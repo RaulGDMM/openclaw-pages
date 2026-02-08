@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicciones Precios Vivienda España 2026-2028</title>
+    <meta name="description" content="Análisis completo de las predicciones de precios de vivienda en España para 2026, 2027 y 2028.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .highlight strong {
+            color: #667eea;
+        }
+
+        .sources {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .sources h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .sources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .source-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .source-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+        }
+
+        .source-item a:hover {
+            text-decoration: underline;
+        }
+
+        .source-item p {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .timeline {
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-year {
+            flex-shrink: 0;
+            width: 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .timeline-content h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-bar {
+            margin: 20px 0;
+        }
+
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chart-bar-bg {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+            font-weight: 700;
+            transition: width 1s ease-in-out;
+        }
+
+        .factors-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .factors-list li {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .factors-list li i {
+            color: #764ba2;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .recommendation h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .recommendation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendation li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .recommendation li:last-child {
+            border-bottom: none;
+        }
+
+        .recommendation li i {
+            color: #764ba2;
+            margin-right: 10px;
+        }
+
+        .mobile-warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .mobile-warning i {
+            font-size: 2em;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-year {
+                width: 100%;
+                padding: 15px 10px;
+                border-radius: 10px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Predicciones Precios Vivienda España</h1>
+            <p>Análisis completo 2026-2028 | Basado en datos de expertos e instituciones</p>
+        </header>
+
+        <div class="content">
+            <!-- Resumen Ejecutivo -->
+            <section class="section">
+                <h2>📊 Resumen Ejecutivo</h2>
+                <div class="card">
+                    <h3>🎯 Tendencia General</h3>
+                    <p><strong>2026:</strong> Crecimiento continuado (4-7%), sin bajada clara</p>
+                    <p><strong>2027:</strong> Ralentización del crecimiento (4-7% anual)</p>
+                    <p><strong>2028:</strong> Posible primera bajada significativa</p>
+                </div>
+            </section>
+
+            <!-- Predicciones por año -->
+            <section class="section">
+                <h2>📈 Predicciones por Año</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content">
+                            <h4>Crecimiento Moderado (4-7%)</h4>
+                            <p><strong>Bankinter:</strong> +4% (desde +7% en 2025)</p>
+                            <p><strong>BBVA Research:</strong> +5,3% (desde +7,3% en 2025)</p>
+                            <p><strong>RealAdvisor:</strong> Enfriamiento del mercado, sin bajada generalizada</p>
+                            <p><strong>Tinsa:</strong> 0-3% alzas en volúmenes, 5-10% aumento de precios</p>
+                            <p class="highlight">El mercado sigue en tendencia alcista pero con desaceleración</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2027</div>
+                        <div class="timeline-content">
+                            <h4>Ralentización (4-7%)</h4>
+                            <p><strong>Bankinter:</strong> +4% (desde +7% en 2026)</p>
+                            <p><strong>BBVA/CaixaBank/Tinsa:</strong> Crecimiento 3-5% anual</p>
+                            <p><strong>Expertos:</strong> Posible moderación adicional</p>
+                            <p class="highlight">Fin del ciclo inmobiliario iniciado en 2014, inicio de ajustes</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2028</div>
+                        <div class="timeline-content">
+                            <h4>Possible Bajada (Primera)</h4>
+                            <p><strong>I.A. Analistas:</strong> Primera bajada clara y sostenida</p>
+                            <p><strong>Normalización:</strong> Ajustes por segmentos, no rebote brusco</p>
+                            <p class="highlight">Esperar 2028 para inversión real con descuentos significativos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de barras -->
+                <div class="chart-container">
+                    <h3>📈 Evolución Esperada de Precios</h3>
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>2024</span>
+                            <span>Base</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 100%">100%</div>
+                        </div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>2025</span>
+                            <span>7,3% ↑</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 107%">+7,3%</div>
+                        </div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>2026</span>
+                            <span>4-7% ↑</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 105%">+4-7%</div>
+                        </div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>2027</span>
+                            <span>4-5% ↑</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 103%">+4-5%</div>
+                        </div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">
+                            <span>2028</span>
+                            <span>0-3% ↓</span>
+                        </div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 98%">0-3%</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Factores Clave -->
+            <section class="section">
+                <h2>🔍 Factores que Afectarán el Mercado</h2>
+                <ul class="factors-list">
+                    <li><i class="fas fa-chart-line"></i> Tipos de interés del BCE</li>
+                    <li><i class="fas fa-home"></i> Encarecimiento de hipotecas</li>
+                    <li><i class="fas fa-tools"></i> Altos costes de construcción</li>
+                    <li><i class="fas fa-city"></i> Trabas urbanísticas</li>
+                    <li><i class="fas fa-wallet"></i> Poder adquisitivo de los hogares</li>
+                    <li><i class="fas fa-users"></i> Crecimiento demográfico</li>
+                    <li><i class="fas fa-umbrella-beach"></i> Demanda internacional</li>
+                    <li><i class="fas fa-exclamation-triangle"></i> Escasez de suelo finalista</li>
+                </ul>
+            </section>
+
+            <!-- Zonas Específicas -->
+            <section class="section">
+                <h2>📍 Zonas con Potencial Bajada</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>🏔️ Zonas Rurales e Interiores</h3>
+                        <p>Podrían experimentar bajadas ligeras (-1% a -3%)</p>
+                        <p class="highlight">Menor demanda, mayor oferta disponible</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏖️ Costas con Menos Demanda</h3>
+                        <p>Estabilidad o ligera bajada (no zonas turísticas)</p>
+                        <p class="highlight">Costa Mediterránea y Canarias: estables o repuntes</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏙️ Grandes Ciudades</h3>
+                        <p>Precios más estables, demanda alta</p>
+                        <p class="highlight">Máxima presión de demanda, menor margen de bajada</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recomendaciones -->
+            <section class="recommendation">
+                <h3>💡 Recomendaciones</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> <strong>Para vivir ahora:</strong> Buena oportunidad, precios relativamente bajos</li>
+                    <li><i class="fas fa-calendar-alt"></i> <strong>Para inversión:</strong> Esperar 2028 para ver descuentos significativos</li>
+                    <li><i class="fas fa-search"></i> <strong>Zonas:</strong> Considerar zonas rurales e interiores</li>
+                    <li><i class="fas fa-hand-holding-usd"></i> <strong>Financiación:</strong> Vigilar tipos de interés y poder adquisitivo</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Fuentes -->
+        <div class="sources">
+            <h2>📚 Fuentes Consultadas</h2>
+            <div class="sources-list">
+                <div class="source-item">
+                    <a href="https://www.bankinter.com/blog/finanzas-personales/prevision-precio-vivienda" target="_blank">Bankinter - Previsión precio vivienda 2026 y 2027</a>
+                    <p>Blog oficial | 26/11/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.idealista.com/news/inmobiliario/vivienda/2025/12/29/862619-que-pasara-con-la-vivienda-en-2026-los-escenarios-posibles-segun-los-expertos" target="_blank">Idealista - Qué pasará con la vivienda en 2026</a>
+                    <p>Noticia oficial | 29/12/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://blog.urbanitae.com/2025/11/03/el-precio-de-la-vivienda-en-espana-evolucion-y-previsiones-para-2026/" target="_blank">Urbanitae - Evolución y previsiones 2026</a>
+                    <p>Blog especializado | 03/11/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://elpais.com/economia/negocios/2026-01-03/la-pesadilla-de-la-vivienda-se-enquista-asi-subira-el-precio-este-2026.html" target="_blank">El País - La vivienda se enquista 2026</a>
+                    <p>Diario El País | 03/01/2026</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.dineo.es/blog/el-precio-de-la-vivienda-prevision/" target="_blank">Dineo - Previsión precio vivienda 2026 y 2027</a>
+                    <p>Blog financiero | 26/11/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.culmia.com/es/blog/prevision-del-precio-de-la-vivienda-en-2026/" target="_blank">Culmia - Previsión del precio de la vivienda 2026</a>
+                    <p>Blog inmobiliario | 2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.elperiodico.com/es/economia/20251002/precios-vivienda-creceran-5-2026-122204481" target="_blank">El Periódico - Los precios crecerán un 5% en 2026</a>
+                    <p>Diario El Periódico | 02/10/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://blog.escogecasa.es/previsiones-vivienda-2026-seguiran-subiendo-los-precios-y-donde-invertir/" target="_blank">Escogecasa - Previsiones vivienda 2026</a>
+                    <p>Blog inmobiliario | 18/12/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://realadvisor.es/es/blog/bajara-del-precio-vivienda" target="_blank">RealAdvisor - ¿Habrá una bajada en 2026?</a>
+                    <p>Portal inmobiliario | 07/01/2026</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.elespanol.com/sociedad/20260203/german-perez-barrio-experto-inmobiliario-precio-vivienda-desaceleracion/1003744110914_0.html" target="_blank">ElEspañol - Expertos en desaceleración 2026</a>
+                    <p>Portal de noticias | 03/02/2026</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://habitaro.com/prevision-precio-vivienda-2026/" target="_blank">Habitaro - Previsión precio vivienda 2026</a>
+                    <p>Blog inmobiliario | 21/08/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.expansion.com/economia/2025/12/27/694ec50a468aebe0758b456d.html" target="_blank">Expansión - Mercado de máximos 2026</a>
+                    <p>Diario Expansión | 27/12/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.primeinvest.es/es/nuestro-blog/prevision-precio-vivienda-2026" target="_blank">PrimeInvest - Previsión precio vivienda 2026</a>
+                    <p>Blog inmobiliario | 30/12/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.donpiso.com/blog/prevision-precio-vivienda-2026/" target="_blank">DonPiso - Previsión precio vivienda 2026</a>
+                    <p>Portal inmobiliario | 2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.abc.es/recreo/bajar-precio-vivienda-espana-segun-inteligencia-artificial-20250709123135-nt.html" target="_blank">ABC - Bajada de precios según IA</a>
+                    <p>Diario ABC | 09/07/2025</p>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.daurumestate.com/efectos-inflacion-precio-viviendas/" target="_blank">Daurum Estate - Efectos de la inflación</a>
+                    <p>Blog inmobiliario | 02/09/2025</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📊 Datos actualizados a febrero de 2026 | Análisis basado en fuentes oficiales e instituciones financieras</p>
+            <p style="margin-top: 10px;">© 2026 - Cocobot AI 🐱🤖 | Generado con inteligencia artificial con alma de gato</p>
+        </footer>
+    </div>
+</body>
+</html>
