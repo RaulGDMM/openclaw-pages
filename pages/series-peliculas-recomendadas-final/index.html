@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Series y Películas Recomendadas 2025 - Cocobot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .series-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .movies-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+        }
+
+        .series-section h2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .movies-section h2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+            padding: 15px;
+        }
+
+        .movie-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .movie-info {
+            padding: 20px;
+        }
+
+        .movie-title {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .rating {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            background: #ffd700;
+            color: #333;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .rating::before {
+            content: '⭐';
+            margin-right: 5px;
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            font-size: 0.85em;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 15px;
+        }
+
+        .movie-description {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            opacity: 0.95;
+            font-size: 0.9em;
+        }
+
+        .trailer-link, .platform-link {
+            display: inline-block;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
+        .platform-link {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .trailer-link:hover, .platform-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .footer .badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 15px;
+            }
+
+            .movie-poster {
+                height: 200px;
+            }
+
+            .movie-title {
+                font-size: 1.2em;
+            }
+
+            .trailer-link, .platform-link {
+                padding: 8px 14px;
+                font-size: 0.8em;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .movie-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Series y Películas Recomendadas 2025</h1>
+            <p>Las mejores series y películas de Amazon Prime Video, Netflix, HBO Max, Disney+ y más</p>
+        </header>
+
+        <!-- SERIES -->
+        <div class="section">
+            <h2 class="series-section">📺 SERIES</h2>
+            <div class="movie-grid">
+                <!-- La Rueda del Tiempo -->
+                <div class="movie-card">
+                    <img src="https://assets-prd.ignimgs.com/2023/12/01/fallout-lucydoor-1sheet-1701443495837.jpg" alt="La Rueda del Tiempo Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">La Rueda del Tiempo</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Fantasía Épica</span>
+                            <span class="badge">8 Temporadas</span>
+                            <span class="badge">2021-2025</span>
+                        </div>
+                        <p class="movie-description">Basada en las novelas de Robert Jordan. Moiraine busca al Dragón Renacido entre cinco jóvenes.</p>
+                        <a href="https://www.youtube.com/watch?v=2kOMw4mm2mU" class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.primevideo.com/detail/La-rueda-del-tiempo/0U3073DE9J38JXZ5WLZW5O8MH3" class="platform-link" target="_blank">📺 Prime</a>
+                    </div>
+                </div>
+
+                <!-- Fallout -->
+                <div class="movie-card">
+                    <img src="https://assets-prd.ignimgs.com/2023/12/01/fallout-lucydoor-1sheet-1701443495837.jpg" alt="Fallout Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">Fallout - Temp. 2</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Sci-Fi</span>
+                            <span class="badge">8 Episodios</span>
+                            <span class="badge">2024</span>
+                        </div>
+                        <p class="movie-description">Adaptación de Bethesda del mundo postapocalíptico.</p>
+                        <a href="https://www.youtube.com/watch?v=XAwaWp6V2IE" class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.primevideo.com/detail/Fallout/0KBDY8OBBE3Y0RV5FOQH96H3N6" class="platform-link" target="_blank">📺 Prime</a>
+                    </div>
+                </div>
+
+                <!-- Stranger Things -->
+                <div class="movie-card">
+                    <img src="https://www.netflix.com/tudum/articles/stranger-things-season-5-poster-artist" alt="Stranger Things Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">Stranger Things</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Sci-Fi/Horror</span>
+                            <span class="badge">4 Temporadas</span>
+                            <span class="badge">2016-2022</span>
+                        </div>
+                        <p class="movie-description">Amigos enfrentan monstruos y experimentos secretos en Hawkins.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.netflix.com/title/80057281" class="platform-link" target="_blank">🎬 Netflix</a>
+                    </div>
+                </div>
+
+                <!-- The Boys -->
+                <div class="movie-card">
+                    <img src="https://in.ign.com/the-boys-26/248106/news/the-boys-amazon-prime-video-reveals-first-posters-for-the-fifth-and-final-season-of-the-superhero-sh" alt="The Boys Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">The Boys - Temp. 4</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Superhéroes</span>
+                            <span class="badge">8 Episodios</span>
+                            <span class="badge">2024</span>
+                        </div>
+                        <p class="movie-description">Acción adictiva sin perder profundidad ni mordacidad.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.primevideo.com/detail/The-Boys/..." class="platform-link" target="_blank">📺 Prime</a>
+                    </div>
+                </div>
+
+                <!-- The Witcher -->
+                <div class="movie-card">
+                    <img src="https://www.netflix.com/tudum/articles/stranger-things-season-5-poster-artist" alt="The Witcher Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">The Witcher - Temp. 4</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Fantasía</span>
+                            <span class="badge">8 Episodios</span>
+                            <span class="badge">2025</span>
+                        </div>
+                        <p class="movie-description">Geralt de Rivia busca a Ciri en nuevas aventuras.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.netflix.com/title/80243563" class="platform-link" target="_blank">🎬 Netflix</a>
+                    </div>
+                </div>
+
+                <!-- Wednesday -->
+                <div class="movie-card">
+                    <img src="https://www.netflix.com/tudum/galleries/wednesday-season-2-character-art-posters" alt="Wednesday Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">Wednesday - Temp. 2</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Misterio</span>
+                            <span class="badge">8 Episodios</span>
+                            <span class="badge">2024</span>
+                        </div>
+                        <p class="movie-description">Jenna Ortega como Wednesday en una serie de misterio y comedia.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.netflix.com/title/81254203" class="platform-link" target="_blank">🎬 Netflix</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PELÍCULAS -->
+        <div class="section">
+            <h2 class="movies-section">🎥 PELÍCULAS</h2>
+            <div class="movie-grid">
+                <!-- Nosferatu -->
+                <div class="movie-card">
+                    <img src="http://www.impawards.com/2024/nosferatu.html" alt="Nosferatu Poster" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">Nosferatu (2024)</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Terror</span>
+                            <span class="badge">2h 12min</span>
+                            <span class="badge">2024</span>
+                        </div>
+                        <p class="movie-description">Remake del clásico de terror mudo de F.W. Murnau.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                        <a href="https://www.primevideo.com/detail/Nosferatu/0F7TWFQK7RKDWLFNLUG9GBV2XD" class="platform-link" target="_blank">📺 Prime</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>🎬 Hecho con ❤️ por Cocobot 🐱 | Todas las series están disponibles en sus plataformas</p>
+            <span class="badge">⚠️ Algunos títulos pueden no estar disponibles en tu zona geográfica</span>
+        </footer>
+    </div>
+</body>
+</html>
