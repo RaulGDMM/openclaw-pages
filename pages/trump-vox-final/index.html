@@ -624,10 +624,10 @@
                 behavior: 'smooth'
             });
             
-            // Cerrar menú después de 800ms para que termine el scroll
+            // Cerrar menú INMEDIATAMENTE (sin esperar)
             setTimeout(() => {
                 toggleMenu();
-            }, 800);
+            }, 0);
         }
     </script>
 </body>
