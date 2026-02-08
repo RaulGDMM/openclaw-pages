@@ -9,9 +9,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
@@ -21,6 +18,9 @@
             min-height: 100vh;
             color: white;
             line-height: 1.7;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
@@ -40,6 +40,7 @@
             padding: 12px 15px;
             border-radius: 8px;
             cursor: pointer;
+            display: block;
             transition: transform 0.3s ease, background 0.3s ease;
         }
 
@@ -58,6 +59,7 @@
             border-radius: 2px;
         }
 
+        /* Menu Overlay */
         .menu-overlay {
             display: none;
             position: fixed;
@@ -74,8 +76,10 @@
 
         .menu-overlay.active {
             display: flex;
+            animation: fadeIn 0.3s ease;
         }
 
+        /* Menu Content */
         .menu-content {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -87,6 +91,7 @@
             animation: slideUp 0.3s ease;
         }
 
+        /* Menu Links */
         .menu-content a {
             display: block;
             padding: 18px 20px;
@@ -106,6 +111,7 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
+        /* Header */
         header {
             text-align: center;
             padding: 80px 20px 50px;
@@ -126,6 +132,7 @@
             opacity: 0.9;
         }
 
+        /* Sections */
         .section {
             padding: 20px;
             margin-bottom: 30px;
@@ -141,6 +148,7 @@
             text-align: center;
         }
 
+        /* News Card */
         .news-card {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
@@ -185,6 +193,7 @@
             transform: scale(1.05);
         }
 
+        /* Stat Box */
         .stat-box {
             display: flex;
             align-items: center;
@@ -210,6 +219,7 @@
             line-height: 1.4;
         }
 
+        /* Explanation Box */
         .explanation-box {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             padding: 30px;
@@ -262,6 +272,7 @@
             font-size: 1.1em;
         }
 
+        /* Comparison Table */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
@@ -289,6 +300,7 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        /* Footer */
         footer {
             text-align: center;
             padding: 30px;
@@ -303,6 +315,30 @@
             line-height: 1.6;
         }
 
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
                 padding-top: 80px;
@@ -325,23 +361,8 @@
                 font-size: 2.2em;
             }
 
-            .hamburger-menu {
-                display: block;
-            }
-
             .menu-content {
                 padding: 30px 20px;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
     </style>
@@ -354,6 +375,7 @@
         <span></span>
     </div>
 
+    <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-content">
             <a href="#trump" onclick="smoothScroll(event, 'trump')">🇺🇸 Donald Trump</a>
