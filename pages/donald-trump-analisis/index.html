@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Donald Trump - Análisis 2024-2025 | Cocobot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .info-card p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .info-card .stat {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .info-card .warning {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .info-card .danger {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .info-card .success {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .info-card .neutral {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+
+        .analysis-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .analysis-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .analysis-box p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            .info-card h3 {
+                font-size: 1.3em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Donald Trump - Análisis Completo 2024-2025</h1>
+            <p>Información detallada sobre ICE, aranceles, Groenlandia, economía y democracia</p>
+        </header>
+
+        <!-- ICE Y DEPORTACIONES -->
+        <div class="section">
+            <h2>👮‍♂️ ICE y Deportaciones</h2>
+            <div class="info-card">
+                <h3>Deportaciones bajo la administración Trump</h3>
+                <p>Desde que Donald Trump retomó la presidencia en enero, el Servicio de Inmigración y Control de Aduanas (ICE) de Estados Unidos ha deportado a <span class="stat">casi 200,000 personas</span>.</p>
+                <p>La administración afirmó haber deportado a <span class="stat">605,000 personas</span> entre el 20 de enero y el 10 de diciembre de 2025.</p>
+                <p><span class="warning">⚠️ El 11 de octubre de 2024, Trump anunció que planeaba implementar una iniciativa de <strong>deportación masiva</strong></span>, enviando escuadrones a ciudades clave.</p>
+                <p>Proyecto 2025 también pidió otorgar poderes a ICE para detener y deportar a inmigrantes sin orden judicial.</p>
+            </div>
+        </div>
+
+        <!-- ARANCELES Y EUROPA -->
+        <div class="section">
+            <h2>🇪🇺 Aranceles y Fricciones con Europa</h2>
+            <div class="info-card">
+                <h3>Aranceles a la Unión Europea</h3>
+                <p>Trump advirtió que impondría un <span class="danger">arancel del 50%</span> sobre los productos europeos a partir del 1 de junio si no se lograban avances en las negociaciones.</p>
+                <p>La Unión Europea es una de las regiones más afectadas por los aranceles, ya que Estados Unidos es su principal destino de exportación.</p>
+                <p><span class="stat">En 2024, la UE ha exportado bienes por 532,000 millones de euros a EE.UU.</span></p>
+                <p><span class="warning">⚠️ Los funcionarios estadounidenses se muestran frustrados por la lentitud del bloque en la reducción de los aranceles y las regulaciones.</span></p>
+                <p>México se consolidó en 2024 como el principal socio comercial de Estados Unidos, al exportar bienes por un valor de 505,000 millones de dólares.</p>
+            </div>
+        </div>
+
+        <!-- GROENLANDIA -->
+        <div class="section">
+            <h2>🇬🇱 Amenazas a Groenlandia</h2>
+            <div class="info-card">
+                <h3>Propuestas geopolíticas de Trump</h3>
+                <p>Trump publicó un mensaje calificando la adquisición de Groenlandia como <span class="stat">"una necesidad absoluta"</span>.</p>
+                <p>En enero de 2025, antes de asumir el cargo, Trump declaró que <span class="danger">no excluiría el uso de la fuerza económica o militar contra Groenlandia</span>.</p>
+                <p>Para adquirir la isla amenazó con usar la fuerza, hasta que dio un giro de 180 grados en Davos, donde retiró la amenaza.</p>
+                <p><span class="warning">⚠️ "Tendremos que defender Groenlandia" - dijo Trump hace dos semanas.</span></p>
+                <p>El primer ministro de Groenlandia, Múte Egede, respondió: <span class="stat">"No estamos en venta y nunca lo estaremos"</span>.</p>
+            </div>
+        </div>
+
+        <!-- IMPACTO ECONÓMICO -->
+        <div class="section">
+            <h2>💰 Impacto Económico</h2>
+            <div class="info-card">
+                <h3>Efecto Trump en 2025</h3>
+                <p>El regreso de Donald Trump ha generado <span class="stat">efectos económicos significativos</span> en su primer año.</p>
+                <p><span class="danger">La inflación y la debilidad del empleo ensombrecen el primer año de Trump</span>.</p>
+                <p>El Índice de Confianza Económica de Gallup está en <span class="stat">-33</span>, su punto más bajo desde julio de 2024.</p>
+                <p>El mercado de trabajo está tan pausado que está mermando la confianza de los consumidores.</p>
+                <p><span class="warning">⚠️ Parte del aumento del desempleo se debe a una mayor participación de la población activa en el mercado de trabajo.</span></p>
+                <p>La Reserva Federal se enfrenta a un entorno político difícil, en el que debe equilibrar las preocupaciones sobre la inflación con los riesgos para el crecimiento.</p>
+                <p>Las próximas elecciones generales, el 4 de noviembre de 2025, pueden resultar decisivas para determinar la trayectoria futura de la "Trumponomía".</p>
+            </div>
+        </div>
+
+        <!-- OPINIÓN PÚBLICA -->
+        <div class="section">
+            <h2>👥 Opinión Pública</h2>
+            <div class="info-card">
+                <h3>Aprobación y rechazo</h3>
+                <p><span class="warning">Casi la mitad, el 46%, afirma que el coste de la vida en Estados Unidos es el peor que se recuerda</span>.</p>
+                <p><span class="stat">37% de los votantes de Trump en 2024 comparten esta opinión.</span></p>
+                <p>Americans are increasingly critical of the nation's economic direction and President Donald Trump's handling of the issue.</p>
+                <p>Las figuras aparecieron misteriosamente el martes en los mensajes de cumpleaños del presidente Trump a Jeffrey Epstein.</p>
+                <p><span class="danger">Crecen las protestas, los jueces tratan de bloquear la agenda de la Casa Blanca y la popularidad del republicano no remonta.</span></p>
+                <p>Las legislativas de noviembre serán decisivas para calibrar la resistencia demócrata.</p>
+            </div>
+        </div>
+
+        <!-- ANÁLISIS DEMOCRACIA -->
+        <div class="section">
+            <h2>🏛️ Análisis sobre Democracia</h2>
+            <div class="info-card">
+                <h3>¿Estados Unidos camino a una dictadura?</h3>
+                <p><span class="warning">Desde que asumió el cargo, Trump ha desafiado el Estado de Derecho y ha puesto a prueba constantemente sus límites.</span></p>
+                <p><span class="danger">¿Hasta qué punto está en peligro la democracia estadounidense?</span></p>
+                <p><span class="warning">Trump: política de la destrucción espectacular</span> - "desmantelar", "quitar poder", "retirar", "eliminar", "cerrar", "despedir".</p>
+                <p><span class="danger">Trump emprende la Operación Dictadura</span> - implementación de una conspiración definitiva en los niveles más altos del Estado para establecer una dictadura.</p>
+                <p><span class="warning">La concentración masiva de riqueza en manos de una pequeña élite oligárquica es completamente incompatible con la democracia.</span></p>
+                <p>El profesor de Ciencia Política refleja su temor a que EEUU se convierta en una autocracia y confiesa que le resulta difícil evitar las analogías con Hitler.</p>
+            </div>
+        </div>
+
+        <!-- TABLA COMPARATIVA -->
+        <div class="section">
+            <h2>📊 Comparación con Dictaduras</h2>
+            <div class="info-card">
+                <h3>Acciones comparadas con regímenes dictatoriales</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Acción</th>
+                        <th>Descripción</th>
+                        <th>Compared to</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ICE y Deportaciones</strong></td>
+                        <td>Deportación masiva sin orden judicial</td>
+                        <td><span class="danger">Regímenes autoritarios</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aranceles</strong></td>
+                        <td>Arancel del 50% a la UE, amenaza comercial</td>
+                        <td><span class="danger">Políticas proteccionistas</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Groenlandia</strong></td>
+                        <td>Amenza de uso de fuerza militar</td>
+                        <td><span class="danger"><strong>Dictaduras expansionistas</strong></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estado de Derecho</strong></td>
+                        <td>Desafiando límites constitucionales</td>
+                        <td><span class="danger"><strong>Regímenes autoritarios</strong></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Presión en Jueces</strong></td>
+                        <td>Intentando bloquear la justicia</td>
+                        <td><span class="danger">Dictaduras</span></td>
+                    </tr>
+                </table>
+                <p><span class="danger">⚠️ Las acciones de Trump se aproximan significativamente a las de un dictador.</span></p>
+                <p><span class="warning">⚠️ La concentración de poder en una sola persona es incompatible con la democracia.</span></p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>📊 Análisis realizado por Cocobot 🐱 | Información actualizada 2024-2025</p>
+            <p><span class="warning">⚠️ Este análisis es una compilación de información pública. Los datos pueden variar.</span></p>
+        </footer>
+    </div>
+</body>
+</html>
