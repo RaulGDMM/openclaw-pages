@@ -17,7 +17,7 @@
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
             color: white;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         html {
@@ -219,6 +219,34 @@
             line-height: 1.4;
         }
 
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.25);
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         /* Explanation Box */
         .explanation-box {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
@@ -259,6 +287,7 @@
             line-height: 1.6;
         }
 
+        /* Warning Box */
         .warning-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             padding: 15px;
@@ -272,32 +301,21 @@
             font-size: 1.1em;
         }
 
-        /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
+        /* Section Colors */
+        .section-title.economia {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
-        .comparison-table th,
-        .comparison-table td {
-            padding: 18px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .section-title.politica {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
-        .comparison-table th {
-            background: rgba(0, 0, 0, 0.25);
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1em;
+        .section-title.social {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
-        .comparison-table tr:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .section-title.internacional {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
 
         /* Footer */
@@ -364,6 +382,10 @@
             .menu-content {
                 padding: 30px 20px;
             }
+
+            .news-card {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -378,17 +400,21 @@
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-content">
-            <a href="#trump" onclick="smoothScroll(event, 'trump')">🇺🇸 Donald Trump</a>
-            <a href="#vox" onclick="smoothScroll(event, 'vox')">🇪🇸 Vox España</a>
-            <a href="#comparacion" onclick="smoothScroll(event, 'comparacion')">📊 Comparación</a>
-            <a href="#explicacion" onclick="smoothScroll(event, 'explicacion')">📊 Informe Think Tank</a>
+            <a href="#trump">🇺🇸 Donald Trump</a>
+            <a href="#vox">🇪🇸 Vox España</a>
+            <a href="#comparacion">📊 Comparación</a>
+            <a href="#economia">💰 Economía</a>
+            <a href="#politica">🏛️ Política</a>
+            <a href="#social">👥 Social</a>
+            <a href="#internacional">🌍 Internacional</a>
+            <a href="#explicacion">📊 Informe Think Tank</a>
         </div>
     </div>
 
     <div class="container">
         <header>
             <h1>📊 Comparación Trump - Vox</h1>
-            <p>Políticas migratorias con análisis completo</p>
+            <p>Políticas migratorias y más con análisis completo</p>
         </header>
 
         <div class="section" id="trump">
@@ -461,6 +487,88 @@
                     <td style="padding: 18px; border-bottom: 1px solid rgba(255,255,255,0.1);">1+ millones</td>
                 </tr>
             </table>
+        </div>
+
+        <div class="section" id="economia">
+            <div class="section-title economia">
+                💰 Comparación Económica
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Recortes fiscales y deuda</h3>
+                <div class="stat-box">
+                    <div class="stat-number">+31%</div>
+                    <div class="stat-label">Deuda nacional EE. UU.<br>entre 2017-2025</div>
+                </div>
+                <p>Trump impulsó fuertes recortes de impuestos y aumentó el gasto, lo que provocó que la deuda nacional se disparara.</p>
+                <p><strong>Leer más:</strong> <a href="https://cincodias.elpais.com/mercados-financieros/2025-07-05/guia-para-entender-como-impacta-el-plan-fiscal-de-trump-en-el-mercado-de-deuda-de-ee-uu.html" target="_blank">Impacto del plan fiscal de Trump - El País</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Bajada radical de impuestos</h3>
+                <p>Vox propone bajar impuestos radicalmente, incluyendo IVA cero en productos de primera necesidad.</p>
+                <div class="warning-box">
+                    <p>⚠️ Posible rebaja de pensiones para compensar</p>
+                </div>
+                <p><strong>Ver artículo:</strong> <a href="https://www.voxespana.es/actualidad/bajada-radical-de-impuestos-drastica-reduccion-del-gasto-politico-ineficaz-simplificacion-de-tramites-asi-es-el-programa-economico-de-vox-para-el-23j-20230707" target="_blank">Programa económico de Vox - Vox España</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="politica">
+            <div class="section-title politica">
+                🏛️ Comparación Política
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Ataque a instituciones</h3>
+                <p>Trump ha criticado y atacado constantemente medios de comunicación, jueces y organismos electorales.</p>
+                <p><strong>Leer más:</strong> <a href="https://www.esglobal.org/de-trump-a-vox-la-venganza-contra-el-cambio-social/" target="_blank">De Trump a Vox: la venganza contra el cambio social - Esglobal</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Ataque a la izquierda</h3>
+                <p>Vox ha criticado y atacado constantemente partidos de izquierda y movimientos sociales progresistas.</p>
+                <p><strong>Leer más:</strong> <a href="https://www.esglobal.org/de-trump-a-vox-la-venganza-contra-el-cambio-social/" target="_blank">De Trump a Vox: la venganza contra el cambio social - Esglobal</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="social">
+            <div class="section-title social">
+                👥 Comparación Social
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Derechos LGBT</h3>
+                <p>Trump ha recortado derechos de las comunidades LGBTQ+ y promovido políticas conservadoras.</p>
+                <p><strong>Leer más:</strong> <a href="https://apnews.com/article/donald-trump-lgbtq-rights-supreme-court-2024" target="_blank">Recortes de derechos LGBTQ - AP News</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Derechos LGBT</h3>
+                <p>Vox ha criticado y atacado constantemente los derechos LGBT+ y promovido políticas conservadoras.</p>
+                <p><strong>Leer más:</strong> <a href="https://www.bbc.com/mundo/noticias-internacional-48051726" target="_blank">Vox y sus propuestas conservadoras - BBC</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="internacional">
+            <div class="section-title internacional">
+                🌍 Comparación Internacional
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Proteccionismo</h3>
+                <p>Trump ha impuesto aranceles masivos a productos extranjeros y ha retirado a EE. UU. de varios tratados internacionales.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://www.infobae.com/espana/2025/04/16/los-aranceles-de-donald-trump-hacen-fuerte-a-vox-roba-al-pp-mas-de-62800-votos/" target="_blank">Aranceles de Trump y su impacto - Infobae</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Alianzas con Trump</h3>
+                <p>Vox ha expresado apoyo a las políticas de Trump y ha mantenido relaciones con el movimiento conservador estadounidense.</p>
+                <div class="warning-box">
+                    <p>⚠️ Vox ha hecho suyo el "terror trumpista"</p>
+                </div>
+                <p><strong>Ver artículo:</strong> <a href="https://elpais.com/opinion/2025-07-01/vox-hace-suyo-el-terror-trumpista.html" target="_blank">Vox hace suyo el terror trumpista - EL PAÍS</a></p>
+            </div>
         </div>
 
         <div class="section" id="explicacion">
