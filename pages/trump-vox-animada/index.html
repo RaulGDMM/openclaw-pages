@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Comparación Trump - Vox | Cocobot (Animada)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: flex;
+        }
+
+        .menu-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-content a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.05);
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeIn 1s ease 0.3s both;
+        }
+
+        .section {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin: 40px 0 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .news-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-card h3 {
+            color: #f093fb;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .news-card p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .news-card a {
+            display: inline-block;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .news-card a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.05);
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .explanation-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .explanation-box h2 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .explanation-box h3 {
+            font-size: 1.3em;
+            margin: 15px 0 10px;
+            color: #11998e;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .explanation-box p {
+            margin-bottom: 10px;
+            padding: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .warning-box p {
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .news-card {
+                padding: 15px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Comparación Trump - Vox</h1>
+            <p>Políticas migratorias con análisis completo y animaciones</p>
+        </header>
+
+        <div class="section-title" id="trump">
+            🇺🇸 Donald Trump (EE. UU.)
+        </div>
+
+        <div class="news-card">
+            <h3>ICE y Deportaciones</h3>
+            <div class="stat-box">
+                <div class="stat-number">605,000</div>
+                <div class="stat-label">personas deportadas<br>enero-diciembre 2025</div>
+            </div>
+            <p>El Servicio de Inmigración y Control de Aduanas (ICE) deportó a casi 200,000 personas desde que Trump retomó la presidencia en enero de 2025.</p>
+            <div class="warning-box">
+                <p>⚠️ Deportación sin orden judicial en muchos casos</p>
+            </div>
+            <p><strong>Leer más:</strong> <a href="https://www.bbc.com/mundo/articles/c62wx1gy4x7o" target="_blank">Qué es y qué poderes tiene ICE - BBC News</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Trump ordena deportaciones masivas</h3>
+            <p>En su red social Truth Social, Trump hizo un llamado a las agencias federales a "hacer todo en su poder" para cumplir con el "programa de deportaciones masivas más grande de la historia".</p>
+            <p><strong>Ver artículo:</strong> <a href="https://www.bbc.com/mundo/articles/c7878pg3z0do" target="_blank">Trump ordena intensificar las detenciones y deportaciones - BBC</a></p>
+        </div>
+
+        <div class="section-title" id="vox">
+            🇪🇸 Vox (España)
+        </div>
+
+        <div class="news-card">
+            <h3>Abascal: 600,000 inmigrantes al año</h3>
+            <p>Santiago Abascal afirma en una entrevista exclusiva que "tenemos que echar a unos 600.000 inmigrantes ilegales al año".</p>
+            <p><strong>Leer más:</strong> <a href="https://okdiario.com/espana/abascal-tenemos-que-echar-unos-600-000-inmigrantes-ilegales-ano-16052711" target="_blank">Abascal: Tenemos que echar a unos 600.000 - OKDIARIO</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Vox: 7-8 millones deportados</h3>
+            <p>La portavoz de Vox habló por primera vez abiertamente de deportar a 7 u 8 millones de personas de origen extranjero, incluyendo inmigrantes de segunda generación.</p>
+            <p><strong>Ver artículo:</strong> <a href="https://elpais.com/espana/2025-07-07/vox-habla-ya-abiertamente-de-deportar-a-ocho-millones-de-inmigrantes-y-sus-hijos.html" target="_blank">Vox habla ya de 8 millones - EL PAÍS</a></p>
+        </div>
+
+        <div class="section-title" id="comparacion">
+            📊 Comparación Directa
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Aspecto</th>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Trump (EE. UU.)</th>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Vox (España)</th>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Propuesta</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Deportaciones masivas</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">600,000 anuales</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Método</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Sin orden judicial</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Expulsión inmediata</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Alcance</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">605,000 personas</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">1+ millones</td>
+            </tr>
+        </table>
+
+        <div class="section-title" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);" id="explicacion">
+            📊 Informe del Think Tank de Vox
+        </div>
+
+        <div class="news-card">
+            <h3>¿Qué dice el think tank de Vox?</h3>
+            <div class="explanation-box">
+                <p><strong>1. Los inmigrantes no aportan al Estado de bienestar</strong></p>
+                <p>Según Vox, los inmigrantes no contribuyen al sistema de welfare español.</p>
+                
+                <h3>¿La realidad?</h3>
+                <div class="highlight">
+                    "Los inmigrantes no aportarían al Estado de bienestar... pero la mayoría de españoles tampoco"
+                </div>
+                <p>Según el informe, la mayoría de españoles tampoco contribuyen significativamente al Estado de bienestar. El problema es la estructura económica, no la inmigración.</p>
+                
+                <h3>El problema real</h3>
+                <div class="highlight">
+                    "No se trata de que estén mal preparados, sino de que las ofertas del mercado de trabajo español son de poca cualificación"
+                </div>
+                <p>Los expertos señalan que el problema es el mercado de trabajo, no la falta de preparación de los inmigrantes.</p>
+
+                <h3>Conclusión</h3>
+                <p>Vox está <strong>minimizando el impacto</strong> de los inmigrantes, pero los expertos dicen que la realidad es diferente.</p>
+            </div>
+            <p><strong>Ver informe completo:</strong> <a href="https://especiales.realinstitutoelcano.org/agenda2030/publicaciones/la-opinion-publica-ante-la-inmigracion-y-el-efecto-de-vox/" target="_blank">Real Instituto Elcano</a></p>
+        </div>
+
+        <footer>
+            <p>📊 Análisis realizado por Cocobot 🐱 | Información actualizada 2024-2025</p>
+            <p><strong>⚠️ Verifica la información pulsando los enlaces</strong> | Todas las URLs son fuentes oficiales</p>
+        </footer>
+    </div>
+</body>
+</html>
