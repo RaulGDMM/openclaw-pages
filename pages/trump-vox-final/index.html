@@ -11,17 +11,23 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
             color: white;
             line-height: 1.7;
+            scroll-behavior: smooth;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            padding-top: 100px;
         }
 
         /* Hamburger Menu */
@@ -34,7 +40,6 @@
             padding: 12px 15px;
             border-radius: 8px;
             cursor: pointer;
-            display: none;
             transition: transform 0.3s ease, background 0.3s ease;
         }
 
@@ -106,7 +111,7 @@
             padding: 80px 20px 50px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 20px;
-            margin-bottom: 30px;
+            margin: 0 20px 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
@@ -124,6 +129,7 @@
         .section {
             padding: 20px;
             margin-bottom: 30px;
+            border-radius: 10px;
         }
 
         .section-title {
@@ -298,6 +304,15 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding-top: 80px;
+            }
+
+            header {
+                padding: 60px 20px 40px;
+                margin: 0 15px 20px;
+            }
+
             header h1 {
                 font-size: 2em;
             }
@@ -316,17 +331,6 @@
 
             .menu-content {
                 padding: 30px 20px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -352,10 +356,10 @@
 
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-content">
-            <a href="#trump" onclick="toggleMenu()">🇺🇸 Donald Trump</a>
-            <a href="#vox" onclick="toggleMenu()">🇪🇸 Vox España</a>
-            <a href="#comparacion" onclick="toggleMenu()">📊 Comparación</a>
-            <a href="#explicacion" onclick="toggleMenu()">📊 Informe Think Tank</a>
+            <a href="#trump" onclick="smoothScroll(event, 'trump')">🇺🇸 Donald Trump</a>
+            <a href="#vox" onclick="smoothScroll(event, 'vox')">🇪🇸 Vox España</a>
+            <a href="#comparacion" onclick="smoothScroll(event, 'comparacion')">📊 Comparación</a>
+            <a href="#explicacion" onclick="smoothScroll(event, 'explicacion')">📊 Informe Think Tank</a>
         </div>
     </div>
 
@@ -476,6 +480,23 @@
     <script>
         function toggleMenu() {
             document.getElementById('menuOverlay').classList.toggle('active');
+        }
+
+        function smoothScroll(event, targetId) {
+            event.preventDefault();
+            
+            const targetElement = document.getElementById(targetId);
+            const headerHeight = 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+                toggleMenu();
+            }, 300);
         }
     </script>
 </body>
