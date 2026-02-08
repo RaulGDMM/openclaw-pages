@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Series y Películas Recomendadas 2025</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 3.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        header p { font-size: 1.3em; opacity: 0.9; }
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        .movie-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .movie-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); }
+        .movie-poster {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+        }
+        .movie-info { padding: 25px; color: white; }
+        .movie-title { font-size: 1.5em; margin-bottom: 8px; font-weight: bold; }
+        .rating {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ffd700;
+            color: #333;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .movie-meta { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+        .badge { padding: 5px 12px; background: rgba(255, 255, 255, 0.2); border-radius: 20px; font-size: 0.8em; }
+        .movie-description { margin-bottom: 15px; line-height: 1.5; opacity: 0.95; font-size: 0.95em; }
+        .trailer-link, .platform-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-right: 10px;
+        }
+        .platform-link { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .trailer-link:hover, .platform-link:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Series y Películas Recomendadas 2025</h1>
+            <p>Amazon Prime Video, Netflix, HBO Max, Disney+ y más</p>
+        </header>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <div class="movie-poster">🌀</div>
+                <div class="movie-info">
+                    <div class="movie-title">La Rueda del Tiempo</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Fantasía Épica</span><span class="badge">8 Temporadas</span></div>
+                    <p class="movie-description">Basada en las novelas de Robert Jordan. Moiraine busca al Dragón Renacido entre cinco jóvenes.</p>
+                    <a href="https://www.youtube.com/watch?v=2kOMw4mm2mU" class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/La-rueda-del-tiempo/0U3073DE9J38JXZ5WLZW5O8MH3" class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">☢️</div>
+                <div class="movie-info">
+                    <div class="movie-title">Fallout - Temp. 2</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Sci-Fi</span><span class="badge">8 Episodios</span></div>
+                    <p class="movie-description">Adaptación de Bethesda del mundo postapocalíptico.</p>
+                    <a href="https://www.youtube.com/watch?v=XAwaWp6V2IE" class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/Fallout/0KBDY8OBBE3Y0RV5FOQH96H3N6" class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">🧛</div>
+                <div class="movie-info">
+                    <div class="movie-title">Nosferatu (2024)</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Terror</span><span class="badge">2h 12min</span></div>
+                    <p class="movie-description">Remake del clásico de terror mudo de F.W. Murnau.</p>
+                    <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/Nosferatu/0F7TWFQK7RKDWLFNLUG9GBV2XD" class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">🦸</div>
+                <div class="movie-info">
+                    <div class="movie-title">The Boys - Temp. 4</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Superhéroes</span><span class="badge">8 Episodios</span></div>
+                    <p class="movie-description">Acción adictiva sin perder profundidad ni mordacidad.</p>
+                    <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/The-Boys/..." class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">💪</div>
+                <div class="movie-info">
+                    <div class="movie-title">Reacher - Temp. 3</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Acción</span><span class="badge">8 Episodios</span></div>
+                    <p class="movie-description">Alan Ritchson como Reacher en su temporada 3.</p>
+                    <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/Reacher/0H1T1C23B07HLZPPHJSSPMYSL7" class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">🏔️</div>
+                <div class="movie-info">
+                    <div class="movie-title">Outer Range</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Sci-Fi/Western</span><span class="badge">2 Temporadas</span></div>
+                    <p class="movie-description">Josh Brolin descubre un misterioso vórtice en sus tierras.</p>
+                    <a href="https://www.youtube.com/watch?v=pIxgBqTBZZA" class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.primevideo.com/detail/Outer-Range/0MXZP4ODBZSOP24GEX7IY9ZWJM" class="platform-link" target="_blank">📺 Prime</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">🧙</div>
+                <div class="movie-info">
+                    <div class="movie-title">The Witcher - Temp. 4</div>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Fantasía</span><span class="badge">8 Episodios</span></div>
+                    <p class="movie-description">Geralt de Rivia busca a Ciri en nuevas aventuras.</p>
+                    <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.netflix.com/title/80243563" class="platform-link" target="_blank">🎬 Netflix</a>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">👻</div>
+                <div class="movie-info">
+                    <div class="movie-title">Stranger Things</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="movie-meta"><span class="badge">Sci-Fi/Horror</span><span class="badge">4 Temporadas</span></div>
+                    <p class="movie-description">Amigos enfrentan monstruos y experimentos secretos.</p>
+                    <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Tráiler</a>
+                    <a href="https://www.netflix.com/title/80057281" class="platform-link" target="_blank">🎬 Netflix</a>
+                </div>
+            </div>
+        </div>
+        <footer style="text-align: center; color: white; padding: 30px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; margin-top: 50px;">
+            <p>🎬 Hecho con ❤️ por Cocobot 🐱 | Todas las series están disponibles en sus plataformas</p>
+        </footer>
+    </div>
+</body>
+</html>
