@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Zoe y Alma - Super Acción 3D 🎮</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .game-wrapper {
+            transform-style: preserve-3d;
+            animation: boardFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes boardFloat {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-10px) rotateX(5deg); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, #ffd700 0%, #ff6b6b 50%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .player-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0.6;
+        }
+
+        .player:hover {
+            opacity: 1;
+        }
+
+        .player.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .player.active.cat {
+            background: rgba(255, 107, 107, 0.3);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.4);
+            border: 3px solid #ff6b6b;
+        }
+
+        .player.active.dog {
+            background: rgba(76, 175, 80, 0.3);
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.4);
+            border: 3px solid #4CAF50;
+        }
+
+        .player-icon {
+            font-size: 3rem;
+        }
+
+        .player-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Tablero 3D */
+        .board-3d {
+            transform: rotateX(10deg) rotateY(0deg);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            margin-bottom: 20px;
+        }
+
+        .board-3d:hover {
+            transform: rotateX(5deg) rotateY(0deg);
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 110px);
+            grid-template-rows: repeat(3, 110px);
+            gap: 10px;
+            padding: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6),
+                        inset 0 0 30px rgba(255,255,255,0.1);
+            transform-style: preserve-3d;
+        }
+
+        .cell {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(145deg, #2a2a5a 0%, #1a1a3a 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3),
+                        inset 0 0 15px rgba(255,255,255,0.05);
+            user-select: none;
+        }
+
+        .cell:hover:not(.taken) {
+            transform: translateZ(20px) scale(1.05);
+            background: linear-gradient(145deg, #3a3a7a 0%, #2a2a5a 100%);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4),
+                        0 0 30px rgba(255, 215, 0, 0.3),
+                        inset 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        .cell.taken {
+            cursor: not-allowed;
+        }
+
+        .cell.cat {
+            color: #ff6b6b;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.8),
+                         3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .cell.dog {
+            color: #4CAF50;
+            text-shadow: 0 0 30px rgba(76, 175, 80, 0.8),
+                         3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .cell.winner {
+            animation: winner-pulse 1s infinite;
+            background: linear-gradient(145deg, #ffd700 0%, #ffaa00 100%);
+        }
+
+        @keyframes winner-pulse {
+            0%, 100% {
+                transform: scale(1) translateZ(15px);
+            }
+            50% {
+                transform: scale(1.05) translateZ(25px);
+            }
+        }
+
+        /* Controles */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #1a1a2e;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+            color: white;
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Resultado */
+        .result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .result-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .result-content {
+            text-align: center;
+            transform: scale(0.5);
+            transition: transform 0.3s;
+        }
+
+        .result-overlay.show .result-content {
+            transform: scale(1);
+        }
+
+        .result {
+            font-size: 3rem;
+            font-weight: bold;
+            padding: 30px 60px;
+            border-radius: 30px;
+            display: inline-block;
+            animation: celebrate 0.5s;
+        }
+
+        .result.win-cat {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+            color: white;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.5);
+        }
+
+        .result.win-dog {
+            background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+            color: white;
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.5);
+        }
+
+        .result.draw {
+            background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+            color: white;
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Stats */
+        .stats {
+            margin-top: 20px;
+            display: flex;
+            gap: 25px;
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .board {
+                grid-template-columns: repeat(3, 90px);
+                grid-template-rows: repeat(3, 90px);
+                gap: 8px;
+                padding: 15px;
+            }
+
+            .cell {
+                width: 90px;
+                height: 90px;
+                font-size: 3.2rem;
+            }
+
+            .player {
+                gap: 10px;
+            }
+
+            .player-icon {
+                font-size: 2.2rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .player-indicator {
+                gap: 15px;
+                padding: 10px 20px;
+                flex-direction: column;
+            }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 215, 0, 0.4);
+            border-radius: 50%;
+            animation: particle-float 10s infinite;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="game-wrapper">
+        <h1>🎮 ZOE y ALMA 🎮</h1>
+        <div class="subtitle">3 EN RAYA - SUPER ACCIÓN 3D</div>
+
+        <div class="player-indicator">
+            <div class="player cat active" id="playerCat" onclick="selectPlayer('cat')">
+                <span class="player-icon">🐱</span>
+                <span class="player-name">Zoe</span>
+            </div>
+            <div class="player dog" id="playerDog" onclick="selectPlayer('dog')">
+                <span class="player-icon">🐶</span>
+                <span class="player-name">Alma</span>
+            </div>
+        </div>
+
+        <div class="board-3d">
+            <div class="board" id="board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-restart" onclick="restartGame()">🔄 Reiniciar</button>
+            <button class="btn btn-reset" onclick="resetScore()">📊 Reset</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat">🏆 Partidas: <span id="totalGames">0</span></div>
+            <div class="stat">📊 Zoe: <span id="catWinRate">0</span>%</div>
+            <div class="stat">📊 Alma: <span id="dogWinRate">0</span>%</div>
+        </div>
+    </div>
+
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-content">
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Partículas
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 6) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        const board = document.getElementById('board');
+        const cells = document.querySelectorAll('.cell');
+        const playerCat = document.getElementById('playerCat');
+        const playerDog = document.getElementById('playerDog');
+
+        let catScore = 0;
+        let dogScore = 0;
+        const catWins = JSON.parse(localStorage.getItem('zoeAlma3_catWins')) || 0;
+        const dogWins = JSON.parse(localStorage.getItem('zoeAlma3_dogWins')) || 0;
+
+        let currentPlayer = 'cat';
+        let gameActive = true;
+        let boardState = Array(9).fill(null);
+        let selectedPlayer = 'cat';
+
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function updateStats() {
+            document.getElementById('catScore').textContent = catScore;
+            document.getElementById('dogScore').textContent = dogScore;
+            document.getElementById('totalGames').textContent = catScore + dogScore;
+            const total = catScore + dogScore;
+            document.getElementById('catWinRate').textContent = total > 0 ? Math.round((catScore / total) * 100) : 0;
+            document.getElementById('dogWinRate').textContent = total > 0 ? Math.round((dogScore / total) * 100) : 0;
+        }
+
+        function selectPlayer(player) {
+            if (!gameActive) return;
+            selectedPlayer = player;
+            currentPlayer = player;
+            playerCat.classList.toggle('active', player === 'cat');
+            playerDog.classList.toggle('active', player === 'dog');
+        }
+
+        function checkWin(player) {
+            for (const pattern of winPatterns) {
+                if (pattern.every(index => boardState[index] === player)) {
+                    pattern.forEach(index => {
+                        cells[index].classList.add('winner');
+                    });
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function checkDraw() {
+            return boardState.every(cell => cell !== null);
+        }
+
+        function endGame(winner) {
+            gameActive = false;
+
+            if (winner === 'cat') {
+                catScore++;
+            } else if (winner === 'dog') {
+                dogScore++;
+            }
+
+            localStorage.setItem('zoeAlma3_catWins', catScore);
+            localStorage.setItem('zoeAlma3_dogWins', dogScore);
+            updateStats();
+
+            setTimeout(() => {
+                showResult(winner);
+            }, 500);
+        }
+
+        function showResult(winner) {
+            const overlay = document.getElementById('resultOverlay');
+            const result = document.getElementById('result');
+
+            if (winner === 'cat') {
+                result.className = 'result win-cat';
+                result.textContent = '🎉 ¡Zoe gana! 🎉';
+            } else if (winner === 'dog') {
+                result.className = 'result win-dog';
+                result.textContent = '🎉 ¡Alma gana! 🎉';
+            } else {
+                result.className = 'result draw';
+                result.textContent = "🤝 ¡Es un empate!";
+            }
+
+            overlay.classList.add('show');
+        }
+
+        function restartGame() {
+            boardState = Array(9).fill(null);
+            gameActive = true;
+            currentPlayer = selectedPlayer;
+
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove('cat', 'dog', 'winner', 'taken');
+            });
+
+            playerCat.classList.toggle('active', currentPlayer === 'cat');
+            playerDog.classList.toggle('active', currentPlayer === 'dog');
+
+            document.getElementById('resultOverlay').classList.remove('show');
+        }
+
+        function resetScore() {
+            catScore = 0;
+            dogScore = 0;
+            localStorage.setItem('zoeAlma3_catWins', 0);
+            localStorage.setItem('zoeAlma3_dogWins', 0);
+            updateStats();
+            restartGame();
+        }
+
+        function makeMove(index) {
+            if (!gameActive || boardState[index]) return;
+
+            boardState[index] = currentPlayer;
+            cells[index].textContent = currentPlayer === 'cat' ? '🐱' : '🐶';
+            cells[index].classList.add(currentPlayer, 'taken');
+
+            if (checkWin(currentPlayer)) {
+                endGame(currentPlayer);
+                return;
+            }
+
+            if (checkDraw()) {
+                endGame('draw');
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'cat' ? 'dog' : 'cat';
+            playerCat.classList.toggle('active', currentPlayer === 'cat');
+            playerDog.classList.toggle('active', currentPlayer === 'dog');
+        }
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const index = parseInt(cell.dataset.index);
+                makeMove(index);
+            });
+        });
+
+        updateStats();
+    </script>
+</body>
+</html>
