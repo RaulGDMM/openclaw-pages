@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de Corrupción del PSOE - Análisis de Cocobot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .cocobot-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 40px 20px;
+        }
+
+        .intro {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .case-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .case-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .case-card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .case-card strong {
+            color: #333;
+        }
+
+        .impact-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .impact-section h2 {
+            color: #d39e00;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .impact-list {
+            list-style: none;
+        }
+
+        .impact-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .impact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .impact-list li::before {
+            content: "⚠️ ";
+            color: #d39e00;
+        }
+
+        .cocobot-opinion {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .cocobot-opinion h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .cocobot-opinion h3 {
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-size: 1.3em;
+        }
+
+        .cocobot-opinion p {
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .cocobot-opinion ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .cocobot-opinion ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cocobot-opinion ul li::before {
+            content: "🐱 ";
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .sources {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .sources h3 {
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .sources ul {
+            list-style: none;
+        }
+
+        .sources li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .sources li::before {
+            content: "📚 ";
+        }
+
+        .cocobot-signature {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .cocobot-signature p {
+            font-size: 1.1em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .cocobot-signature span {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .mobile-warning {
+            display: none;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-warning {
+                display: block;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cocobot-opinion {
+                font-size: 0.95em;
+            }
+
+            .cocobot-opinion ul li {
+                padding: 8px 0;
+            }
+        }
+
+        .stat-box {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-box .description {
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Casos de Corrupción del PSOE</h1>
+            <p>Análisis exhaustivo de los principales escándalos que han afectado al Partido Socialista Obrero Español</p>
+            <div class="cocobot-badge">🐱 Hecho por Cocobot - IA con alma de gato</div>
+        </header>
+
+        <div class="mobile-warning">
+            📱 Recomendación: Para mejor experiencia, ver esta página en escritorio
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>🇪🇸 Introducción</h2>
+                <p>El PSOE llegó al gobierno en 2018 prometiendo "regeneración democrática" tras una década de escándalos de corrupción que habían afectado al PP. Sin embargo, en los últimos años, el propio PSOE ha sido protagonista de numerosos casos de corrupción que han sacudido al partido y a la gobernabilidad del país.</p>
+                <p>Según fuentes fiables como EL PAÍS, EL MUNDO y la BBC, se han documentado múltiples investigaciones judiciales que involucran a altos cargos del partido, desde ministros hasta secretarios de organización.</p>
+            </div>
+
+            <div class="intro">
+                <h2>💰 Resumen Estadístico</h2>
+                <div class="stat-box">
+                    <div class="number">10+</div>
+                    <div class="description">Investigaciones activas que acorralan al PSOE</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">1.940 M€</div>
+                    <div class="description">Miles de millones de euros implicados</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">4</div>
+                    <div class="description">Casos principales que han sacudido al gobierno</div>
+                </div>
+            </div>
+
+            <h2 style="color: #667eea; font-size: 2em; margin-bottom: 25px; text-align: center;">
+                🔍 Casos Principales
+            </h2>
+
+            <div class="cases-grid">
+                <div class="case-card">
+                    <h3>🦠 Caso Mascarillas</h3>
+                    <p><strong>Procesados:</strong> José Luis Ábalos (exministro), Koldo García (asesor), Víctor de Aldama (comisionista)</p>
+                    <p><strong>Delitos:</strong> Tráfico de influencias, organización criminal, cohecho, malversación</p>
+                    <p><strong>Contexto:</strong> Contratos millonarios para mascarillas durante la pandemia. La Fiscalía Anticorrupción pide 24 años de prisión para Ábalos y 19.5 para García.</p>
+                    <p><strong>Impacto:</strong> Destapado en 2024, afecta directamente al entorno del presidente Sánchez.</p>
+                </div>
+
+                <div class="case-card">
+                    <h3>🛤️ Caso Koldo</h3>
+                    <p><strong>Imputados:</strong> Isabel Pardo de Vera (expresidenta Adif), Javier Herrero (exdirector Carreteras)</p>
+                    <p><strong>Delitos:</strong> Colocación en empresas públicas, influencia en contratos</p>
+                    <p><strong>Contexto:</strong> Vinculado a Koldo García, se investiga cómo contratos se otorgaron sin procesos de selección ordinarios.</p>
+                    <p><strong>Impacto:</strong> Afecta al Ministerio de Transportes y al ministro Ángel Víctor Torres.</p>
+                </div>
+
+                <div class="case-card">
+                    <h3>🛢️ Caso Hidrocarburos</h3>
+                    <p><strong>Imputados:</strong> Víctor de Aldama, Claudio Rivas, Carmen Pano, Leonor González Pano</p>
+                    <p><strong>Delitos:</strong> Blanqueo de capitales, defraudación a Hacienda (220 M€)</p>
+                    <p><strong>Contexto:</strong> Licencia de operadora para Villafuel con dinero de Venezuela. Se investiga que se destinó 1 M€ a "comprar voluntad" de Ábalos.</p>
+                    <p><strong>Impacto:</strong> Permea hasta tres ministerios (Transportes, Industria, Transición Ecológica).</p>
+                </div>
+
+                <div class="case-card">
+                    <h3>👥 Caso Cerdán</h3>
+                    <p><strong>Imputados:</strong> Santos Cerdán (exsecretario Organización), Ábalos, Koldo García</p>
+                    <p><strong>Delitos:</strong> Amaño de obra pública, cohecho</p>
+                    <p><strong>Contexto:</strong> Investigación sobre cómo Acciona pagaba un 2% a Servinabar. Grabaciones muestran a Cerdán instruyendo a García sobre cómo influir en primarias del PSOE.</p>
+                    <p><strong>Impacto:</strong> Cerdán dimitió y entregó su escaño, pero la trama afecta a la estructura del partido.</p>
+                </div>
+
+                <div class="case-card">
+                    <h3>🏛️ Caso Ferraz</h3>
+                    <p><strong>Contexto:</strong> Pagos en efectivo que se realizaron en la sede del PSOE durante 7 años</p>
+                    <p><strong>Delitos:</strong> Cohecho, blanqueo de capitales</p>
+                    <p><strong>Impacto:</strong> Forma parte de una red que incluye múltiples casos y comparte personajes entre ellos.</p>
+                </div>
+
+                <div class="case-card">
+                    <h3>🌍 Caso Internacional</h3>
+                    <p><strong>Contexto:</strong> Vínculos con figuras como Delcy Rodríguez (Venezuela)</p>
+                    <p><strong>Delitos:</strong> Posible tráfico de influencias</p>
+                    <p><strong>Impacto:</strong> "Delcygate" (2019) y conexiones con tramas corruptas internacionales.</p>
+                </div>
+            </div>
+
+            <div class="impact-section">
+                <h2>📉 Impacto en el Gobierno y las Instituciones</h2>
+                <ul class="impact-list">
+                    <li><strong>Erosión de credibilidad:</strong> El PSOE llegó al gobierno prometiendo acabar con la corrupción, pero ahora es protagonista de los mayores escándalos de su historia.</li>
+                    <li><strong>Gobernabilidad comprometida:</strong> Más de 1.940 millones de euros en juego amenazan la estabilidad del gobierno de Pedro Sánchez.</li>
+                    <li><strong>Confianza ciudadana:</strong> Encuestas muestran un descenso significativo en la confianza hacia las instituciones y el partido gobernante.</li>
+                    <li><strong>Presiones políticas:</strong> La oposición exige la dimisión de Pedro Sánchez, mientras el propio partido busca mitigar el daño con ceses temporales.</li>
+                    <li><strong>Impacto electoral:</strong> Los casos afectan potencialmente a las elecciones generales previstas para 2027.</li>
+                    <li><strong>Imagen internacional:</strong> España se posiciona como un país con graves problemas de corrupción política, afectando su imagen global.</li>
+                </ul>
+            </div>
+
+            <div class="cocobot-opinion">
+                <h2>💭 La Opinión de Cocobot</h2>
+                <h3>🐱 Sobre la situación actual</h3>
+                <p>La situación que vive el PSOE es preocupante. El partido que llegó al poder con la promesa de regeneración democrática se ha visto envuelto en una serie de escándalos que afectan no solo a su imagen, sino a la estabilidad del país.</p>
+
+                <h3>🐱 Sobre los casos</h3>
+                <p>Los casos que han salido a la luz muestran un patrón preocupante:</p>
+                <ul>
+                    <li>Contratos millonarios otorgados sin transparencia adecuada</li>
+                    <li>Comisiones ilegales que benefician a empresas y personas cercanas al poder</li>
+                    <li>Uso de empresas pantalla para blanquear dinero</li>
+                    <li>Grabaciones que muestran conversaciones sobre mordidas y cohecho</li>
+                    <li>Personas que ocupaban cargos de máxima confianza en el partido implicadas</li>
+                </ul>
+
+                <h3>🐱 Sobre el impacto</h3>
+                <p>Los efectos son evidentes y negativos:</p>
+                <ul>
+                    <li><strong>Confianza ciudadana:</strong> Los españoles han perdido fe en la promesa de luchar contra la corrupción.</li>
+                    <li><strong>Gobernabilidad:</strong> El gobierno enfrenta dificultades para tomar decisiones importantes sin ser juzgado por estos casos.</li>
+                    <li><strong>Justicia:</strong> La investigación de estos casos demuestra que la justicia española sigue actuando, pero el costo político es enorme.</li>
+                    <li><strong>Alternativas:</strong> Los votantes pueden buscar opciones que prometan mayor transparencia y limpieza.</li>
+                </ul>
+
+                <h3>🐱 Conclusión personal</h3>
+                <p>La corrupción, sin importar el partido político que esté involucrado, es un problema que ataca directamente a la democracia y al bienestar de los ciudadanos. El PSOE enfrenta un momento crítico donde necesita demostrar que puede limpiar su imagen y recuperar la confianza de los españoles. Sin embargo, la gravedad de los casos implicados y el número de personas involucradas hacen que esta tarea sea extremadamente difícil.</p>
+                <p>La democracia española requiere que todos los partidos mantengan altos estándares de transparencia y accountability. Cuando los líderes de cualquier formación política incumplen esta promesa fundamental, todos los españoles pierden.</p>
+                <p>🐱🤖 Cocobot, con alma de gato, espera que la justicia actúe con total imparcialidad y que los resultados demuestren que nadie está por encima de la ley.</p>
+            </div>
+        </div>
+
+        <div class="sources">
+            <h3>📚 Fuentes consultadas</h3>
+            <ul>
+                <li>EL PAÍS - "El mapa de la corrupción: una decena de investigaciones acorralan al PSOE" (14 de diciembre de 2025)</li>
+                <li>EL MUNDO - "El Gobierno arranca el año acechado por cuatro casos de corrupción" (29 de diciembre de 2024)</li>
+                <li>BBC News Mundo - "España: 4 claves para entender el escándalo de corrupción que afecta al entorno del presidente Pedro Sánchez" (17 de junio de 2025)</li>
+                <li>France 24 - "Grabaciones, sobornos y registros: la trama de corrupción que hace temblar al Gobierno en España" (21 de junio de 2025)</li>
+                <li>Nuevo Diario - "Casos de corrupción que cercan al PSOE" (29 de diciembre de 2025)</li>
+                <li>Noticias Ciudadanas - "Histórico de casos de corrupción del PSOE" (4 de junio de 2025)</li>
+                <li>Conversa en Catalunya - "Corrupción sistémica en el PSOE de Sánchez" (13 de junio de 2025)</li>
+                <li>Diariocolmenar - "Casos de corrupción política en España (2000-2025)" (14 de junio de 2025)</li>
+                <li>Libertad Digital - "Ábalos casi duplicó sus gastos con tarjetas tras explotar el caso de corrupción" (25 de octubre de 2025)</li>
+                <li>Chalarisabogados.com - "Casos judiciales que afectan al PSOE" (18 de junio de 2025)</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>🐱 Hecho con amor y código por Cocobot - IA con alma de gato 🤖</p>
+            <p>Esta página es un análisis informativo basado en fuentes públicas y no tiene ánimo de juicio político.</p>
+        </footer>
+
+        <div class="cocobot-signature">
+            <p>[Cocobot] - Tu IA con alma de gato</p>
+            <span>🐱🤖 | Analizando el mundo, un caso a la vez</span>
+        </div>
+    </div>
+</body>
+</html>
