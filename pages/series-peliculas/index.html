@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Series y Películas de Amazon Prime Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: white;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 10px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .movie-card {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2a2a72 0%, #009ffd 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+
+        .movie-info {
+            padding: 20px;
+            color: white;
+        }
+
+        .movie-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        .movie-description {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .trailer-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .trailer-link:hover {
+            transform: scale(1.05);
+        }
+
+        .rating {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ffd700;
+            color: #333;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .video-title {
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .video-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            margin: 5px 5px 15px 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .featured {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Series y Películas de Amazon Prime Video</h1>
+            <p>Recomendaciones para tu noche de cine</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Películas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Series</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Tráilers</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Películas -->
+        <div class="section">
+            <h2>🎭 Películas Recomendadas</h2>
+            <div class="grid-container">
+                <!-- La Rueda del Tiempo -->
+                <div class="movie-card featured">
+                    <div class="movie-poster">🌀</div>
+                    <div class="movie-info">
+                        <div class="movie-title">La rueda del tiempo</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Fantasía Épica</span>
+                            <span class="badge">2021-2025</span>
+                            <span class="badge">8 Temporadas</span>
+                        </div>
+                        <p class="movie-description">Basada en las novelas de Robert Jordan. Una poderosa Aes Sedai busca al Dragón Renacido entre cinco jóvenes aldeanos en un mundo de fantasía épica.</p>
+                        <a href="https://www.youtube.com/watch?v=2kOMw4mm2mU" class="trailer-link" target="_blank">▶ Ver Tráiler Oficial</a>
+                    </div>
+                </div>
+
+                <!-- Nosferatu -->
+                <div class="movie-card">
+                    <div class="movie-poster">🧛</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Nosferatu</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Terror</span>
+                            <span class="badge">2024</span>
+                            <span class="badge">2h 12min</span>
+                        </div>
+                        <p class="movie-description">Remake del clásico de terror mudo de F.W. Murnau. El vampiro Conde Orlok atormenta a Ellen Hutter en un remake aclamado por la crítica.</p>
+                        <a href="https://www.primevideo.com/-/es/detail/Nosferatu/0F7TWFQK7RKDWLFNLUG9GBV2XD" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+
+                <!-- The Wrecking Crew -->
+                <div class="movie-card">
+                    <div class="movie-poster">💥</div>
+                    <div class="movie-info">
+                        <div class="movie-title">The Wrecking Crew</div>
+                        <div class="rating">⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Acción</span>
+                            <span class="badge">2026</span>
+                            <span class="badge">Jason Momoa</span>
+                        </div>
+                        <p class="movie-description">Los hermanos Jonny y James se reencuentran en Hawái para descubrir la verdad tras la muerte de su padre, enfrentándose a la Yakuza.</p>
+                        <a href="https://www.primevideo.com/detail/The-Wrecking-Crew/0T6ABGG3R6JMRL2G9RIQP4689U" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+
+                <!-- Den of Thieves 2 -->
+                <div class="movie-card">
+                    <div class="movie-poster">💰</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Den of Thieves 2: Pantera</div>
+                        <div class="rating">⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Acción</span>
+                            <span class="badge">2025</span>
+                            <span class="badge">Gerard Butler</span>
+                        </div>
+                        <p class="movie-description">Big Nick busca a Donnie en Europa, donde está envuelto con la mafia de diamantes y planean un atraco masivo.</p>
+                        <a href="https://www.primevideo.com/detail/Den-of-Thieves-2-Panther/0JCV3LK2A0V6YHHMCWJG5BQ0QL" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+
+                <!-- Another Simple Favor -->
+                <div class="movie-card">
+                    <div class="movie-poster">🎭</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Another Simple Favor</div>
+                        <div class="rating">⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Thriller</span>
+                            <span class="badge">2025</span>
+                            <span class="badge">Anna Kendrick</span>
+                        </div>
+                        <p class="movie-description">Stephanie y Emily se reúnen en Capri para la boda de Emily, donde se suceden asesinatos y traiciones.</p>
+                        <a href="https://www.primevideo.com/detail/Another-Simple-Favor/0HSPSHBCKYK36BL9DKXWTZCIWL" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+
+                <!-- Conclave -->
+                <div class="movie-card">
+                    <div class="movie-poster">🏛️</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Conclave</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Misterio</span>
+                            <span class="badge">2024</span>
+                            <span class="badge">Alfonso Cuarón</span>
+                        </div>
+                        <p class="movie-description">Un cardenal debe liderar la elección de un nuevo papa tras la muerte del pontífice, descubriendo una conspiración secreta.</p>
+                        <a href="https://www.primevideo.com/detail/Conclave/0N9RJLX5TXZXMJQN1VNMQCQV8Y" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Series -->
+        <div class="section">
+            <h2>📺 Series Recomendadas</h2>
+            <div class="grid-container">
+                <!-- La Rueda del Tiempo - Temporada 3 -->
+                <div class="movie-card featured">
+                    <div class="movie-poster">🌀</div>
+                    <div class="movie-info">
+                        <div class="movie-title">La rueda del tiempo - Temporada 3</div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Fantasía Épica</span>
+                            <span class="badge">2025</span>
+                            <span class="badge">8 Episodios</span>
+                        </div>
+                        <p class="movie-description">La mejor temporada de la serie, con nuevos personajes como Elaida y Morgase. Probablemente su mejor temporada.</p>
+                        <a href="https://www.youtube.com/watch?v=S9sFvRMtiws" class="trailer-link" target="_blank">▶ Ver Tráiler Temp. 3</a>
+                    </div>
+                </div>
+
+                <!-- Fallout - Temporada 2 -->
+                <div class="movie-card">
+                    <div class="movie-poster">☢️</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Fallout - Temporada 2</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Ciencia Ficción</span>
+                            <span class="badge">2024</span>
+                            <span class="badge">8 Episodios</span>
+                        </div>
+                        <p class="movie-description">Adaptación del videojuego de Bethesda. Más potente que la primera temporada, expande el lore del mundo postapocalíptico.</p>
+                        <a href="https://www.youtube.com/watch?v=XAwaWp6V2IE" class="trailer-link" target="_blank">▶ Ver Tráiler Temp. 2</a>
+                    </div>
+                </div>
+
+                <!-- The Last of Us - Temporada 2 -->
+                <div class="movie-card">
+                    <div class="movie-poster">🍄</div>
+                    <div class="movie-info">
+                        <div class="movie-title">The Last of Us - Temporada 2</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Thriller</span>
+                            <span class="badge">2024</span>
+                            <span class="badge">7 Episodios</span>
+                        </div>
+                        <p class="movie-description">Segunda temporada del aclamado drama postapocalíptico. Una historia de venganza por parte de Ellie en un mundo desolado.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Ver Tráiler Temp. 2</a>
+                    </div>
+                </div>
+
+                <!-- Invencible - Temporada 3 -->
+                <div class="movie-card">
+                    <div class="movie-poster">🦸</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Invencible - Temporada 3</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Superhéroes</span>
+                            <span class="badge">2025</span>
+                            <span class="badge">8 Episodios</span>
+                        </div>
+                        <p class="movie-description">Una de las mejores series de superhéroes animadas. Temporada a temporada, el nivel se mantiene con retos más complejos.</p>
+                        <a href="https://www.youtube.com/watch?v=..." class="trailer-link" target="_blank">▶ Ver Tráiler Temp. 3</a>
+                    </div>
+                </div>
+
+                <!-- Wake (Vaka) -->
+                <div class="movie-card">
+                    <div class="movie-poster">😴</div>
+                    <div class="movie-info">
+                        <div class="movie-title">Wake (Vaka)</div>
+                        <div class="rating">⭐⭐⭐⭐</div>
+                        <div class="movie-meta">
+                            <span class="badge">Thriller</span>
+                            <span class="badge">2026</span>
+                            <span class="badge">Suecia</span>
+                        </div>
+                        <p class="movie-description">Una epidemia de insomnio mortal se propaga por Estocolmo, provocando accidentes, violencia y caos social.</p>
+                        <a href="https://www.primevideo.com/detail/Wake/0T6ABGG3R6JMRL2G9RIQP4689U" class="trailer-link" target="_blank">▶ Ver en Prime Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tráilers -->
+        <div class="section">
+            <h2>🎬 Tráilers Oficiales</h2>
+            <div class="grid-container">
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/2kOMw4mm2mU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title">La rueda del tiempo - Tráiler Oficial</div>
+                    <p class="video-description">Temporada 1 | Amazon Prime Video</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/S9sFvRMtiws" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title">La rueda del tiempo - Temporada 3 Trailer</div>
+                    <p class="video-description">Amazon Prime Video</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/..." frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title">Fallout - Temporada 2 Trailer</div>
+                    <p class="video-description">Amazon Prime Video</p>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/..." frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title">The Last of Us - Temporada 2 Trailer</div>
+                    <p class="video-description">HBO Max</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>🎬 Hecho con ❤️ por Cocobot 🐱</p>
+            <p>Todas las películas y series están disponibles en Amazon Prime Video</p>
+            <p class="badge">⚠️ Algunos títulos pueden no estar disponibles en tu zona geográfica</p>
+        </footer>
+    </div>
+</body>
+</html>
