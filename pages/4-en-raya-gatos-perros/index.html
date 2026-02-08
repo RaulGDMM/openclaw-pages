@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱 4 en Raya - Gatos vs Perros 🐶</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 3rem;
+            color: #ffd700;
+        }
+
+        .subtitle {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        .game-info {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .player {
+            padding: 15px 30px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .player.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .player.cat {
+            border: 3px solid #ff9500;
+        }
+
+        .player.dog {
+            border: 3px solid #4CAF50;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #2a2a4e 0%, #1a1a2e 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .cell:hover {
+            transform: scale(1.05);
+            background: linear-gradient(145deg, #3a3a6e 0%, #2a2a4e 100%);
+        }
+
+        .cell.cat {
+            color: #ff9500;
+        }
+
+        .cell.dog {
+            color: #4CAF50;
+        }
+
+        .cell.winner {
+            background: linear-gradient(145deg, #ffd700 0%, #ffaa00 100%);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .controls {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #1a1a2e;
+        }
+
+        .btn-restart:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 20px 40px;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .result.win {
+            display: block;
+            background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+            color: white;
+            animation: celebrate 0.5s;
+        }
+
+        .result.lose {
+            display: block;
+            background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+            color: white;
+            animation: celebrate 0.5s;
+        }
+
+        .result.draw {
+            display: block;
+            background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+            color: white;
+        }
+
+        .result.cat {
+            background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+            color: #1a1a2e;
+        }
+
+        .result.dog {
+            background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+            color: white;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .stats {
+            margin-top: 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 1.1rem;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .board {
+                grid-template-columns: repeat(4, 80px);
+                grid-template-rows: repeat(4, 80px);
+            }
+
+            .cell {
+                width: 80px;
+                height: 80px;
+                font-size: 3.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .game-info {
+                font-size: 1rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .player {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🐱 4 en Raya 🐶</h1>
+    <div class="subtitle">Gatos vs Perros - ¡4 fichas en fila gana!</div>
+
+    <div class="game-info">
+        <div class="player cat active" id="playerCat">
+            🐱 Gatos: <span id="catScore">0</span>
+        </div>
+        <div class="player dog" id="playerDog">
+            🐶 Perros: <span id="dogScore">0</span>
+        </div>
+    </div>
+
+    <div class="board" id="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+        <div class="cell" data-index="9"></div>
+        <div class="cell" data-index="10"></div>
+        <div class="cell" data-index="11"></div>
+        <div class="cell" data-index="12"></div>
+        <div class="cell" data-index="13"></div>
+        <div class="cell" data-index="14"></div>
+        <div class="cell" data-index="15"></div>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="controls">
+        <button class="btn btn-restart" onclick="restartGame()">🔄 Reiniciar partida</button>
+        <button class="btn btn-reset" onclick="resetScore()">📊 Resetear puntuaciones</button>
+    </div>
+
+    <div class="stats">
+        <div class="stat">🏆 Partidas totales: <span id="totalGames">0</span></div>
+        <div class="stat">📊 Gato: <span id="catWinRate">0</span>%</div>
+        <div class="stat">📊 Perro: <span id="dogWinRate">0</span>%</div>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const cells = document.querySelectorAll('.cell');
+        const playerCat = document.getElementById('playerCat');
+        const playerDog = document.getElementById('playerDog');
+        const result = document.getElementById('result');
+
+        let catScore = 0;
+        let dogScore = 0;
+        const catWins = JSON.parse(localStorage.getItem('4enraya_catWins')) || 0;
+        const dogWins = JSON.parse(localStorage.getItem('4enraya_dogWins')) || 0;
+
+        let currentPlayer = 'cat';
+        let gameActive = true;
+        let boardState = Array(16).fill(null);
+
+        const winPatterns = [
+            [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15],
+            [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15],
+            [0, 5, 10, 15], [3, 6, 9, 12]
+        ];
+
+        function updateStats() {
+            document.getElementById('catScore').textContent = catScore;
+            document.getElementById('dogScore').textContent = dogScore;
+            document.getElementById('totalGames').textContent = catScore + dogScore;
+            document.getElementById('catWinRate').textContent = catScore > 0 ? Math.round((catScore / (catScore + dogScore)) * 100) : 0;
+            document.getElementById('dogWinRate').textContent = dogScore > 0 ? Math.round((dogScore / (catScore + dogScore)) * 100) : 0;
+        }
+
+        function checkWin(player) {
+            for (const pattern of winPatterns) {
+                const win = pattern.every(index => boardState[index] === player);
+                if (win) {
+                    pattern.forEach(index => {
+                        cells[index].classList.add('winner');
+                    });
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function checkDraw() {
+            return boardState.every(cell => cell !== null);
+        }
+
+        function endGame(winner) {
+            gameActive = false;
+
+            if (winner === 'cat') {
+                catScore++;
+                result.className = 'result win cat';
+                result.textContent = '🎉 ¡Ganan los Gatos! 🐱';
+            } else if (winner === 'dog') {
+                dogScore++;
+                result.className = 'result win dog';
+                result.textContent = '🎉 ¡Ganan los Perros! 🐶';
+            } else {
+                result.className = 'result draw';
+                result.textContent = "🤝 ¡Es un empate!";
+            }
+
+            localStorage.setItem('4enraya_catWins', catScore);
+            localStorage.setItem('4enraya_dogWins', dogScore);
+
+            updateStats();
+        }
+
+        function handleCellClick(e) {
+            const cell = e.target;
+            const index = parseInt(cell.dataset.index);
+
+            if (boardState[index] || !gameActive) return;
+
+            boardState[index] = currentPlayer;
+            cell.textContent = currentPlayer === 'cat' ? '🐱' : '🐶';
+            cell.classList.add(currentPlayer);
+
+            if (checkWin(currentPlayer)) {
+                endGame(currentPlayer);
+                return;
+            }
+
+            if (checkDraw()) {
+                endGame('draw');
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'cat' ? 'dog' : 'cat';
+            playerCat.classList.toggle('active', currentPlayer === 'cat');
+            playerDog.classList.toggle('active', currentPlayer === 'dog');
+        }
+
+        function restartGame() {
+            boardState = Array(16).fill(null);
+            gameActive = true;
+            currentPlayer = 'cat';
+            result.style.display = 'none';
+
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove('cat', 'dog', 'winner');
+            });
+
+            playerCat.classList.add('active');
+            playerDog.classList.remove('active');
+        }
+
+        function resetScore() {
+            catScore = 0;
+            dogScore = 0;
+            localStorage.setItem('4enraya_catWins', 0);
+            localStorage.setItem('4enraya_dogWins', 0);
+            updateStats();
+            restartGame();
+        }
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', handleCellClick);
+        });
+
+        updateStats();
+    </script>
+</body>
+</html>
