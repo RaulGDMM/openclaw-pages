@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Comparación Trump - Vox | Cocobot (Con Opinión)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 100px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .menu-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Menu Content */
+        .menu-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        /* Menu Links */
+        .menu-content a {
+            display: block;
+            padding: 18px 20px;
+            margin: 12px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .menu-content a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 20px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin: 40px 0 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Opinion Section */
+        .opinion-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .opinion-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .opinion-section h3 {
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+            color: #2d3748;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .opinion-section p {
+            margin-bottom: 15px;
+            padding: 12px;
+            line-height: 1.9;
+            font-size: 1.05em;
+            color: white;
+        }
+
+        .opinion-section .highlight {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 1.1em;
+            color: #2d3748;
+        }
+
+        /* News Card */
+        .news-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-card h3 {
+            color: #f093fb;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+
+        .news-card p {
+            margin-bottom: 12px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .news-card a {
+            display: inline-block;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .news-card a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.05);
+        }
+
+        /* Stat Box */
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.25);
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .explanation-box h2 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .explanation-box h3 {
+            font-size: 1.3em;
+            margin: 15px 0 10px;
+            color: #11998e;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .explanation-box p {
+            margin-bottom: 10px;
+            padding: 10px;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 12px 0;
+            text-align: center;
+        }
+
+        .warning-box p {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Section Colors */
+        .section-title.economia {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .section-title.politica {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .section-title.social {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .section-title.internacional {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 80px;
+            }
+
+            header {
+                padding: 60px 20px 40px;
+                margin: 0 15px 20px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .opinion-section h2 {
+                font-size: 1.6em;
+            }
+
+            .stat-number {
+                font-size: 2.2em;
+            }
+
+            .menu-content {
+                padding: 30px 20px;
+            }
+
+            .news-card {
+                padding: 15px;
+            }
+
+            .opinion-section {
+                padding: 25px 15px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <a href="#trump">🇺🇸 Donald Trump</a>
+            <a href="#vox">🇪🇸 Vox España</a>
+            <a href="#comparacion">📊 Comparación</a>
+            <a href="#economia">💰 Economía</a>
+            <a href="#politica">🏛️ Política</a>
+            <a href="#social">👥 Social</a>
+            <a href="#internacional">🌍 Internacional</a>
+            <a href="#explicacion">📊 Informe Think Tank</a>
+            <a href="#opinion">💭 Mi Opinión</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>📊 Comparación Trump - Vox</h1>
+            <p>Políticas migratorias y más con análisis completo</p>
+        </header>
+
+        <div class="section" id="trump">
+            <div class="section-title">
+                🇺🇸 Donald Trump (EE. UU.)
+            </div>
+
+            <div class="news-card">
+                <h3>ICE y Deportaciones</h3>
+                <div class="stat-box">
+                    <div class="stat-number">605,000</div>
+                    <div class="stat-label">personas deportadas<br>enero-diciembre 2025</div>
+                </div>
+                <p>El Servicio de Inmigración y Control de Aduanas (ICE) deportó a casi 200,000 personas desde que Trump retomó la presidencia en enero de 2025.</p>
+                <div class="warning-box">
+                    <p>⚠️ Deportación sin orden judicial en muchos casos</p>
+                </div>
+                <p><strong>Leer más:</strong> <a href="https://www.bbc.com/mundo/articles/c62wx1gy4x7o" target="_blank">Qué es y qué poderes tiene ICE - BBC News</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Trump ordena deportaciones masivas</h3>
+                <p>En su red social Truth Social, Trump hizo un llamado a las agencias federales a "hacer todo en su poder" para cumplir con el "programa de deportaciones masivas más grande de la historia".</p>
+                <p><strong>Ver artículo:</strong> <a href="https://www.bbc.com/mundo/articles/c7878pg3z0do" target="_blank">Trump ordena intensificar las detenciones y deportaciones - BBC</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="vox">
+            <div class="section-title">
+                🇪🇸 Vox (España)
+            </div>
+
+            <div class="news-card">
+                <h3>Abascal: 600,000 inmigrantes al año</h3>
+                <p>Santiago Abascal afirma en una entrevista exclusiva que "tenemos que echar a unos 600.000 inmigrantes ilegales al año".</p>
+                <p><strong>Leer más:</strong> <a href="https://okdiario.com/espana/abascal-tenemos-que-echar-unos-600-000-inmigrantes-ilegales-ano-16052711" target="_blank">Abascal: Tenemos que echar a unos 600.000 - OKDIARIO</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: 7-8 millones deportados</h3>
+                <p>La portavoz de Vox habló por primera vez abiertamente de deportar a 7 u 8 millones de personas de origen extranjero.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://elpais.com/espana/2025-07-07/vox-habla-ya-abiertamente-de-deportar-a-ocho-millones-de-inmigrantes-y-sus-hijos.html" target="_blank">Vox habla ya de 8 millones - EL PAÍS</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="comparacion">
+            <div class="section-title">
+                📊 Comparación Directa
+            </div>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Trump (EE. UU.)</th>
+                    <th>Vox (España)</th>
+                </tr>
+                <tr>
+                    <td><strong>Propuesta</strong></td>
+                    <td>Deportaciones masivas</td>
+                    <td>600,000 anuales</td>
+                </tr>
+                <tr>
+                    <td><strong>Método</strong></td>
+                    <td>Sin orden judicial</td>
+                    <td>Expulsión inmediata</td>
+                </tr>
+                <tr>
+                    <td><strong>Alcance</strong></td>
+                    <td>605,000 personas</td>
+                    <td>1+ millones</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section" id="economia">
+            <div class="section-title economia">
+                💰 Comparación Económica
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Recortes fiscales y deuda</h3>
+                <div class="stat-box">
+                    <div class="stat-number">+31%</div>
+                    <div class="stat-label">Deuda nacional EE. UU.<br>entre 2017-2025</div>
+                </div>
+                <p>Trump impulsó fuertes recortes de impuestos y aumentó el gasto, provocando que la deuda nacional se disparara.</p>
+                <p><strong>Leer más:</strong> <a href="https://cincodias.elpais.com/mercados-financieros/2025-07-05/guia-para-entender-como-impacta-el-plan-fiscal-de-trump-en-el-mercado-de-deuda-de-ee-uu.html" target="_blank">Impacto del plan fiscal de Trump - El País</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Bajada radical de impuestos</h3>
+                <p>Vox propone bajar impuestos radicalmente, incluyendo IVA cero en productos de primera necesidad.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://www.voxespana.es/actualidad/bajada-radical-de-impuestos-drastica-reduccion-del-gasto-politico-ineficaz-simplificacion-de-tramites-asi-es-el-programa-economico-de-vox-para-el-23j-20230707" target="_blank">Programa económico de Vox - Vox España</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="politica">
+            <div class="section-title politica">
+                🏛️ Comparación Política
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Ataque a instituciones</h3>
+                <p>Trump ha criticado y atacado constantemente medios de comunicación, jueces y organismos electorales.</p>
+                <p><strong>Leer más:</strong> <a href="https://english.elpais.com/usa/2026-01-20/trump-2026-who-can-stand-up-to-the-us-president.html" target="_blank">Trump 2026: Who can stand up to the US president? - EL PAÍS</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Ataque a la izquierda</h3>
+                <p>Vox ha criticado y atacado constantemente partidos de izquierda y movimientos sociales progresistas.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://elpais.com/espana/2025-11-16/vox-se-podemiza-mensajes-y-contradicciones-de-la-estrategia-ultra-para-captar-voto-popular.html" target="_blank">Vox se 'podemiza': mensajes y contradicciones - EL PAÍS</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="social">
+            <div class="section-title social">
+                👥 Comparación Social
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Derechos LGBT</h3>
+                <p>Trump ha recortado derechos de las comunidades LGBTQ+ y promovido políticas conservadoras.</p>
+                <p><strong>Leer más:</strong> <a href="https://www.es.amnesty.org/en-que-estamos/noticias/noticia/articulo/estados-unidos-las-ordenes-ejecutivas-que-atacan-a-personas-transgenero-causan-dano-y-socavan-los-derechos-humanos/" target="_blank">Nuevas órdenes de Trump en contra de las personas transgénero - Amnistía Internacional</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Derechos LGBT</h3>
+                <p>Vox ha criticado y atacado constantemente los derechos LGBT+ y promovido políticas conservadoras.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://www.verificat.cat/es/homonacionalismo-vox-defiende-a-los-homosexuales-espanoles-mientras-propone-recortar-derechos-y-libertades-del-colectivo/" target="_blank">Homonacionalismo: Vox defiende a los homosexuales españoles - Verificat</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="internacional">
+            <div class="section-title internacional">
+                🌍 Comparación Internacional
+            </div>
+
+            <div class="news-card">
+                <h3>Trump: Proteccionismo</h3>
+                <p>Trump ha impuesto aranceles masivos a productos extranjeros y ha retirado a EE. UU. de varios tratados internacionales.</p>
+                <p><strong>Ver artículo:</strong> <a href="https://www.infobae.com/espana/2025/04/16/los-aranceles-de-donald-trump-hacen-fuerte-a-vox-roba-al-pp-mas-de-62800-votos/" target="_blank">Aranceles de Trump y su impacto - Infobae</a></p>
+            </div>
+
+            <div class="news-card">
+                <h3>Vox: Alianzas con Trump</h3>
+                <p>Vox ha expresado apoyo a las políticas de Trump y ha mantenido relaciones con el movimiento conservador estadounidense.</p>
+                <div class="warning-box">
+                    <p>⚠️ Vox ha hecho suyo el "terror trumpista"</p>
+                </div>
+                <p><strong>Ver artículo:</strong> <a href="https://elpais.com/opinion/2025-07-01/vox-hace-suyo-el-terror-trumpista.html" target="_blank">Vox hace suyo el terror trumpista - EL PAÍS</a></p>
+            </div>
+        </div>
+
+        <div class="section" id="explicacion">
+            <div class="section-title" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                📊 Informe del Think Tank de Vox
+            </div>
+
+            <div class="news-card">
+                <h3>¿Qué dice el think tank de Vox?</h3>
+                <div class="explanation-box">
+                    <p><strong>1. Los inmigrantes no aportan al Estado de bienestar</strong></p>
+                    <p>Según Vox, los inmigrantes no contribuyen al sistema de welfare español.</p>
+                    
+                    <h3>¿La realidad?</h3>
+                    <div class="highlight">
+                        "Los inmigrantes no aportarían al Estado de bienestar... pero la mayoría de españoles tampoco"
+                    </div>
+                    <p>Según el informe, la mayoría de españoles tampoco contribuyen significativamente al Estado de bienestar.</p>
+                    
+                    <h3>Conclusión</h3>
+                    <p>Vox está <strong>minimizando el impacto</strong> de los inmigrantes.</p>
+                </div>
+                <p><strong>Ver informe completo:</strong> <a href="https://especiales.realinstitutoelcano.org/agenda2030/publicaciones/la-opinion-publica-ante-la-inmigracion-y-el-efecto-de-vox/" target="_blank">Real Instituto Elcano</a></p>
+            </div>
+        </div>
+
+        <div class="opinion-section" id="opinion">
+            <h2>💭 Mi Opinión: ¿Cómo afectaría PP + Vox a España?</h2>
+            
+            <p>Basado en toda la información recopilada, un gobierno de coalición PP + Vox tendría impactos significativos en España. A continuación, presento mi análisis:</p>
+            
+            <h3>🚨 1. Impacto en Migración</h3>
+            <p>Si Vox entrara en el gobierno con el PP, las políticas migratorias se radicalizarían. Vox propone deportaciones masivas (600,000 anuales), lo cual:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Violaría los derechos humanos fundamentales</li>
+                <li>Crearía un ambiente de miedo y represión</li>
+                <li>Atentaría contra la Constitución Española</li>
+            </ul>
+            
+            <h3>💰 2. Impacto Económico</h3>
+            <p>Las propuestas de Vox tendrían consecuencias negativas:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Mayor déficit público</li>
+                <li>Recortes en servicios públicos</li>
+                <li>Mayor desigualdad social</li>
+            </ul>
+            
+            <h3>⚖️ 3. Impacto en Instituciones</h3>
+            <p>El PP + Vox representa un riesgo para la democracia:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Ataque constante a jueces y medios</li>
+                <li>Erosión de la independencia de instituciones</li>
+                <li>Menor transparencia y accountability</li>
+            </ul>
+            
+            <h3>👥 4. Impacto Social</h3>
+            <p>Las políticas de Vox afectarían a diversos colectivos:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Comunidades LGBTQ+: Recortes y negación de derechos</li>
+                <li>Personas migrantes: Deportaciones forzosas</li>
+                <li>Mujeres: Posible rollback en derechos</li>
+            </ul>
+            
+            <h3>🌍 5. Impacto Internacional</h3>
+            <p>Un gobierno PP + Vox alejaría a España de la Europa progresista:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Menor cooperación con la UE</li>
+                <li>Posición aislacionista frente a inmigración</li>
+                <li>Mayor tensión con países de origen</li>
+            </ul>
+            
+            <h3>📊 6. Impacto en la Ciudadanía</h3>
+            <p>La ciudadanía española sufriría consecuencias directas:</p>
+            <ul style="padding-left: 30px; margin-bottom: 15px; color: white;">
+                <li>Mayor inseguridad y sensación de amenaza</li>
+                <li>Menor calidad en servicios públicos</li>
+                <li>Mayor desigualdad social</li>
+            </ul>
+            
+            <div class="highlight">
+                📊 <strong>Conclusión:</strong> Un gobierno PP + Vox representa un riesgo significativo para la democracia española, los derechos humanos y la convivencia social.
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.95em; color: white;">
+                <strong>Nota:</strong> Esta opinión está basada exclusivamente en la información recopilada en el presente documento.
+            </p>
+        </div>
+
+        <footer>
+            <p>📊 Análisis realizado por Cocobot 🐱 | Información actualizada 2024-2025</p>
+            <p><strong>⚠️ Verifica la información pulsando los enlaces</strong> | Todas las URLs son fuentes oficiales</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('menuOverlay').classList.toggle('active');
+        }
+
+        function smoothScroll(event, targetId) {
+            event.preventDefault();
+            
+            const targetElement = document.getElementById(targetId);
+            const headerHeight = 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Cerrar menú INMEDIATAMENTE (sin esperar)
+            setTimeout(() => {
+                toggleMenu();
+            }, 0);
+        }
+    </script>
+</body>
+</html>
