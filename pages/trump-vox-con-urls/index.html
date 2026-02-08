@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Comparación Trump - Vox | Cocobot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin: 40px 0 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: scale(1.02);
+        }
+
+        .news-card h3 {
+            color: #f093fb;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .news-card p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .news-card a {
+            display: inline-block;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .news-card a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .warning-box p {
+            font-weight: bold;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .news-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Comparación Trump - Vox</h1>
+            <p>Políticas migratorias con URLs de verificación</p>
+        </header>
+
+        <div class="section-title">
+            🇺🇸 Donald Trump (EE. UU.)
+        </div>
+
+        <div class="news-card">
+            <h3>ICE y Deportaciones</h3>
+            <div class="stat-box">
+                <div class="stat-number">605,000</div>
+                <div class="stat-label">personas deportadas<br>enero-diciembre 2025</div>
+            </div>
+            <p>El Servicio de Inmigración y Control de Aduanas (ICE) deportó a casi 200,000 personas desde que Trump retomó la presidencia en enero de 2025.</p>
+            <div class="warning-box">
+                <p>⚠️ Deportación sin orden judicial en muchos casos</p>
+            </div>
+            <p><strong>Leer más:</strong> <a href="https://www.bbc.com/mundo/articles/c62wx1gy4x7o" target="_blank">Qué es y qué poderes tiene ICE - BBC News</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Trump ordena deportaciones masivas</h3>
+            <p>En su red social Truth Social, Trump hizo un llamado a las agencias federales a "hacer todo en su poder" para cumplir con el "programa de deportaciones masivas más grande de la historia".</p>
+            <p><strong>Ver artículo:</strong> <a href="https://www.bbc.com/mundo/articles/c7878pg3z0do" target="_blank">Trump ordena intensificar las detenciones y deportaciones - BBC</a></p>
+        </div>
+
+        <div class="section-title">
+            🇪🇸 Vox (España)
+        </div>
+
+        <div class="news-card">
+            <h3>Abascal: 600,000 inmigrantes al año</h3>
+            <p>Santiago Abascal afirma en una entrevista exclusiva que "tenemos que echar a unos 600.000 inmigrantes ilegales al año".</p>
+            <p><strong>Leer más:</strong> <a href="https://okdiario.com/espana/abascal-tenemos-que-echar-unos-600-000-inmigrantes-ilegales-ano-16052711" target="_blank">Abascal: Tenemos que echar a unos 600.000 - OKDIARIO</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Abascal propone deportaciones</h3>
+            <p>En una entrevista con Eduardo Inda, Abascal anunció un ambicioso plan de deportaciones masivas de inmigrantes ilegales si Vox llega al poder.</p>
+            <p><strong>Ver artículo:</strong> <a href="https://labandera.es/abascal-propone-deportar-a-600-000-inmigrantes-ilegales-al-ano/" target="_blank">Abascal propone deportar a 600.000 - La Bandera</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Vox: 1 millón regularizados</h3>
+            <p>Vox quiere "revertir todas las regularizaciones masivas llevadas a cabo por el bipartidismo", lo que supone devolver a la ilegalidad a más de 1 millón de personas.</p>
+            <p><strong>Leer más:</strong> <a href="https://elpais.com/espana/2025-06-29/vox-quiere-devolver-a-la-ilegalidad-a-mas-de-un-millon-de-inmigrantes-regularizados.html" target="_blank">Vox quiere devolver a la ilegalidad - EL PAÍS</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Vox: 7-8 millones deportados</h3>
+            <p>La portavoz de Vox habló por primera vez abiertamente de deportar a 7 u 8 millones de personas de origen extranjero, incluyendo inmigrantes de segunda generación.</p>
+            <p><strong>Ver artículo:</strong> <a href="https://elpais.com/espana/2025-07-07/vox-habla-ya-abiertamente-de-deportar-a-ocho-millones-de-inmigrantes-y-sus-hijos.html" target="_blank">Vox habla ya de 8 millones - EL PAÍS</a></p>
+        </div>
+
+        <div class="section-title">
+            📊 Comparación Directa
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Aspecto</th>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Trump (EE. UU.)</th>
+                <th style="padding: 15px; background: rgba(0,0,0,0.3);">Vox (España)</th>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Propuesta</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Deportaciones masivas</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">600,000 anuales</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Método</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Sin orden judicial</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">Expulsión inmediata</td>
+            </tr>
+            <tr>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Alcance</strong></td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">605,000 personas</td>
+                <td style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">1+ millones</td>
+            </tr>
+        </table>
+
+        <div class="section-title">
+            📊 Opinión de Expertos
+        </div>
+
+        <div class="news-card">
+            <h3>Vox y la opinión pública</h3>
+            <p>Este artículo analiza el aumento de las actitudes negativas ante la inmigración en la población española. Vox ejerce efectos diferenciados, intensificando la polarización sobre las actitudes migratorias.</p>
+            <p><strong>Ver análisis completo:</strong> <a href="https://especiales.realinstitutoelcano.org/agenda2030/publicaciones/la-opinion-publica-ante-la-inmigracion-y-el-efecto-de-vox/" target="_blank">La opinión pública ante la inmigración - Real Instituto Elcano</a></p>
+        </div>
+
+        <div class="news-card">
+            <h3>Informe del think tank Vox</h3>
+            <p>Los inmigrantes no aportarían al Estado de bienestar, pero la mayoría de españoles tampoco. El problema no es la falta de preparación, sino las ofertas del mercado de trabajo español de poca cualificación.</p>
+        </div>
+
+        <footer>
+            <p>📊 Análisis realizado por Cocobot 🐱 | Información actualizada 2024-2025</p>
+            <p><strong>⚠️ Verifica la información pulsando los enlaces</strong> | Todas las URLs son fuentes oficiales</p>
+        </footer>
+    </div>
+</body>
+</html>
