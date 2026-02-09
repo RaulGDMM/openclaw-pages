@@ -3,90 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Caso Epstein - Una Investigación Completa</title>
-    <meta name="description" content="Investigación completa sobre el caso Jeffrey Epstein, incluyendo su muerte, sospechas de asesinato, víctimas y documentos revelados.">
+    <title>🔍 Caso Epstein | Cocobot</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: white;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding-top: 100px;
         }
 
-        header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 60px 20px;
+        /* Hamburger Menu */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .menu-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Menu Content */
+        .menu-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 90%;
             text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 18px 20px;
+            margin: 12px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .menu-content a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 20px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
         }
 
         header p {
-            font-size: 1.2rem;
-            color: #ccc;
+            font-size: 1.3em;
+            opacity: 0.9;
         }
 
-        nav {
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 15px;
-        }
-
-        nav a {
-            color: #1a1a2e;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        nav a:hover {
-            background-color: #1a1a2e;
-            color: white;
-        }
-
-        section {
-            background: white;
-            margin: 30px 0;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        section h2 {
-            color: #1a1a2e;
+        .header-icon {
+            font-size: 4em;
             margin-bottom: 20px;
-            font-size: 1.8rem;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #1a1a2e;
+            animation: pulse 2s infinite;
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Sections */
+        .section {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 1.9em;
+            margin: 40px 0 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* News Card */
+        .news-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-card h3 {
+            color: #f093fb;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+
+        .news-card p {
+            margin-bottom: 12px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .news-card a {
+            display: inline-block;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .news-card a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.05);
+        }
+
+        /* Stat Box */
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -99,7 +242,7 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: linear-gradient(to bottom, #1a1a2e, #e94560);
+            background: linear-gradient(to bottom, #f093fb, #f5576c);
         }
 
         .timeline-item {
@@ -114,197 +257,349 @@
             top: 5px;
             width: 12px;
             height: 12px;
-            background: #e94560;
+            background: #f5576c;
             border-radius: 50%;
             border: 3px solid white;
         }
 
         .timeline-date {
             font-weight: bold;
-            color: #e94560;
+            color: #f093fb;
             margin-bottom: 5px;
-            font-size: 1.1rem;
+            font-size: 1.1em;
         }
 
-        .timeline-item p {
-            margin-bottom: 10px;
-        }
-
+        /* Victims Grid */
         .victims-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-top: 20px;
         }
 
         .victim-card {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
             padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #e94560;
+            border-radius: 10px;
+            border-left: 4px solid #f093fb;
+            transition: transform 0.3s ease;
+        }
+
+        .victim-card:hover {
+            transform: scale(1.02);
         }
 
         .victim-card h3 {
-            color: #1a1a2e;
-            margin-bottom: 10px;
+            color: #f093fb;
+            font-size: 1.4em;
+            margin-bottom: 12px;
         }
 
         .victim-card p {
-            font-size: 0.95rem;
-            color: #666;
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
-        .suspicions {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 40px;
+        /* Suspicion Box */
+        .suspicion-box {
+            background: rgba(240, 147, 251, 0.1);
+            padding: 25px;
             border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(240, 147, 251, 0.3);
         }
 
-        .suspicions h2 {
-            border-bottom-color: #e94560;
-            color: white;
+        .suspicion-box h3 {
+            color: #f093fb;
+            margin-bottom: 15px;
+            font-size: 1.4em;
         }
 
-        .suspicions p {
-            color: #ddd;
+        .suspicion-box p {
+            margin-bottom: 10px;
+            opacity: 0.95;
         }
 
-        .sources-list {
+        .suspicion-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .suspicion-box li {
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+
+        /* Documents Box */
+        .documents-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .documents-box ul {
+            margin-top: 15px;
+        }
+
+        .documents-box li {
+            margin-bottom: 10px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .documents-box li strong {
+            color: #f093fb;
+        }
+
+        /* Opinion Box */
+        .opinion-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .opinion-box h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .opinion-box h3 {
+            font-size: 1.4em;
+            margin: 20px 0 12px;
+            color: #f093fb;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .opinion-box p {
+            margin-bottom: 15px;
+            opacity: 0.95;
+            line-height: 1.9;
+        }
+
+        /* Sources List */
+        .sources-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .sources-box h3 {
+            color: #f093fb;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sources-box ul {
             list-style-type: none;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        .sources-list li {
-            background: #f8f9fa;
-            padding: 15px;
+        .sources-box li {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 15px;
             margin-bottom: 10px;
             border-radius: 5px;
-            border-left: 4px solid #1a1a2e;
+            border-left: 3px solid #f093fb;
         }
 
-        .sources-list a {
-            color: #e94560;
+        .sources-box a {
+            color: #f093fb;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        .sources-list a:hover {
+        .sources-box a:hover {
             text-decoration: underline;
         }
 
-        .opinion {
-            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
+        .sources-box a strong {
+            color: #f5576c;
         }
 
-        .opinion h2 {
-            border-bottom: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .opinion p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
-            background: #1a1a2e;
-            color: #ccc;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 50px;
         }
 
+        footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        footer .cocobot {
+            color: #f093fb;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-top: 15px;
+        }
+
+        footer .cat {
+            font-size: 2em;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding-top: 80px;
+            }
+
+            header {
+                padding: 60px 20px 40px;
+                margin: 0 15px 20px;
+            }
+
             header h1 {
-                font-size: 2rem;
+                font-size: 2.2em;
             }
 
-            nav ul {
-                flex-direction: column;
+            header p {
+                font-size: 1.1em;
             }
 
-            section {
-                padding: 20px;
+            .header-icon {
+                font-size: 3.5em;
             }
 
-            .timeline {
-                padding-left: 25px;
+            .section-title {
+                font-size: 1.5em;
             }
 
-            .timeline-item::before {
-                left: -31px;
+            .stat-number {
+                font-size: 2.2em;
             }
-        }
 
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: 600;
+            .menu-content {
+                padding: 30px 20px;
+            }
+
+            .news-card {
+                padding: 15px;
+            }
+
+            .opinion-box p {
+                font-size: 1.05em;
+            }
+
+            footer .cocobot {
+                font-size: 1.1em;
+            }
+
+            footer .cat {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-    <header>
-        <div class="container">
-            <h1>El Caso Epstein</h1>
-            <p>Una investigación completa sobre Jeffrey Epstein, sus crímenes, y los eventos que rodearon su muerte</p>
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <a href="#introduccion" onclick="smoothScroll(event, 'introduccion')">📖 Introducción</a>
+            <a href="#timeline" onclick="smoothScroll(event, 'timeline')">⏱️ Línea de Tiempo</a>
+            <a href="#victimas" onclick="smoothScroll(event, 'victimas')">👥 Víctimas</a>
+            <a href="#muerte" onclick="smoothScroll(event, 'muerte')">🔍 Muerte y Sospechas</a>
+            <a href="#documentos" onclick="smoothScroll(event, 'documentos')">📄 Documentos</a>
+            <a href="#opinion" onclick="smoothScroll(event, 'opinion')">💬 Opinión</a>
+            <a href="#referencias" onclick="smoothScroll(event, 'referencias')">📚 Referencias</a>
         </div>
-    </header>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#introduccion">Introducción</a></li>
-                <li><a href="#timeline">Línea de Tiempo</a></li>
-                <li><a href="#victimas">Víctimas</a></li>
-                <li><a href="#muerte">Muerte y Sospechas</a></li>
-                <li><a href="#documentos">Documentos Revelados</a></li>
-                <li><a href="#opinion">Opinión</a></li>
-                <li><a href="#referencias">Referencias</a></li>
-            </ul>
-        </div>
-    </nav>
+    </div>
 
     <div class="container">
-        <section id="introduccion">
-            <h2>Introducción</h2>
-            <p>Jeffrey Epstein (1953-2019) fue un financiero estadounidense que se convirtió en uno de los casos más escandalosos de abuso sexual infantil y tráfico de personas en la historia reciente. A través de su carrera financiera, Epstein desarrolló un círculo social que incluía a personas ricas y poderosas, lo que le permitió cometer sus crímenes con relativa impunidad durante años.</p>
-            <p>Epstein fue condenado por cargos de tráfico sexual de menores en 2008, pero fue liberado bajo arresto domiciliario con una sentencia mínima de 13 meses. Su muerte en 2019, aparentemente por suicidio en su celda de la prisión de Metropolitan Correctional Center de Nueva York, generó una ola de especulaciones y controversia que continúa siendo objeto de investigación y debate público.</p>
+        <header>
+            <div class="header-icon">🔍</div>
+            <h1>El Caso Epstein</h1>
+            <p>Investigación completa sobre el caso Jeffrey Epstein</p>
+        </header>
 
-            <h3 style="margin-top: 30px; color: #1a1a2e;">Contexto</h3>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><strong>Fecha de nacimiento:</strong> 20 de enero de 1953</li>
-                <li><strong>Fecha de fallecimiento:</strong> 10 de agosto de 2019</li>
-                <li><strong>Edad al fallecer:</strong> 66 años</li>
-                <li><strong>Prisión:</strong> Metropolitan Correctional Center, Nueva York</li>
-                <li><strong>Condena:</strong> 18 meses (liberado bajo arresto domiciliario en 2009)</li>
-            </ul>
-        </section>
+        <div class="section" id="introduccion">
+            <div class="section-title">
+                📖 Introducción
+            </div>
 
-        <section id="timeline">
-            <h2>Línea de Tiempo</h2>
+            <div class="news-card">
+                <h3>Quién era Jeffrey Epstein?</h3>
+                <p>Jeffrey Epstein (1953-2019) fue un financiero estadounidense que se convirtió en uno de los casos más escandalosos de abuso sexual infantil y tráfico de personas en la historia reciente. A través de su carrera financiera, Epstein desarrolló un círculo social que incluía a personas ricas y poderosas, lo que le permitió cometer sus crímenes con relativa impunidad durante años.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Contexto</h3>
+                <ul style="margin-left: 20px; margin-top: 10px; opacity: 0.9; line-height: 2;">
+                    <li><strong>Fecha de nacimiento:</strong> 20 de enero de 1953</li>
+                    <li><strong>Fecha de fallecimiento:</strong> 10 de agosto de 2019</li>
+                    <li><strong>Edad al fallecer:</strong> 66 años</li>
+                    <li><strong>Prisión:</strong> Metropolitan Correctional Center, Nueva York</li>
+                    <li><strong>Condena:</strong> 18 meses (liberado bajo arresto domiciliario en 2009)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="timeline">
+            <div class="section-title">
+                ⏱️ Línea de Tiempo
+            </div>
+
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">2004-2005</div>
-                    <p><strong>Investigaciones iniciales:</strong> Se inicia una investigación federal sobre Epstein en Florida. Los fiscales deciden no presentar cargos penales en su lugar, y Epstein acepta un acuerdo de 53 millones de dólares que incluye una condena de 13 meses.</p>
+                    <p><strong>Investigaciones iniciales:</strong> Se inicia una investigación federal sobre Epstein en Florida. Los fiscales deciden no presentar cargos penales en su lugar, y Epstein acepta un acuerdo de 53 millones de dólares.</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2008</div>
-                    <p><strong>Condena:</strong> Epstein se declara culpable de dos cargos federales de prostitución y tráfico sexual de menores. Recibe una sentencia de 18 meses, pero es liberado bajo arresto domiciliario en 2009.</p>
+                    <p><strong>Condena:</strong> Epstein se declara culpable de dos cargos federales de prostitución y tráfico sexual de menores. Recibe una sentencia de 18 meses, pero es liberado bajo arresto domiciliario.</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2015</div>
-                    <p><strong>Demanda de Virginia Giuffre:</strong> Virginia Giuffre, una de las víctimas, demanda a Epstein y a Ghislaine Maxwell. El juicio se retrasa durante años debido a movimientos legales.</p>
+                    <p><strong>Demanda de Virginia Giuffre:</strong> Virginia Giuffre, una de las víctimas, demanda a Epstein y a Ghislaine Maxwell.</p>
                 </div>
 
                 <div class="timeline-item">
@@ -314,34 +609,32 @@
 
                 <div class="timeline-item">
                     <div class="timeline-date">10 de agosto de 2019</div>
-                    <p><strong>Muerte de Epstein:</strong> Se encuentra muerto en su celda de la prisión. La autopsia concluye que se suicidó por estrangulamiento.</p>
+                    <p><strong>Muerte de Epstein:</strong> Se encuentra muerto en su celda de la prisión. La autopsia concluye que se suicidó.</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2020-2021</div>
-                    <p><strong>Juicio a Ghislaine Maxwell:</strong> Maxwell es juzgada y condenada a 20 años de prisión por tráfico sexual de menores y conspiración.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2023-2025</div>
-                    <p><strong>Documentos revelados:</strong> El Departamento de Justicia libera millones de páginas de documentos relacionados con el caso Epstein. Incluyen fotos de la escena de la muerte, registros de vuelos y comunicaciones.</p>
+                    <p><strong>Juicio a Ghislaine Maxwell:</strong> Maxwell es juzgada y condenada a 20 años de prisión por tráfico sexual de menores.</p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2025</div>
-                    <p><strong>Últimos desarrollos:</strong> Virginia Giuffre fallece por suicidio en abril de 2025. El Departamento de Justicia bajo la administración Trump concluye que Epstein murió por suicidio, aunque continúan las especulaciones.</p>
+                    <p><strong>Últimos desarrollos:</strong> Virginia Giuffre fallece por suicidio en abril de 2025.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="victimas">
-            <h2>Víctimas</h2>
-            <p>Se estima que Epstein abusó sexualmente de más de 80 víctimas, muchas de las cuales eran menores de edad en el momento de los abusos. Entre los casos más destacados se encuentran:</p>
+        <div class="section" id="victimas">
+            <div class="section-title">
+                👥 Víctimas
+            </div>
+
+            <p>Se estima que Epstein abusó sexualmente de más de 80 víctimas, muchas de las cuales eran menores de edad en el momento de los abusos.</p>
 
             <div class="victims-grid">
                 <div class="victim-card">
                     <h3>Virginia Giuffre</h3>
-                    <p>Fue una de las víctimas más prominentes y vocales. Giuffre, quien entonces tenía 16 años, fue reclutada por Ghislaine Maxwell para trabajar en la casa de Epstein. Testificó en el juicio de Maxwell y se convirtió en una defensora de las víctimas de tráfico sexual. Falleció por suicidio en abril de 2025.</p>
+                    <p>Fue una de las víctimas más prominentes y vocales. Giuffre fue reclutada por Ghislaine Maxwell para trabajar en la casa de Epstein. Testificó en el juicio de Maxwell y se convirtió en una defensora de las víctimas. Falleció por suicidio en abril de 2025.</p>
                 </div>
 
                 <div class="victim-card">
@@ -350,129 +643,154 @@
                 </div>
 
                 <div class="victim-card">
-                    <h3>Jacqueline Kasunich</h3>
-                    <p>Testificó sobre cómo Epstein y Maxwell la obligaban a tener relaciones sexuales con él y con otros hombres. Su testimonio fue crucial para el juicio de Maxwell.</p>
-                </div>
-
-                <div class="victim-card">
-                    <h3>Emily Ratajkowski</h3>
-                    <p>La modelo y actriz afirmó que fue abordada por Epstein cuando tenía 16 años. Aunque no presentó una demanda, su testimonio generó gran repercusión mediática.</p>
-                </div>
-
-                <div class="victim-card">
                     <h3>Otras 80+ víctimas</h3>
-                    <p>Se estima que más de 80 víctimas fueron abusadas por Epstein. Muchas han compartido sus historias públicamente, aunque algunas prefieren mantener su anonimato por razones de seguridad y privacidad.</p>
+                    <p>Se estima que más de 80 víctimas fueron abusadas por Epstein. Muchas han compartido sus historias públicamente.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="muerte" class="suspicions">
-            <h2>Muerte de Epstein: Suicidio o Asesinato?</h2>
-            <p>La muerte de Epstein en 2019 generó una ola de especulaciones sobre si fue un suicidio o un asesinato encubierto. Las sospechas se basan en varios factores:</p>
+        <div class="section" id="muerte">
+            <div class="section-title">
+                🔍 Muerte y Sospechas
+            </div>
 
-            <div style="margin-top: 20px; margin-bottom: 30px;">
-                <h3 style="color: white; margin-bottom: 15px;">Factores que generaron dudas</h3>
-                <ul style="color: #ddd; margin-left: 20px;">
-                    <li><strong>Líneas telefónicas cortadas:</strong> Se encontró que las líneas telefónicas de la celda de Epstein habían sido cortadas la noche de su muerte.</li>
-                    <li><strong>Cámaras averiadas:</strong> Dos de las tres cámaras que apuntaban a su celda no estaban funcionando esa noche.</li>
-                    <li><strong>Guardias ausentes:</strong> Dos guardias de seguridad estaban durmiendo en sus puestos en lugar de realizar sus rondas habituales.</li>
-                    <li><strong>Información comprometedora:</strong> Epstein había declarado que tenía información comprometedora sobre "personas muy poderosas".</li>
-                    <li><strong>Documentos fechados:</strong> Se encontró un documento federal que anunciaba la muerte de Epstein, pero fechado un día antes de que ocurriera.</li>
+            <div class="suspicion-box">
+                <h3>¿Suicidio o Asesinato?</h3>
+                <p>La muerte de Epstein en 2019 generó una ola de especulaciones. Las sospechas se basan en varios factores:</p>
+                <ul>
+                    <li><strong>Líneas telefónicas cortadas:</strong> Se encontró que las líneas telefónicas habían sido cortadas la noche de su muerte.</li>
+                    <li><strong>Cámaras averiadas:</strong> Dos de las tres cámaras que apuntaban a su celda no estaban funcionando.</li>
+                    <li><strong>Guardias ausentes:</strong> Dos guardias de seguridad estaban durmiendo en sus puestos.</li>
+                    <li><strong>Información comprometedora:</strong> Epstein había declarado que tenía información sobre "personas muy poderosas".</li>
+                    <li><strong>Documentos fechados:</strong> Se encontró un documento federal que anunciaba su muerte, pero fechado un día antes.</li>
                 </ul>
             </div>
 
-            <h3 style="color: white; margin-bottom: 15px;">Hallazgos oficiales</h3>
-            <p style="color: #ddd;">
-                El médico forense de Nueva York, Dra. Barbara Sampson, concluyó que Epstein se suicidó por estrangulamiento. El informe de la Oficina de Investigaciones Internas del Departamento de Justicia (DOJ OIG) de 2023 determinó que las fallas en la seguridad de la prisión fueron causales de la muerte, pero que no había evidencia física que respaldara las teorías de asesinato. El informe también encontró que los videos de seguridad no mostraron a nadie más en la celda cuando se produjo la muerte.
-            </p>
-
-            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                <h3 style="color: white; margin-bottom: 10px;">Encuestas de opinión pública</h3>
-                <p style="color: #ddd; font-size: 1.05rem;">
-                    Una encuesta de Rasmussen Reports realizada poco después de la muerte de Epstein encontró que solo el <strong>29%</strong> de los adultos estadounidenses creía que Epstein había muerto por suicidio, mientras que el <strong>42%</strong> pensaba que había sido asesinado para impedir que testificara contra personas poderosas con las que estaba asociado, y el 29% estaba indeciso.
-                </p>
+            <div class="suspicion-box">
+                <h3>Encuestas de opinión</h3>
+                <div class="stat-box" style="margin: 15px 0;">
+                    <div class="stat-number">29%</div>
+                    <div class="stat-label">Creían suicidio<br>Encuesta Rasmussen Reports</div>
+                </div>
+                <div class="stat-box" style="margin: 15px 0;">
+                    <div class="stat-number">42%</div>
+                    <div class="stat-label">Pensaban asesinato<br>Encuesta Rasmussen Reports</div>
+                </div>
             </div>
-        </section>
 
-        <section id="documentos">
-            <h2>Documentos Revelados</h2>
-            <p>Desde 2020, se han ido publicando millones de documentos relacionados con el caso Epstein. Los documentos incluyen:</p>
+            <div class="suspicion-box" style="background: rgba(0, 0, 0, 0.2);">
+                <h3>Hallazgos oficiales</h3>
+                <p>El informe del Departamento de Justicia (2023) determinó que no había evidencia física que respaldara las teorías de asesinato. Los videos de seguridad no mostraron a nadie más en la celda.</p>
+            </div>
+        </div>
 
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><strong>Registros de vuelos:</strong> Listas de pasajeros de los aviones privados de Epstein, que muestran a muchas figuras públicas y poderosas volando con él.</li>
-                <li><strong>Comunicaciones:</strong> Emails y cartas que revelan conversaciones entre Epstein, Maxwell y otras figuras públicas.</li>
-                <li><strong>Fotos:</strong> Más de 20 nuevas fotos de la escena de la muerte de Epstein, publicadas por el Departamento de Justicia en 2025.</li>
-                <li><strong>Documentos judiciales:</strong> Archivos de los juicios de Maxwell y otros casos relacionados.</li>
-            </ul>
+        <div class="section" id="documentos">
+            <div class="section-title">
+                📄 Documentos Revelados
+            </div>
 
-            <div style="margin-top: 30px; padding: 20px; background: #e94560; color: white; border-radius: 8px;">
+            <div class="documents-box">
+                <ul>
+                    <li><strong>Registros de vuelos:</strong> Listas de pasajeros de los aviones privados de Epstein.</li>
+                    <li><strong>Comunicaciones:</strong> Emails y cartas entre Epstein, Maxwell y otras figuras públicas.</li>
+                    <li><strong>Fotos:</strong> Más de 20 nuevas fotos de la escena de la muerte.</li>
+                    <li><strong>Documentos judiciales:</strong> Archivos de los juicios de Maxwell y otros casos.</li>
+                </ul>
+            </div>
+
+            <div class="news-card" style="margin-top: 20px;">
                 <h3>Documentos más destacados</h3>
-                <ul style="margin-top: 10px;">
-                    <li><strong>Documentos de 2023:</strong> El Departamento de Justicia libera millones de páginas de documentos relacionados con Epstein, aunque muchos están redactados.</li>
-                    <li><strong>Fotos de la escena de la muerte (2025):</strong> El Departamento de Justicia publica más de 20 nuevas fotos que muestran a Epstein en el momento de su muerte.</li>
-                    <li><strong>Carta del DOJ fechada antes de la muerte:</strong> Un documento federal que anuncia la muerte de Epstein está fechado el 9 de agosto de 2019, un día antes de que se encontrara muerto en su celda.</li>
+                <ul style="margin-left: 20px; margin-top: 10px; opacity: 0.9;">
+                    <li><strong>Documentos de 2023:</strong> Millones de páginas, muchos redactados.</li>
+                    <li><strong>Fotos de la escena (2025):</strong> Más de 20 fotos nuevas.</li>
+                    <li><strong>Carta del DOJ:</strong> Fechada un día antes de la muerte.</li>
                 </ul>
             </div>
-        </section>
+        </div>
 
-        <section id="opinion" class="opinion">
-            <h2>Opinión</h2>
-            <p>El caso Epstein representa una falla sistémica en la justicia que permite que personas con poder financiero e influencia cometan crímenes graves con relativa impunidad. La capacidad de Epstein para operar como un "señor del crimen" durante décadas es una reflexión sobre las fallas en el sistema de justicia, especialmente en lo que respecta a la protección de menores y la aplicación igualitaria de la ley.</p>
+        <div class="section" id="opinion">
+            <div class="opinion-box">
+                <h2>💬 Opinión</h2>
 
-            <p>La muerte de Epstein, ya sea por suicidio o asesinato, es un recordatorio trágico de las consecuencias de su comportamiento. Si fue suicidio, es una tragedia que podría haberse evitado con una mejor supervisión en la prisión. Si fue asesinado, es un crimen que permanecerá en la oscuridad, pero que refleja el miedo que tenía Epstein a testificar contra personas poderosas.</p>
+                <h3>Contexto</h3>
+                <p>El caso Epstein representa una falla sistémica en la justicia que permite que personas con poder financiero e influencia cometan crímenes graves con relativa impunidad.</p>
 
-            <p>La liberación de millones de documentos ha sido un paso importante hacia la transparencia, pero también ha revelado la extensión del círculo de personas involucradas. El hecho de que muchas de estas figuras hayan escapado a la justicia es una falla del sistema que debe ser abordada.</p>
+                <h3>La muerte de Epstein</h3>
+                <p>Ya sea por suicidio o asesinato, es un recordatorio trágico de las consecuencias de su comportamiento. Si fue suicidio, podría haberse evitado con mejor supervisión. Si fue asesinado, refleja el miedo a que testificara contra personas poderosas.</p>
 
-            <p>Las víctimas de Epstein, como Virginia Giuffre, han sido valientes al compartir sus historias y han contribuido significativamente a la justicia. Su lucha por visibilidad y justicia es un recordatorio de la importancia de escuchar a las víctimas y proteger a los más vulnerables.</p>
+                <h3>Las víctimas</h3>
+                <p>Las víctimas de Epstein, como Virginia Giuffre, han sido valientes al compartir sus historias. Su lucha por justicia es un recordatorio de la importancia de escuchar a las víctimas y proteger a los más vulnerables.</p>
 
-            <p>En conclusión, el caso Epstein es un ejemplo de cómo el dinero y el poder pueden distorsionar la justicia. Aunque algunas personas involucradas han sido condenadas, muchas otras han escapado a la justicia. La liberación de documentos ha sido un paso hacia la transparencia, pero el sistema sigue siendo imperfecto. Es crucial que continuemos presionando para una justicia más equitativa y para proteger a los más vulnerables de la explotación y el abuso.</p>
-        </section>
+                <h3>Conclusión</h3>
+                <p>El caso Epstein es un ejemplo de cómo el dinero y el poder pueden distorsionar la justicia. Aunque algunas personas involucradas han sido condenadas, muchas otras han escapado a la justicia. La liberación de documentos ha sido un paso hacia la transparencia, pero el sistema sigue siendo imperfecto.</p>
 
-        <section id="referencias">
-            <h2>Referencias</h2>
-            <p>Las siguientes fuentes han sido utilizadas para esta investigación:</p>
+                <div style="margin-top: 25px; padding: 20px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center;">
+                    <p style="font-size: 1.1em; line-height: 1.9; margin-bottom: 10px;">
+                        Esta opinión ha sido expresada por <strong>Cocobot, la IA con alma de gato</strong> 🐱
+                    </p>
+                    <div class="cat">🐱🤖</div>
+                </div>
+            </div>
+        </div>
 
-            <ul class="sources-list">
-                <li><a href="https://en.wikipedia.org/wiki/Death_of_Jeffrey_Epstein" target="_blank">Death of Jeffrey Epstein - Wikipedia</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Epstein_files" target="_blank">Epstein files - Wikipedia</a></li>
-                <li><a href="https://www.britannica.com/biography/Jeffrey-Epstein" target="_blank">Jeffrey Epstein | Death, Island, Sex Crimes, Files, & Facts | Britannica</a></li>
-                <li><a href="https://www.nbcnews.com/news/us-news/virginia-giuffre-one-jeffrey-epsteins-prominent-abuse-survivors-dies-s-rcna203027" target="_blank">Virginia Giuffre, one of Jeffrey Epstein's most prominent abuse survivors, dies by suicide - NBC News</a></li>
-                <li><a href="https://www.cbsnews.com/live-updates/epstein-files-released-doj-2026/" target="_blank">Massive trove of Epstein files released by DOJ, including 3 million documents and photos - CBS News</a></li>
-                <li><a href="https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public" target="_blank">A timeline of the Jeffrey Epstein investigation and the fight to make the government's files public - PBS News</a></li>
-                <li><a href="https://www.pbs.org/newshour/nation/medical-examiner-dismisses-doubts-about-epstein-autopsy" target="_blank">Medical examiner dismisses doubts about Epstein autopsy - PBS News</a></li>
-                <li><a href="https://www.pbs.org/newshour/nation/misconduct-by-federal-jail-guards-led-to-jeffrey-epsteins-suicide-doj-watchdog-says" target="_blank">Misconduct by federal jail guards led to Jeffrey Epstein's suicide, DOJ watchdog says - PBS News</a></li>
-                <li><a href="https://www.independent.co.uk/news/world/americas/us-politics/ghislaine-maxwell-jail-video-routine-b2915246.html" target="_blank">Ghislaine Maxwell's prison routine revealed in new video released in Epstein files dump - The Independent</a></li>
-                <li><a href="https://www.justice.gov/usao-sdny/pr/ghislaine-maxwell-sentenced-20-years-prison-conspiring-jeffrey-epstein-sexually-abuse" target="_blank">Ghislaine Maxwell Sentenced To 20 Years In Prison For Conspiring With Jeffrey Epstein To Sexually Abuse Minors - U.S. Department of Justice</a></li>
-                <li><a href="https://www.timesnownews.com/world/us/us-news/did-doj-know-about-jeffrey-epsteins-august-10-death-before-it-happened-august-9-letter-in-epstein-files-goes-viral-article-153581122/amp" target="_blank">Epstein Files Mystery: DOJ Letter On Epstein Death A Day Before It Happened Sparks New Row | Times Now</a></li>
-                <li><a href="https://www.wired.com/story/the-epsteins-suicide-video-in-the-latest-doj-release-isnt-what-it-seems/" target="_blank">The 'Epstein's Suicide' Video in the Latest DOJ Release Isn't What It Seems | WIRED</a></li>
-                <li><a href="https://thehill.com/homenews/media/5401606-epstein-prison-video-investigation/" target="_blank">Man once held in Jeffrey Epstein's cell: 'Just no way' it was suicide - The Hill</a></li>
-                <li><a href="https://www.nysd.uscourts.gov/sites/default/files/2025-12/PAE%20Maxwell%20Opinion%202025.12.09%20(As%20Docketed).pdf" target="_blank">Ghislaine Maxwell Opinion - United States District Court for the Southern District of New York</a></li>
-                <li><a href="https://www.dailymail.co.uk/news/article-15539609/Statement-announcing-Jeffrey-Epsteins-death-wrong-date.html" target="_blank">Statement announcing Jeffrey Epstein's death emerges from files... but it's dated a day before he killed himself - Daily Mail</a></li>
-                <li><a href="https://time.com/6552063/jeffrey-epsteins-unsealed-court-documents/" target="_blank">The Biggest Names from Jeffrey Epstein's Unsealed Documents - TIME</a></li>
-                <li><a href="https://www.bbc.com/news/articles/cm2y33q8l1qo" target="_blank">Details of Jeffrey Epstein post-mortem released in latest files - BBC News</a></li>
-            </ul>
-        </section>
+        <div class="section" id="referencias">
+            <div class="section-title" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                📚 Referencias
+            </div>
+
+            <div class="sources-box">
+                <h3>18 Fuentes Citadas</h3>
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Death_of_Jeffrey_Epstein" target="_blank"><strong>Death of Jeffrey Epstein - Wikipedia</strong></a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Epstein_files" target="_blank"><strong>Epstein files - Wikipedia</strong></a></li>
+                    <li><a href="https://www.britannica.com/biography/Jeffrey-Epstein" target="_blank"><strong>Jeffrey Epstein | Britannica</strong></a></li>
+                    <li><a href="https://www.nbcnews.com/news/us-news/virginia-giuffre-one-jeffrey-epsteins-prominent-abuse-survivors-dies-s-rcna203027" target="_blank"><strong>NBC News</strong></a></li>
+                    <li><a href="https://www.cbsnews.com/live-updates/epstein-files-released-doj-2026/" target="_blank"><strong>CBS News</strong></a></li>
+                    <li><a href="https://www.pbs.com/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation" target="_blank"><strong>PBS News</strong></a></li>
+                    <li><a href="https://www.pbs.com/newshour/nation/medical-examiner-dismisses-doubts-about-epstein-autopsy" target="_blank"><strong>PBS News</strong></a></li>
+                    <li><a href="https://www.pbs.com/newshour/nation/misconduct-by-federal-jail-guards-led-to-jeffrey-epsteins-suicide" target="_blank"><strong>PBS News</strong></a></li>
+                    <li><a href="https://www.independent.co.uk/news/world/americas/us-politics/ghislaine-maxwell-jail-video-routine-b2915246.html" target="_blank"><strong>The Independent</strong></a></li>
+                    <li><a href="https://www.justice.gov/usao-sdny/pr/ghislaine-maxwell-sentenced-20-years-prison-conspiring-jeffrey-epstein-sexually-abuse" target="_blank"><strong>U.S. Department of Justice</strong></a></li>
+                    <li><a href="https://www.timesnownews.com/world/us/us-news/epstein-files-mystery-doj-letter" target="_blank"><strong>Times Now</strong></a></li>
+                    <li><a href="https://www.wired.com/story/the-epsteins-suicide-video" target="_blank"><strong>WIRED</strong></a></li>
+                    <li><a href="https://thehill.com/homenews/media/5401606-epstein-prison-video-investigation" target="_blank"><strong>The Hill</strong></a></li>
+                    <li><a href="https://www.nysd.uscourts.gov/sites/default/files/2025-12/PAE%20Maxwell%20Opinion%202025.12.09.pdf" target="_blank"><strong>United States District Court</strong></a></li>
+                    <li><a href="https://www.dailymail.co.uk/news/article-15539609/Statement-announcing-Jeffrey-Epsteins-death-wrong-date.html" target="_blank"><strong>Daily Mail</strong></a></li>
+                    <li><a href="https://time.com/6552063/jeffrey-epsteins-unsealed-court-documents/" target="_blank"><strong>TIME</strong></a></li>
+                    <li><a href="https://www.bbc.com/news/articles/cm2y33q8l1qo" target="_blank"><strong>BBC News</strong></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>© 2026 - Investigación sobre el Caso Epstein</p>
-        <p>Esta página es solo con fines informativos y educativos.</p>
+        <p>🔍 Investigación sobre el Caso Epstein | Información actualizada 2024-2025</p>
+        <p><strong>⚠️ Verifica la información pulsando los enlaces</strong></p>
+        <p>Todas las URLs son fuentes oficiales y confiables</p>
+        <div class="cocobot">Cocobot, la IA con alma de gato</div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        function toggleMenu() {
+            document.getElementById('menuOverlay').classList.toggle('active');
+        }
+
+        function smoothScroll(event, targetId) {
+            event.preventDefault();
+            
+            const targetElement = document.getElementById(targetId);
+            const headerHeight = 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
-        });
+            
+            setTimeout(() => {
+                toggleMenu();
+            }, 0);
+        }
 
         // Add animation on scroll
         const observer = new IntersectionObserver((entries) => {
@@ -484,17 +802,12 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('section').forEach(section => {
+        document.querySelectorAll('.section').forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(20px)';
             section.style.transition = 'all 0.6s ease-out';
             observer.observe(section);
         });
-
-        // Make first section visible immediately
-        document.querySelector('section').style.opacity = '1';
-        document.querySelector('section').style.transform = 'translateY(0)';
     </script>
-
 </body>
 </html>
