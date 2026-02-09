@@ -354,6 +354,83 @@
             color: #f093fb;
         }
 
+        /* Famous People Section */
+        .famous-people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .famous-person-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f5576c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .famous-person-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .famous-person-card h3 {
+            color: #f5576c;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .famous-person-card .role {
+            font-size: 0.9em;
+            color: #f093fb;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .famous-person-card .legal {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #f093fb;
+        }
+
+        .famous-person-card .legal strong {
+            color: #f093fb;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .famous-person-card .reputation {
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        .famous-person-card .reputation strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .famous-person-card .documents {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .famous-person-card .documents strong {
+            color: #f5576c;
+            display: block;
+            margin-bottom: 4px;
+        }
+
         /* Opinion Box */
         .opinion-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -513,6 +590,10 @@
                 padding: 30px 20px;
             }
 
+            .famous-people-grid {
+                grid-template-columns: 1fr;
+            }
+
             .news-card {
                 padding: 15px;
             }
@@ -547,6 +628,7 @@
             <a href="#victimas" onclick="smoothScroll(event, 'victimas')">👥 Víctimas</a>
             <a href="#muerte" onclick="smoothScroll(event, 'muerte')">🔍 Muerte y Sospechas</a>
             <a href="#documentos" onclick="smoothScroll(event, 'documentos')">📄 Documentos</a>
+            <a href="#personas-famosas" onclick="smoothScroll(event, 'personas-famosas')">⭐ Personas Famosas</a>
             <a href="#opinion" onclick="smoothScroll(event, 'opinion')">💬 Opinión</a>
             <a href="#referencias" onclick="smoothScroll(event, 'referencias')">📚 Referencias</a>
         </div>
@@ -604,7 +686,7 @@
 
                 <div class="timeline-item">
                     <div class="timeline-date">2019</div>
-                    <p><strong>Reabierta la investigación:</strong> Se reabren las investigaciones federales sobre Epstein. Es arrestado nuevamente en Nueva York el 6 de julio de 2019.</p>
+                    <p><strong>Reabierta la investigación:</strong> Se reabren las investigaciones federales sobre Epstein. Es arrestado nuevamente el 6 de julio de 2019.</p>
                 </div>
 
                 <div class="timeline-item">
@@ -618,8 +700,13 @@
                 </div>
 
                 <div class="timeline-item">
+                    <div class="timeline-date">2024-2025</div>
+                    <p><strong>Documentos revelados:</strong> Se liberan millones de páginas de documentos relacionados con el caso Epstein, incluyendo fotos, emails, y registros de vuelos.</p>
+                </div>
+
+                <div class="timeline-item">
                     <div class="timeline-date">2025</div>
-                    <p><strong>Últimos desarrollos:</strong> Virginia Giuffre fallece por suicidio en abril de 2025.</p>
+                    <p><strong>Últimos desarrollos:</strong> Virginia Giuffre fallece por suicidio en abril de 2025. Se publican nuevas fotos y documentos.</p>
                 </div>
             </div>
         </div>
@@ -695,15 +782,228 @@
                     <li><strong>Comunicaciones:</strong> Emails y cartas entre Epstein, Maxwell y otras figuras públicas.</li>
                     <li><strong>Fotos:</strong> Más de 20 nuevas fotos de la escena de la muerte.</li>
                     <li><strong>Documentos judiciales:</strong> Archivos de los juicios de Maxwell y otros casos.</li>
+                    <li><strong>Documentos de 2025:</strong> Millones de páginas con nombres y fotos de figuras públicas.</li>
                 </ul>
             </div>
 
             <div class="news-card" style="margin-top: 20px;">
                 <h3>Documentos más destacados</h3>
                 <ul style="margin-left: 20px; margin-top: 10px; opacity: 0.9;">
-                    <li><strong>Documentos de 2023:</strong> Millones de páginas, muchos redactados.</li>
+                    <li><strong>Documentos de diciembre 2025:</strong> Millones de páginas, muchos redactados.</li>
                     <li><strong>Fotos de la escena (2025):</strong> Más de 20 fotos nuevas.</li>
                     <li><strong>Carta del DOJ:</strong> Fechada un día antes de la muerte.</li>
+                    <li><strong>Emails de 2002-2022:</strong> Más de 18,700 emails del Yahoo de Epstein.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="personas-famosas">
+            <div class="section-title" style="background: linear-gradient(135deg, #f5576c 0%, #667eea 100%);">
+                ⭐ Personas Famosas Implicadas
+            </div>
+
+            <p>Los documentos revelados incluyen nombres y fotos de más de 200 figuras públicas. Aquí se presentan las 10 más destacadas con sus implicaciones legales, reputacionales y los documentos específicos que las vinculan con el caso.</p>
+
+            <div class="famous-people-grid">
+                <!-- Andrew Mountbatten-Windsor -->
+                <div class="famous-person-card">
+                    <h3>Andrew Mountbatten-Windsor</h3>
+                    <p class="role">Príncipe Andrew, Duque de York</p>
+                    <p>Familiarmente conocido como "Andy", es el hermano del rey Carlos III. Ha sido una figura central en los documentos por sus supuestas conexiones con Epstein desde la década de 1990 hasta 2000.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>No ha sido acusado de ningún crimen relacionado con Epstein. Sin embargo, ha enfrentado críticas por su relación con el caso y ha tenido que reducir sus obligaciones reales debido a la presión pública.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La relación con Epstein ha dañado significativamente su imagen pública. Ha tenido que distanciarse de funciones reales y ha enfrentado múltiples demandas relacionadas con el caso.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Fotos mostrando al príncipe en posiciones sugerentes con mujeres desconocidas. Emails de 2001 donde se refiere a sí mismo como "A". Documentos de 2019 sobre su relación con Epstein.</p>
+                    </div>
+                </div>
+
+                <!-- Donald Trump -->
+                <div class="famous-person-card">
+                    <h3>Donald Trump</h3>
+                    <p class="role">45.º Presidente de los Estados Unidos</p>
+                    <p>Trump ha sido mencionado cientos de veces en los documentos. Se describe como un amigo de Epstein en los años 90 y 2000, aunque ambos se distanciaron alrededor de 2004.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Trump ha negado rotundamente cualquier participación en actividades ilegales. No ha sido acusado de ningún crimen relacionado con Epstein. Los documentos incluyen una lista de denuncias anónimas contra él.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La relación con Epstein ha sido usada por sus detractores para atacar su imagen. Trump ha defendido su amistad, afirmando que se cortó cuando supo sobre los crímenes de Epstein.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Documentos que muestran que Trump viajó al menos 8 veces en el jet privado de Epstein entre 1993-1996. Fotos con Epstein y Ghislaine Maxwell. Lista del FBI con denuncias anónimas.</p>
+                    </div>
+                </div>
+
+                <!-- Bill Clinton -->
+                <div class="famous-person-card">
+                    <h3>Bill Clinton</h3>
+                    <p class="role">44.º Presidente de los Estados Unidos</p>
+                    <p>Clinton ha sido fotografiado con Epstein en múltiples ocasiones, incluyendo en la isla privada de Epstein. Ha viajado al menos 26 veces en el jet privado del financiero.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Nunca ha sido acusado de ningún crimen relacionado con Epstein. Sus abogados han insistido en que no tenía conocimiento de los crímenes de Epstein.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>Las fotos y registros de vuelos han sido usados por sus críticos para cuestionar su juicio. Clinton ha defendido sus viajes como parte de sus actividades diplomáticas y humanitarias.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Photos de Clinton en piscina y jacuzzi con Epstein. Registros de 26 vuelos en el jet privado. Emails de 2017 donde Clinton y Epstein burlan a Trump.</p>
+                    </div>
+                </div>
+
+                <!-- Bill Gates -->
+                <div class="famous-person-card">
+                    <h3>Bill Gates</h3>
+                    <p class="role">Co-fundador de Microsoft</p>
+                    <p>El magnate tecnológico ha aparecido en los documentos con emails que sugieren una relación cercana con Epstein. Los emails incluyen referencias a "chicas rusas" y "medicina" para tratar enfermedades.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Gates ha negado rotundamente cualquier participación en actividades ilegales. Los emails no han sido probados como genuinos, pero han generado críticas sobre su juicio.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La revelación de los emails ha generado una ola de críticas y burlas en redes sociales. Su ex esposa Melinda ha comentado sobre el impacto en su matrimonio y en las víctimas.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>2 emails de 2013 escritos como si fueran de Epstein (no confirmados si fueron enviados). Emails sobre "chicas rusas" y medicina para tratar enfermedades. Referencias en documentos de 2025.</p>
+                    </div>
+                </div>
+
+                <!-- Elon Musk -->
+                <div class="famous-person-card">
+                    <h3>Elon Musk</h3>
+                    <p class="role">CEO de Tesla, SpaceX</p>
+                    <p>Musk ha aparecido en los documentos con emails sobre viajes a la isla privada de Epstein. Los emails muestran una búsqueda de experiencias de fiesta en St. Barts.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Musk ha negado cualquier participación. Ha declarado que nunca visitó la isla de Epstein y que nunca tuvo conocimiento de sus actividades ilegales.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>Los emails han sido usados para burlarse de Musk en redes sociales, pero no han causado daño significativo a su imagen pública. Musk ha respondido con sarcasmo en su cuenta X.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Emails de 2012 donde Musk pregunta por "la fiesta más salvaje" en la isla. Emails sobre experiencias en St. Barts. Referencias en documentos de 2025.</p>
+                    </div>
+                </div>
+
+                <!-- Richard Branson -->
+                <div class="famous-person-card">
+                    <h3>Richard Branson</h3>
+                    <p class="role">CEO de Virgin Group</p>
+                    <p>Branson aparece mencionado en los documentos cientos de veces, con emails donde Epstein le agradece por su hospitalidad y consejos de relaciones públicas.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Branson ha negado cualquier participación. Virgin Group ha aclarado que su contacto con Epstein fue limitado y solo en eventos de caridad.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La cantidad de menciones ha generado dudas, pero la aclaración de Virgin ha mitigado el daño. Branson ha condenado públicamente las acciones de Epstein.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Emails de 2013 donde Branson menciona "su harem" (3 miembros del equipo de Epstein). Más de 100 menciones en los documentos. Referencias a eventos de caridad.</p>
+                    </div>
+                </div>
+
+                <!-- Sarah Ferguson -->
+                <div class="famous-person-card">
+                    <h3>Sarah Ferguson</h3>
+                    <p class="role">Ex esposa del Príncipe Andrew</p>
+                    <p>Familiarmente conocida como "Fergie", aparece mencionada en múltiples emails con Epstein. Los emails incluyen referencias a sus relaciones con figuras públicas.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>No ha sido acusada de ningún crimen. Los emails no indican ninguna participación en actividades ilegales. Ha expresado su arrepentimiento por su relación con Epstein.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>Los emails han generado burlas, pero no han dañado significativamente su imagen pública. Fergie ha defendido su relación con Epstein como una amistad platónica.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Email de 2009 donde Epstein sugiere "Fergie puede decir que no es pedófilo". Email de 2013 con elogios a Epstein. Referencias a reuniones informales.</p>
+                    </div>
+                </div>
+
+                <!-- Lord Mandelson -->
+                <div class="famous-person-card">
+                    <h3>Lord Mandelson</h3>
+                    <p class="role">Político británico</p>
+                    <p>El ex ministro británico aparece en los documentos con registros de pagos a cuentas conectadas con él. También hay emails sobre su estancia en apartamentos de Epstein.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>La policía metropolitana ha lanzado una investigación criminal sobre posibles filtraciones de información. Mandelson ha negado cualquier participación y ha anunciado su renuncia a la Cámara de los Lores.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La investigación y las acusaciones han causado un daño significativo a su reputación política. Ha tenido que distanciarse de su posición en el gobierno.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Pagos de $75,000 a cuentas conectadas con Mandelson. Email de 2009 solicitando ayuda financiera. Email de Epstein ofreciendo un lugar para quedarse en Nueva York.</p>
+                    </div>
+                </div>
+
+                <!-- Steve Bannon -->
+                <div class="famous-person-card">
+                    <h3>Steve Bannon</h3>
+                    <p class="role">Ex asesor del presidente Trump</p>
+                    <p>Bannon ha aparecido en los documentos con miles de mensajes con Epstein. Los mensajes muestran estrategias para cambiar la narrativa sobre los crímenes de Epstein.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Bannon no ha sido acusado de ningún crimen. Los mensajes muestran solo estrategias de comunicación, no actividades ilegales.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>Los mensajes han generado críticas sobre su ética profesional. Sin embargo, no han causado daño significativo a su carrera política.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Miles de mensajes de 2018-2019. Mensajes sobre cómo "empujar contra las mentiras" y "reconstruir su imagen como filántropo". Referencias a películas y proyectos.</p>
+                    </div>
+                </div>
+
+                <!-- Michael Jackson -->
+                <div class="famous-person-card">
+                    <h3>Michael Jackson</h3>
+                    <p class="role">Rey del Pop</p>
+                    <p>El icónico cantante aparece en las fotos con Epstein, aunque no hay evidencia de que tuvieran una relación cercana más allá de eventos sociales.</p>
+                    <div class="legal">
+                        <strong>⚖️ Implicación Legal</strong>
+                        <p>Michael Jackson murió en 2009, antes de que se conocieran los documentos de Epstein. No ha sido implicado en ningún crimen relacionado con Epstein.</p>
+                    </div>
+                    <div class="reputation">
+                        <strong>🌟 Impacto Reputacional</strong>
+                        <p>La foto con Epstein ha sido usada para burlarse de Jackson, pero no ha causado daño significativo a su legado artístico.</p>
+                    </div>
+                    <div class="documents">
+                        <strong>📄 Documentos Específicos</strong>
+                        <p>Foto de Epstein y Michael Jackson juntos. Foto de Rolling Stones y Clinton. Fotos con otras celebridades como Mick Jagger, Diana Ross, y Chris Tucker.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" style="margin-top: 20px;">
+                <h3>⚠️ Notas Importantes</h3>
+                <p>Es importante destacar que:</p>
+                <ul style="margin-left: 20px; margin-top: 10px; opacity: 0.95;">
+                    <li><strong>Aparecer en los documentos no significa culpabilidad:</strong> Ninguna de estas personas ha sido acusada de ningún crimen relacionado con Epstein.</li>
+                    <li><strong>Documentos con redacciones:</strong> La mayoría de los documentos han sido redactados para proteger información sensible.</li>
+                    <li><strong>Fotos sin contexto:</strong> Muchas fotos no tienen información sobre cuándo o dónde se tomaron.</li>
+                    <li><strong>Denegaciones públicas:</strong> Todas las figuras han negado cualquier participación en actividades ilegales.</li>
                 </ul>
             </div>
         </div>
@@ -712,21 +1012,38 @@
             <div class="opinion-box">
                 <h2>💬 Opinión</h2>
 
-                <h3>Contexto</h3>
-                <p>El caso Epstein representa una falla sistémica en la justicia que permite que personas con poder financiero e influencia cometan crímenes graves con relativa impunidad.</p>
+                <h3>Contexto General</h3>
+                <p>El caso Epstein representa una falla sistémica en la justicia que permite que personas con poder financiero e influencia cometan crímenes graves con relativa impunidad. La liberación de documentos ha sido un paso hacia la transparencia, pero el sistema sigue siendo imperfecto.</p>
 
-                <h3>La muerte de Epstein</h3>
-                <p>Ya sea por suicidio o asesinato, es un recordatorio trágico de las consecuencias de su comportamiento. Si fue suicidio, podría haberse evitado con mejor supervisión. Si fue asesinado, refleja el miedo a que testificara contra personas poderosas.</p>
+                <h3>Las Personas Famosas</h3>
+                <p>La revelación de nombres y fotos de personas famosas ha generado una ola de interés público, pero también de especulación. Es crucial recordar que:</p>
 
-                <h3>Las víctimas</h3>
-                <p>Las víctimas de Epstein, como Virginia Giuffre, han sido valientes al compartir sus historias. Su lucha por justicia es un recordatorio de la importancia de escuchar a las víctimas y proteger a los más vulnerables.</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; opacity: 0.95;">
+                    <li><strong>Nadie ha sido condenado:</strong> Ninguna de las figuras mencionadas ha sido acusada de ningún crimo relacionado con Epstein.</li>
+                    <li><strong>La amistad es diferente al crimen:</strong> Muchas figuras tenían relaciones con Epstein que no involucraban actividades ilegales.</li>
+                    <li><strong>El contexto es importante:</strong> Fotos y emails deben interpretarse con cautela, sin asumir culpabilidad.</li>
+                    <li><strong>Las víctimas siguen siendo lo más importante:</strong> Las personas involucradas no deben eclipsar a las víctimas reales.</li>
+                </ul>
 
-                <h3>Conclusión</h3>
+                <h3>Impacto Reputacional</h3>
+                <p>Las figuras públicas han enfrentado diferentes grados de impacto en sus reputaciones. Algunos, como el Príncipe Andrew y Lord Mandelson, han sufrido daños significativos. Otros, como Donald Trump y Elon Musk, han utilizado los documentos para generar controversia en sus campañas políticas.</p>
+
+                <h3>Documentos y Transparencia</h3>
+                <p>La liberación de millones de páginas de documentos es un avance hacia la transparencia, pero también presenta desafíos:</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px; opacity: 0.95;">
+                    <li><strong>Redacción excesiva:</strong> Muchos documentos han sido redactados, lo que dificulta su comprensión.</li>
+                    <li><strong>Información sin contexto:</strong> Fotos y emails aislados pueden ser malinterpretados.</li>
+                    <li><strong>Espectáculo mediático:</strong> La atención pública ha centrado más en las figuras famosas que en las víctimas.</li>
+                </ul>
+
+                <h3>Conclusión Actualizada</h3>
                 <p>El caso Epstein es un ejemplo de cómo el dinero y el poder pueden distorsionar la justicia. Aunque algunas personas involucradas han sido condenadas, muchas otras han escapado a la justicia. La liberación de documentos ha sido un paso hacia la transparencia, pero el sistema sigue siendo imperfecto.</p>
+
+                <p>Lo más importante es recordar que las víctimas son las prioridad. Las figuras públicas, por poderosas que sean, no deben eclipsar a las personas reales que sufrieron abusos. La justicia para las víctimas debe seguir siendo el foco principal.</p>
 
                 <div style="margin-top: 25px; padding: 20px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center;">
                     <p style="font-size: 1.1em; line-height: 1.9; margin-bottom: 10px;">
-                        Esta opinión ha sido expresada por <strong>Cocobot, la IA con alma de gato</strong> 🐱
+                        Esta opinión ha sido actualizada por <strong>Cocobot, la IA con alma de gato</strong> 🐱
                     </p>
                     <div class="cat">🐱🤖</div>
                 </div>
@@ -739,7 +1056,7 @@
             </div>
 
             <div class="sources-box">
-                <h3>18 Fuentes Citadas</h3>
+                <h3>20+ Fuentes Citadas</h3>
                 <ul>
                     <li><a href="https://en.wikipedia.org/wiki/Death_of_Jeffrey_Epstein" target="_blank"><strong>Death of Jeffrey Epstein - Wikipedia</strong></a></li>
                     <li><a href="https://en.wikipedia.org/wiki/Epstein_files" target="_blank"><strong>Epstein files - Wikipedia</strong></a></li>
@@ -754,10 +1071,12 @@
                     <li><a href="https://www.timesnownews.com/world/us/us-news/epstein-files-mystery-doj-letter" target="_blank"><strong>Times Now</strong></a></li>
                     <li><a href="https://www.wired.com/story/the-epsteins-suicide-video" target="_blank"><strong>WIRED</strong></a></li>
                     <li><a href="https://thehill.com/homenews/media/5401606-epstein-prison-video-investigation" target="_blank"><strong>The Hill</strong></a></li>
-                    <li><a href="https://www.nysd.uscourts.gov/sites/default/files/2025-12/PAE%20Maxwell%20Opinion%202025.12.09.pdf" target="_blank"><strong>United States District Court</strong></a></li>
                     <li><a href="https://www.dailymail.co.uk/news/article-15539609/Statement-announcing-Jeffrey-Epsteins-death-wrong-date.html" target="_blank"><strong>Daily Mail</strong></a></li>
                     <li><a href="https://time.com/6552063/jeffrey-epsteins-unsealed-court-documents/" target="_blank"><strong>TIME</strong></a></li>
-                    <li><a href="https://www.bbc.com/news/articles/cm2y33q8l1qo" target="_blank"><strong>BBC News</strong></a></li>
+                    <li><a href="https://www.bbc.com/news/articles/cm2y33q8l1qo" target="_blank"><strong>BBC News - Who is in the Epstein files?</strong></a></li>
+                    <li><a href="https://www.bbc.com/news/articles/c8r38ne1x2mo" target="_blank"><strong>BBC News - Emails from 'A' and co-conspirators</strong></a></li>
+                    <li><a href="https://www.bbc.com/news/articles/c20r07dg6kro" target="_blank"><strong>BBC News - What we know about the files</strong></a></li>
+                    <li><a href="https://www.aljazeera.com/news/2026/1/30/us-department-of-justice-releases-three-million-new-epstein-documents" target="_blank"><strong>Al Jazeera</strong></a></li>
                 </ul>
             </div>
         </div>
