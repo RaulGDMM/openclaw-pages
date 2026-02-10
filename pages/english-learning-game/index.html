@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 English Quest - Exam Prep Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Main Menu */
+        .menu {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 25px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .menu-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Game Area */
+        .game-area {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .game-progress {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Mission List */
+        .mission-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mission-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .mission-card:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .mission-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .mission-card.completed {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .mission-card.completed .mission-title {
+            text-decoration: line-through;
+            color: #28a745;
+        }
+
+        .mission-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .mission-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .mission-xp {
+            float: right;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Exercise Types */
+        .exercise-container {
+            margin-top: 20px;
+        }
+
+        .exercise-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f0f8;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e9ecef;
+            font-weight: 600;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .input-answer {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .input-answer:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Feedback */
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            display: block;
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .feedback-text {
+            font-size: 0.95rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        /* Achievement Popup */
+        .achievement-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        .achievement-popup.active {
+            display: block;
+            animation: popup 0.5s ease;
+        }
+
+        .achievement-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .achievement-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .achievement-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        @keyframes popup {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .achievement-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .achievement-item.earned {
+            opacity: 1;
+            filter: grayscale(0%);
+            background: #fff3cd;
+        }
+
+        .achievement-icon-small {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* Level Up Animation */
+        .level-up-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .level-up-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: levelUp 1s ease;
+        }
+
+        @keyframes levelUp {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .game-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .mission-xp {
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 English Quest</h1>
+            <div class="subtitle">Exam Preparation Game</div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value" id="level-display">1</div>
+                <div class="stat-label">Level</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="xp-display">0</div>
+                <div class="stat-label">XP</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="missions-display">0/10</div>
+                <div class="stat-label">Missions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="streak-display">0</div>
+                <div class="stat-label">Streak 🔥</div>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div class="menu" id="main-menu">
+            <h2>🎮 Main Menu</h2>
+            <button class="menu-btn" onclick="showGameArea()">🎯 Play Game</button>
+            <button class="menu-btn" onclick="showAchievements()">🏆 Achievements</button>
+            <button class="menu-btn" onclick="showStats()">📊 Statistics</button>
+            <button class="menu-btn" onclick="resetProgress()">🔄 Reset Progress</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area" id="game-area">
+            <div class="game-header">
+                <div class="game-title" id="game-title">Missions</div>
+                <div class="game-progress" id="game-progress">0/10</div>
+            </div>
+
+            <div id="mission-list-container">
+                <div class="mission-list">
+                    <!-- Missions will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Area -->
+        <div class="game-area" id="exercise-area">
+            <div class="game-header">
+                <button class="btn btn-secondary" onclick="backToMissions()">← Back</button>
+                <div class="game-title" id="exercise-title">Exercise</div>
+                <div class="game-progress" id="exercise-progress">1/5</div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-title" id="exercise-type">Vocabulary</div>
+                <div class="question-box">
+                    <div class="question-text" id="question-text"></div>
+                </div>
+
+                <div id="options-container" class="options"></div>
+                <input type="text" class="input-answer" id="text-input" style="display: none;">
+
+                <div class="feedback" id="feedback"></div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn" id="submit-btn" onclick="submitAnswer()">Submit</button>
+                    <button class="btn btn-secondary" id="next-btn" onclick="nextQuestion()" style="display: none;">Next →</button>
+                    <button class="btn" id="complete-btn" onclick="completeMission()" style="display: none;">Complete Mission ✨</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Area -->
+        <div class="game-area" id="achievements-area">
+            <div class="game-header">
+                <button class="btn btn-secondary" onclick="backToMenu()">← Back</button>
+                <div class="game-title">🏆 Achievements</div>
+                <div></div>
+            </div>
+
+            <div class="exercise-title">Badges Earned</div>
+            <div class="achievements-grid" id="achievements-grid"></div>
+        </div>
+
+        <!-- Statistics Area -->
+        <div class="game-area" id="stats-area">
+            <div class="game-header">
+                <button class="btn btn-secondary" onclick="backToMenu()">← Back</button>
+                <div class="game-title">📊 Statistics</div>
+                <div></div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-title">Total Practice Time</div>
+                <div class="question-text" id="total-time">0 minutes</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-title">Questions Answered</div>
+                <div class="question-text" id="total-questions">0 questions</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-title">Correct Answers</div>
+                <div class="question-text" id="correct-answers">0%</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-title">Best Streak</div>
+                <div class="question-text" id="best-streak">0 days</div>
+            </div>
+        </div>
+
+        <!-- Level Up Overlay -->
+        <div class="level-up-overlay" id="level-up-overlay">
+            <div class="level-up-content">
+                <div style="font-size: 3rem;">🎉</div>
+                <div style="font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 10px;">LEVEL UP!</div>
+                <div style="font-size: 1.5rem;">You are now Level <span id="new-level"></span></div>
+                <button class="btn" onclick="closeLevelUp()" style="margin-top: 20px;">Continue 🚀</button>
+            </div>
+        </div>
+
+        <!-- Achievement Popup -->
+        <div class="achievement-popup" id="achievement-popup">
+            <div class="achievement-icon" id="achievement-icon">🏆</div>
+            <div class="achievement-title" id="achievement-title">Achievement Unlocked!</div>
+            <div class="achievement-desc" id="achievement-desc">You earned a new badge</div>
+            <button class="btn" onclick="closeAchievement()">Awesome! 🎉</button>
+        </div>
+    </div>
+
+    <script>
+        // Game Data
+        const missions = [
+            {
+                id: 1,
+                title: "Project Challenges",
+                desc: "Describe a project problem and solution",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Speaking Challenge",
+                        text: "Describe a recent project challenge you faced. What was it and how did you solve it?",
+                        question: "What is the first step you take when facing a project challenge?",
+                        options: [
+                            "Panic and give up",
+                            "Analyze the problem",
+                            "Ignore it",
+                            "Blame others"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Analyzing the problem is the first and most important step."
+                    },
+                    {
+                        type: "question",
+                        title: "Problem-Solving",
+                        text: "Use connectors to describe a challenge you solved.",
+                        question: "Which connectors are useful for describing cause and effect?",
+                        options: [
+                            "At first / However / In the end",
+                            "Because / So / Therefore",
+                            "If / Then / Else",
+                            "While / Although / But"
+                        ],
+                        correct: 0,
+                        feedback: "Perfect! 'At first' shows initial state, 'However' shows contrast, and 'In the end' shows the result."
+                    },
+                    {
+                        type: "question",
+                        title: "Technical Vocabulary",
+                        text: "What does 'setback' mean in a project context?",
+                        question: "A 'setback' is when:",
+                        options: [
+                            "The project is cancelled",
+                            "Something impedes or slows progress",
+                            "Everything goes perfectly",
+                            "You finish ahead of schedule"
+                        ],
+                        correct: 1,
+                        feedback: "Great! A setback is something that slows down or impedes progress."
+                    },
+                    {
+                        type: "question",
+                        title: "Connectors Practice",
+                        text: "Complete the sentence using the right connector.",
+                        question: "The project was delayed ___ it was underfunded.",
+                        options: [
+                            "because",
+                            "although",
+                            "if",
+                            "so"
+                        ],
+                        correct: 0,
+                        feedback: "Correct! 'Because' shows cause and effect."
+                    },
+                    {
+                        type: "question",
+                        title: "Summary Practice",
+                        text: "Summarize a project challenge in one sentence.",
+                        question: "Which sentence structure is best for summarizing?",
+                        options: [
+                            "The problem was X. The solution was Y. The result was Z.",
+                            "I think maybe X.",
+                            "I don't know what to do.",
+                            "It was bad."
+                        ],
+                        correct: 0,
+                        feedback: "Excellent! Clear structure: Problem → Solution → Result."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Meeting Language",
+                desc: "Learn phrases for professional meetings",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Meeting Phrases",
+                        text: "What is a good way to disagree diplomatically?",
+                        question: "\"I see your point, but…\" is used to:",
+                        options: [
+                            "Agree strongly",
+                            "Disagree politely",
+                            "Interrupt aggressively",
+                            "End the meeting quickly"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! This phrase shows respect while expressing a different opinion."
+                    },
+                    {
+                        type: "question",
+                        title: "Clarification",
+                        text: "What do you say when you want to understand better?",
+                        question: "Which phrase is used for clarification?",
+                        options: [
+                            "Let's stop talking.",
+                            "Can you clarify what you mean?",
+                            "That's wrong.",
+                            "I don't care."
+                        ],
+                        correct: 1,
+                        feedback: "Great! 'Can you clarify what you mean?' is professional and clear."
+                    },
+                    {
+                        type: "question",
+                        title: "Agreeing & Disagreeing",
+                        text: "How do you agree with someone politely?",
+                        question: "Which phrase agrees with a different assessment?",
+                        options: [
+                            "You're completely wrong!",
+                            "I'm afraid I can't agree with that.",
+                            "I don't care.",
+                            "That's terrible."
+                        ],
+                        correct: 1,
+                        feedback: "Excellent diplomatic phrase for professional disagreement."
+                    },
+                    {
+                        type: "question",
+                        title: "Meeting Management",
+                        text: "What do you say to keep the meeting focused?",
+                        question: "\"Let's circle back to this later\" means:",
+                        options: [
+                            "The meeting is over",
+                            "Let's discuss this again later",
+                            "I'm leaving now",
+                            "This is not important"
+                        ],
+                        correct: 1,
+                        feedback: "Correct! It means we'll discuss it at a more appropriate time."
+                    },
+                    {
+                        type: "question",
+                        title: "Action Items",
+                        text: "What do you say to assign tasks?",
+                        question: "Which phrase assigns responsibility?",
+                        options: [
+                            "We'll do it together.",
+                            "Can you clarify?",
+                            "Let's assign action items.",
+                            "I don't know who should do it."
+                        ],
+                        correct: 2,
+                        feedback: "Perfect! 'Let's assign action items' is clear and professional."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Bug Reports & QA",
+                desc: "Learn how to report bugs professionally",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Bug Reporting",
+                        text: "How do you describe a bug in a professional way?",
+                        question: "What is the first thing you should do when reporting a bug?",
+                        options: [
+                            "Blame someone",
+                            "Describe the steps to reproduce",
+                            "Ignore it",
+                            "Say it's not my problem"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Clear steps to reproduce help developers fix the bug."
+                    },
+                    {
+                        type: "question",
+                        title: "Severity Levels",
+                        text: "What does 'critical' severity mean?",
+                        question: "A bug with 'critical' severity:",
+                        options: [
+                            "Is a minor cosmetic issue",
+                            "Blocks the entire system",
+                            "Can be fixed later",
+                            "Is not important"
+                        ],
+                        correct: 1,
+                        feedback: "Correct! Critical bugs prevent the system from working."
+                    },
+                    {
+                        type: "question",
+                        title: "Reproducibility",
+                        text: "Why is reproducibility important?",
+                        question: "\"Reproducible\" means:",
+                        options: [
+                            "The bug is random",
+                            "The bug happens every time",
+                            "Nobody can find the bug",
+                            "The bug is fixed"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Reproducible bugs are much easier to fix."
+                    },
+                    {
+                        type: "question",
+                        title: "Bug Fixing",
+                        text: "How do you describe a bug fix?",
+                        question: "Which sentence describes a bug fix?",
+                        options: [
+                            "I broke it on purpose.",
+                            "I fixed a bug in the login module.",
+                            "I don't know what I did.",
+                            "The bug is still there."
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Clear and professional description of a bug fix."
+                    },
+                    {
+                        type: "question",
+                        title: "Rollback",
+                        text: "What is a rollback?",
+                        question: "A rollback is when you:",
+                        options: [
+                            "Upgrade to a new version",
+                            "Go back to a previous version",
+                            "Delete the code",
+                            "Add new features"
+                        ],
+                        correct: 1,
+                        feedback: "Correct! Rollback returns to a previous working state."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Deadlines & Deliverables",
+                desc: "Manage deadlines professionally",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Deadline Management",
+                        text: "What do you say when you can't meet a deadline?",
+                        question: "\"We may need to push this back\" means:",
+                        options: [
+                            "We finished early",
+                            "The project is cancelled",
+                            "We need more time",
+                            "We're starting late"
+                        ],
+                        correct: 2,
+                        feedback: "Excellent! It shows honesty and asks for more time."
+                    },
+                    {
+                        type: "question",
+                        title: "Realistic Timeline",
+                        text: "How do you create a realistic timeline?",
+                        question: "What should you consider when setting a deadline?",
+                        options: [
+                            "Make it as short as possible",
+                            "Consider dependencies and risks",
+                            "Ignore the client's needs",
+                            "Blame the team"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Dependencies and risks make a deadline realistic."
+                    },
+                    {
+                        type: "question",
+                        title: "Scope Changes",
+                        text: "How do you handle scope changes?",
+                        question: "What do you say when scope increases?",
+                        options: [
+                            "We can't do it.",
+                            "The scope has increased.",
+                            "I don't know.",
+                            "It's impossible."
+                        ],
+                        correct: 1,
+                        feedback: "Great! Clear communication about scope changes."
+                    },
+                    {
+                        type: "question",
+                        title: "Commitment",
+                        text: "What does it mean to 'commit' to a deadline?",
+                        question: "\"Can we commit to this deadline?\" means:",
+                        options: [
+                            "We're not sure",
+                            "We agree to complete on time",
+                            "We're delaying it",
+                            "We're ignoring it"
+                        ],
+                        correct: 1,
+                        feedback: "Correct! Commitment shows responsibility and reliability."
+                    },
+                    {
+                        type: "question",
+                        title: "Negotiation",
+                        text: "How do you negotiate deadlines?",
+                        question: "What's a good way to negotiate?",
+                        options: [
+                            "Demand more money",
+                            "Explain the risks and propose alternatives",
+                            "Blame others",
+                            "Give up"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Professional negotiation considers all factors."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Team Collaboration",
+                desc: "Improve team communication skills",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Stand-up Meeting",
+                        text: "What do you say in a daily stand-up?",
+                        question: "What should you cover in a stand-up?",
+                        options: [
+                            "Personal life stories",
+                            "Yesterday's progress, today's plan, blockers",
+                            "Technical debates",
+                            "Complaints"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Stand-ups are for quick, focused updates."
+                    },
+                    {
+                        type: "question",
+                        title: "Action Items",
+                        text: "What are action items?",
+                        question: "Action items are:",
+                        options: [
+                            "Things you don't need to do",
+                            "Specific tasks assigned with deadlines",
+                            "Meeting notes",
+                            "Technical documents"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Action items ensure progress and accountability."
+                    },
+                    {
+                        type: "question",
+                        title: "Feedback",
+                        text: "How do you give constructive feedback?",
+                        question: "\"I see your point, but…\" is used for:",
+                        options: [
+                            "Agreeing completely",
+                            "Giving constructive feedback",
+                            "Interrupting",
+                            "Ending the meeting"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! This phrase provides feedback while respecting others' opinions."
+                    },
+                    {
+                        type: "question",
+                        title: "Collaboration",
+                        text: "What does 'cross-functional collaboration' mean?",
+                        question: "Cross-functional collaboration involves:",
+                        options: [
+                            "Working alone",
+                            "Teams from different functions working together",
+                            "Competing with other teams",
+                            "Avoiding meetings"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Different functions (dev, QA, PM) working together."
+                    },
+                    {
+                        type: "question",
+                        title: "Knowledge Sharing",
+                        text: "Why is knowledge sharing important?",
+                        question: "What does 'knowledge-sharing mindset' mean?",
+                        options: [
+                            "Hiding information",
+                            "Sharing information with the team",
+                            "Competing for knowledge",
+                            "Ignoring new information"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Sharing knowledge helps everyone learn and grow."
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Crisis Management",
+                desc: "Handle emergencies professionally",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Crisis Response",
+                        text: "What is the first step in a crisis?",
+                        question: "When facing a crisis, what should you do?",
+                        options: [
+                            "Panic",
+                            "Stay calm and assess the situation",
+                            "Blame someone",
+                            "Ignore it"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Staying calm allows you to think clearly and take action."
+                    },
+                    {
+                        type: "question",
+                        title: "Communication",
+                        text: "How do you communicate during a crisis?",
+                        question: "What should you communicate during a crisis?",
+                        options: [
+                            "Nothing",
+                            "Clear, honest, and timely updates",
+                            "False information",
+                            "Confusion"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Clear communication builds trust and reduces panic."
+                    },
+                    {
+                        type: "question",
+                        title: "Wake-up Call",
+                        text: "What is a 'wake-up call'?",
+                        question: "A wake-up call is when:",
+                        options: [
+                            "You sleep late",
+                            "Something alerts you to an important problem",
+                            "You celebrate",
+                            "You finish work early"
+                        ],
+                        correct: 1,
+                        feedback: "Great! It's a warning that prompts action."
+                    },
+                    {
+                        type: "question",
+                        title: "Escalation",
+                        text: "When should you escalate an issue?",
+                        question: "You should escalate when:",
+                        options: [
+                            "The issue is minor",
+                            "The issue needs attention beyond your level",
+                            "You want to complain",
+                            "The issue is solved"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Escalation ensures the right people handle important issues."
+                    },
+                    {
+                        type: "question",
+                        title: "Resolution",
+                        text: "How do you resolve a crisis?",
+                        question: "What's the key to crisis resolution?",
+                        options: [
+                            "Ignoring the problem",
+                            "Quick, decisive action and communication",
+                            "Blaming others",
+                            "Waiting for someone else"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Action and communication are essential for resolution."
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Technical Vocabulary",
+                desc: "Learn technical terms for developers",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Deployment",
+                        text: "What is deployment?",
+                        question: "Deployment is when you:",
+                        options: [
+                            "Delete code",
+                            "Launch software to production",
+                            "Write new features",
+                            "Test code"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Deployment means releasing software to users."
+                    },
+                    {
+                        type: "question",
+                        title: "Staging",
+                        text: "What is a staging environment?",
+                        question: "A staging environment is used for:",
+                        options: [
+                            "Production users only",
+                            "Testing before going to production",
+                            "Development only",
+                            "Archiving old code"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Staging is for testing before real users see it."
+                    },
+                    {
+                        type: "question",
+                        title: "Rollback",
+                        text: "What is rollback?",
+                        question: "Rollback is used when:",
+                        options: [
+                            "You want to upgrade",
+                            "You need to return to a previous version",
+                            "You want to add features",
+                            "You're finished with the project"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Rollback fixes problems after deployment."
+                    },
+                    {
+                        type: "question",
+                        title: "Integration Testing",
+                        text: "What is integration testing?",
+                        question: "Integration testing:",
+                        options: [
+                            "Tests individual components",
+                            "Tests how different components work together",
+                            "Tests only the database",
+                            "Tests only the frontend"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Integration testing ensures components interact correctly."
+                    },
+                    {
+                        type: "question",
+                        title: "Documentation",
+                        text: "Why is documentation important?",
+                        question: "Good documentation:",
+                        options: [
+                            "Is optional",
+                            "Helps others understand and use your code",
+                            "Takes too much time",
+                            "Is only for senior developers"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Documentation makes code maintainable and understandable."
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Conditional Structures",
+                desc: "Master conditionals for exam",
+                xp: 100,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Zero Conditional",
+                        text: "What is the zero conditional used for?",
+                        question: "The zero conditional is used for:",
+                        options: [
+                            "Future predictions",
+                            "General facts and habits",
+                            "Hypothetical situations",
+                            "Regrets"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! General facts and habits (e.g., 'If I study, I learn')."
+                    },
+                    {
+                        type: "question",
+                        title: "First Conditional",
+                        text: "What is the first conditional used for?",
+                        question: "The first conditional is used for:",
+                        options: [
+                            "Past situations",
+                            "Future real possibilities",
+                            "Hypothetical situations",
+                            "Regrets about the past"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Future real possibilities (e.g., 'If it rains, I'll stay home')."
+                    },
+                    {
+                        type: "question",
+                        title: "Second Conditional",
+                        text: "What is the second conditional used for?",
+                        question: "The second conditional is used for:",
+                        options: [
+                            "Real situations",
+                            "Hypothetical or imaginary situations",
+                            "Past situations",
+                            "Future predictions"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Hypothetical situations (e.g., 'If I were rich, I would travel')."
+                    },
+                    {
+                        type: "question",
+                        title: "Third Conditional",
+                        text: "What is the third conditional used for?",
+                        question: "The third conditional is used for:",
+                        options: [
+                            "Future possibilities",
+                            "Hypothetical past situations",
+                            "Real situations",
+                            "General facts"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Hypothetical past situations (e.g., 'If I had studied, I would have passed')."
+                    },
+                    {
+                        type: "question",
+                        title: "Mixed Conditionals",
+                        text: "When do you use mixed conditionals?",
+                        question: "Mixed conditionals are used when:",
+                        options: [
+                            "You have no condition",
+                            "You mix past and present/hypothetical",
+                            "You only talk about the future",
+                            "You only talk about the past"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Mix past cause with present result (e.g., 'If I hadn't slept, I wouldn't be tired now')."
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Exam Practice",
+                desc: "Comprehensive review for the exam",
+                xp: 150,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Exam Question 1",
+                        text: "Complete the sentence with the correct form.",
+                        question: "If I ___ (know) about the bug, I ___ (fix) it immediately.",
+                        options: [
+                            "knew / would fix",
+                            "had known / would have fixed",
+                            "know / will fix",
+                            "would know / would have fixed"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Third conditional for past hypothetical situation."
+                    },
+                    {
+                        type: "question",
+                        title: "Exam Question 2",
+                        text: "What is the main purpose of a meeting?",
+                        question: "The main purpose of a meeting is to:",
+                        options: [
+                            "Kill time",
+                            "Make decisions and solve problems",
+                            "Eat together",
+                            "Argue"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Meetings should have clear objectives and outcomes."
+                    },
+                    {
+                        type: "question",
+                        title: "Exam Question 3",
+                        text: "What should you do before a meeting?",
+                        question: "What should you prepare before a meeting?",
+                        options: [
+                            "Nothing",
+                            "An agenda and relevant information",
+                            "Food",
+                            "Complaints"
+                        ],
+                        correct: 1,
+                        feedback: "Great! Preparation ensures efficient and productive meetings."
+                    },
+                    {
+                        type: "question",
+                        title: "Exam Question 4",
+                        text: "How do you summarize a project?",
+                        question: "A good project summary includes:",
+                        options: [
+                            "Only the problems",
+                            "What was done, results, and lessons learned",
+                            "Only the future plans",
+                            "Nothing"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Summary should cover what happened and what we learned."
+                    },
+                    {
+                        type: "question",
+                        title: "Exam Question 5",
+                        text: "What is the most important skill for a QA developer?",
+                        question: "The most important skill for QA is:",
+                        options: [
+                            "Coding fast",
+                            "Testing thoroughly and communicating clearly",
+                            "Managing the project",
+                            "Writing documentation"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! Thorough testing and clear communication are essential."
+                    }
+                ]
+            },
+            {
+                id: 10,
+                title: "Final Challenge",
+                desc: "Complete the game and earn your badge!",
+                xp: 200,
+                exercises: [
+                    {
+                        type: "question",
+                        title: "Final Speaking",
+                        text: "Describe a project you're proud of in 1-2 minutes.",
+                        question: "What structure should you use for your story?",
+                        options: [
+                            "Random sentences",
+                            "Introduction → Problem → Solution → Result",
+                            "Only the problem",
+                            "Only the result"
+                        ],
+                        correct: 1,
+                        feedback: "Perfect! Clear structure makes your story engaging and understandable."
+                    },
+                    {
+                        type: "question",
+                        title: "Final Review",
+                        text: "Review key phrases from the course.",
+                        question: "What phrase shows you're open to dialogue?",
+                        options: [
+                            "I don't care.",
+                            "We remain open to dialogue and constructive engagement.",
+                            "That's wrong.",
+                            "I'm not interested."
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! This phrase shows professionalism and openness."
+                    },
+                    {
+                        type: "question",
+                        title: "Final Vocabulary",
+                        text: "What does 'to pick up the slack' mean?",
+                        question: "\"To pick up the slack\" means:",
+                        options: [
+                            "To slow down",
+                            "To take over when someone else is busy",
+                            "To quit",
+                            "To ignore"
+                        ],
+                        correct: 1,
+                        feedback: "Great! It means taking responsibility when someone else can't complete their work."
+                    },
+                    {
+                        type: "question",
+                        title: "Final Achievement",
+                        text: "What have you learned from this course?",
+                        question: "The most important thing you've learned:",
+                        options: [
+                            "Nothing",
+                            "How to use English in technical meetings",
+                            "How to avoid meetings",
+                            "How to speak only in Spanish"
+                        ],
+                        correct: 1,
+                        feedback: "Excellent! You've gained valuable communication skills for your professional life."
+                    },
+                    {
+                        type: "question",
+                        title: "Final Congratulations",
+                        text: "You've completed all missions!",
+                        question: "How do you feel about your English skills now?",
+                        options: [
+                            "Still the same",
+                            "Much more confident and prepared",
+                            "Worse",
+                            "Confused"
+                        ],
+                        correct: 1,
+                        feedback: "🎉 CONGRATULATIONS! You've completed English Quest! Keep practicing and you'll continue improving. Good luck with your exam! 🚀"
+                    }
+                ]
+            }
+        ];
+
+        const achievements = [
+            { id: "first_mission", icon: "🥉", name: "First Steps", desc: "Complete your first mission" },
+            { id: "ten_missions", icon: "🥈", name: "On Your Way", desc: "Complete 5 missions" },
+            { id: "halfway", icon: "⭐", name: "Halfway There", desc: "Complete 5 missions" },
+            { id: "all_missions", icon: "🥇", name: "Mission Complete", desc: "Complete all missions" },
+            { id: "speed_demon", icon: "⚡", name: "Speed Demon", desc: "Complete a mission in under 2 minutes" },
+            { id: "perfect_score", icon: "💯", name: "Perfect Score", desc: "Get 100% on any mission" },
+            { id: "streak_3", icon: "🔥", name: "On Fire", desc: "3 day practice streak" },
+            { id: "streak_7", icon: "🌟", name: "Week Warrior", desc: "7 day practice streak" },
+            { id: "level_3", icon: "📈", name: "Rising Star", desc: "Reach level 3" },
+            { id: "level_5", icon: "🏆", name: "Champion", desc: "Reach level 5" }
+        ];
+
+        // Game State
+        let gameState = {
+            level: 1,
+            xp: 0,
+            missionsCompleted: [],
+            achievements: [],
+            streak: 0,
+            lastPractice: null,
+            totalTime: 0,
+            totalQuestions: 0,
+            correctAnswers: 0,
+            currentMission: 0,
+            currentExercise: 0,
+            selectedOption: null,
+            startTime: null
+        };
+
+        // Load saved state
+        function loadState() {
+            const saved = localStorage.getItem('englishQuestState');
+            if (saved) {
+                gameState = JSON.parse(saved);
+            }
+            updateUI();
+        }
+
+        // Save state
+        function saveState() {
+            localStorage.setItem('englishQuestState', JSON.stringify(gameState));
+        }
+
+        // Update UI
+        function updateUI() {
+            document.getElementById('level-display').textContent = gameState.level;
+            document.getElementById('xp-display').textContent = gameState.xp;
+            document.getElementById('missions-display').textContent = `${gameState.missionsCompleted.length}/${missions.length}`;
+            document.getElementById('streak-display').textContent = gameState.streak;
+
+            // Update achievements grid
+            renderAchievements();
+        }
+
+        // Show menu
+        function showGameArea() {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('achievements-area').style.display = 'none';
+            document.getElementById('stats-area').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            renderMissions();
+        }
+
+        function backToMenu() {
+            document.getElementById('main-menu').style.display = 'block';
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('achievements-area').style.display = 'none';
+            document.getElementById('stats-area').style.display = 'none';
+            updateUI();
+        }
+
+        function backToMissions() {
+            document.getElementById('exercise-area').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            renderMissions();
+        }
+
+        function showAchievements() {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('achievements-area').style.display = 'block';
+            document.getElementById('stats-area').style.display = 'none';
+            renderAchievements();
+        }
+
+        function showStats() {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('achievements-area').style.display = 'none';
+            document.getElementById('stats-area').style.display = 'block';
+
+            document.getElementById('total-time').textContent = `${Math.floor(gameState.totalTime / 60)} minutes`;
+            document.getElementById('total-questions').textContent = `${gameState.totalQuestions} questions`;
+            const accuracy = gameState.totalQuestions > 0 ? Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
+            document.getElementById('correct-answers').textContent = `${accuracy}%`;
+            document.getElementById('best-streak').textContent = `${gameState.streak} days`;
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                localStorage.removeItem('englishQuestState');
+                gameState = {
+                    level: 1,
+                    xp: 0,
+                    missionsCompleted: [],
+                    achievements: [],
+                    streak: 0,
+                    lastPractice: null,
+                    totalTime: 0,
+                    totalQuestions: 0,
+                    correctAnswers: 0,
+                    currentMission: 0,
+                    currentExercise: 0,
+                    selectedOption: null,
+                    startTime: null
+                };
+                updateUI();
+                alert('Progress has been reset!');
+            }
+        }
+
+        // Render missions
+        function renderMissions() {
+            const container = document.getElementById('mission-list-container');
+            document.getElementById('game-progress').textContent = `${gameState.missionsCompleted.length}/${missions.length}`;
+            document.getElementById('game-title').textContent = 'Missions';
+
+            container.innerHTML = missions.map((mission, index) => {
+                const isCompleted = gameState.missionsCompleted.includes(mission.id);
+                const isLocked = index > 0 && !gameState.missionsCompleted.includes(missions[index - 1].id);
+
+                return `
+                    <div class="mission-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}"
+                         onclick="${isLocked || isCompleted ? '' : `startMission(${mission.id})`}">
+                        <span class="mission-xp">+${mission.xp} XP</span>
+                        <div class="mission-title">${mission.title}</div>
+                        <div class="mission-desc">${mission.desc}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Start mission
+        function startMission(missionId) {
+            const mission = missions.find(m => m.id === missionId);
+            if (!mission) return;
+
+            gameState.currentMission = missionId;
+            gameState.currentExercise = 0;
+            gameState.selectedOption = null;
+
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('exercise-area').style.display = 'block';
+
+            document.getElementById('game-title').textContent = mission.title;
+            document.getElementById('exercise-progress').textContent = '1/5';
+            document.getElementById('exercise-title').textContent = mission.exercises[0].title;
+
+            loadQuestion(0);
+        }
+
+        // Load question
+        function loadQuestion(exerciseIndex) {
+            const mission = missions.find(m => m.id === gameState.currentMission);
+            const exercise = mission.exercises[exerciseIndex];
+
+            gameState.selectedOption = null;
+            gameState.startTime = Date.now();
+
+            document.getElementById('exercise-title').textContent = exercise.title;
+            document.getElementById('question-text').textContent = exercise.text;
+            document.getElementById('exercise-progress').textContent = `${exerciseIndex + 1}/${mission.exercises.length}`;
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('complete-btn').style.display = 'none';
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            exercise.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        // Select option
+        function selectOption(index, element) {
+            const mission = missions.find(m => m.id === gameState.currentMission);
+            const exercise = mission.exercises[gameState.currentExercise];
+
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            gameState.selectedOption = index;
+        }
+
+        // Submit answer
+        function submitAnswer() {
+            if (gameState.selectedOption === null) {
+                alert('Please select an option!');
+                return;
+            }
+
+            const mission = missions.find(m => m.id === gameState.currentMission);
+            const exercise = mission.exercises[gameState.currentExercise];
+            const timeSpent = Date.now() - gameState.startTime;
+
+            const options = document.querySelectorAll('.option');
+
+            if (gameState.selectedOption === exercise.correct) {
+                // Correct answer
+                options[gameState.selectedOption].classList.add('correct');
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+
+                const xpEarned = exercise.xp || Math.round(exercise.xp * (60 / (timeSpent / 1000 + 60)));
+                addXP(xpEarned);
+                showFeedback(true, exercise.feedback);
+
+                // Check for speed demon achievement
+                if (timeSpent < 120000) {
+                    unlockAchievement('speed_demon');
+                }
+            } else {
+                // Incorrect answer
+                options[gameState.selectedOption].classList.add('incorrect');
+                options[exercise.correct].classList.add('correct');
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+
+                showFeedback(false, `Correct answer: ${exercise.options[exercise.correct]}`);
+            }
+
+            gameState.totalQuestions++;
+            gameState.correctAnswers += (gameState.selectedOption === exercise.correct ? 1 : 0);
+            saveState();
+            updateUI();
+
+            // Update next button
+            if (gameState.currentExercise < mission.exercises.length - 1) {
+                document.getElementById('submit-btn').style.display = 'none';
+                document.getElementById('next-btn').style.display = 'inline-block';
+            } else {
+                document.getElementById('submit-btn').style.display = 'none';
+                document.getElementById('complete-btn').style.display = 'inline-block';
+            }
+        }
+
+        // Next question
+        function nextQuestion() {
+            gameState.currentExercise++;
+            loadQuestion(gameState.currentExercise);
+        }
+
+        // Complete mission
+        function completeMission() {
+            const mission = missions.find(m => m.id === gameState.currentMission);
+            if (!gameState.missionsCompleted.includes(mission.id)) {
+                gameState.missionsCompleted.push(mission.id);
+
+                // Check achievements
+                unlockAchievement('first_mission');
+                if (gameState.missionsCompleted.length >= 5) {
+                    unlockAchievement('halfway');
+                }
+                if (gameState.missionsCompleted.length >= missions.length) {
+                    unlockAchievement('all_missions');
+                }
+
+                // Level up check
+                const xpNeeded = gameState.level * 500;
+                if (gameState.xp >= xpNeeded) {
+                    gameState.level++;
+                    showLevelUp();
+                }
+
+                // Update streak
+                const now = Date.now();
+                if (gameState.lastPractice && now - gameState.lastPractice > 86400000) {
+                    gameState.streak = 1;
+                } else {
+                    gameState.streak++;
+                }
+                gameState.lastPractice = now;
+
+                saveState();
+                updateUI();
+            }
+
+            backToMissions();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, text) {
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `<div class="feedback-title">${isCorrect ? '✅ Correct!' : '❌ Not quite'}</div><div class="feedback-text">${text}</div>`;
+        }
+
+        // Add XP
+        function addXP(amount) {
+            gameState.xp += amount;
+            saveState();
+            updateUI();
+        }
+
+        // Unlock achievement
+        function unlockAchievement(achievementId) {
+            if (gameState.achievements.includes(achievementId)) return;
+
+            gameState.achievements.push(achievementId);
+
+            const achievement = achievements.find(a => a.id === achievementId);
+            if (achievement) {
+                document.getElementById('achievement-icon').textContent = achievement.icon;
+                document.getElementById('achievement-title').textContent = 'Achievement Unlocked!';
+                document.getElementById('achievement-desc').textContent = achievement.name + ': ' + achievement.desc;
+                document.getElementById('achievement-popup').classList.add('active');
+            }
+
+            // Check level achievements
+            if (gameState.achievements.includes('level_3') && gameState.level >= 3) {
+                unlockAchievement('level_3');
+            }
+            if (gameState.achievements.includes('level_5') && gameState.level >= 5) {
+                unlockAchievement('level_5');
+            }
+
+            saveState();
+            updateUI();
+        }
+
+        function closeAchievement() {
+            document.getElementById('achievement-popup').classList.remove('active');
+        }
+
+        // Show level up
+        function showLevelUp() {
+            document.getElementById('new-level').textContent = gameState.level;
+            document.getElementById('level-up-overlay').style.display = 'flex';
+        }
+
+        function closeLevelUp() {
+            document.getElementById('level-up-overlay').style.display = 'none';
+        }
+
+        // Render achievements
+        function renderAchievements() {
+            const grid = document.getElementById('achievements-grid');
+            grid.innerHTML = achievements.map(achievement => {
+                const isEarned = gameState.achievements.includes(achievement.id);
+                return `
+                    <div class="achievement-item ${isEarned ? 'earned' : ''}">
+                        <div class="achievement-icon-small">${achievement.icon}</div>
+                        <div class="achievement-name">${achievement.name}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initialize
+        loadState();
+    </script>
+</body>
+</html>
