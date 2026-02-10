@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥥 Acceso Universidad Mayores 45 - UCLM | Cocobot</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --coco-green: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #7c3aed 50%, var(--primary) 100%);
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            position: relative;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+        .hero .coco-mascot {
+            font-size: 3rem;
+            position: relative;
+            animation: bounce 2s ease infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== INFO BANNER ===== */
+        .info-banner {
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-container {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-tabs {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+        .nav-tab {
+            flex: 1;
+            min-width: 140px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .nav-tab:hover { color: var(--primary-light); background: rgba(99,102,241,0.05); }
+        .nav-tab.active { color: var(--primary-light); border-bottom-color: var(--primary-light); background: rgba(99,102,241,0.1); }
+        .nav-tab .tab-icon { display: block; font-size: 1.3rem; margin-bottom: 0.2rem; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+        .section { display: none; animation: fadeIn 0.3s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .card h3 {
+            color: var(--primary-light);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card .meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* ===== EXAM TEXT BOX ===== */
+        .text-box {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1rem;
+            text-align: justify;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .text-box::-webkit-scrollbar { width: 6px; }
+        .text-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* ===== QUESTIONS ===== */
+        .question-block {
+            background: rgba(99,102,241,0.05);
+            border: 1px solid rgba(99,102,241,0.2);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+        }
+        .question-block h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .question-block p { color: var(--text-muted); }
+        .points-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== REVEAL BUTTON (answers) ===== */
+        .reveal-container { margin: 1rem 0; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .reveal-btn:hover { transform: scale(1.03); box-shadow: 0 4px 15px rgba(99,102,241,0.4); }
+        .hidden-answer {
+            display: none;
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.3);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-top: 0.75rem;
+            line-height: 1.8;
+        }
+        .hidden-answer.visible { display: block; animation: fadeIn 0.3s; }
+        .hidden-answer h5 { color: var(--success); margin-bottom: 0.5rem; }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.6rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+        .btn-primary:hover { box-shadow: 0 4px 15px rgba(99,102,241,0.5); transform: translateY(-1px); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #059669); }
+        .btn-success:hover { box-shadow: 0 4px 15px rgba(16,185,129,0.5); transform: translateY(-1px); }
+        .btn-accent { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #000; }
+        .btn-accent:hover { box-shadow: 0 4px 15px rgba(245,158,11,0.5); transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+        }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+        /* ===== DOWNLOAD LINKS ===== */
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .download-card {
+            background: rgba(99,102,241,0.05);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .download-card h4 { color: var(--text); font-size: 0.95rem; }
+        .download-card .links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .download-card a {
+            color: var(--primary-light);
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--primary-light);
+            border-radius: 0.4rem;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .download-card a:hover { background: var(--primary); color: white; }
+
+        /* ===== PRACTICE TEST ===== */
+        .practice-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 0.6rem;
+            padding: 0.8rem 1rem;
+            margin: 0.4rem 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .practice-option:hover { border-color: var(--primary-light); background: rgba(99,102,241,0.05); }
+        .practice-option.selected { border-color: var(--primary); background: rgba(99,102,241,0.15); }
+        .practice-option.correct { border-color: var(--success) !important; background: rgba(16,185,129,0.15) !important; }
+        .practice-option.incorrect { border-color: var(--danger) !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .practice-option.selected .option-letter { background: var(--primary); }
+        .practice-option.correct .option-letter { background: var(--success); }
+        .practice-option.incorrect .option-letter { background: var(--danger); }
+
+        /* ===== SCORE DISPLAY ===== */
+        .score-display {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(124,58,237,0.1));
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+        .score-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .score-label { color: var(--text-muted); font-size: 1.1rem; margin-top: 0.5rem; }
+        .score-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--border);
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease;
+            background: linear-gradient(90deg, var(--danger), var(--accent), var(--success));
+        }
+        .score-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== INFO GRID ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .info-item {
+            background: rgba(99,102,241,0.05);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+        }
+        .info-item h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .info-item p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ===== CONSEJOS ===== */
+        .tip-card {
+            background: rgba(34,197,94,0.05);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+        }
+        .tip-card h4 { color: var(--coco-green); margin-bottom: 0.5rem; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero { padding: 2rem 1rem 1.5rem; }
+            .main { padding: 1rem; }
+            .card { padding: 1rem; }
+            .text-box { padding: 0.75rem; font-size: 0.95rem; }
+            .download-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== TEXTAREA for writing exercises ===== */
+        .writing-area {
+            width: 100%;
+            min-height: 180px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: vertical;
+            margin: 0.75rem 0;
+        }
+        .writing-area:focus { outline: none; border-color: var(--primary-light); }
+        .word-count { font-size: 0.8rem; color: var(--text-muted); text-align: right; }
+
+        /* Timer */
+        .timer-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(99,102,241,0.05);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+    <div class="coco-mascot">🥥</div>
+    <h1>Acceso Universidad Mayores 45</h1>
+    <p class="subtitle">UCLM — Castilla-La Mancha</p>
+    <div class="badge">📅 Pruebas: Abril 2026 · Inscripción: Marzo 2026</div>
+</div>
+
+<div class="info-banner">
+    📢 Prueba = Comentario de Texto + Lengua Castellana + Entrevista Personal · Duración: 90 min por ejercicio
+</div>
+
+<!-- ===== NAV ===== -->
+<div class="nav-container">
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showSection('info')">
+            <span class="tab-icon">📋</span> Información
+        </div>
+        <div class="nav-tab" onclick="showSection('examenes')">
+            <span class="tab-icon">📄</span> Exámenes
+        </div>
+        <div class="nav-tab" onclick="showSection('practice')">
+            <span class="tab-icon">✏️</span> Práctica
+        </div>
+        <div class="nav-tab" onclick="showSection('writing')">
+            <span class="tab-icon">📝</span> Redacción
+        </div>
+        <div class="nav-tab" onclick="showSection('tips')">
+            <span class="tab-icon">💡</span> Consejos
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<!-- ==================== SECCIÓN INFO ==================== -->
+<div id="section-info" class="section active">
+    <div class="card">
+        <h3>🎓 ¿Qué es la Prueba de Mayores de 45?</h3>
+        <p>Las pruebas de acceso para <strong>mayores de 45 años</strong> permiten acceder a enseñanzas universitarias de Grado a personas que <em>no posean otra vía de acceso</em> (EvAU, FP Superior, otro título universitario…).</p>
+        <p style="margin-top:0.75rem">La prueba se realiza una vez al año en la <strong>Universidad de Castilla-La Mancha (UCLM)</strong> y su superación permite ser admitido <em>únicamente en la UCLM</em>.</p>
+    </div>
+
+    <div class="card">
+        <h3>📝 Estructura del Examen</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <h4>📖 Ejercicio 1 — Comentario de Texto</h4>
+                <p>Se proponen <strong>2 textos</strong> (preferentemente periodísticos, de actualidad). Se elige UNO y se debe:<br>
+                • Resumen del contenido (2 pts)<br>
+                • Exposición del tema (1 pt)<br>
+                • Recursos lingüísticos: adecuación, cohesión, coherencia (2 pts)<br>
+                • Perspectiva del autor (2 pts)<br>
+                • Visión crítica personal (3 pts)</p>
+            </div>
+            <div class="info-item">
+                <h4>🔤 Ejercicio 2 — Lengua Castellana</h4>
+                <p>Ejercicio de 90 minutos sobre:<br>
+                • Comprensión y análisis de texto<br>
+                • Análisis sintáctico<br>
+                • Desarrollo teórico de temas de Lengua<br>
+                • Localización de texto literario<br>
+                <strong>Penalizaciones:</strong> faltas de ortografía restan puntos.</p>
+            </div>
+            <div class="info-item">
+                <h4>🗣️ Fase 2 — Entrevista Personal</h4>
+                <p>Solo tras superar la fase escrita. Valora:<br>
+                • Madurez e idoneidad<br>
+                • Conocimientos mínimos<br>
+                Resultado: <strong>Apto / No Apto</strong></p>
+            </div>
+            <div class="info-item">
+                <h4>📊 Calificación</h4>
+                <p>• Cada ejercicio: 0 a 10 puntos<br>
+                • Media de los dos ejercicios ≥ <strong>5 puntos</strong><br>
+                • Mínimo <strong>4 puntos</strong> en cada ejercicio<br>
+                • No hay límite de convocatorias<br>
+                • Se puede repetir para mejorar nota</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📅 Fechas Importantes (2025-2026)</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <h4>📚 Curso Preparatorio</h4>
+                <p>Matrícula: <strong>6-31 octubre 2025</strong><br>
+                Inicio: <strong>3 noviembre 2025</strong><br>
+                Fin: <strong>1 semana antes de pruebas</strong><br>
+                Precio: <strong>150€</strong> (100% online)</p>
+            </div>
+            <div class="info-item">
+                <h4>✍️ Inscripción Pruebas</h4>
+                <p>Periodo: <strong>Marzo 2026</strong><br>
+                Vía: Automatrícula online en UCLM<br>
+                Documentos: DNI + justificante pago</p>
+            </div>
+            <div class="info-item">
+                <h4>📝 Realización Pruebas</h4>
+                <p>Fecha prevista: <strong>Abril 2026</strong><br>
+                2 ejercicios de 90 min cada uno<br>
+                Provincias: Albacete, Ciudad Real, Cuenca, Toledo</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECCIÓN EXÁMENES REALES ==================== -->
+<div id="section-examenes" class="section">
+    <div class="card">
+        <h3>📄 Exámenes Oficiales UCLM — Comentario de Texto</h3>
+        <p class="meta">Estos son exámenes reales de convocatorias anteriores de la UCLM y otras universidades españolas para mayores de 25 y 45 años.</p>
+
+        <div class="download-grid">
+            <div class="download-card">
+                <h4>📝 UCLM — Comentario de Texto</h4>
+                <div class="links">
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/Criterios_CorrectionM25/2020/Examenes/Comentario-de-texto.ashx?la=es" target="_blank">📥 2020</a>
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/Criterios_CorrectionM25/2017/examenes/Comentario-de-textos.ashx?la=es" target="_blank">📥 2017</a>
+                </div>
+            </div>
+            <div class="download-card">
+                <h4>🔤 UCLM — Lengua Castellana</h4>
+                <div class="links">
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/PDFEvAU/ModelosPruebas2425/LENGUA-CASTELLANA-Y-Literatura.ashx?la=en" target="_blank">📥 2024/25</a>
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/PDFEvAU/ModelosPruebas2324/Lengua-Castellana-y-Literatura.ashx?la=es" target="_blank">📥 2023/24</a>
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/PDFEvAU/ModelosPruebas2223/ConvocatoriaOrdinaria/Lengua-castellana-y-literatura-Ordinaria-2023.ashx?la=es" target="_blank">📥 2022/23</a>
+                </div>
+            </div>
+            <div class="download-card">
+                <h4>📋 UCLM — Criterios y Temario</h4>
+                <div class="links">
+                    <a href="https://www.uclm.es/perfiles/preuniversitario/acceso/modosacceso/mayoresm25m45/criterioscorreccionexamenesm25" target="_blank">📋 Criterios corrección</a>
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/PDFAccesoM254540/Temarios/2025-2026/INFORMACION-COMENTARIO-DE-TEXTO.ashx?la=es" target="_blank">📋 Temario C. Texto</a>
+                </div>
+            </div>
+            <div class="download-card">
+                <h4>🏛️ UCM (Madrid) — Mayores 45</h4>
+                <div class="links">
+                    <a href="https://www.ucm.es/modelos-de-examen-y-ejercicios-45" target="_blank">📥 Todos los modelos</a>
+                </div>
+            </div>
+            <div class="download-card">
+                <h4>🌐 Más exámenes (muchosexamenes.com)</h4>
+                <div class="links">
+                    <a href="https://www.muchosexamenes.com/examenes/pruebas-acceso-universidad-mayores-25-anos/castilla-la-mancha/asignatura/comentario-texto/" target="_blank">📥 Comentario Texto CLM</a>
+                </div>
+            </div>
+            <div class="download-card">
+                <h4>🎓 Curso Preparatorio UCLM</h4>
+                <div class="links">
+                    <a href="https://www.uclm.es/perfiles/preuniversitario/acceso/modosacceso/mayoresm25m45" target="_blank">ℹ️ Info completa</a>
+                    <a href="https://www.uclm.es/-/media/Files/A04-Gestion-Academica/PDFEstudiantes/PDFAccesoM254540/Curso_preparatoriom25m45/Curso_preparatorio_25-26/InformacionCursopreparacion2025-2026.ashx?la=es" target="_blank">📋 Curso 2025/26</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAMEN REAL 1: 2020 — Electrodoméstica -->
+    <div class="card">
+        <h3>📖 Examen UCLM 2020 — Opción A: "Electrodoméstica"</h3>
+        <p class="meta">Prueba de acceso para mayores de 25 y 45 años · Comentario de Texto</p>
+        <div class="text-box">
+            <strong>Electrodoméstica</strong><br><br>
+            El número de accidentes de trabajo en España a lo largo de enero de 2019 ascendió a 47.435, de los cuales 44 fueron mortales, según el Ministerio de Trabajo. Busco datos cuando veo un anuncio que me hace recordar al tío de una amiga que perdió el dedo en la picadora: su carne pasó a ser hamburguesa.<br><br>
+            En el anuncio, una trabajadora de una fábrica de electrodomésticos visita la cocina de unos señores que han comprado una nevera. La mujer, mientras acaricia el electrodoméstico, susurra: "Tiene un pedacito mío".<br><br>
+            Al sentimentalismo operario se opone la actualísima alienación marxista. Porque, ¿qué pedacito de la trabajadora se ha quedado en el electrodoméstico —una nevera a la que se acaricia con más amor que a ciertas mascotas—?, ¿se ha quedado su corazón?, ¿su amor por las cosas bien hechas?, ¿el sudor de su frente?, ¿su fuerza de trabajo mal pagada?, ¿el peso de su hipoteca?, ¿se habrá quedado en la nevera algo parecido al dedo del tío de mi amiga?, ¿por qué esa mujer mira el frigorífico como a un hijo?
+        </div>
+        <div class="question-block">
+            <h4>Indicaciones del examen <span class="points-badge">10 pts</span></h4>
+            <p>1. Resumen del contenido (2 pts)<br>
+            2. Exposición del tema (1 pt)<br>
+            3. Descripción de recursos lingüísticos: adecuación, cohesión, coherencia (2 pts)<br>
+            4. Perspectiva del autor sobre el tema (2 pts)<br>
+            5. Visión crítica y personal (3 pts)</p>
+        </div>
+        <div class="reveal-container">
+            <button class="reveal-btn" onclick="toggleAnswer(this)">🔍 Ver orientación de respuesta</button>
+            <div class="hidden-answer">
+                <h5>✅ Orientación para la respuesta</h5>
+                <p><strong>Resumen:</strong> El texto reflexiona sobre la contradicción entre la publicidad que romantiza el trabajo en una fábrica de electrodomésticos y la dura realidad laboral, incluyendo los accidentes de trabajo. La autora usa la ironía para cuestionar el sentimentalismo del anuncio.</p>
+                <p><strong>Tema:</strong> La alienación laboral y la contradicción entre la imagen publicitaria del trabajo y la realidad de los trabajadores.</p>
+                <p><strong>Recursos lingüísticos:</strong><br>
+                • <em>Adecuación:</em> Texto periodístico de opinión, registro culto con toques coloquiales ("su carne pasó a ser hamburguesa").<br>
+                • <em>Cohesión:</em> Preguntas retóricas encadenadas como mecanismo de progresión temática; referencia anafórica ("la mujer", "esa mujer").<br>
+                • <em>Coherencia:</em> Estructura deductiva: dato → anécdota → análisis → preguntas retóricas.</p>
+                <p><strong>Perspectiva del autor:</strong> Crítica e irónica. Denuncia la alienación del trabajador que se identifica emocionalmente con el producto que fabrica, mientras la empresa se beneficia de su explotación.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAMEN REAL 2: 2017 — La vida en una esquina -->
+    <div class="card">
+        <h3>📖 Examen UCLM 2017 — Opción A: "La vida en una esquina"</h3>
+        <p class="meta">Prueba de acceso para mayores de 25 y 45 años · Comentario de Texto</p>
+        <div class="text-box">
+            <strong>La vida en una esquina</strong><br><br>
+            Todas las mañanas a la misma hora durante 11 años Auggie sale de su estanco en una esquina de una calle de Brooklyn y toma una fotografía. Luego revela la instantánea y la pega en un álbum cuyas páginas abarcan toda la historia de esa esquina, con sus luces y sombras, sus destellos y sus tinieblas.<br><br>
+            Todas las fotografías están tomadas desde el mismo ángulo, aunque difieren en los matices de las estaciones, en los rostros de los transeúntes, en los automóviles aparcados junto a la acera. Hay poca diferencia entre una postal y la del día siguiente, pero mucha entre una de enero y otra de julio.<br><br>
+            No hay nada mejor que una esquina para captar la fugacidad de la existencia. Ahora entra un soplo de viento frío por mi ventana y se agitan las cortinas mientras observo a un hombre de mediana edad, con bastón, que camina hacia su destino.
+        </div>
+        <p class="meta">— Pedro G. Cuartango, <em>El Mundo</em>, 11 de marzo de 2017</p>
+
+        <div class="question-block">
+            <h4>Indicaciones del examen <span class="points-badge">10 pts</span></h4>
+            <p>Mismo esquema: Resumen (2 pts), Tema (1 pt), Recursos lingüísticos (2 pts), Perspectiva del autor (2 pts), Visión crítica personal (3 pts).</p>
+        </div>
+        <div class="reveal-container">
+            <button class="reveal-btn" onclick="toggleAnswer(this)">🔍 Ver orientación de respuesta</button>
+            <div class="hidden-answer">
+                <h5>✅ Orientación para la respuesta</h5>
+                <p><strong>Resumen:</strong> El texto describe el ritual diario de Auggie, un estanquero de Brooklyn que fotografía la misma esquina durante 11 años, capturando el paso del tiempo y la fugacidad de la vida.</p>
+                <p><strong>Tema:</strong> La fugacidad de la existencia y cómo la rutina cotidiana puede ser un registro del paso del tiempo.</p>
+                <p><strong>Recursos lingüísticos:</strong><br>
+                • <em>Adecuación:</em> Texto periodístico literario, estilo narrativo poético.<br>
+                • <em>Cohesión:</em> Antítesis (luces/sombras, destellos/tinieblas), repetición (todas las mañanas).<br>
+                • <em>Coherencia:</em> Estructura inductiva: descripción particular → reflexión universal sobre la vida.</p>
+                <p><strong>Perspectiva del autor:</strong> Contemplativa y melancólica. Valora el gesto artístico de Auggie como forma de aprehender lo efímero.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAMEN 2017 Opción B -->
+    <div class="card">
+        <h3>📖 Examen UCLM 2017 — Opción B: Temas de composición</h3>
+        <p class="meta">Prueba de acceso para mayores de 25 y 45 años · Comentario de Texto</p>
+        <div class="question-block">
+            <h4>Opción B: elija un tema y escriba una composición <span class="points-badge">10 pts</span></h4>
+            <p><strong>Tema 1:</strong> Hay personas que, llevadas por la nostalgia, reconocen que hoy en día existen muchos más recursos que facilitan la vida, pero que en tiempos pasados la gente era más feliz. Exprese su opinión al respecto argumentando su postura.</p>
+            <p style="margin-top:0.5rem"><strong>Tema 2:</strong> Existe un debate intenso en torno a la tauromaquia entre quienes la defienden como tradición cultural alegando la libertad del individuo y quienes la consideran una forma cruel de maltrato animal. Opine al respecto aportando argumentos que justifiquen sus ideas.</p>
+        </div>
+        <div class="question-block">
+            <h4>Criterios de evaluación</h4>
+            <p>• Precisión en la exposición de la tesis (2 pts)<br>
+            • Variedad y pertinencia de los argumentos (3 pts)<br>
+            • Corrección ortográfica, morfológica y sintáctica (2 pts)<br>
+            • Precisión y riqueza del léxico (2 pts)<br>
+            • Claridad de escritura y presentación (1 pt)</p>
+        </div>
+        <div class="reveal-container">
+            <button class="reveal-btn" onclick="toggleAnswer(this)">🔍 Ver orientación de respuesta</button>
+            <div class="hidden-answer">
+                <h5>✅ Orientación Tema 1 (nostalgia vs progreso)</h5>
+                <p><strong>Tesis posible:</strong> El progreso material no garantiza la felicidad, pero idealizar el pasado es un sesgo cognitivo.</p>
+                <p><strong>Argumentos:</strong> avances médicos vs estrés digital; comunidad social pasada vs redes sociales actuales; sesgo de supervivencia en la memoria nostálgica; índices de bienestar (educación, esperanza de vida).</p>
+                <h5 style="margin-top:1rem">✅ Orientación Tema 2 (tauromaquia)</h5>
+                <p><strong>Tesis posible:</strong> La evolución ética de una sociedad requiere revisar tradiciones que causan sufrimiento.</p>
+                <p><strong>Argumentos:</strong> patrimonio cultural vs evolución moral; libertad individual vs derechos de los animales; posiciones de la UE sobre bienestar animal; alternativas culturales; comparación con otros países.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECCIÓN PRÁCTICA ==================== -->
+<div id="section-practice" class="section">
+    <div class="card">
+        <h3>✏️ Test de Comprensión Lectora</h3>
+        <p>Cada vez que inicies un test, las preguntas se generan de forma aleatoria para que la experiencia sea diferente. ¡Pon a prueba tu comprensión!</p>
+        <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="startPractice()">🎲 Generar Nuevo Test</button>
+            <button class="btn btn-outline btn-sm" onclick="resetPractice()" id="reset-btn" style="display:none">🔄 Reiniciar</button>
+        </div>
+    </div>
+
+    <div id="practice-area"></div>
+    <div id="practice-score" style="display:none"></div>
+</div>
+
+<!-- ==================== SECCIÓN REDACCIÓN ==================== -->
+<div id="section-writing" class="section">
+    <div class="card">
+        <h3>📝 Práctica de Redacción con Temporizador</h3>
+        <p>Simula las condiciones reales del examen. Tienes <strong>90 minutos</strong> para redactar tu comentario o composición.</p>
+        <button class="btn btn-primary" onclick="startWriting()" id="writing-start-btn" style="margin-top:1rem">▶️ Iniciar Ejercicio</button>
+    </div>
+
+    <div id="writing-area" style="display:none">
+        <div class="card">
+            <div class="timer-bar">
+                <span>⏱️</span>
+                <span class="timer-display" id="timer">90:00</span>
+                <span style="color:var(--text-muted); font-size:0.85rem" id="timer-label">minutos restantes</span>
+                <button class="btn btn-sm btn-outline" onclick="toggleTimer()" id="timer-toggle" style="margin-left:auto">⏸️ Pausar</button>
+            </div>
+
+            <div id="writing-prompt"></div>
+
+            <textarea class="writing-area" id="writing-text" placeholder="Escribe aquí tu redacción..." oninput="updateWordCount()"></textarea>
+            <div class="word-count"><span id="wc">0</span> palabras</div>
+
+            <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap">
+                <button class="btn btn-success" onclick="saveWriting()">💾 Guardar borrador</button>
+                <button class="btn btn-accent" onclick="newWritingPrompt()">🎲 Nuevo tema</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SECCIÓN CONSEJOS ==================== -->
+<div id="section-tips" class="section">
+    <div class="card">
+        <h3>💡 Consejos de Cocobot para el Examen</h3>
+        <p>Aquí tienes mis mejores consejos para que apruebes con nota. ¡Tú puedes! 🥥💪</p>
+    </div>
+
+    <div class="tip-card">
+        <h4>🥥 Consejo #1 — Lee SIEMPRE dos veces</h4>
+        <p>Primera lectura rápida para captar la idea global. Segunda lectura subrayando: ideas principales, palabras clave, conectores y recursos retóricos.</p>
+    </div>
+    <div class="tip-card">
+        <h4>🥥 Consejo #2 — Estructura tu respuesta</h4>
+        <p><strong>Comentario de texto ideal:</strong><br>
+        1️⃣ Resumen (4-5 líneas, sin copiar frases del texto)<br>
+        2️⃣ Tema (1-2 frases, idea principal abstracta)<br>
+        3️⃣ Recursos lingüísticos (cita ejemplos del texto)<br>
+        4️⃣ Perspectiva del autor (objetivo/subjetivo, tono, intención)<br>
+        5️⃣ Opinión personal (argumenta, no improvises)</p>
+    </div>
+    <div class="tip-card">
+        <h4>🥥 Consejo #3 — Ortografía = puntos gratis</h4>
+        <p>⚠️ Las faltas RESTAN puntos. Repasa:<br>
+        • Tildes: solo, este/ese/aquel NO llevan tilde. Sí llevan: todavía, también, además…<br>
+        • b/v, g/j, h... Cuando dudes, escribe otra palabra.<br>
+        • Signos de puntuación: usa punto y coma, no abuses de la coma.</p>
+    </div>
+    <div class="tip-card">
+        <h4>🥥 Consejo #4 — Gestiona el tiempo</h4>
+        <p>90 minutos por ejercicio. Distribuye:<br>
+        ⏰ 10 min → Lectura y planificación<br>
+        ⏰ 65 min → Escritura<br>
+        ⏰ 15 min → Revisión ortográfica y de contenido</p>
+    </div>
+    <div class="tip-card">
+        <h4>🥥 Consejo #5 — Vocabulario rico</h4>
+        <p>Evita: "cosa", "hacer", "tener", "poner".<br>
+        Usa: "aspecto", "realizar", "poseer", "colocar", "establecer".<br>
+        Conectores: "no obstante", "en consecuencia", "por otra parte", "en definitiva".</p>
+    </div>
+    <div class="tip-card">
+        <h4>🥥 Consejo #6 — Para la entrevista</h4>
+        <p>• Sé honesto sobre tu motivación<br>
+        • Prepara: ¿por qué esa carrera?, ¿qué esperas de la universidad?<br>
+        • Viste formal pero cómodo<br>
+        • Respira profundo antes de entrar, ¡tú puedes!</p>
+    </div>
+
+    <div class="card">
+        <h3>📚 Recursos Útiles</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <h4>🌐 UCLM Oficial</h4>
+                <p><a href="https://www.uclm.es/perfiles/preuniversitario/acceso/modosacceso/mayoresm25m45" target="_blank" style="color:var(--primary-light)">Página oficial Mayores 25/45</a></p>
+            </div>
+            <div class="info-item">
+                <h4>📧 Contacto</h4>
+                <p>Curso preparatorio: <strong>curso.m25y45@uclm.es</strong></p>
+            </div>
+            <div class="info-item">
+                <h4>💰 Precio Pruebas</h4>
+                <p>Tasas: ~74€ · Curso prep: 150€</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+    🥥 Hecho con cariño por <strong>Cocobot</strong> · Acceso Universidad Mayores 45 — UCLM<br>
+    <span style="font-size:0.8rem">Los textos de exámenes son propiedad de la UCLM y se incluyen con fines educativos.</span>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== REVEAL ANSWERS =====
+function toggleAnswer(btn) {
+    const answer = btn.nextElementSibling;
+    answer.classList.toggle('visible');
+    btn.textContent = answer.classList.contains('visible') ? '🙈 Ocultar respuesta' : '🔍 Ver orientación de respuesta';
+}
+
+// ===== PRACTICE TEST DATA =====
+const practiceTexts = [
+    {
+        title: "La era de la desinformación",
+        author: "Adaptado de El País",
+        text: "Vivimos en una época en la que la información nos llega desde múltiples fuentes y a una velocidad sin precedentes. Las redes sociales se han convertido en el principal canal de comunicación para millones de personas, pero también en un campo abonado para la difusión de noticias falsas. Un estudio del MIT demostró que las noticias falsas se difunden un 70% más rápido que las verdaderas en Twitter. El fenómeno no es nuevo: la propaganda ha existido siempre, pero la tecnología digital ha multiplicado su alcance de forma exponencial. Los algoritmos de las plataformas priorizan el contenido que genera reacciones emocionales, lo que favorece la viralización de información impactante, sea o no veraz. La solución no pasa únicamente por la regulación legal, sino también por la educación mediática de los ciudadanos. Aprender a contrastar fuentes, verificar datos y desarrollar un espíritu crítico ante lo que consumimos digitalmente es tan necesario hoy como saber leer y escribir.",
+        questions: [
+            {
+                q: "¿Cuál es el tema principal del texto?",
+                options: [
+                    "Las redes sociales como herramienta educativa",
+                    "La desinformación digital y la necesidad de educación mediática",
+                    "La regulación legal de Internet",
+                    "La historia de la propaganda en los medios"
+                ],
+                correct: 1
+            },
+            {
+                q: "Según el texto, ¿qué demostró el estudio del MIT?",
+                options: [
+                    "Que Twitter es la red social más usada",
+                    "Que las noticias falsas se difunden un 70% más rápido que las verdaderas",
+                    "Que la regulación legal es suficiente",
+                    "Que los algoritmos son neutrales"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué tipo de contenido priorizan los algoritmos según el texto?",
+                options: [
+                    "Contenido educativo y verificado",
+                    "Noticias de última hora de medios oficiales",
+                    "Contenido que genera reacciones emocionales",
+                    "Contenido de entretenimiento"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Cuál es la postura del autor respecto a la solución?",
+                options: [
+                    "Solo hay que regular legalmente las plataformas",
+                    "Las redes sociales deberían prohibirse",
+                    "La educación mediática es tan necesaria como saber leer y escribir",
+                    "No hay solución posible al problema"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Qué recurso de cohesión predomina en el texto?",
+                options: [
+                    "La enumeración caótica",
+                    "La progresión temática lineal: problema → datos → causa → solución",
+                    "El uso de metáforas encadenadas",
+                    "La repetición de estructuras sintácticas paralelas"
+                ],
+                correct: 1
+            }
+        ]
+    },
+    {
+        title: "El precio de la vivienda",
+        author: "Adaptado de El Mundo",
+        text: "El acceso a la vivienda se ha convertido en uno de los mayores problemas sociales de España. Los jóvenes dedican de media el 93% de su salario al alquiler en ciudades como Madrid o Barcelona, según datos del Banco de España. Esta situación ha provocado que la edad media de emancipación en nuestro país supere los 30 años, muy por encima de la media europea. Las causas son múltiples: la especulación inmobiliaria, el auge de las viviendas turísticas que reducen la oferta residencial, los salarios estancados y la escasez de vivienda social. Mientras en Países Bajos o Austria el parque público de vivienda supera el 20%, en España apenas alcanza el 2,5%. Sin embargo, no faltan las propuestas: desde limitar los precios del alquiler hasta incentivar la construcción de vivienda protegida. Lo que parece claro es que sin una acción decidida, toda una generación quedará excluida de un derecho fundamental reconocido en el artículo 47 de la Constitución.",
+        questions: [
+            {
+                q: "¿Qué porcentaje de su salario dedican los jóvenes al alquiler en las grandes ciudades?",
+                options: [
+                    "El 47%, según la Constitución",
+                    "El 93%, según el Banco de España",
+                    "El 30%, según la media europea",
+                    "El 20%, según datos del Gobierno"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué dato se ofrece como contraste sobre la vivienda social?",
+                options: [
+                    "En España hay más vivienda social que en Europa",
+                    "Países Bajos y Austria superan el 20% frente al 2,5% de España",
+                    "El 47% de las viviendas en España son públicas",
+                    "La vivienda social ha crecido un 93% en la última década"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Cuál es la tesis del texto?",
+                options: [
+                    "Los jóvenes no quieren independizarse",
+                    "La vivienda es un lujo, no un derecho",
+                    "Sin acción decidida, una generación será excluida de un derecho constitucional",
+                    "Los precios del alquiler están justificados por la demanda"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Qué tipo de texto es y cuál es su intención comunicativa?",
+                options: [
+                    "Narrativo, busca entretener al lector",
+                    "Descriptivo, muestra la belleza de las ciudades",
+                    "Expositivo-argumentativo, busca informar y persuadir sobre un problema social",
+                    "Instructivo, da consejos para comprar una vivienda"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Qué recurso retórico utiliza el autor al citar el artículo 47 de la Constitución?",
+                options: [
+                    "Una hipérbole para exagerar el problema",
+                    "Un argumento de autoridad para reforzar su tesis",
+                    "Una metáfora sobre los derechos fundamentales",
+                    "Una ironía sobre la inutilidad de las leyes"
+                ],
+                correct: 1
+            }
+        ]
+    },
+    {
+        title: "Inteligencia artificial y empleo",
+        author: "Adaptado de ABC",
+        text: "La inteligencia artificial está transformando el mercado laboral a una velocidad que pocos anticiparon. Según la OCDE, el 27% de los empleos actuales en los países desarrollados corren alto riesgo de automatización. No se trata solo de trabajos manuales y repetitivos: la IA generativa ya es capaz de redactar textos, crear imágenes, programar software y analizar grandes volúmenes de datos legales o médicos. Sin embargo, conviene evitar tanto el catastrofismo como la complacencia. La historia demuestra que cada revolución tecnológica ha destruido empleos pero también ha creado otros nuevos, a menudo imprevisibles. El teléfono eliminó al mensajero, pero creó a millones de teleoperadores. Lo que sí parece inevitable es que la transición será dolorosa para quienes no puedan adaptarse. Por eso, la formación continua y la recualificación profesional no son ya una opción, sino una necesidad perentoria. Los gobiernos, las empresas y los propios trabajadores deben asumir esta responsabilidad compartida.",
+        questions: [
+            {
+                q: "¿Qué porcentaje de empleos corren riesgo de automatización según la OCDE?",
+                options: [
+                    "El 50% de todos los empleos mundiales",
+                    "El 27% de los empleos en países desarrollados",
+                    "El 15% de los puestos manuales",
+                    "El 80% de los empleos tecnológicos"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué ejemplo histórico usa el autor para apoyar su argumento?",
+                options: [
+                    "La invención de Internet creó las redes sociales",
+                    "El teléfono eliminó al mensajero pero creó teleoperadores",
+                    "La imprenta reemplazó a los copistas medievales",
+                    "El automóvil acabó con los carruajes"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Cuál es la postura del autor ante la IA?",
+                options: [
+                    "Totalmente catastrofista: la IA destruirá todo el empleo",
+                    "Complaciente: no hay de qué preocuparse",
+                    "Equilibrada: ni catastrofismo ni complacencia, pero exige acción",
+                    "Indiferente: la IA no tendrá tanto impacto"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Qué propone el texto como solución?",
+                options: [
+                    "Prohibir la IA en ciertos sectores",
+                    "Formación continua y recualificación como responsabilidad compartida",
+                    "Crear un impuesto especial a las máquinas",
+                    "Reducir la jornada laboral a 4 días"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué procedimiento de coherencia emplea el texto?",
+                options: [
+                    "Estructura circular que vuelve al principio",
+                    "Estructura problema-matización-propuesta de solución",
+                    "Estructura cronológica de la historia de la IA",
+                    "Estructura descriptiva de pros y contras"
+                ],
+                correct: 1
+            }
+        ]
+    },
+    {
+        title: "La soledad no deseada",
+        author: "Adaptado de La Vanguardia",
+        text: "La soledad no deseada afecta ya a más de cuatro millones de personas en España, según estadísticas del INE. Y no se trata solo de personas mayores: uno de cada cuatro jóvenes de entre 18 y 34 años dice sentirse solo de forma frecuente. Este fenómeno, que algunos expertos califican como la epidemia silenciosa del siglo XXI, tiene consecuencias devastadoras para la salud: incrementa en un 26% el riesgo de mortalidad prematura, equivalente a fumar 15 cigarrillos diarios. Las causas son complejas: la disolución de las redes comunitarias tradicionales, la movilidad laboral que aleja a las personas de sus círculos de apoyo, y paradójicamente, la hiperconectividad digital que ofrece la ilusión de compañía sin verdadera intimidad. El Reino Unido fue pionero al crear un Ministerio de la Soledad en 2018. En España, varias comunidades autónomas han comenzado a desarrollar estrategias específicas, pero aún estamos lejos de abordar el problema con la urgencia que merece.",
+        questions: [
+            {
+                q: "¿Cuántas personas en España sufren soledad no deseada?",
+                options: [
+                    "Un millón de personas mayores",
+                    "Más de cuatro millones de personas",
+                    "El 15% de la población total",
+                    "250.000 personas en zonas rurales"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué comparación sanitaria hace el texto sobre la soledad?",
+                options: [
+                    "Es como tener diabetes",
+                    "Es equivalente a fumar 15 cigarrillos diarios",
+                    "Duplica el riesgo de sufrir depresión",
+                    "Es como no hacer ejercicio físico"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué paradoja señala el texto?",
+                options: [
+                    "Que los jóvenes quieren estar solos pero sufren la soledad",
+                    "Que la hiperconectividad digital ofrece ilusión de compañía sin verdadera intimidad",
+                    "Que las personas mayores tienen más amigos que los jóvenes",
+                    "Que vivir en ciudades grandes reduce la soledad"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué país fue pionero en abordar la soledad institucionalmente?",
+                options: [
+                    "España, con un plan nacional",
+                    "Japón, con los hikikomori",
+                    "El Reino Unido, con un Ministerio de la Soledad en 2018",
+                    "Suecia, con programas de voluntariado"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Cuál es la intención comunicativa principal del texto?",
+                options: [
+                    "Entretener al lector con datos curiosos",
+                    "Denunciar la falta de acción ante un grave problema social y sanitario",
+                    "Describir diferentes tipos de soledad",
+                    "Instruir sobre cómo evitar la soledad"
+                ],
+                correct: 1
+            }
+        ]
+    },
+    {
+        title: "La España vaciada",
+        author: "Adaptado de 20 Minutos",
+        text: "En los últimos cincuenta años, más de 3.000 municipios españoles han perdido la mitad de su población. Son pueblos que se mueren lentamente: sus escuelas cierran, sus consultorios médicos reducen horarios y sus últimos habitantes envejecen sin relevo generacional. La España vaciada, como la bautizó el periodista Sergio del Molino, no es un fenómeno natural ni inevitable: es el resultado de décadas de políticas de inversión centradas en las grandes ciudades y la costa, que han dejado al interior rural sin infraestructuras, sin oportunidades laborales y sin servicios básicos. El teletrabajo ha abierto una ventana de esperanza. Desde la pandemia, familias jóvenes han comenzado a replantearse una vida fuera de la gran ciudad, atraídas por el menor coste de vida, el contacto con la naturaleza y un ritmo más humano. Pero para que este flujo sea sostenible hacen falta tres cosas: conectividad digital real (fibra óptica y cobertura móvil), servicios públicos dignos (sanidad, educación, transporte) y ayudas económicas que incentiven la repoblación.",
+        questions: [
+            {
+                q: "¿Cuántos municipios han perdido la mitad de su población en 50 años?",
+                options: [
+                    "Unos 500 municipios del interior peninsular",
+                    "Más de 3.000 municipios españoles",
+                    "La totalidad de pueblos de Castilla-La Mancha",
+                    "1.500 municipios de menos de 100 habitantes"
+                ],
+                correct: 1
+            },
+            {
+                q: "Según el texto, ¿quién acuñó el término 'España vaciada'?",
+                options: [
+                    "Un político del Parlamento",
+                    "El periodista Sergio del Molino",
+                    "El INE en su último informe",
+                    "Un estudio de la Unión Europea"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Qué tres elementos son necesarios para la repoblación sostenible?",
+                options: [
+                    "Turismo rural, ganadería y agricultura ecológica",
+                    "Conectividad digital, servicios públicos y ayudas económicas",
+                    "Más carreteras, hospitales y universidades",
+                    "Industria, centros comerciales y ocio"
+                ],
+                correct: 1
+            },
+            {
+                q: "¿Cuál es la causa del despoblamiento según el autor?",
+                options: [
+                    "El cambio climático ha hecho inhabitable el interior",
+                    "La gente prefiere la ciudad por su oferta cultural",
+                    "Décadas de políticas que concentraron la inversión en ciudades y costa",
+                    "La mecanización agrícola eliminó todos los empleos rurales"
+                ],
+                correct: 2
+            },
+            {
+                q: "¿Qué tono adopta el autor al final del texto?",
+                options: [
+                    "Pesimista absoluto: no hay remedio posible",
+                    "Esperanzado pero realista: el teletrabajo abre una puerta que exige condiciones",
+                    "Irónico: ridiculiza a quienes quieren vivir en pueblos",
+                    "Neutral: se limita a describir hechos sin valorar"
+                ],
+                correct: 1
+            }
+        ]
+    }
+];
+
+// Writing prompts
+const writingPrompts = [
+    {
+        type: "comentario",
+        title: "Comentario de Texto — La brecha digital",
+        text: "La brecha digital sigue siendo una realidad preocupante. Mientras los nativos digitales manejan la tecnología con naturalidad, millones de personas mayores quedan excluidas de servicios esenciales que migran a lo digital: citas médicas, trámites bancarios, declaraciones fiscales. El cierre de oficinas presenciales no es modernización, sino abandono de quienes construyeron la sociedad que ahora los deja atrás. No se trata de resistencia al cambio, sino de dignidad.",
+        instructions: "Comente el texto siguiendo el esquema oficial UCLM: resumen (2 pts), tema (1 pt), recursos lingüísticos (2 pts), perspectiva del autor (2 pts) y visión crítica personal (3 pts)."
+    },
+    {
+        type: "composicion",
+        title: "Composición — Salud mental y sociedad",
+        text: null,
+        instructions: "Escriba una composición argumentada sobre el siguiente tema: 'Los problemas de salud mental, especialmente entre los jóvenes, han aumentado drásticamente en los últimos años. Algunos creen que es una cuestión personal mientras otros apuntan a causas sociales como las redes sociales, la precariedad laboral y la presión por el éxito. Exprese su opinión al respecto argumentando su postura.'"
+    },
+    {
+        type: "comentario",
+        title: "Comentario de Texto — El turismo masivo",
+        text: "Barcelona, Venecia, Ámsterdam: cada vez más ciudades se rebelan contra el turismo masivo. Los residentes protestan con pancartas que rezan 'Tourists go home', no por xenofobia, sino por supervivencia. Cuando un piso turístico genera en un mes lo que un trabajador paga de alquiler en un año, la ecuación es clara: el barrio se vacía de vecinos y se llena de maletas con ruedas. La industria turística genera riqueza, sin duda, pero ¿a costa de qué? ¿De convertir ciudades vivas en parques temáticos para selfies?",
+        instructions: "Comente el texto siguiendo el esquema oficial UCLM: resumen (2 pts), tema (1 pt), recursos lingüísticos (2 pts), perspectiva del autor (2 pts) y visión crítica personal (3 pts)."
+    },
+    {
+        type: "composicion",
+        title: "Composición — Educación y futuro",
+        text: null,
+        instructions: "Escriba una composición argumentada sobre el siguiente tema: 'El sistema educativo debería adaptarse a las necesidades del siglo XXI, incorporando habilidades como el pensamiento crítico, la inteligencia emocional y las competencias digitales, en lugar de centrarse casi exclusivamente en la memorización de contenidos. ¿Está de acuerdo? Argumente su postura.'"
+    },
+    {
+        type: "comentario",
+        title: "Comentario de Texto — Cambio climático",
+        text: "El año 2025 ha sido el más caluroso jamás registrado, superando por medio grado el récord anterior. Los incendios forestales han arrasado el equivalente a la superficie de Bélgica solo en el Mediterráneo. Las inundaciones se multiplican al ritmo de la concentración de CO₂ en la atmósfera. Y sin embargo, seguimos discutiendo si debemos actuar. El negacionismo climático, alimentado por intereses económicos y amplificado por las redes sociales, es un lujo que la humanidad ya no puede permitirse. Cada año de inacción no es neutralidad: es una decisión activa de hipotecar el futuro.",
+        instructions: "Comente el texto siguiendo el esquema oficial UCLM: resumen (2 pts), tema (1 pt), recursos lingüísticos (2 pts), perspectiva del autor (2 pts) y visión crítica personal (3 pts)."
+    },
+    {
+        type: "composicion",
+        title: "Composición — Trabajo y vida personal",
+        text: null,
+        instructions: "Escriba una composición argumentada: 'En los últimos años ha crecido el debate sobre la conciliación entre la vida laboral y personal. Mientras algunos defienden la reducción de la jornada a 4 días o el teletrabajo como soluciones, otros argumentan que la productividad y la competitividad económica podrían verse afectadas. Exponga y argumente su opinión.'"
+    }
+];
+
+// ===== PRACTICE TEST ENGINE =====
+let currentTest = null;
+let userAnswers = {};
+
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function startPractice() {
+    // Pick 2 random texts
+    const selected = shuffleArray(practiceTexts).slice(0, 2);
+    currentTest = [];
+    userAnswers = {};
+    let qIndex = 0;
+
+    selected.forEach(text => {
+        // Pick 3-4 random questions from each text
+        const qs = shuffleArray(text.questions).slice(0, Math.min(4, text.questions.length));
+        qs.forEach(q => {
+            // Shuffle options but track the correct one
+            const optionPairs = q.options.map((o, i) => ({ text: o, wasIndex: i }));
+            const shuffled = shuffleArray(optionPairs);
+            const newCorrect = shuffled.findIndex(o => o.wasIndex === q.correct);
+
+            currentTest.push({
+                id: qIndex,
+                textTitle: text.title,
+                textAuthor: text.author,
+                textContent: text.text,
+                question: q.q,
+                options: shuffled.map(o => o.text),
+                correct: newCorrect
+            });
+            qIndex++;
+        });
+    });
+
+    renderPractice();
+    document.getElementById('reset-btn').style.display = 'inline-flex';
+    document.getElementById('practice-score').style.display = 'none';
+}
+
+function renderPractice() {
+    const area = document.getElementById('practice-area');
+    let currentTextTitle = '';
+    let html = '';
+
+    html += `<div class="progress-info">
+        <span>Preguntas: ${currentTest.length}</span>
+        <span id="answered-count">Respondidas: 0 / ${currentTest.length}</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>`;
+
+    currentTest.forEach((item, idx) => {
+        if (item.textTitle !== currentTextTitle) {
+            currentTextTitle = item.textTitle;
+            html += `<div class="card">
+                <h3>📖 ${item.textTitle}</h3>
+                <p class="meta">${item.textAuthor}</p>
+                <div class="text-box">${item.textContent}</div>
+            </div>`;
+        }
+
+        html += `<div class="card" id="q-card-${idx}">
+            <h3 style="font-size:1.1rem">Pregunta ${idx + 1} <span class="points-badge">${item.textTitle}</span></h3>
+            <p style="margin-bottom:1rem; font-weight:500">${item.question}</p>`;
+
+        item.options.forEach((opt, oi) => {
+            const letter = String.fromCharCode(65 + oi);
+            html += `<div class="practice-option" id="opt-${idx}-${oi}" onclick="selectOption(${idx}, ${oi})">
+                <div class="option-letter">${letter}</div>
+                <span>${opt}</span>
+            </div>`;
+        });
+
+        html += `</div>`;
+    });
+
+    html += `<div style="text-align:center; margin:2rem 0">
+        <button class="btn btn-success" onclick="submitPractice()" id="submit-btn" style="font-size:1.1rem; padding:1rem 2.5rem">
+            ✅ Corregir Test
+        </button>
+    </div>`;
+
+    area.innerHTML = html;
+}
+
+function selectOption(qIdx, optIdx) {
+    // Check if already submitted
+    if (document.getElementById('submit-btn').disabled) return;
+
+    // Deselect previous
+    currentTest[qIdx].options.forEach((_, oi) => {
+        document.getElementById(`opt-${qIdx}-${oi}`).classList.remove('selected');
+    });
+
+    // Select new
+    document.getElementById(`opt-${qIdx}-${optIdx}`).classList.add('selected');
+    userAnswers[qIdx] = optIdx;
+
+    // Update progress
+    const answered = Object.keys(userAnswers).length;
+    document.getElementById('answered-count').textContent = `Respondidas: ${answered} / ${currentTest.length}`;
+    document.getElementById('progress-fill').style.width = `${(answered / currentTest.length) * 100}%`;
+}
+
+function submitPractice() {
+    let correct = 0;
+    const total = currentTest.length;
+
+    currentTest.forEach((item, idx) => {
+        const userAnswer = userAnswers[idx];
+        const correctIdx = item.correct;
+
+        // Show correct
+        document.getElementById(`opt-${idx}-${correctIdx}`).classList.add('correct');
+
+        if (userAnswer !== undefined) {
+            if (userAnswer === correctIdx) {
+                correct++;
+            } else {
+                document.getElementById(`opt-${idx}-${userAnswer}`).classList.add('incorrect');
+            }
+        }
+
+        // Disable clicking
+        item.options.forEach((_, oi) => {
+            document.getElementById(`opt-${idx}-${oi}`).onclick = null;
+            document.getElementById(`opt-${idx}-${oi}`).style.cursor = 'default';
+        });
+    });
+
+    // Disable submit
+    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('submit-btn').style.opacity = '0.5';
+
+    // Score
+    const pct = Math.round((correct / total) * 100);
+    const score10 = ((correct / total) * 10).toFixed(1);
+    let message = '';
+    let color = '';
+
+    if (pct >= 80) { message = '🥥 ¡Excelente! Estás muy preparado/a'; color = 'var(--success)'; }
+    else if (pct >= 60) { message = '👍 Bien, pero puedes mejorar'; color = 'var(--accent)'; }
+    else if (pct >= 40) { message = '⚠️ Necesitas repasar más los textos'; color = 'var(--accent-dark)'; }
+    else { message = '📚 Necesitas dedicar más tiempo a la comprensión lectora'; color = 'var(--danger)'; }
+
+    const scoreHtml = `<div class="score-display">
+        <div class="score-number">${score10}</div>
+        <div class="score-label">de 10 puntos · ${correct}/${total} respuestas correctas</div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:${pct}%"></div></div>
+        <div class="score-message" style="color:${color}">${message}</div>
+        <div style="margin-top:1.5rem">
+            <button class="btn btn-primary" onclick="startPractice()">🎲 Intentar otro test</button>
+        </div>
+    </div>`;
+
+    document.getElementById('practice-score').innerHTML = scoreHtml;
+    document.getElementById('practice-score').style.display = 'block';
+    document.getElementById('practice-score').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetPractice() {
+    document.getElementById('practice-area').innerHTML = '';
+    document.getElementById('practice-score').style.display = 'none';
+    currentTest = null;
+    userAnswers = {};
+}
+
+// ===== WRITING EXERCISE =====
+let timerInterval = null;
+let remainingSeconds = 90 * 60;
+let timerRunning = false;
+
+function startWriting() {
+    document.getElementById('writing-start-btn').style.display = 'none';
+    document.getElementById('writing-area').style.display = 'block';
+    remainingSeconds = 90 * 60;
+    newWritingPrompt();
+    startTimer();
+}
+
+function newWritingPrompt() {
+    const prompt = writingPrompts[Math.floor(Math.random() * writingPrompts.length)];
+    let html = `<h3 style="color:var(--accent); margin-bottom:0.75rem">${prompt.title}</h3>`;
+
+    if (prompt.text) {
+        html += `<div class="text-box">${prompt.text}</div>`;
+    }
+
+    html += `<div class="question-block"><h4>📋 Instrucciones</h4><p>${prompt.instructions}</p></div>`;
+
+    document.getElementById('writing-prompt').innerHTML = html;
+}
+
+function startTimer() {
+    timerRunning = true;
+    document.getElementById('timer-toggle').textContent = '⏸️ Pausar';
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        if (!timerRunning) return;
+        remainingSeconds--;
+        if (remainingSeconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('timer').style.color = 'var(--danger)';
+            document.getElementById('timer-label').textContent = '¡Tiempo agotado!';
+            alert('⏰ ¡Se acabó el tiempo! En un examen real tendrías que entregar.');
+            return;
+        }
+        const m = Math.floor(remainingSeconds / 60);
+        const s = remainingSeconds % 60;
+        document.getElementById('timer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+        if (remainingSeconds <= 300) {
+            document.getElementById('timer').style.color = 'var(--danger)';
+            document.getElementById('timer-label').textContent = '⚠️ ¡Últimos 5 minutos!';
+        } else if (remainingSeconds <= 900) {
+            document.getElementById('timer').style.color = 'var(--accent)';
+            document.getElementById('timer-label').textContent = '⏳ Menos de 15 minutos';
+        }
+    }, 1000);
+}
+
+function toggleTimer() {
+    timerRunning = !timerRunning;
+    document.getElementById('timer-toggle').textContent = timerRunning ? '⏸️ Pausar' : '▶️ Reanudar';
+}
+
+function updateWordCount() {
+    const text = document.getElementById('writing-text').value.trim();
+    const words = text ? text.split(/\s+/).length : 0;
+    document.getElementById('wc').textContent = words;
+}
+
+function saveWriting() {
+    const text = document.getElementById('writing-text').value;
+    if (!text.trim()) { alert('No hay nada que guardar'); return; }
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `redaccion-${new Date().toISOString().slice(0,10)}.txt`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
