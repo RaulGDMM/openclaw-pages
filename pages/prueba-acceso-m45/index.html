@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱 Prueba de Acceso M45 - Cocobot 🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            line-height: 2;
+        }
+
+        .info-card li::before {
+            content: "🐱 ";
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .exercise-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-text {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 2;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .question h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .option {
+            display: block;
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #e7f0ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .result-excellent {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .result-good {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .result-fair {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .result-need-work {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .feedback {
+            background: #e7f0ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .feedback strong {
+            color: #667eea;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        .text-source {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .nav-tab {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐱 Prueba de Acceso M45 🐱</h1>
+            <p>Prepara tu acceso a la universidad con Cocobot</p>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="info">📚 Información</div>
+            <div class="nav-tab" data-tab="practice">📝 Práctica</div>
+            <div class="nav-tab" data-tab="diagnostic">🧠 Evaluación</div>
+        </div>
+
+        <div class="content">
+            <!-- Información Section -->
+            <div class="section active" id="info">
+                <div class="info-card">
+                    <h2>📋 Sobre el Examen M45</h2>
+                    <ul>
+                        <li><strong>Convocatoria 2025/26:</strong> Pruebas el 14-15 de abril</li>
+                        <li><strong>Matrícula:</strong> 9-20 de marzo</li>
+                        <li><strong>Fase General:</strong> Comentario de texto + Lengua castellana</li>
+                        <li><strong>Duración:</strong> 90 minutos por ejercicio</li>
+                        <li><strong>Para aprobar:</strong> Mínimo 5 puntos + entrevista aprobada</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h2>🎯 Objetivo de esta Web</h2>
+                    <p>Esta herramienta está diseñada para ayudarte a practicar la <strong>lectura comprensiva</strong>, que es uno de los ejercicios más importantes del examen M45.</p>
+                    <br>
+                    <p>Con cada prueba recibirás:</p>
+                    <ul>
+                        <li>Un texto para leer y comprender</li>
+                        <li>Preguntas de lectura comprensiva</li>
+                        <li>Una puntuación automática</li>
+                        <li>Feedback personalizado</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h2>💡 Consejos para el Examen</h2>
+                    <ul>
+                        <li>Lee el texto completo antes de responder</li>
+                        <li>Subraya las ideas principales</li>
+                        <li>Responde con tus propias palabras</li>
+                        <li>No te estanques en una pregunta</li>
+                        <li>Gana tiempo leyendo las preguntas primero</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="btn" onclick="showTab('practice')">📝 Comenzar Práctica</button>
+                </div>
+            </div>
+
+            <!-- Práctica Section -->
+            <div class="section" id="practice">
+                <h2 style="color: #667eea; margin-bottom: 20px; font-size: 1.8rem;">📝 Ejercicio de Práctica</h2>
+                <p style="color: #6c757d; text-align: center; margin-bottom: 20px;">Lee el texto y responde las preguntas. Cada vez que recargas, ¡aparecen textos y preguntas nuevos!</p>
+
+                <div id="practice-exercise">
+                    <div class="exercise-container">
+                        <div class="exercise-text" id="practice-text"></div>
+                        <div id="practice-questions"></div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn" id="practice-submit" onclick="submitPractice()">✅ Ver Respuestas</button>
+                            <button class="btn btn-secondary" onclick="generateNewPractice()">🔄 Nuevo Texto</button>
+                        </div>
+                        <div id="practice-result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagnostics Section -->
+            <div class="section" id="diagnostic">
+                <h2 style="color: #667eea; margin-bottom: 20px; font-size: 1.8rem;">🧪 Evaluación Diagnóstica</h2>
+                <p style="color: #6c757d; text-align: center; margin-bottom: 20px;">Realiza esta prueba para evaluar tu nivel actual de lectura comprensiva.</p>
+
+                <div id="diagnostic-exercise">
+                    <div class="exercise-container">
+                        <div class="exercise-text" id="diagnostic-text"></div>
+                        <div id="diagnostic-questions"></div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn" id="diagnostic-submit" onclick="submitDiagnostic()">✅ Ver Resultados</button>
+                            <button class="btn btn-secondary" id="diagnostic-reset" onclick="resetDiagnostic()">🔄 Reiniciar Evaluación</button>
+                        </div>
+                        <div id="diagnostic-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Textos para práctica
+        const practiceTexts = [
+            {
+                text: "La inteligencia artificial ha transformado radicalmente la forma en que vivimos y trabajamos. Desde asistentes virtuales como Siri y Alexa hasta algoritmos que recomiendan contenido en plataformas de streaming, la IA está presente en casi todos los aspectos de nuestra vida diaria. Según expertos, para el año 2030 se estima que más del 40% de las tareas laborales estarán automatizadas en algún grado.\n\nSin embargo, esta transformación no es necesariamente negativa. Los avances en IA han permitido desarrollar soluciones a problemas complejos que antes parecían imposibles. Desde la detección temprana de enfermedades hasta la optimización de rutas de transporte, las aplicaciones prácticas de la inteligencia artificial están mejorando la calidad de vida humana.\n\nEl mayor desafío que enfrentamos es encontrar un equilibrio adecuado. Necesitamos aprovechar los beneficios de la tecnología sin perder nuestra esencia humana. La educación y la formación continua serán clave para asegurar que las personas puedan adaptarse a este nuevo panorama.",
+                questions: [
+                    {
+                        question: "¿Qué porcentaje de las tareas laborales se estima que estará automatizado para el 2030?",
+                        options: ["20%", "40%", "60%", "80%"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuál es un beneficio práctico de la inteligencia artificial mencionado en el texto?",
+                        options: ["Crear trabajos para todos", "Detectar enfermedades temprano", "Eliminar la necesidad de educación", "Automatizar todas las tareas humanas"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuál es el principal desafío que enfrentamos con la inteligencia artificial?",
+                        options: ["La falta de tecnología suficiente", "Encontrar un equilibrio adecuado entre tecnología y humanidad", "La automatización de todas las tareas", "La prohibición del uso de IA"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                text: "El cambio climático es uno de los desafíos más urgentes que enfrenta la humanidad en el siglo XXI. La actividad humana, especialmente la quema de combustibles fósiles, ha incrementado significativamente las emisiones de gases de efecto invernadero en la atmósfera. Esto ha provocado un aumento global de la temperatura, la deriva de los polos de hielo y la alteración de patrones climáticos.\n\nLos efectos de este cambio climático son evidentes y preocupantes. Se han registrado aumentos en la frecuencia de huracanes y tormentas extremas, sequías más prolongadas en regiones agrícolas y la pérdida de biodiversidad en ecosistemas sensibles. Los científicos advierten que, si no tomamos medidas drásticas, para 2050 el nivel del mar podría aumentar entre 0.5 y 1 metro, lo que amenazaría a millones de personas que viven en zonas costeras.",
+                questions: [
+                    {
+                        question: "¿Cuál es la causa principal del cambio climático mencionada en el texto?",
+                        options: ["Las erupciones volcánicas", "La actividad humana, especialmente combustibles fósiles", "Los asteroides en el espacio", "El calentamiento solar"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué efecto del cambio climático menciona el texto?",
+                        options: ["Disminución de las tormentas", "Aumento de huracanes y tormentas extremas", "Reducción de la temperatura global", "Mayor cantidad de lluvias"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuánto podría aumentar el nivel del mar para 2050 si no se toman medidas drásticas?",
+                        options: ["Entre 0.5 y 1 metro", "Entre 1 y 2 metros", "Entre 2 y 3 metros", "Entre 5 y 10 metros"],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                text: "La educación es uno de los pilares fundamentales del desarrollo humano y social. A lo largo de la historia, las instituciones educativas han evolucionado para adaptarse a los cambios tecnológicos y sociales. Hoy en día, el aprendizaje no se limita al aula tradicional, sino que abarca plataformas online, cursos especializados y educación continua.\n\nEl acceso a la información ha democratizado el conocimiento. Gracias a internet, cualquier persona con conexión a la red puede acceder a millones de recursos educativos gratuitos. Esto ha permitido que personas de todas las edades y condiciones puedan aprender nuevas habilidades, actualizar sus conocimientos y adaptarse a un mundo en constante cambio.\n\nNo obstante, la educación también enfrenta desafíos importantes. La brecha digital, la calidad de la enseñanza y la adaptación a las necesidades del mercado laboral son cuestiones que requieren atención urgente. El futuro de la educación dependerá de nuestra capacidad para innovar y mantenerse relevantes.",
+                questions: [
+                    {
+                        question: "¿Qué ha permitido democratizar el acceso a la información según el texto?",
+                        options: ["La televisión", "La educación tradicional", "Internet", "Los libros"],
+                        correct: 2
+                    },
+                    {
+                        question: "¿Cuál es uno de los desafíos que enfrenta la educación mencionado en el texto?",
+                        options: ["La falta de estudiantes interesados", "La brecha digital, la calidad de enseñanza y adaptación laboral", "El aumento de profesores", "La falta de presupuesto"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cómo se ha adaptado la educación a los cambios tecnológicos?",
+                        options: ["Eliminando la tecnología", "A través de plataformas online y educación continua", "Solo en universidades", "No se ha adaptado"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                text: "La salud mental es tan importante como la salud física, pero a menudo es menos priorizada. El estrés crónico, la ansiedad y la depresión afectan a millones de personas en todo el mundo. Según la OMS, más de 300 millones de personas sufren de depresión en algún momento de sus vidas.\n\nLas causas de los problemas de salud mental son multifactoriales. Factores genéticos, ambientales, sociales y emocionales pueden contribuir al desarrollo de trastornos mentales. La buena noticia es que, con el diagnóstico oportuno y el tratamiento adecuado, la gran mayoría de las personas pueden recuperar su bienestar mental.\n\nLa prevención es fundamental. La práctica de hábitos saludables como el ejercicio regular, la alimentación balanceada, la buena calidad del sueño y la conexión social pueden reducir significativamente el riesgo de problemas mentales. Además, hablar abiertamente sobre la salud mental ayuda a reducir el estigma y fomenta la búsqueda de ayuda cuando sea necesaria.",
+                questions: [
+                    {
+                        question: "¿Cuántas personas sufren de depresión según la OMS?",
+                        options: ["Más de 100 millones", "Más de 300 millones", "Más de 500 millones", "Más de 1 billón"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué puede ayudar a reducir el riesgo de problemas mentales?",
+                        options: ["La falta de sueño y ejercicio", "El aislamiento social", "La práctica de hábitos saludables y conexión social", "El consumo de alcohol"],
+                        correct: 2
+                    },
+                    {
+                        question: "¿Cuál es una causa de los problemas de salud mental mencionada en el texto?",
+                        options: ["Solo factores genéticos", "Factores genéticos, ambientales, sociales y emocionales", "Solo factores ambientales", "Solo factores emocionales"],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                text: "El turismo sostenible es una forma de viajar que minimiza el impacto negativo en el medio ambiente y las comunidades locales. A medida que crece la conciencia sobre la crisis climática y la necesidad de proteger el planeta, cada vez más viajeros están optando por opciones turísticas responsables.\n\nEl turismo sostenible se basa en tres pilares fundamentales: el impacto ambiental, el impacto social y el impacto económico. Los viajes sostenibles buscan reducir la contaminación, respetar las culturas locales, apoyar la economía de las comunidades visitadas y preservar los recursos naturales para las generaciones futuras.\n\nLos beneficios del turismo sostenible son múltiples. No solo protege el medio ambiente, sino que también genera empleos locales, preserva el patrimonio cultural y promueve el entendimiento intercultural. Los turistas conscientes pueden contribuir positivamente al destino que visitan, creando un viaje más significativo y enriquecedor para todos.",
+                questions: [
+                    {
+                        question: "¿Qué es el turismo sostenible?",
+                        options: ["Viajar sin dinero", "Viajar que minimiza impacto negativo en el ambiente y comunidades", "Viajar rápido", "Viajar solo para descansar"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuántos pilares fundamentales se mencionan para el turismo sostenible?",
+                        options: ["Dos", "Tres", "Cuatro", "Cinco"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué beneficio del turismo sostenible menciona el texto?",
+                        options: ["Solo reduce contaminación", "Genera empleos locales y preserva patrimonio cultural", "Aumenta el consumo de recursos", "No tiene beneficios sociales"],
+                        correct: 1
+                    }
+                ]
+            }
+        ];
+
+        let currentPracticeText = null;
+        let currentDiagnosticText = null;
+        let practiceScore = 0;
+        let diagnosticScore = 0;
+        let practiceAnswers = {};
+        let diagnosticAnswers = {};
+
+        // Generar ejercicio de práctica
+        function generateNewPractice() {
+            const randomIndex = Math.floor(Math.random() * practiceTexts.length);
+            currentPracticeText = practiceTexts[randomIndex];
+            
+            document.getElementById('practice-text').innerHTML = currentPracticeText.text;
+            
+            const questionsContainer = document.getElementById('practice-questions');
+            questionsContainer.innerHTML = '';
+            
+            currentPracticeText.questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options">`;
+                
+                q.options.forEach((option, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.innerHTML = option;
+                    optionDiv.onclick = () => selectOption('practice', index, optIndex, optionDiv);
+                    questionDiv.querySelector('.options').appendChild(optionDiv);
+                });
+                
+                questionDiv.innerHTML += '</div>';
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            practiceAnswers = {};
+            practiceScore = 0;
+            document.getElementById('practice-submit').style.display = 'inline-block';
+            document.getElementById('practice-result').innerHTML = '';
+        }
+
+        // Seleccionar opción
+        function selectOption(type, questionIndex, optionIndex, optionElement) {
+            const container = optionElement.parentElement;
+            const options = container.querySelectorAll('.option');
+            
+            options.forEach(opt => opt.classList.remove('selected'));
+            optionElement.classList.add('selected');
+            
+            if (type === 'practice') {
+                practiceAnswers[questionIndex] = optionIndex;
+            } else {
+                diagnosticAnswers[questionIndex] = optionIndex;
+            }
+        }
+
+        // Generar ejercicio diagnóstico (texto diferente cada vez)
+        let diagnosticTexts = [...practiceTexts];
+        
+        function generateDiagnosticText() {
+            if (diagnosticTexts.length === 0) {
+                diagnosticTexts = [...practiceTexts];
+            }
+            
+            const randomIndex = Math.floor(Math.random() * diagnosticTexts.length);
+            currentDiagnosticText = diagnosticTexts[randomIndex];
+            
+            // Eliminar texto usado
+            diagnosticTexts.splice(randomIndex, 1);
+            
+            document.getElementById('diagnostic-text').innerHTML = currentDiagnosticText.text;
+            
+            const questionsContainer = document.getElementById('diagnostic-questions');
+            questionsContainer.innerHTML = '';
+            
+            currentDiagnosticText.questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options">`;
+                
+                q.options.forEach((option, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.innerHTML = option;
+                    optionDiv.onclick = () => selectOption('diagnostic', index, optIndex, optionDiv);
+                    questionDiv.querySelector('.options').appendChild(optionDiv);
+                });
+                
+                questionDiv.innerHTML += '</div>';
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            diagnosticAnswers = {};
+            diagnosticScore = 0;
+            document.getElementById('diagnostic-submit').style.display = 'inline-block';
+            document.getElementById('diagnostic-reset').style.display = 'inline-block';
+            document.getElementById('diagnostic-result').innerHTML = '';
+        }
+
+        // Calcular puntuación
+        function calculateScore(type) {
+            const text = type === 'practice' ? currentPracticeText : currentDiagnosticText;
+            const answers = type === 'practice' ? practiceAnswers : diagnosticAnswers;
+            
+            let score = 0;
+            text.questions.forEach((q, index) => {
+                if (answers[index] === q.correct) {
+                    score++;
+                }
+            });
+            
+            return (score / text.questions.length) * 10;
+        }
+
+        // Mostrar resultado
+        function showResult(type) {
+            const score = calculateScore(type);
+            const text = type === 'practice' ? currentPracticeText : currentDiagnosticText;
+            const answers = type === 'practice' ? practiceAnswers : diagnosticAnswers;
+            
+            let resultDiv = document.getElementById(`${type}-result`);
+            
+            // Mensaje según puntuación
+            let message, className, feedback;
+            
+            if (score >= 9) {
+                message = '¡Excelente! 🌟';
+                className = 'result-excellent';
+                feedback = `<strong>¡Felicidades!</strong> Tu nivel de lectura comprensiva es excelente. Estás muy bien preparado/a para el examen M45. Sigue practicando para mantener tu nivel y ganar confianza.`;
+            } else if (score >= 7) {
+                message = '¡Muy bien! 👏';
+                className = 'result-good';
+                feedback = `<strong>¡Bien hecho!</strong> Tu nivel es bueno. Tienes una comprensión sólida del texto, pero hay algunos detalles que puedes mejorar con más práctica. ¡Sigue así!`;
+            } else if (score >= 5) {
+                message = 'Buen trabajo 👍';
+                className = 'result-fair';
+                feedback = `<strong>Estás en buen camino.</strong> Has demostrado comprensión básica, pero hay áreas donde puedes mejorar. Recomiendo practicar más para ganar confianza y precisión.`;
+            } else {
+                message = '¡Necesitas practicar más! 💪';
+                className = 'result-need-work';
+                feedback = `<strong>No desanimes.</strong> La práctica es fundamental. Te recomiendo leer varios textos y hacer ejercicios diarios para mejorar tu comprensión lectora. ¡Tú puedes!`;
+            }
+            
+            resultDiv.innerHTML = `
+                <div class="score-display">
+                    Puntuación: ${score.toFixed(1)} / 10
+                </div>
+                <div class="result-message ${className}">
+                    ${message}
+                </div>
+                <div class="feedback">
+                    <strong>Feedback:</strong><br>${feedback}
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-secondary" onclick="generateNewPractice()">🔄 Nueva Práctica</button>
+                    ${type === 'diagnostic' ? '<button class="btn" onclick="resetDiagnostic()">🔄 Reiniciar Evaluación</button>' : ''}
+                </div>
+            `;
+        }
+
+        // Submit funciones
+        function submitPractice() {
+            if (Object.keys(practiceAnswers).length < currentPracticeText.questions.length) {
+                alert('Por favor, selecciona todas las respuestas antes de continuar.');
+                return;
+            }
+            showResult('practice');
+        }
+
+        function submitDiagnostic() {
+            if (Object.keys(diagnosticAnswers).length < currentDiagnosticText.questions.length) {
+                alert('Por favor, selecciona todas las respuestas antes de continuar.');
+                return;
+            }
+            showResult('diagnostic');
+        }
+
+        // Reset diagnóstico
+        function resetDiagnostic() {
+            diagnosticTexts = [...practiceTexts];
+            document.getElementById('diagnostic-result').innerHTML = '';
+            document.getElementById('diagnostic-reset').style.display = 'inline-block';
+            generateDiagnosticText();
+        }
+
+        // Navegación entre tabs
+        function showTab(tabId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            
+            if (tabId === 'practice') {
+                if (!currentPracticeText) {
+                    generateNewPractice();
+                } else {
+                    document.getElementById('practice-submit').style.display = 'inline-block';
+                    document.getElementById('practice-result').innerHTML = '';
+                }
+            } else if (tabId === 'diagnostic') {
+                if (!currentDiagnosticText) {
+                    generateDiagnosticText();
+                } else {
+                    document.getElementById('diagnostic-submit').style.display = 'inline-block';
+                    document.getElementById('diagnostic-reset').style.display = 'inline-block';
+                    document.getElementById('diagnostic-result').innerHTML = '';
+                }
+            }
+        }
+
+        // Event listeners para tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => showTab(tab.dataset.tab));
+        });
+
+        // Inicializar con práctica
+        generateNewPractice();
+    </script>
+</body>
+</html>
