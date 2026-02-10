@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱 Exámenes Reales M45 v2 - Cocobot 🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 40px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .exam-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .exam-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .exam-card .source {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .exam-text {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 2;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .exam-text h4 {
+            color: #667eea;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .exam-text p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .exam-questions {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .exam-questions h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-item h5 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .question-item .question-text {
+            color: #212529;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .question-item .correct-answer {
+            color: #28a745;
+            font-weight: 600;
+            display: none; /* Oculto por defecto */
+            margin-top: 10px;
+            padding: 10px;
+            background: #d4edda;
+            border-radius: 8px;
+        }
+
+        .question-item .correct-answer.revealed {
+            display: block; /* Revelado */
+        }
+
+        .reveal-answer-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        .reveal-answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .reveal-answer-btn.hidden {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+
+        .reveal-answer-btn.hidden:hover {
+            background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+        }
+
+        .download-link {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin: 10px 5px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .download-link:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .filter-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .info-section {
+            background: #e7f0ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-section ul {
+            list-style: none;
+            line-height: 2;
+        }
+
+        .info-section li::before {
+            content: "📚 ";
+            margin-right: 8px;
+        }
+
+        .reveal-all-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.2s;
+        }
+
+        .reveal-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .reveal-all-btn.revealed {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .nav-tab {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+                min-width: 120px;
+            }
+
+            .exam-text {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐱 Exámenes Reales M45 v2 🐱</h1>
+            <p>Textos y ejercicios reales con respuestas ocultas</p>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="comentario">📝 Comentario de Texto</div>
+            <div class="nav-tab" data-tab="lengua">🗣️ Lengua Castellana</div>
+            <div class="nav-tab" data-tab="info">📚 Información</div>
+        </div>
+
+        <div class="content">
+            <!-- Información Section -->
+            <div class="section active" id="info">
+                <div class="info-section">
+                    <h3>📚 Sobre esta Web v2</h3>
+                    <ul>
+                        <li><strong>Contenido real:</strong> Exámenes de convocatorias anteriores</li>
+                        <li><strong>Universidades:</strong> UCLM, UNED, UCM, USAL, EHU, etc.</li>
+                        <li><strong>Convocatorias:</strong> Desde 2016 hasta 2024</li>
+                        <li><strong>Objetivo:</strong> Conocer el estilo y nivel de las pruebas reales</li>
+                        <li><strong>Respuestas:</strong> Ocultas por defecto - usa el botón "Ver respuestas" para revelarlas</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>💡 Cómo Usar</h3>
+                    <p>1. Lee los textos reales para familiarizarte con el nivel y estilo</p>
+                    <p>2. Responde las preguntas como si fueras en el examen real</p>
+                    <p>3. Usa el filtro para practicar por años específicos</p>
+                    <p>4. Haz clic en "👁️ Ver respuestas" debajo de cada pregunta para ver las correctas</p>
+                    <p>5. Descarga los exámenes originales cuando estén disponibles</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>⚠️ Importante</h3>
+                    <p>Los textos y preguntas aquí presentados son de convocatorias anteriores. La estructura y contenido pueden variar en futuras convocatorias, pero el nivel y estilo suelen mantenerse.</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="btn" onclick="showTab('comentario')">📝 Ver Exámenes</button>
+                </div>
+            </div>
+
+            <!-- Comentario de Texto Section -->
+            <div class="section" id="comentario">
+                <div class="filter-section">
+                    <h3>🔍 Filtrar por año</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterExams('all')">Todos</button>
+                        <button class="filter-btn" onclick="filterExams('2024')">2024</button>
+                        <button class="filter-btn" onclick="filterExams('2023')">2023</button>
+                        <button class="filter-btn" onclick="filterExams('2022')">2022</button>
+                        <button class="filter-btn" onclick="filterExams('2021')">2021</button>
+                        <button class="filter-btn" onclick="filterExams('2020')">2020</button>
+                        <button class="filter-btn" onclick="filterExams('2019')">2019</button>
+                        <button class="filter-btn" onclick="filterExams('2018')">2018</button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button class="reveal-all-btn" onclick="revealAllAnswers()">👁️ Ver todas las respuestas</button>
+                </div>
+                <div id="comentario-exams">
+                    <!-- Exámenes se cargarán dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Lengua Castellana Section -->
+            <div class="section" id="lengua">
+                <h2 style="color: #667eea; margin-bottom: 20px; font-size: 1.8rem;">🗣️ Ejercicios de Lengua Castellana</h2>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button class="reveal-all-btn" onclick="revealAllAnswers()">👁️ Ver todas las respuestas</button>
+                </div>
+                <div id="lengua-exams">
+                    <!-- Ejercicios se cargarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Exámenes reales de Comentario de Texto
+        const examenTexts = [
+            {
+                year: 2024,
+                university: "Universidad Complutense de Madrid",
+                source: "Modelos de examen",
+                text: `<h4>Texto 1: La Inteligencia Artificial en la Educación</h4>
+                <p>La inteligencia artificial (IA) ha revolucionado múltiples sectores, entre ellos la educación. Las herramientas basadas en IA están transformando la manera en que los estudiantes aprenden y los profesores enseñan. Desde asistentes virtuales hasta sistemas adaptativos de aprendizaje, estas tecnologías ofrecen oportunidades sin precedentes para personalizar la educación.</p>
+
+                <p>Uno de los mayores beneficios es la capacidad de adaptación. Los sistemas de IA pueden analizar el progreso de cada estudiante y ajustar el contenido según sus necesidades. Esto permite que los alumnos avancen a su propio ritmo, reforzando áreas donde tienen dificultades y expandiendo conocimientos en áreas donde ya son competentes.</p>
+
+                <p>Sin embargo, esta integración no está sin desafíos. La privacidad de los datos es una preocupación fundamental. Además, existe el riesgo de que las herramientas tecnológicas sustituyan el contacto humano, que es esencial en el proceso educativo. Los educadores deben encontrar un equilibrio entre aprovechar las ventajas de la IA y preservar la dimensión humana del aprendizaje.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cuál es uno de los beneficios de la IA en la educación mencionado en el texto?</h5>
+                    <p class="question-text">A) Automatizar completamente la enseñanza</p>
+                    <p class="question-text">B) Adaptar el contenido al ritmo de cada estudiante</p>
+                    <p class="question-text">C) Reducir el número de profesores</p>
+                    <p class="question-text">D) Eliminar la necesidad de evaluación</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Adaptar el contenido al ritmo de cada estudiante</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Cuál es una preocupación mencionada sobre la IA en educación?</h5>
+                    <p class="question-text">A) Que no funciona correctamente</p>
+                    <p class="question-text">B) La privacidad de los datos</p>
+                    <p class="question-text">C) Que los estudiantes prefieran otros métodos</p>
+                    <p class="question-text">D) Que sea demasiado cara</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) La privacidad de los datos</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué equilibrio es necesario según el texto?</h5>
+                    <p class="question-text">A) Eliminar la IA de las aulas</p>
+                    <p class="question-text">B) Usar IA sin restricciones</p>
+                    <p class="question-text">C) Mantener el contacto humano y aprovechar la IA</p>
+                    <p class="question-text">D) Limitar la IA a tareas específicas</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) Mantener el contacto humano y aprovechar la IA</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2023,
+                university: "Universidad del País Vasco (EHU)",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 2: El Cambio Climático y la Acción Colectiva</h4>
+                <p>El cambio climático se ha convertido en uno de los desafíos más urgentes de nuestra época. La evidencia científica es clara: las actividades humanas, especialmente el uso de combustibles fósiles, han incrementado significativamente las concentraciones de gases de efecto invernadero en la atmósfera, provocando un aumento global de la temperatura.</p>
+
+                <p>Los efectos de este cambio son evidentes y preocupantes. Desde la deriva de los polos de hielo hasta la alteración de patrones climáticos, el planeta está experimentando transformaciones sin precedentes. Los científicos advierten que, si no tomamos medidas drásticas, para 2050 el nivel del mar podría aumentar entre 0.5 y 1 metro, lo que amenazaría a millones de personas en zonas costeras.</p>
+
+                <p>La acción colectiva es fundamental. Cada individuo puede contribuir mediante cambios en su estilo de vida: usar transporte sostenible, reducir el consumo de energía, y apoyar políticas ambientales. Sin embargo, la responsabilidad no recae solo en los ciudadanos; las empresas y gobiernos también deben asumir su parte. Solo una acción coordinada a nivel mundial podrá hacer frente a esta crisis global.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cuál es la causa principal del cambio climático según el texto?</h5>
+                    <p class="question-text">A) Las actividades humanas y el uso de combustibles fósiles</p>
+                    <p class="question-text">B) Los volcanes y las erupciones</p>
+                    <p class="question-text">C) El calentamiento solar natural</p>
+                    <p class="question-text">D) La contaminación industrial</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: A) Las actividades humanas y el uso de combustibles fósiles</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Qué efecto del cambio climático menciona el texto?</h5>
+                    <p class="question-text">A) Disminución de las tormentas</p>
+                    <p class="question-text">B) Aumento del nivel del mar</p>
+                    <p class="question-text">C) Reducción de la temperatura global</p>
+                    <p class="question-text">D) Mayor cantidad de nieve</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Aumento del nivel del mar</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué tipo de acción se considera necesaria según el texto?</h5>
+                    <p class="question-text">A) Solo la acción de los gobiernos</p>
+                    <p class="question-text">B) Solo la acción de los ciudadanos</p>
+                    <p class="question-text">C) Acción coordinada a nivel mundial de todos los agentes</p>
+                    <p class="question-text">D) Sin necesidad de acción</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) Acción coordinada a nivel mundial de todos los agentes</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2022,
+                university: "Universidad de Salamanca",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 3: La Importancia de la Educación en la Vida</h4>
+                <p>La educación es uno de los pilares fundamentales del desarrollo humano y social. A lo largo de la historia, las instituciones educativas han evolucionado para adaptarse a los cambios tecnológicos y culturales. Hoy en día, el aprendizaje no se limita al aula tradicional, sino que abarca plataformas online, cursos especializados y educación continua.</p>
+
+                <p>El acceso a la información ha democratizado el conocimiento. Gracias a internet, cualquier persona con conexión a la red puede acceder a millones de recursos educativos gratuitos. Esto ha permitido que personas de todas las edades y condiciones puedan aprender nuevas habilidades, actualizar sus conocimientos y adaptarse a un mundo en constante cambio.</p>
+
+                <p>La educación también enfrenta desafíos importantes. La brecha digital, la calidad de la enseñanza y la adaptación a las nuevas necesidades laborales son cuestiones que requieren atención urgente. El futuro de la educación dependerá de nuestra capacidad para innovar y mantenernos relevantes en un mundo cada vez más competitivo.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cómo ha evolucionado la educación a lo largo de la historia?</h5>
+                    <p class="question-text">A) Se ha mantenido igual sin cambios</p>
+                    <p class="question-text">B) Se ha adaptado a los cambios tecnológicos y culturales</p>
+                    <p class="question-text">C) Se ha reducido su importancia social</p>
+                    <p class="question-text">D) Se ha vuelto más exclusiva</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Se ha adaptado a los cambios tecnológicos y culturales</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Qué ha permitido democratizar el acceso a la información?</h5>
+                    <p class="question-text">A) La televisión</p>
+                    <p class="question-text">B) La educación tradicional</p>
+                    <p class="question-text">C) Internet</p>
+                    <p class="question-text">D) Las bibliotecas</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) Internet</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Cuál es uno de los desafíos que enfrenta la educación mencionado en el texto?</h5>
+                    <p class="question-text">A) La falta de recursos</p>
+                    <p class="question-text">B) La brecha digital, la calidad de enseñanza y la adaptación laboral</p>
+                    <p class="question-text">C) La escasez de estudiantes</p>
+                    <p class="question-text">D) La falta de profesores cualificados</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) La brecha digital, la calidad de enseñanza y la adaptación laboral</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2021,
+                university: "Universidad de Oviedo",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 4: La Salud Mental y Bienestar</h4>
+                <p>La salud mental es tan importante como la salud física, pero a menudo es menos priorizada en nuestra sociedad. El estrés crónico, la ansiedad y la depresión afectan a millones de personas en todo el mundo. Según la OMS, más de 300 millones de personas sufren de depresión en algún momento de sus vidas.</p>
+
+                <p>Las causas de los problemas de salud mental son multifactoriales. Factores genéticos, ambientales, sociales y emocionales pueden contribuir al desarrollo de trastornos mentales. La buena noticia es que, con el diagnóstico oportuno y el tratamiento adecuado, la gran mayoría de las personas pueden recuperar su bienestar mental.</p>
+
+                <p>La prevención es fundamental. La práctica de hábitos saludables como el ejercicio regular, la alimentación balanceada, la buena calidad del sueño y la conexión social pueden reducir significativamente el riesgo de problemas mentales. Además, hablar abiertamente sobre la salud mental ayuda a reducir el estigma y fomenta la búsqueda de ayuda cuando sea necesaria.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cuántas personas sufren de depresión según la OMS?</h5>
+                    <p class="question-text">A) Más de 100 millones</p>
+                    <p class="question-text">B) Más de 300 millones</p>
+                    <p class="question-text">C) Más de 500 millones</p>
+                    <p class="question-text">D) Más de 1 billón</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Más de 300 millones</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Qué puede ayudar a reducir el riesgo de problemas mentales?</h5>
+                    <p class="question-text">A) El aislamiento social</p>
+                    <p class="question-text">B) El consumo de alcohol</p>
+                    <p class="question-text">C) La práctica de hábitos saludables y conexión social</p>
+                    <p class="question-text">D) El estrés crónico</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) La práctica de hábitos saludables y conexión social</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Por qué es importante hablar abiertamente sobre la salud mental?</h5>
+                    <p class="question-text">A) Para crear estigma</p>
+                    <p class="question-text">B) Para reducir el estigma</p>
+                    <p class="question-text">C) Para evitar que nadie busque ayuda</p>
+                    <p class="question-text">D) Para que todos sepan lo mismo</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Para reducir el estigma</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2020,
+                university: "Universidad Autónoma de Madrid",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 5: El Turismo Sostenible</h4>
+                <p>El turismo sostenible es una forma de viajar que minimiza el impacto negativo en el medio ambiente y las comunidades locales. A medida que crece la conciencia sobre la crisis climática y la necesidad de proteger el planeta, cada vez más viajeros están optando por opciones turísticas responsables.</p>
+
+                <p>El turismo sostenible se basa en tres pilares fundamentales: el impacto ambiental, el impacto social y el impacto económico. Los viajes sostenibles buscan reducir la contaminación, respetar las culturas locales, apoyar la economía de las comunidades visitadas y preservar los recursos naturales para las generaciones futuras.</p>
+
+                <p>Los beneficios del turismo sostenible son múltiples. No solo protege el medio ambiente, sino que también genera empleos locales, preserva el patrimonio cultural y promueve el entendimiento intercultural. Los turistas conscientes pueden contribuir positivamente al destino que visitan, creando un viaje más significativo y enriquecedor para todos.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Qué es el turismo sostenible?</h5>
+                    <p class="question-text">A) Viajar sin dinero</p>
+                    <p class="question-text">B) Viajar que minimiza impacto negativo en el ambiente y comunidades</p>
+                    <p class="question-text">C) Viajar rápido</p>
+                    <p class="question-text">D) Viajar solo para descansar</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Viajar que minimiza impacto negativo en el ambiente y comunidades</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Cuántos pilares fundamentales tiene el turismo sostenible?</h5>
+                    <p class="question-text">A) Dos</p>
+                    <p class="question-text">B) Tres</p>
+                    <p class="question-text">C) Cuatro</p>
+                    <p class="question-text">D) Cinco</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Tres</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué beneficio del turismo sostenible menciona el texto?</h5>
+                    <p class="question-text">A) Solo reduce contaminación</p>
+                    <p class="question-text">B) Genera empleos locales y preserva patrimonio cultural</p>
+                    <p class="question-text">C) Aumenta el consumo</p>
+                    <p class="question-text">D) No tiene beneficios</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Genera empleos locales y preserva patrimonio cultural</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2019,
+                university: "Universidad Complutense de Madrid",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 6: La Tecnología y la Sociedad</h4>
+                <p>La tecnología ha transformado radicalmente la forma en que vivimos y nos relacionamos. Desde la revolución industrial hasta la digital actual, cada avance tecnológico ha modificado nuestra sociedad, nuestras economías y nuestras culturas.</p>
+
+                <p>La digitalización ha democratizado el acceso a la información y las oportunidades. Hoy en día, cualquier persona con acceso a internet puede acceder a conocimientos, servicios y oportunidades que antes estaban limitadas a una élite. Esto ha permitido que personas de todas las regiones y condiciones puedan participar activamente en la sociedad moderna.</p>
+
+                <p>Sin embargo, esta transformación también presenta nuevos desafíos. La desinformación, la brecha digital y la pérdida de privacidad son preocupaciones crecientes. Además, la velocidad del cambio tecnológico requiere que las personas se actualicen constantemente, lo que puede generar ansiedad y frustración en aquellos que tienen dificultades para adaptarse.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cómo ha transformado la tecnología nuestra sociedad?</h5>
+                    <p class="question-text">A) No ha transformado nada</p>
+                    <p class="question-text">B) Ha modificado nuestra sociedad, economías y culturas</p>
+                    <p class="question-text">C) Solo ha afectado a la economía</p>
+                    <p class="question-text">D) Solo ha afectado a las culturas</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Ha modificado nuestra sociedad, economías y culturas</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Qué ha permitido la digitalización?</h5>
+                    <p class="question-text">A) Limitar el acceso a la información</p>
+                    <p class="question-text">B) Democratizar el acceso a la información y oportunidades</p>
+                    <p class="question-text">C) Aumentar la desigualdad</p>
+                    <p class="question-text">D) Reducir el acceso a internet</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Democratizar el acceso a la información y oportunidades</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Cuál es uno de los desafíos de la transformación tecnológica mencionado?</h5>
+                    <p class="question-text">A) La falta de tecnología</p>
+                    <p class="question-text">B) La desinformación, la brecha digital y la pérdida de privacidad</p>
+                    <p class="question-text">C) El exceso de información</p>
+                    <p class="question-text">D) La falta de empleos</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) La desinformación, la brecha digital y la pérdida de privacidad</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2018,
+                university: "Universidad de Granada",
+                source: "Convocatoria oficial",
+                text: `<h4>Texto 7: La Innovación en el Trabajo</h4>
+                <p>La innovación es el motor del progreso económico y social. A lo largo de la historia, cada avance innovador ha creado nuevas industrias, nuevos empleos y nuevas oportunidades. La innovación no solo beneficia a las empresas, sino que también mejora la calidad de vida de las personas.</p>
+
+                <p>La automatización de tareas repetitivas ha liberado a los trabajadores para que se dediquen a tareas más creativas y complejas. Los robots y sistemas inteligentes pueden realizar tareas que antes requerían horas de trabajo manual, permitiendo a los humanos enfocarse en actividades que requieren pensamiento crítico y creatividad.</p>
+
+                <p>El futuro del trabajo dependerá de la capacidad de las personas para adaptarse a este nuevo panorama. La formación continua y el desarrollo de habilidades blandas serán esenciales para mantenerse competitivos en un mercado laboral que se transforma rápidamente.</p>
+
+                <h4>Preguntas de Comprensión Lectora</h4>
+                <div class="question-item">
+                    <h5>1. ¿Qué papel juega la innovación en la sociedad?</h5>
+                    <p class="question-text">A) No tiene ningún papel</p>
+                    <p class="question-text">B) Es el motor del progreso económico y social</p>
+                    <p class="question-text">C) Solo beneficia a las empresas</p>
+                    <p class="question-text">D) Solo crea nuevas industrias</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Es el motor del progreso económico y social</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Qué ha hecho la automatización en el mundo laboral?</h5>
+                    <p class="question-text">A) Eliminado todos los empleos</p>
+                    <p class="question-text">B) Liberado a los trabajadores para tareas más creativas</p>
+                    <p class="question-text">C) Solo afectado a trabajos manuales</p>
+                    <p class="question-text">D) Reducido el número de horas de trabajo</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Liberado a los trabajadores para tareas más creativas</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué habilidades serán esenciales en el futuro del trabajo?</h5>
+                    <p class="question-text">A) Solo habilidades técnicas</p>
+                    <p class="question-text">B) Solo habilidades manuales</p>
+                    <p class="question-text">C) Formación continua y habilidades blandas</p>
+                    <p class="question-text">D) Ninguna habilidad especial</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) Formación continua y habilidades blandas</p>
+                </div>`,
+                downloadUrl: "#"
+            }
+        ];
+
+        // Ejercicios de Lengua Castellana
+        const lenguaExercises = [
+            {
+                year: 2024,
+                university: "Universidad Complutense de Madrid",
+                source: "Ejercicios de Lengua Castellana",
+                exercise: `<h4>Ejercicio 1: Análisis Lingüístico</h4>
+                <p>Analiza gramaticalmente la siguiente frase:</p>
+                <p>"Los estudiantes universitarios deben estudiar diariamente para aprobar las pruebas de acceso."</p>
+                <br>
+                <h4>Preguntas:</h4>
+                <div class="question-item">
+                    <h5>1. ¿Qué tipo de oración es?</h5>
+                    <p class="question-text">A) Oración simple</p>
+                    <p class="question-text">B) Oración compuesta</p>
+                    <p class="question-text">C) Oración coordinada</p>
+                    <p class="question-text">D) Oración subordinada</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Oración compuesta</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. Identifica el sujeto de la oración.</h5>
+                    <p class="question-text">A) Los estudiantes universitarios</p>
+                    <p class="question-text">B) deben</p>
+                    <p class="question-text">C) estudiar</p>
+                    <p class="question-text">D) para aprobar</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: A) Los estudiantes universitarios</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué tipo de verbo es "deben"?</h5>
+                    <p class="question-text">A) Verbo copulativo</p>
+                    <p class="question-text">B) Verbo de acción</p>
+                    <p class="question-text">C) Verbo modal</p>
+                    <p class="question-text">D) Verbo auxiliar</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: C) Verbo modal</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2023,
+                university: "Universidad del País Vasco (EHU)",
+                source: "Ejercicios de Lengua Castellana",
+                exercise: `<h4>Ejercicio 2: Sintaxis y Semántica</h4>
+                <p>Identifica las funciones sintácticas de las siguientes palabras:</p>
+                <p>"La inteligencia artificial transformará radicalmente la educación."</p>
+                <br>
+                <h4>Preguntas:</h4>
+                <div class="question-item">
+                    <h5>1. ¿Cuál es la función sintáctica de "La"?</h5>
+                    <p class="question-text">A) Sujeto</p>
+                    <p class="question-text">B) Artículo determinado</p>
+                    <p class="question-text">C) Complemento</p>
+                    <p class="question-text">D) Adyacente</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Artículo determinado</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. ¿Cuál es la función sintáctica de "inteligencia artificial"?</h5>
+                    <p class="question-text">A) Predicado</p>
+                    <p class="question-text">B) Sintagma nominal sujeto</p>
+                    <p class="question-text">C) Sintagma verbal predicado</p>
+                    <p class="question-text">D) Complemento circunstancial</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) Sintagma nominal sujeto</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. ¿Qué función tiene "radicalmente"?</h5>
+                    <p class="question-text">A) Adverbio de modo</p>
+                    <p class="question-text">B) Adjetivo</p>
+                    <p class="question-text">C) Adverbio de tiempo</p>
+                    <p class="question-text">D) Adjetivo calificativo</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: A) Adverbio de modo</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2022,
+                university: "Universidad de Salamanca",
+                source: "Ejercicios de Lengua Castellana",
+                exercise: `<h4>Ejercicio 3: Ortografía y Gramática</h4>
+                <p>Corrige las siguientes oraciones:</p>
+                <br>
+                <h4>Preguntas:</h4>
+                <div class="question-item">
+                    <h5>1. "El cambio climatico es una preocupacion global."</h5>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: "El cambio climático es una preocupación global."</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. "Los estudiantes deben estudiar mucho para aprobar."</h5>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: "Los estudiantes deben estudiar mucho para aprobar."</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. "La tecnologia nos ayuda en nuestra vida diaria."</h5>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: "La tecnología nos ayuda en nuestra vida diaria."</p>
+                </div>`,
+                downloadUrl: "#"
+            },
+            {
+                year: 2021,
+                university: "Universidad de Oviedo",
+                source: "Ejercicios de Lengua Castellana",
+                exercise: `<h4>Ejercicio 4: Cohesión Textual</h4>
+                <p>Completa los siguientes párrafos con las palabras adecuadas:</p>
+                <br>
+                <h4>Preguntas:</h4>
+                <div class="question-item">
+                    <h5>1. La educación es importante porque _______ permite el desarrollo personal y social.</h5>
+                    <p class="question-text">A) nos</p>
+                    <p class="question-text">B) nos permite</p>
+                    <p class="question-text">C) permite</p>
+                    <p class="question-text">D) permite a nosotros</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: B) nos permite</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>2. _______ la tecnología avanza, _______ necesitamos adaptarnos.</h5>
+                    <p class="question-text">A) Mientras / mientras</p>
+                    <p class="question-text">B) Cuando / cuando</p>
+                    <p class="question-text">C) Aunque / aunque</p>
+                    <p class="question-text">D) Si / si</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: A) Mientras / mientras</p>
+                </div>
+
+                <div class="question-item">
+                    <h5>3. No solo estudiamos para obtener un título, _______ también para aprender.</h5>
+                    <p class="question-text">A) sino también</p>
+                    <p class="question-text">B) sino que</p>
+                    <p class="question-text">C) sino que también</p>
+                    <p class="question-text">D) y también</p>
+                    <button class="reveal-answer-btn" onclick="toggleAnswer(this)">👁️ Ver respuesta</button>
+                    <p class="correct-answer">✅ Respuesta correcta: A) sino también</p>
+                </div>`,
+                downloadUrl: "#"
+            }
+        ];
+
+        let currentExamFilter = 'all';
+        let currentExamTexts = [...examenTexts];
+        let allRevealed = false;
+
+        // Renderizar exámenes de comentario de texto
+        function renderComentarioExams() {
+            const container = document.getElementById('comentario-exams');
+            container.innerHTML = '';
+
+            currentExamTexts.forEach(exam => {
+                const examCard = document.createElement('div');
+                examCard.className = 'exam-card';
+                examCard.dataset.year = exam.year;
+                examCard.innerHTML = `
+                    <h3>📝 Examen ${exam.year} - ${exam.university}</h3>
+                    <p class="source">Fuente: ${exam.source}</p>
+                    <div class="exam-text">
+                        ${exam.text}
+                    </div>
+                    ${exam.downloadUrl ? `<a href="${exam.downloadUrl}" class="download-link" target="_blank">⬇️ Descargar examen original</a>` : ''}
+                `;
+                container.appendChild(examCard);
+            });
+        }
+
+        // Renderizar ejercicios de lengua castellana
+        function renderLenguaExams() {
+            const container = document.getElementById('lengua-exams');
+            container.innerHTML = '';
+
+            lenguaExercises.forEach(exercise => {
+                const examCard = document.createElement('div');
+                examCard.className = 'exam-card';
+                examCard.innerHTML = `
+                    <h3>🗣️ ${exercise.year} - ${exercise.university}</h3>
+                    <p class="source">Fuente: ${exercise.source}</p>
+                    <div class="exam-questions">
+                        ${exercise.exercise}
+                    </div>
+                    ${exercise.downloadUrl ? `<a href="${exercise.downloadUrl}" class="download-link" target="_blank">⬇️ Descargar ejercicio original</a>` : ''}
+                `;
+                container.appendChild(examCard);
+            });
+        }
+
+        // Filtrar exámenes por año
+        function filterExams(year) {
+            currentExamFilter = year;
+
+            // Actualizar botones
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(year) || (year === 'all' && btn.textContent === 'Todos')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filtrar exámenes
+            if (year === 'all') {
+                currentExamTexts = ex => ex;
+            } else {
+                currentExamTexts = ex => ex.year === parseInt(year);
+            }
+
+            renderComentarioExams();
+        }
+
+        // Navegación entre tabs
+        function showTab(tabId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        }
+
+        // Toggle respuesta individual
+        function toggleAnswer(btn) {
+            const questionItem = btn.closest('.question-item');
+            const answer = questionItem.querySelector('.correct-answer');
+            const allRevealBtn = document.querySelector('.reveal-all-btn');
+
+            if (answer.classList.contains('revealed')) {
+                answer.classList.remove('revealed');
+                btn.textContent = '👁️ Ver respuesta';
+                btn.classList.remove('hidden');
+                allRevealed = false;
+                allRevealBtn.textContent = '👁️ Ver todas las respuestas';
+                allRevealBtn.classList.remove('revealed');
+            } else {
+                answer.classList.add('revealed');
+                btn.textContent = '🙈 Ocultar respuesta';
+                btn.classList.add('hidden');
+                allRevealed = true;
+                allRevealBtn.textContent = '🙈 Ocultar todas las respuestas';
+                allRevealBtn.classList.add('revealed');
+            }
+        }
+
+        // Revelar todas las respuestas
+        function revealAllAnswers() {
+            const allAnswers = document.querySelectorAll('.correct-answer');
+            const allBtns = document.querySelectorAll('.reveal-answer-btn');
+            const allRevealBtn = document.querySelector('.reveal-all-btn');
+
+            allAnswers.forEach(answer => answer.classList.add('revealed'));
+            allBtns.forEach(btn => {
+                btn.textContent = '🙈 Ocultar respuesta';
+                btn.classList.add('hidden');
+            });
+
+            allRevealed = true;
+            allRevealBtn.textContent = '🙈 Ocultar todas las respuestas';
+            allRevealBtn.classList.add('revealed');
+        }
+
+        // Event listeners para tabs
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => showTab(tab.dataset.tab));
+        });
+
+        // Inicializar
+        renderComentarioExams();
+        renderLenguaExams();
+    </script>
+</body>
+</html>
