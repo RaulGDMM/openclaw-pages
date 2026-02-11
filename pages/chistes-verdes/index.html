@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🟢 Chistes Verdes - El mejor humor picante</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .warning {
+            text-align: center;
+            background: #ff6b6b;
+            color: #1a1a2e;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .joke-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .joke-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .joke-title {
+            font-size: 1.3em;
+            color: #00ff88;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .joke-content {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            white-space: pre-line;
+        }
+
+        .joke-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .vote-count {
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .vote-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .vote-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .share-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .joke-card {
+                padding: 20px;
+            }
+
+            .joke-stats {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="warning">
+            ⚠️ ADVERTENCIA: Este contenido es solo para adultos. Si eres menor de 18 años, te recomendamos salir.
+        </div>
+
+        <header>
+            <h1>🟢 Chistes Verdes</h1>
+            <p>El mejor humor picante y atrevido</p>
+        </header>
+
+        <div id="chistes-container">
+            <div class="joke-card">
+                <div class="joke-title">🩺 Crisis Sexual</div>
+                <div class="joke-content">Un tío va al médico y le comenta:
+- Doctor, tengo el siguiente problema: cuando hago el amor con mi mujer, me da la impresión de que no siente nada. Algunas veces incluso se duerme... ¡figúese!
+
+- Eso tiene una explicación científica. Algunas mujeres cuando se excitan se acaloran tanto, que les es imposible sentir nada. Trate de hacerle el amor y abanicarla al mismo tiempo.
+
+- ¡Gracias, Doctor!
+
+Y esa noche así lo hizo, pero cuando atendía al abanico, no atendía a lo otro. Así que contrató a un negro para que la abanicase, mientras él le hacía el amor.
+
+- Dale, negro. ¡Abaníca!. ¿Sientes algo ahora, mi amor?
+
+- No, nada.
+
+- ¡Más fuerte, negro!. ¡Carajo!. ¿Y ahora, cariño?
+
+- Nada, nada...
+
+- A ver, negro. Dame para acá el abanico y tú dale a ella.
+
+El negro se pone encima de la mujer y empieza con lo suyo, mientras el marido la abanicaba.
+
+- ¿Y ahora, amor, sientes algo?
+
+- ¡¡¡Sííííí... ahora sííííí... ahhhh... AHHHH...!
+
+- ¿Ves, negro?. ¡Así se abanica!</div>
+                <div class="joke-stats">
+                    <span>82.92% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 82.92%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">👶 Confusión</div>
+                <div class="joke-content">- Mamá, mamá, ¿cómo se explica que papá sea negro, tú blanca y yo amarillo?
+
+- Mira chaval, si supieras la orgía que hubo ese día, lo que me extraña es que no ladres.</div>
+                <div class="joke-stats">
+                    <span>80.68% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 80.68%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🐄 Granjero Espabilado</div>
+                <div class="joke-content">Un granjero compra una ordeñadora para las vacas, y mientras ordeña, piensa que con el movimiento que hace en las tetillas se puede hacer una buena paja, así que se saca el cacharro por la bragueta y lo mete en la chupadora de la tetilla. Entonces se corre hasta seis veces, pero cuando se cansa no puede sacar la picha. Saca el móvil, y llama al servicio técnico para preguntar cómo demonios se para la ordeñadora. El del servicio técnico le contesta:
+
+- Tranquilo, a los 25 litros se para sola.</div>
+                <div class="joke-stats">
+                    <span>80.13% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 80.13%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🎈 Ligereza</div>
+                <div class="joke-content">¿Cuál es la cosa más ligera del mundo?
+
+La polla. Se puede levantar hasta con un pensamiento...</div>
+                <div class="joke-stats">
+                    <span>80.00% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 80.00%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🦸 Superhéroes</div>
+                <div class="joke-content">Superman volaba por el cielo necesitado, cuando vio a la Mujer Maravilla tomando el sol en la terraza sin ropa y con las piernas abiertas. Superman pensó:
+
+- Esta es la mía, pero para que nadie me vea lo voy a hacer rápido con mi súper velocidad y nadie se dará cuenta de que fui yo.
+
+Superman se tiró con toda su fuerza y rápido lo hizo. La Mujer Maravilla sorprendida preguntó:
+
+- ¿Qué pasó?
+
+El hombre invisible extrañado respondió:
+
+- No lo sé, pero me quedó el culo muy dolorido.</div>
+                <div class="joke-stats">
+                    <span>79.26% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 79.26%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🔊 Gritos</div>
+                <div class="joke-content">- ¿Perdone señor, esto es para una encuesta, su mujer grita cuando hacen el amor?
+
+- Pues sí, si, bastante.
+
+- ¿Y lo hace durante, después, antes...?
+
+- No, lo hace después, cuando me limpio la polla con las cortinas.</div>
+                <div class="joke-stats">
+                    <span>77.57% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 77.57%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🥗 Vegetariana</div>
+                <div class="joke-content">Conversación de pareja:
+
+- María, cómeme la polla.
+
+- Pero, ¿no te acuerdas que soy vegetariana?
+
+- Vale, pues cómeme el nabo.</div>
+                <div class="joke-stats">
+                    <span>76.88% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 76.88%"></div>
+                </div>
+            </div>
+
+            <div class="joke-card">
+                <div class="joke-title">🦷 Primera Vez</div>
+                <div class="joke-content">La primera vez de la mujer es como el dolor de muelas:
+
+¡Le duele, pero no quiere que se la saquen!</div>
+                <div class="joke-stats">
+                    <span>76.71% de votos positivos</span>
+                    <button class="share-btn" onclick="shareJoke(this)">Compartir</button>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 76.71%"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with 🐱🤖 by Cocobot | Solo para mayores de 18 años</p>
+        </footer>
+    </div>
+
+    <script>
+        function shareJoke(button) {
+            const jokeCard = button.closest('.joke-card');
+            const jokeTitle = jokeCard.querySelector('.joke-title').textContent;
+            const jokeContent = jokeCard.querySelector('.joke-content').textContent;
+
+            const text = `🟢 ${jokeTitle}\n${jokeContent}\n\n¿Te ha gustado este chiste verde? Visita: https://chistes.verdes`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Chiste Verde',
+                    text: text
+                });
+            } else {
+                // Copiar al portapapeles
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = '¡Copiado!';
+                    button.style.background = 'rgba(0, 255, 136, 0.4)';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '';
+                    }, 2000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
