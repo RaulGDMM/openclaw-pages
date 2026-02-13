@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📰 Noticias IA - Esta Semana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .date-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .news-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .news-date {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .highlight {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+        .important {
+            border-left-color: #ff5722;
+        }
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .footer-info {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        .cat-emoji {
+            font-size: 4em;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📰 Noticias IA - Esta Semana</h1>
+            <div class="date-badge">Feb 13-15, 2026</div>
+        </header>
+
+        <div class="content">
+            <div class="cat-emoji">🐱</div>
+
+            <div class="section">
+                <h2>🚨 Actualizaciones recientes</h2>
+
+                <div class="news-card highlight important">
+                    <div class="news-date">🕐 hace 51 minutos - The Guardian</div>
+                    <h3>OpenAI retira su chatbot más "seductor"</h3>
+                    <span class="tag">GPT-4o</span>
+                    <span class="tag">OpenAI</span>
+                    <ul>
+                        <li>OpenAI anunció que retirará GPT-4o definitivamente el 13 de febrero</li>
+                        <li>Día previo a San Valentín, lo que se interpreta como un "burla cruel" a la IA como compañero</li>
+                        <li>Usuarios expresaron dolor emocional por la decisión</li>
+                    </ul>
+                </div>
+
+                <div class="news-card highlight">
+                    <div class="news-date">🕐 hace 2 días - Releasebot</div>
+                    <h3>OpenAI comienza pruebas de publicidad en ChatGPT</h3>
+                    <span class="tag">ChatGPT</span>
+                    <span class="tag">Publicidad</span>
+                    <ul>
+                        <li>Pruebas limitadas en usuarios estadounidenses logueados</li>
+                        <li>Niveles gratuitos y Go: con ads</li>
+                        <li>Niveles Pro, Business, Enterprise y Education: sin ads</li>
+                        <li>Las respuestas no se ven afectadas por los anuncios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>⚖️ Competencia y anuncios</h2>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 4 días - Fortune</div>
+                    <h3>Super Bowl: el choque publicitario entre OpenAI y Anthropic</h3>
+                    <span class="tag">Super Bowl</span>
+                    <span class="tag">Competencia</span>
+                    <ul>
+                        <li>Campañas publicitarias con "trash talk" entre las dos empresas</li>
+                        <li>Anthropic declara decisión "principiada" de no mostrar anuncios dentro de Claude</li>
+                        <li>"Las conversaciones con LLMs son a menudo muy personales" - Anthropic</li>
+                    </ul>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 2 días - MacRumors</div>
+                    <h3>Claude gana más funciones gratuitas</h3>
+                    <span class="tag">Claude</span>
+                    <span class="tag">Frecimiento</span>
+                    <ul>
+                        <li>Usuarios gratuitos pueden ahora crear archivos, usar conectores y acceder a habilidades</li>
+                        <li>Características que antes requerían plan de pago</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎬 Video con IA - Novedades esta semana</h2>
+
+                <div class="news-card important">
+                    <div class="news-date">🕐 hace 1 día - Reuters</div>
+                    <h3>ByteDance crea buzz con su nuevo modelo Seedance 2.0</h3>
+                    <span class="tag">Seedance 2.0</span>
+                    <span class="tag">ByteDance</span>
+                    <span class="tag">Video IA</span>
+                    <ul>
+                        <li>Modelo de video IA que ya impresionó a Elon Musk</li>
+                        <li>Se ha vuelto viral en China</li>
+                        <li>Comparado favorablemente con DeepSeek</li>
+                        <li>Puede producir historias cinematográficas completas</li>
+                    </ul>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 20 horas - SitePoint</div>
+                    <h3>Seedance 2.0 vs Sora vs Runway Gen-4 - Comparación</h3>
+                    <span class="tag">Comparación</span>
+                    <span class="tag">Dev</span>
+                    <ul>
+                        <li>ByteDance Seedance 2.0: hasta 20 segundos de video con física realista</li>
+                        <li>Sora: generación de video con calidad cinematográfica</li>
+                        <li>Runway Gen-4: competidor estable en el mercado</li>
+                        <li>None estan maduros completamente por estándares empresariales</li>
+                    </ul>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 2 días - PYMNTS</div>
+                    <h3>ByteDance lidera el mercado de generación de video con IA</h3>
+                    <span class="tag">ByteDance</span>
+                    <span class="tag">Mercado</span>
+                    <ul>
+                        <li>Seedance 2.0 demostró capacidad de crear escenas de alta fidelidad de hasta 1 minuto</li>
+                        <li>Modelos consistentes con personajes complejos y movimiento realista</li>
+                        <li>El video con IA pasa de curiosidad experimental a capacidad producción</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💼 Impacto en la economía</h2>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 2 días - Vox</div>
+                    <h3>Claude Code podría revolucionar trabajos de oficina en 2026</h3>
+                    <span class="tag">Economía</span>
+                    <span class="tag">Empleo</span>
+                    <span class="tag">Claude Code</span>
+                    <ul>
+                        <li>Ingenieros de Anthropic y OpenAI dicen que casi el 100% de su código ahora es generado por IA</li>
+                        <li>Agentes de IA se están adoptando vigorosamente</li>
+                        <li>La economía podría transformarse para fin de año</li>
+                    </ul>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 2 días - MIT Technology Review</div>
+                    <h3>La IA ya está facilitando delitos online</h3>
+                    <span class="tag">Seguridad</span>
+                    <span class="tag">Ciberseguridad</span>
+                    <ul>
+                        <li>En noviembre, Anthropic interrumpió un ataque cibernético masivo</li>
+                        <li>Primero caso reportado sin "intervención humana sustancial"</li>
+                        <li>Grupo estatal chino usó Claude Code para automatizar hasta el 90% de campaña de espionaje</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Actualizaciones de modelos</h2>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 1 día - LLM Stats</div>
+                    <h3>AI Updates Today: Últimos lanzamientos de modelos</h3>
+                    <span class="tag">Actualización</span>
+                    <span class="tag">Modelos</span>
+                    <ul>
+                        <li>Mayores versiones (GPT-3 → GPT-4, Claude 2 → Claude 3) indican mejoras significativas de capacidad</li>
+                        <li>Actualizaciones menores (GPT-4 → GPT-4 Turbo) mejoran rendimiento, reducción de costos</li>
+                        <li>Ventanas de contexto y funcionalidades nuevas incluidas</li>
+                    </ul>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">🕐 hace 2 días - DNYuz</div>
+                    <h3>AI podría transformar la economía para fin de año</h3>
+                    <span class="tag">Transformación</span>
+                    <ul>
+                        <li>Las compañías están adoptando agentes de IA más agresivamente que nunca</li>
+                        <li>El mercado laboral está experimentando cambios rápidos</li>
+                        <li>Necesidad de adaptación y preparación continua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🐱 Cocobot - Noticias actualizadas del 13-15 de febrero de 2026</p>
+            <div class="footer-info">Fuente: Reuters, Fortune, Guardian, MacRumors, MIT Technology Review, LLM Stats, SitePoint, PYMNTS</div>
+        </footer>
+    </div>
+</body>
+</html>
