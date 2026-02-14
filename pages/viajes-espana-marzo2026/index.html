@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajes desde Madrid en Marzo 2026</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        select, input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+        }
+        th:hover { background: #5a6fd6; }
+        tr:hover { background: #f5f8ff; }
+        .price {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .duration {
+            color: #666;
+        }
+        .destination {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .highlight {
+            background: #fff3cd !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Viajes desde Madrid en Marzo 2026</h1>
+        
+        <div class="filters">
+            <input type="text" id="search" placeholder="Buscar ciudad...">
+            <select id="priceFilter">
+                <option value="all">Todos los precios</option>
+                <option value="low">Menos de 30€</option>
+                <option value="medium">30-80€</option>
+                <option value="high">Más de 80€</option>
+            </select>
+            <select id="durationFilter">
+                <option value="all">Todas las duraciones</option>
+                <option value="short">Menos de 3h</option>
+                <option value="medium">3-6h</option>
+                <option value="long">Más de 6h</option>
+            </select>
+        </div>
+        
+        <div class="table-container">
+            <table id="destinationsTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Destino ▾</th>
+                        <th onclick="sortTable(1)">Precio (desde)</th>
+                        <th onclick="sortTable(2)">Duración</th>
+                        <th onclick="sortTable(3)">Transporte</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-destination="Barcelona" data-price="15" data-duration="150" data-transport="AVE">
+                        <td class="destination">Barcelona</td>
+                        <td class="price">15€</td>
+                        <td class="duration">2h 30m</td>
+                        <td>AVE, Avlo, Iryo, Ouigo</td>
+                        <td><div class="tags"><span class="tag">Cultura</span><span class="tag">Playa</span><span class="tag">Fútbol</span></div></td>
+                    </tr>
+                    <tr data-destination="Sevilla" data-price="11" data-duration="159" data-transport="AVE">
+                        <td class="destination">Sevilla</td>
+                        <td class="price">11€</td>
+                        <td class="duration">2h 39m</td>
+                        <td>AVE, Avlo, Iryo</td>
+                        <td><div class="tags"><span class="tag">Flamenco</span><span class="tag">Semana Santa</span><span class="tag">Tapas</span></div></td>
+                    </tr>
+                    <tr data-destination="Valencia" data-price="9" data-duration="114" data-transport="Avlo">
+                        <td class="destination">Valencia</td>
+                        <td class="price">9€</td>
+                        <td class="duration">1h 54m</td>
+                        <td>Avlo, Ouigo</td>
+                        <td><div class="tags"><span class="tag">Ciudad de las Artes</span><span class="tag">Playa</span><span class="tag">Paella</span></div></td>
+                    </tr>
+                    <tr data-destination="Granada" data-price="20" data-duration="195" data-transport="AVE">
+                        <td class="destination">Granada</td>
+                        <td class="price">20€</td>
+                        <td class="duration">3h 15m</td>
+                        <td>AVE, Iryo, Ouigo</td>
+                        <td><div class="tags"><span class="tag">Alhambra</span><span class="tag">Naturaleza</span><span class="tag">Tapas gratis</span></div></td>
+                    </tr>
+                    <tr data-destination="Málaga" data-price="8" data-duration="167" data-transport="AVE">
+                        <td class="destination">Málaga</td>
+                        <td class="price">8€</td>
+                        <td class="duration">2h 47m</td>
+                        <td>AVE, Avlo, Ouigo</td>
+                        <td><div class="tags"><span class="tag">Pablo Picasso</span><span class="tag">Costa del Sol</span><span class="tag">Puerto</span></div></td>
+                    </tr>
+                    <tr data-destination="Bilbao" data-price="16" data-duration="290" data-transport="Alvia">
+                        <td class="destination">Bilbao</td>
+                        <td class="price">16€</td>
+                        <td class="duration">4h 50m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Guggenheim</span><span class="tag">Pintxo</span><span class="tag">Gastronomía</span></div></td>
+                    </tr>
+                    <tr data-destination="Santiago de Compostela" data-price="19" data-duration="200" data-transport="Alvia">
+                        <td class="destination">Santiago de Compostela</td>
+                        <td class="price">19€</td>
+                        <td class="duration">3h 20m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Camino</span><span class="tag">Religión</span><span class="tag">Pulpo</span></div></td>
+                    </tr>
+                    <tr data-destination="Oviedo" data-price="20" data-duration="288" data-transport="Alvia">
+                        <td class="destination">Oviedo</td>
+                        <td class="price">20€</td>
+                        <td class="duration">4h 48m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Prehistoria</span><span class="tag">Montaña</span><span class="tag">Sidra</span></div></td>
+                    </tr>
+                    <tr data-destination="Salamanca" data-price="25" data-duration="97" data-transport="AVE">
+                        <td class="destination">Salamanca</td>
+                        <td class="price">25€</td>
+                        <td class="duration">1h 37m</td>
+                        <td>AVE</td>
+                        <td><div class="tags"><span class="tag">Plateresque</span><span class="tag">Universidad</span><span class="tag">Tortilla</span></div></td>
+                    </tr>
+                    <tr data-destination="Córdoba" data-price="16" data-duration="103" data-transport="AVE">
+                        <td class="destination">Córdoba</td>
+                        <td class="price">16€</td>
+                        <td class="duration">1h 43m</td>
+                        <td>AVE, Avlo, Iryo</td>
+                        <td><div class="tags"><span class="tag">Mezquita</span><span class="tag">Patios</span><span class="tag">Flamenca</span></div></td>
+                    </tr>
+                    <tr data-destination="Vigo" data-price="49" data-duration="233" data-transport="Alvia">
+                        <td class="destination">Vigo</td>
+                        <td class="price">49€</td>
+                        <td class="duration">3h 53m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Mariscos</span><span class="tag">Rías Baixas</span><span class="tag">Cidería</span></div></td>
+                    </tr>
+                    <tr data-destination="A Coruña" data-price="19" data-duration="327" data-transport="Alvia">
+                        <td class="destination">A Coruña</td>
+                        <td class="price">19€</td>
+                        <td class="duration">5h 27m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Torre de Hércules</span><span class="tag">Costa da Morte</span><span class="tag">Pulpo</span></div></td>
+                    </tr>
+                    <tr data-destination="Lugo" data-price="20" data-duration="248" data-transport="Alvia">
+                        <td class="destination">Lugo</td>
+                        <td class="price">20€</td>
+                        <td class="duration">4h 08m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Muralla Romana</span><span class="tag">Mar</span><span class="tag">Festivals</span></div></td>
+                    </tr>
+                    <tr data-destination="Ourense" data-price="28" data-duration="135" data-transport="Alvia">
+                        <td class="destination">Ourense</td>
+                        <td class="price">28€</td>
+                        <td class="duration">2h 15m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Pontes</span><span class="tag">Termas</span><span class="tag">Albariño</span></div></td>
+                    </tr>
+                    <tr data-destination="Badajoz" data-price="36" data-duration="258" data-transport="Alvia">
+                        <td class="destination">Badajoz</td>
+                        <td class="price">36€</td>
+                        <td class="duration">4h 18m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Frontiera</span><span class="tag">Patrimonio</span><span class="tag">Tapas</span></div></td>
+                    </tr>
+                    <tr data-destination="Cáceres" data-price="16" data-duration="193" data-transport="Alvia">
+                        <td class="destination">Cáceres</td>
+                        <td class="price">16€</td>
+                        <td class="duration">3h 13m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Casco Antiguo</span><span class="tag">Mérida</span><span class="tag">Naturaleza</span></div></td>
+                    </tr>
+                    <tr data-destination="Mérida" data-price="29" data-duration="221" data-transport="Alvia">
+                        <td class="destination">Mérida</td>
+                        <td class="price">29€</td>
+                        <td class="duration">3h 41m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Teatro Romano</span><span class="tag">Arqueología</span><span class="tag">Tortilla</span></div></td>
+                    </tr>
+                    <tr data-destination="Almería" data-price="23" data-duration="377" data-transport="Alvia">
+                        <td class="destination">Almería</td>
+                        <td class="price">23€</td>
+                        <td class="duration">6h 17m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Alcazaba</span><span class="tag">Desierto</span><span class="tag">Cine</span></div></td>
+                    </tr>
+                    <tr data-destination="Jaén" data-price="36" data-duration="239" data-transport="Alvia">
+                        <td class="destination">Jaén</td>
+                        <td class="price">36€</td>
+                        <td class="duration">3h 59m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Olivar</span><span class="tag">Patrimonio</span><span class="tag">Sierra</span></div></td>
+                    </tr>
+                    <tr data-destination="Úbeda" data-price="18" data-duration="219" data-transport="Intercity">
+                        <td class="destination">Úbeda</td>
+                        <td class="price">18€</td>
+                        <td class="duration">3h 39m</td>
+                        <td>Intercity</td>
+                        <td><div class="tags"><span class="tag">Patrimonio</span><span class="tag">Ruta del Quijote</span><span class="tag">Baeza</span></div></td>
+                    </tr>
+                    <tr data-destination="Guadalajara" data-price="4" data-duration="39" data-transport="Cercanías">
+                        <td class="destination">Guadalajara</td>
+                        <td class="price">4€</td>
+                        <td class="duration">39m</td>
+                        <td>Cercanías</td>
+                        <td><div class="tags"><span class="tag">Cervantes</span><span class="tag">Cercana</span><span class="tag">Fiesta</span></div></td>
+                    </tr>
+                    <tr data-destination="Huelva" data-price="32" data-duration="237" data-transport="Alvia">
+                        <td class="destination">Huelva</td>
+                        <td class="price">32€</td>
+                        <td class="duration">3h 57m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Colón</span><span class="tag">Doñana</span><span class="tag">Mangas</span></div></td>
+                    </tr>
+                    <tr data-destination="Gijón" data-price="39" data-duration="354" data-transport="Alvia">
+                        <td class="destination">Gijón</td>
+                        <td class="price">39€</td>
+                        <td class="duration">5h 54m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Nalón</span><span class="tag">Costa Verde</span><span class="tag">Sidra</span></div></td>
+                    </tr>
+                    <tr data-destination="Valladolid" data-price="22" data-duration="90" data-transport="AVE">
+                        <td class="destination">Valladolid</td>
+                        <td class="price">22€</td>
+                        <td class="duration">1h 30m</td>
+                        <td>AVE</td>
+                        <td><div class="tags"><span class="tag">Vega</span><span class="tag">Patrimonio</span><span class="tag">Vino</span></div></td>
+                    </tr>
+                    <tr data-destination="León" data-price="35" data-duration="327" data-transport="Alvia">
+                        <td class="destination">León</td>
+                        <td class="price">35€</td>
+                        <td class="duration">5h 27m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Catedral</span><span class="tag">Camino</span><span class="tag">Lentejas</span></div></td>
+                    </tr>
+                    <tr data-destination="Santander" data-price="50" data-duration="260" data-transport="Alvia">
+                        <td class="destination">Santander</td>
+                        <td class="price">50€</td>
+                        <td class="duration">4h 20m</td>
+                        <td>Alvia</td>
+                        <td><div class="tags"><span class="tag">Marismas</span><span class="tag">Palacio</span><span class="tag">Playa</span></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p id="noResults" class="no-results" style="display:none;">No se encontraron destinos con esos filtros</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; color: white;">
+            <p>💡 <strong>Consejo:</strong> Marzo es una excelente época para viajar. Precio más bajos que en Semana Santa y buen clima para descubrir España.</p>
+        </div>
+    </div>
+    
+    <script>
+        let sortDirection = {};
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById('destinationsTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const header = table.querySelectorAll('th')[columnIndex];
+            
+            // Toggle direction
+            sortDirection[columnIndex] = !sortDirection[columnIndex];
+            
+            // Update arrow in header
+            const arrows = [' ▾', ' ▴'];
+            header.innerHTML = header.innerHTML.replace(/ ▾| ▴/, arrows[sortDirection[columnIndex] ? 1 : 0]);
+            
+            rows.sort((a, b) => {
+                let valA = a.children[columnIndex].dataset.value || a.children[columnIndex].innerText;
+                let valB = b.children[columnIndex].dataset.value || b.children[columnIndex].innerText;
+                
+                // Convert price to number if possible
+                if (columnIndex === 1) {
+                    valA = parseFloat(valA.replace('€', ''));
+                    valB = parseFloat(valB.replace('€', ''));
+                }
+                // Convert duration to minutes if possible
+                else if (columnIndex === 2) {
+                    const parseDuration = (d) => {
+                        const parts = d.match(/(\d+)h (\d+)m/);
+                        if (parts) return parseInt(parts[1]) * 60 + parseInt(parts[2]);
+                        return 0;
+                    };
+                    valA = parseDuration(valA);
+                    valB = parseDuration(valB);
+                }
+                
+                return sortDirection[columnIndex] ? valA - valB : valB - valA;
+            });
+            
+            tbody.innerHTML = rows.map(row => row.outerHTML).join('');
+        }
+        
+        document.getElementById('search').addEventListener('input', function() {
+            filterTable();
+        });
+        
+        document.getElementById('priceFilter').addEventListener('change', function() {
+            filterTable();
+        });
+        
+        document.getElementById('durationFilter').addEventListener('change', function() {
+            filterTable();
+        });
+        
+        function filterTable() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const priceFilter = document.getElementById('priceFilter').value;
+            const durationFilter = document.getElementById('durationFilter').value;
+            
+            let visibleCount = 0;
+            
+            document.querySelectorAll('#destinationsTable tbody tr').forEach(row => {
+                const destination = row.dataset.destination.toLowerCase();
+                const price = parseFloat(row.dataset.price);
+                const duration = parseInt(row.dataset.duration);
+                
+                let show = true;
+                
+                // Filter by search
+                if (search && !destination.includes(search)) show = false;
+                
+                // Filter by price
+                if (priceFilter === 'low' && price >= 30) show = false;
+                if (priceFilter === 'medium' && (price < 30 || price > 80)) show = false;
+                if (priceFilter === 'high' && price <= 80) show = false;
+                
+                // Filter by duration
+                if (durationFilter === 'short' && duration >= 180) show = false;
+                if (durationFilter === 'medium' && (duration < 180 || duration > 360)) show = false;
+                if (durationFilter === 'long' && duration <= 360) show = false;
+                
+                row.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+            
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+        
+        // Highlight popular destinations on load
+        document.querySelectorAll('tr[data-price="8"], tr[data-price="9"], tr[data-price="4"]').forEach(row => {
+            row.classList.add('highlight');
+        });
+    </script>
+</body>
+</html>
