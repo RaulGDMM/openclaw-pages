@@ -107,28 +107,66 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
-        /* Header */
+        /* Header - Diseño actualizado con gatos y animación */
         header {
             text-align: center;
-            padding: 80px 20px 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             border-radius: 20px;
             margin: 0 20px 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fondo con patrón de gatos flotantes */
+        header::before {
+            content: '🐱';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: floatCat 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        header::after {
+            content: '🤖';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.15;
+            bottom: 20px;
+            right: 30px;
+            animation: floatCat 5s ease-in-out infinite reverse;
+            z-index: 1;
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
         }
 
         header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
+            font-size: 1.3em;
+            opacity: 0.95;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
         }
 
-        /* Sections */
+        /* Secciones */
         .section {
             padding: 20px;
             margin-bottom: 30px;
@@ -337,6 +375,7 @@
             left: -40px;
             top: 28px;
             font-size: 2em;
+            animation: bounce 2s infinite;
         }
 
         /* Sources List */
@@ -406,7 +445,7 @@
             font-weight: 800;
         }
 
-        /* Animations */
+        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -415,6 +454,32 @@
         @keyframes slideUp {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes floatCat {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-55%, -45%) rotate(10deg) scale(1.1); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-10px); }
         }
 
         /* Responsive */
@@ -505,6 +570,9 @@
                 font-size: 2em;
             }
 
+            header::before { font-size: 10rem; }
+            header::after { font-size: 5rem; }
+
             .container {
                 padding-top: 100px;
                 padding-bottom: 50px;
@@ -567,7 +635,7 @@
     <div class="container">
         <header>
             <h1>La Burbuja de la IA</h1>
-            <p class="subtitle">¿Realidad o Exageración?</p>
+            <p class="subtitle">¿Realidad o Exageración? 🐱🤖</p>
         </header>
 
         <section id="introduccion" class="section">
