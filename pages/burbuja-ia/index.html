@@ -1,279 +1,471 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Burbuja de la IA: ¿Realidad o Exageración?</title>
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span>🐱</span> CocoBot
-            </div>
-            <button class="hamburger" id="hamburger" aria-label="Menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#introduccion" class="nav-link">Introducción</a></li>
-                <li class="nav-item"><a href="#causas" class="nav-link">Causas de la Escasez</a></li>
-                <li class="nav-item"><a href="#economia" class="nav-link">Economía de la IA</a></li>
-                <li class="nav-item"><a href="#burbuja" class="nav-link">¿Burbuja o Revolución?</a></li>
-                <li class="nav-item"><a href="#chinos" class="nav-link">La Esperanza Chinesa</a></li>
-                <li class="nav-item"><a href="#futuro" class="nav-link">Futuro y Pronósticos</a></li>
-                <li class="nav-item"><a href="#opinion" class="nav-link">Opinión de CocoBot</a></li>
-                <li class="nav-item"><a href="#fuentes" class="nav-link">Fuentes</a></li>
-            </ul>
-        </div>
-    </nav>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <main class="content">
-        <section id="introduccion" class="section">
-            <div class="container">
-                <h1>La Burbuja de la IA: ¿Realidad o Exageración?</h1>
-                <p class="subtitle">Análisis técnico y económico del auge (y posibles sobrecalentamientos) del mercado de la Inteligencia Artificial en 2025-2026</p>
-                <p class="intro-text">En los últimos dos años, la Inteligencia Artificial ha pasado de ser un tema de investigación académica a convertirse en el centro de la economía global. Pero ¿estamos presenciando una revolución tecnológica genuina o una burbuja especulativa que podría estallar en cualquier momento?</p>
-            </div>
-        </section>
+:root {
+    --primary-color: #8b5cf6;
+    --secondary-color: #ec4899;
+    --accent-color: #f59e0b;
+    --text-color: #1e1b4b;
+    --text-light: #4338ca;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --gradient-1: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%);
+    --gradient-2: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --border-radius: 16px;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        <section id="causas" class="section">
-            <div class="container">
-                <h2>¿Por qué la RAM está tan cara? Las causas estructurales</h2>
-                
-                <div class="info-card">
-                    <h3>1. La Demanda de la IA</h3>
-                    <p>Los modelos de IA modernos requieren miles de gigabytes de memoria RAM para entrenamiento. Los servidores de IA consumen terabytes de RAM, drenando casi toda la producción mundial.</p>
-                </div>
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--bg-color);
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
+}
 
-                <div class="info-card">
-                    <h3>2. El Tripolio Global</h3>
-                    <p>Samsung, SK Hynix y Micron controlan más del 60% de la producción mundial de DRAM. Estas tres empresas han <strong>reducido</strong> la producción de DDR4/DDR5 para consumo general y han derivado recursos a la producción de HBM (memoria de alto ancho de banda), que se vende a precios extremadamente altos para aceleradores de IA.</p>
-                </div>
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    padding: 1rem 0;
+}
 
-                <div class="info-card">
-                    <h3>3. La Escasez Real</h3>
-                    <p>Según datos de PCPartPicker:</p>
-                    <ul>
-                        <li><strong>DDR4 16GB:</strong> $40-60 USD (Q1 2024) → $80-130 USD (2025)</li>
-                        <li><strong>DDR5 16GB:</strong> $50-70 USD (Q1 2024) → $120-140 USD (2025)</li>
-                    </ul>
-                    <p>En el mercado minorista, los kits de 32GB DDR5 pasaron de ~150€ a <strong>~500€</strong> (más del triple).</p>
-                </div>
-            </div>
-        </section>
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        <section id="economia" class="section">
-            <div class="container">
-                <h2>Economía de la IA: ¿Inversión o Especulación?</h2>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>Valor de Mercado de Gigantes</h4>
-                        <p class="stat-value">$15 billones</p>
-                        <p class="stat-desc">Alphabet, Amazon, Apple, Meta, Microsoft, Nvidia y Tesla acumulan este valor combinado</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Nvidia</h4>
-                        <p class="stat-value">&gt;$5 billones</p>
-                        <p class="stat-desc">Fabricante de chips para IA, valoración más alta de su historia</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Google en IA</h4>
-                        <p class="stat-value">$90 mil millones/año</p>
-                        <p class="stat-desc">Inversión anual en desarrollo de IA (triple de hace 4 años)</p>
-                    </div>
-                </div>
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-                <div class="info-card">
-                    <h3>¿Estamos en una burbuja?</h3>
-                    <p>El Banco de Inglaterra ha advertido de una "corrección repentina" en los mercados financieros globales, afirmando que "las valoraciones de mercado parecen excesivas" para las empresas tecnológicas de IA.</p>
-                    <p>Sam Altman (OpenAI) ha especulado que "muchas áreas de la IA están sobrevaloradas en este momento".</p>
-                </div>
-            </div>
-        </section>
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 6px;
+}
 
-        <section id="burbuja" class="section">
-            <div class="container">
-                <h2>¿Burbuja o Revolución? El debate entre expertos</h2>
-                
-                <div class="quote-box">
-                    <p class="quote-text">"La IA es la tecnología más profunda en la que la humanidad ha trabajado jamás. Cuenta con un potencial para generar beneficios extraordinarios; tendremos que superar las disrupciones sociales."</p>
-                    <p class="quote-author">— Sundar Pichai, CEO de Google</p>
-                </div>
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
+    border-radius: 2px;
+    transition: var(--transition);
+}
 
-                <div class="info-card">
-                    <h3>El argumento "burbuja"</h3>
-                    <ul>
-                        <li>Las valoraciones de startups de IA dependen más de narrativa que de beneficios tangibles</li>
-                        <li>Los precios de acciones de IA han subido excesivamente en poco tiempo</li>
-                        <li>La inversión se centra en chips y infraestructura, no en aplicaciones rentables</li>
-                        <li>El FMI advierte que "parte de la revalorización responde más a euforia que a fundamentos"</li>
-                    </ul>
-                </div>
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
 
-                <div class="info-card">
-                    <h3>El argumento "revolución"</h3>
-                    <ul>
-                        <li>La IA ya está generando valor medible en productividad y eficiencia</li>
-                        <li>Las inversiones en IA son necesarias para mantener ventaja competitiva global</li>
-                        <li>La historia muestra que cada revolución tecnológica (PC, internet, móvil) tuvo su "burbuja" inicial</li>
-                        <li>Las empresas que sobrevivan a la corrección serán las dominantes del futuro</li>
-                    </ul>
-                </div>
+.nav-item a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: var(--transition);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+}
 
-                <div class="info-card">
-                    <h3>Opinión de analistas</h3>
-                    <p>En 2026, el riesgo no es tanto que el sector desaparezca como que <strong>parte de los nombres más de moda sufran correcciones del 30%-40%</strong> si las expectativas se desinflan.</p>
-                </div>
-            </div>
-        </section>
+.nav-item a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-2);
+    transition: var(--transition);
+    z-index: -1;
+}
 
-        <section id="chinos" class="section">
-            <div class="container">
-                <h2>La Esperanza Chinesa: ¿Romperán el Tripolio?</h2>
-                
-                <div class="info-card">
-                    <h3>Changxin Memory (China)</h3>
-                    <p>El mayor fabricante de DRAM de China ya ha empezado a expandir su capacidad de producción. Su nueva planta estará en Shanghái y fabricará DRAM para servidores, PC, automóviles inteligentes y smartphones.</p>
-                </div>
+.nav-item a:hover::before {
+    left: 0;
+}
 
-                <div class="info-card">
-                    <h3>Impacto esperado</h3>
-                    <p>Los fabricantes chinos <strong>ya están suavizando el efecto de la crisis</strong> en el acceso a RAM y sus costes para algunos fabricantes de equipos chinos.</p>
-                    <p>Sin embargo, aún representan una cuota pequeña comparados con el tripolio (Samsung, SK Hynix, Micron), por lo que los efectos no se notarán a gran escala en poco tiempo.</p>
-                </div>
+.nav-item a:hover {
+    color: white;
+}
 
-                <div class="info-card">
-                    <h3>Potencial a largo plazo</h3>
-                    <p>Si China logra aumentar su capacidad productiva notablemente entre 2026 y 2027, podría ganar cuota de mercado y romper el tripolio, lo que would bring more competition and lower prices.</p>
-                </div>
-            </div>
-        </section>
+.section {
+    padding: 5rem 0;
+    scroll-margin-top: 100px;
+}
 
-        <section id="futuro" class="section">
-            <div class="container">
-                <h2>Futuro y Pronósticos: ¿Qué esperar en 2026-2027?</h2>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>2026 (actual)</h3>
-                        <p>Precios estabilizados en niveles históricamente altos. Sin caída significativa esperada. Posible estabilización a finales de año.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Finales de 2026</h3>
-                        <p>Posible estabilización de precios (pero no bajada a niveles anteriores a la crisis).</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>2027-2028</h3>
-                        <p>Vuelta a precios más normales <strong>si</strong> la burbuja de IA no explota antes y los fabricantes chinos han aumentado significativamente su capacidad.</p>
-                    </div>
-                </div>
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
-                <div class="info-card">
-                    <h3>Pronóstico de Goldman Sachs</h3>
-                    <p>Según el informe de Goldman Sachs:</p>
-                    <ul>
-                        <li><strong>DDR4:</strong> Subidas de hasta 172% en contratos de suministro</li>
-                        <li><strong>DDR5:</strong> Subidas del 76% en contratos de suministro</li>
-                        <li>Estimación: precios podrían estabilizarse hacia finales de 2026, pero no se espera bajada significativa hasta 2028.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+}
 
-        <section id="opinion" class="section">
-            <div class="container">
-                <h2>Opinión de CocoBot 🐱🤖</h2>
-                
-                <div class="opinion-box">
-                    <p class="opinion-text">Como asistente con actitud de gato, he estudiado este mercado con la profundidad de un felino observando un puntero láser... y aquí va mi análisis:</p>
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
 
-                    <div class="opinion-section">
-                        <h3>✅ Lo que SÍ es real:</h3>
-                        <ul>
-                            <li><strong>La demanda de IA es genuina y gigantesca.</strong> No es invento: los centros de datos consumen terabytes de RAM cada segundo.</li>
-                            <li><strong>La escasez de chips es real.</strong> No hay suficiente capacidad de producción para satisfacer toda la demanda.</li>
-                            <li><strong>Los precios están inflados.</strong> Kit de 32GB DDR5 por 500€ no es normal, ni sostenible a largo plazo.</li>
-                        </ul>
-                    </div>
+.intro-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 700px;
+    line-height: 1.8;
+}
 
-                    <div class="opinion-section">
-                        <h3>⚠️ Lo que es BURBUJA:</h3>
-                        <ul>
-                            <li><strong>La especulación sobre empresas de IA sin modelos de negocio claros.</strong> Muchas startups se basan en narrativa más que en ingresos reales.</li>
-                            <li><strong>La sobrevaloración de acciones de IA.</strong> Algunas empresas han subido 300%+ en un año sin mejorar sus beneficios proporcionalmente.</li>
-                            <li><strong>La inversión "por miedo a perderse" (FOMO).</strong> La carrera por tener IA "a toda costa" ha distorsionado el mercado.</li>
-                        </ul>
-                    </div>
+h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+}
 
-                    <div class="opinion-section">
-                        <h3>🔮 Mi predicción:</h3>
-                        <p>Estamos en una <strong>revolución con una burbuja especulativa encima</strong>, como el internet de finales de los 90. La tecnología es genuina y cambiará el mundo, pero los precios actuales son insostenibles.</p>
-                        <p><strong>Para 2027-2028:</strong> Veremos una consolidación. Las empresas con modelos sólidos sobrevivirán y los precios de hardware volverán a la normalidad.</p>
-                        <p><strong>Recomendación para Raúl:</strong> Si necesitas RAM <em>ya</em>, mira DDR4 (más escasa, pero con menos competencia). Si puedes esperar, espera hasta finales de 2026 cuando los chinos empiecen a inyectar más capacidad.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: var(--gradient-1);
+    border-radius: 2px;
+}
 
-        <section id="fuentes" class="section">
-            <div class="container">
-                <h2>Fuentes y Referencias</h2>
-                
-                <div class="sources-list">
-                    <div class="source-item">
-                        <h4>BBC News Mundo</h4>
-                        <p><a href="https://www.bbc.com/mundo/articles/cn8v80mg9x1o" target="_blank">La contradicción en el corazón de la burbuja de la IA</a></p>
-                        <p><em>Noviembre 2025</em></p>
-                    </div>
+h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--text-color);
+}
 
-                    <div class="source-item">
-                        <h4>MIT Technology Review</h4>
-                        <p><a href="https://technologyreview.es/article/la-ia-en-2026-entre-la-burbuja-y-la-expansion/" target="_blank">La IA en 2026: burbujas, asistentes para todo y más regulación</a></p>
-                        <p><em>Febrero 2026</em></p>
-                    </div>
+.info-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
 
-                    <div class="source-item">
-                        <h4>Hardzone</h4>
-                        <p><a href="https://hardzone.es/noticias/componentes/subida-precio-memoria-ram-ddr5-memoria-ddr4-sube/" target="_blank">El precio de la memoria RAM DDR4 está subiendo más rápido que la DDR5</a></p>
-                        <p><em>Enero 2026</em></p>
-                    </div>
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-1);
+    transition: var(--transition);
+}
 
-                    <div class="source-item">
-                        <h4>Ecosistema Startup</h4>
-                        <p><a href="https://ecosistemastartup.com/precio-dram-tendencias-y-analisis-de-memoria-ram-2024-2025/" target="_blank">Precio DRAM: tendencias y análisis de memoria RAM 2024-2025</a></p>
-                        <p><em>Diciembre 2025</em></p>
-                    </div>
+.info-card:hover::before {
+    height: 8px;
+}
 
-                    <div class="source-item">
-                        <h4>MuyComputer</h4>
-                        <p><a href="https://www.muycomputer.com/2026/02/11/china-quiere-ser-el-heroe-en-esta-crisis-de-la-dram-el-precio-de-la-ram-podria-bajar-antes-de-lo-esperado/" target="_blank">China quiere ser el héroe en esta crisis de la DRAM</a></p>
-                        <p><em>Febrero 2026</em></p>
-                    </div>
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+}
 
-                    <div class="source-item">
-                        <h4>PCPartPicker</h4>
-                        <p><a href="https://pcpartpicker.com/trends/price/memory" target="_blank">Tendencias de precios de memoria RAM</a></p>
-                        <p><em>Fuente original de datos de precios</em></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
 
-    <footer class="footer">
-        <div class="container">
-            <p>Generado por <strong>CocoBot</strong> 🐱🤖 | Febrero 2026</p>
-            <p>Hecho con amor, café y un poco de pánico ante los precios de la RAM</p>
-        </div>
-    </footer>
+.stat-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    text-align: center;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
 
-    <script src="./script.js"></script>
-</body>
-</html>
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(236, 72, 153, 0.15);
+    border-color: var(--secondary-color);
+}
+
+.stat-value {
+    font-size: 2.75rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.75rem;
+}
+
+.stat-desc {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.quote-box {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-radius: var(--border-radius);
+    padding: 3.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-left: 8px solid var(--primary-color);
+}
+
+.quote-box::before {
+    content: '“';
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 6rem;
+    color: rgba(139, 92, 246, 0.1);
+    font-family: serif;
+    line-height: 1;
+}
+
+.quote-text {
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-author {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: right;
+    position: relative;
+    z-index: 1;
+}
+
+.opinion-box {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    margin: 2.5rem 0;
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.1);
+}
+
+.opinion-text {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+.opinion-section {
+    margin-bottom: 2.5rem;
+}
+
+.opinion-section:last-child {
+    margin-bottom: 0;
+}
+
+.timeline {
+    display: grid;
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.timeline-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    position: relative;
+    border-left: 6px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.timeline-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
+}
+
+.timeline-item::before {
+    content: '🐱';
+    position: absolute;
+    left: -3rem;
+    top: 2.2rem;
+    font-size: 2.5rem;
+}
+
+.sources-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.source-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.75rem;
+    border: 2px solid #e5e7eb;
+    transition: var(--transition);
+}
+
+.source-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.source-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.source-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.source-item a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.source-item p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.footer {
+    background: var(--text-color);
+    color: white;
+    padding: 4rem 0 2rem;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.footer strong {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.section {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateX(100%);
+        transition: var(--transition);
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .info-card,
+    .stat-card,
+    .opinion-box,
+    .timeline-item {
+        padding: 1.75rem;
+    }
+
+    .timeline-item::before {
+        left: -2.75rem;
+        top: 2rem;
+    }
+}
