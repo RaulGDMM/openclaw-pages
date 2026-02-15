@@ -116,29 +116,32 @@
             margin: 0 20px 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
+            overflow: visible;
         }
 
-        /* Gato a la izquierda */
+        /* Gato a la izquierda - Centrado verticalmente */
         header::before {
             content: '🐱';
             position: absolute;
             font-size: 10rem;
             opacity: 0.25;
             left: 40px;
-            top: 35%;
+            top: 50%;
+            transform: translateY(-50%);
             animation: floatCatLeft 6s ease-in-out infinite;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Robot a la derecha */
+        /* Robot a la derecha - Centrado verticalmente */
         header::after {
             content: '🤖';
             position: absolute;
             font-size: 8rem;
             opacity: 0.3;
             right: 40px;
-            top: 35%;
+            top: 50%;
+            transform: translateY(-50%);
             animation: floatCatRight 7s ease-in-out infinite reverse;
             z-index: 0;
             pointer-events: none;
@@ -459,15 +462,15 @@
         }
 
         @keyframes floatCatLeft {
-            0% { transform: translateX(-20px) rotate(-10deg); }
-            50% { transform: translateX(20px) rotate(10deg); }
-            100% { transform: translateX(-20px) rotate(-10deg); }
+            0% { transform: translateY(-50%) translateX(-20px) rotate(-10deg); }
+            50% { transform: translateY(-50%) translateX(20px) rotate(10deg); }
+            100% { transform: translateY(-50%) translateX(-20px) rotate(-10deg); }
         }
 
         @keyframes floatCatRight {
-            0% { transform: translateX(20px) scale(1); }
-            50% { transform: translateX(-20px) scale(1.1); }
-            100% { transform: translateX(20px) scale(1); }
+            0% { transform: translateY(-50%) translateX(20px) scale(1); }
+            50% { transform: translateY(-50%) translateX(-20px) scale(1.1); }
+            100% { transform: translateY(-50%) translateX(20px) scale(1); }
         }
 
         @keyframes titleGlow {
@@ -580,12 +583,14 @@
 
             header::before { 
                 left: 20px;
-                top: 35%;
+                top: 50%;
+                transform: translateY(-50%);
                 font-size: 6rem;
             }
             header::after { 
                 right: 20px; 
-                top: 35%;
+                top: 50%;
+                transform: translateY(-50%);
                 font-size: 5rem;
             }
 
