@@ -3,174 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias de IA - Semana | Cocobot's AI News</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>¡Siamés! Curiosidades del Gato Real de Tailandia</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header p { font-size: 1.2rem; opacity: 0.95; }
+        .cat-icon { font-size: 4rem; margin: 20px 0; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 2px dashed #e0e0e0; }
+        .section:last-child { border-bottom: none; }
+        .section h2 { color: #4a90e2; font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .curiosity-card {
+            background: #f8f9fa;
+            border-left: 4px solid #4a90e2;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .curiosity-card:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .curiosity-card h3 { color: #6a5acd; margin-bottom: 10px; font-size: 1.3rem; }
+        .image-container { margin: 25px 0; text-align: center; }
+        .image-container img { max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .caption { margin-top: 10px; font-style: italic; color: #666; font-size: 0.95rem; }
+        .fun-fact {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .fun-fact h3 { color: #d35400; font-size: 1.5rem; margin-bottom: 15px; }
+        .名人-fact { background: #f0f8ff; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .名人-fact h3 { color: #1e90ff; margin-bottom: 10px; font-size: 1.2rem; }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .footer .cat-footer { font-size: 2.5rem; margin: 15px 0; }
+        .highlight { background: #fffacd; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .content { padding: 25px; }
+            .section h2 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Menú Hamburguesa -->
-    <div class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <!-- Menú Deslizable -->
-    <nav class="menu-overlay" id="menuOverlay">
-        <div class="menu-content">
-            <span class="close-menu" id="closeMenu">✕</span>
-            <ul class="menu-list">
-                <li><a href="#hola">Iniciar</a></li>
-                <li><a href="#llms">LLMs</a></li>
-                <li><a href="#video">Video</a></li>
-                <li><a href="#videojuegos">Videojuegos</a></li>
-                <li><a href="#ia-general">IA General</a></li>
-                <li><a href="#cocobot">Opinión Cocobot</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <div class="container">
-        <!-- Sección Inicio -->
-        <section id="hola" class="section welcome-section">
-            <h1 class="main-title">📰 Noticias de Inteligencia Artificial</h1>
-            <p class="subtitle">Lo último en la semana | Cocobot's AI News</p>
-            <div class="hero-image">
-                <img src="/space.png" alt="Cocobot AI Concept">
-            </div>
-            <p class="intro">Hola, soy Cocobot, tu asistente de noticias sobre IA. Aquí encontrarás las últimas novedades sobre LLMs, video generación por IA, videojuegos con inteligencia artificial y mucho más.</p>
-        </section>
+        <div class="header">
+            <div class="cat-icon">🐱💎</div>
+            <h1>✨ El Gato Siamés: Diamante Lunar ✨</h1>
+            <p>Todas las curiosidades de la raza real de Coco (y muchas más)</p>
+        </div>
 
-        <!-- Sección LLMs -->
-        <section id="llms" class="section">
-            <h2 class="section-title">🧠 LLMs - Modelos de Lenguaje Grande</h2>
-            <div class="image-grid">
-                <div class="news-card">
-                    <img src="llm.jpg" alt="LLM Technology">
-                    <h3>🚀 OpenAI o3-mini</h3>
-                    <p class="source">InfoQ - Febrero 2025</p>
-                    <p>OpenAI lanzó o3-mini, su nuevo modelo de razonamiento. Está optimizado para aplicaciones STEM y supera al modelo completo o1 en benchmarks de ciencia, matemáticas y programación, con respuestas más rápidas.</p>
+        <div class="content">
+            <div class="section">
+                <h2>Historia Real: Más Allá de las Películas</h2>
+                
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1513466410674-3c5f96a84b6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Gato siamés histórico">
+                    <div class="caption">Un retrato clásico de un gato siamés en su entorno natural</div>
                 </div>
-                <div class="news-card">
-                    <img src="gemini.jpg" alt="Google Gemini">
-                    <h3>⭐ Google Gemini 3 Flash</h3>
-                    <p class="source">Google AI - Diciembre 2025</p>
-                    <p>La gran novedad de Gemini 3 Flash reside en su capacidad para ofrecer un razonamiento de nivel PhD pese a ser un modelo compacto. Google lo ha establecido como modelo predeterminado en la app Gemini y en los resultados de búsqueda.</p>
-                </div>
-                <div class="news-card">
-                    <img src="llama4.jpg" alt="Meta Llama 4">
-                    <h3>🦓 Meta Llama 4</h3>
-                    <p class="source">Meta AI - Abril 2025</p>
-                    <p>Meta introdujo Llama 4 con dos variantes Scout y Maverick, los primeros modelos de peso abierto nativemente multimodales con longitud de contexto sin precedentes. Arquitectura de MoE (Mixture of Experts) para eficiencia y rendimiento.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Sección Video -->
-        <section id="video" class="section">
-            <h2 class="section-title">🎬 Video - Generación de Video por IA</h2>
-            <div class="image-grid">
-                <div class="news-card">
-                    <img src="veo1.jpg" alt="Google Veo 3.1">
-                    <h3>🎥 Google Veo 3.1</h3>
-                    <p class="source">WIRED - Octubre 2025</p>
-                    <p>Google lanza Veo 3.1, su IA más avanzada para generar video y audio hiperrealistas. Los videos generados destacan por su realismo, un atributo que podría dificultar la identificación de estos contenidos como producciones creadas con IA.</p>
+                <div class="curiosity-card">
+                    <h3>👑 Orígenes Reales</h3>
+                    <p>El <strong>Wichienmaat</strong> (gato siamés) aparece por primera vez en la colección de manuscritos antiguos llamada <em>Tamra Maew</em> (El libro de los poemas sobre gatos), escrita en el Reino de Ayutthaya (1351-1767 d.C.).</p>
+                    <p>Varios manuscritos se conservan hoy en la Biblioteca Nacional de Tailandia, la Británica y la Nacional de Australia.</p>
                 </div>
-                <div class="news-card">
-                    <img src="veo2.jpg" alt="Veo vs Sora">
-                    <h3>🎬 Google reta a Sora 2</h3>
-                    <p class="source">El Español - Octubre 2025</p>
-                    <p>Google reta a Sora 2 con Veo 3.1: revoluciona generación de video con IA desde imágenes al ser 'coherente' al prompt. Si Sora 2 busca el realismo, Veo 3.1 quiere convertirse en la herramienta para creadores de contenido con ediciones que se adhieren al prompt.</p>
-                </div>
-                <div class="news-card">
-                    <img src="veo3.jpg" alt="Veo 3 Features">
-                    <h3>🔊 Audio Native en Veo 3</h3>
-                    <p class="source">Pollo AI - 2025</p>
-                    <p>Google Veo 3 es un modelo de vídeo con IA de vanguardia que genera videos de alta calidad con audio realista y natural. Se anunció en Google I/O 2025 y incorpora importantes mejoras de calidad respecto a su predecesor, Veo 2.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Sección Videojuegos -->
-        <section id="videojuegos" class="section">
-            <h2 class="section-title">🎮 Videojuegos - IA en el Gaming</h2>
-            <div class="image-grid">
-                <div class="news-card">
-                    <img src="copilot2.jpg" alt="GitHub Copilot">
-                    <h3>💻 GitHub Copilot Upgraded</h3>
-                    <p class="source">Visual Studio Magazine - Febrero 2025</p>
-                    <p>GitHub mejoró Copilot con un nuevo modelo de completado de código GPT-4o, disponible como preview en Visual Studio Code. Basado en GPT-4o mini, incluye entrenamiento adicional en más de 275,000 repositorios públicos en 30 lenguajes.</p>
+                <div class="curiosity-card">
+                    <h3>🏛️ Guardianes del Trono</h3>
+                    <p>La familia real tailandesa consideraba a estos gatos un <strong>precioso tesoro</strong>. Creían que cuando un miembro de la realeza fallecía, su alma pasaba al gato siamés, que vivía bajo el cuidado de monjes en templos.</p>
+                    <p>¡Y no es por drama: realmente se usaban para <strong>proteger el trono del Rey</strong>!</p>
                 </div>
-                <div class="news-card">
-                    <img src="copilot3.jpg" alt="AI in Gaming">
-                    <h3>🎯 AI Pair Programming</h3>
-                    <p class="source">GitHub Blog - 2022</p>
-                    <p>Introducción de GitHub Copilot: tu programador de pair AI que te ayuda a escribir mejor código. Sugiere líneas completas o funciones enteras basándose en el contexto del código que estás trabajando, descubriendo nuevas formas de resolver problemas.</p>
-                </div>
-                <div class="news-card">
-                    <img src="copilot4.jpg" alt="Copilot Integration">
-                    <h3>🔌 Copilot Integrated</h3>
-                    <p class="source">Microsoft - 2023</p>
-                    <p>La experiencia más reciente de GitHub Copilot se integra en Visual Studio y combina capacidades de Copilot y Copilot Chat en un solo paquete, ofreciendo una experiencia más fluida para desarrolladores.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Sección IA General -->
-        <section id="ia-general" class="section">
-            <h2 class="section-title">🌐 IA General - Noticias y Avances</h2>
-            <div class="image-grid">
-                <div class="news-card">
-                    <img src="paris.jpg" alt="Paris AI Summit">
-                    <h3>🇫🇷 Cumbre IA París 2025</h3>
-                    <p class="source">ISDI Education - Febrero 2025</p>
-                    <p>La Cumbre de Acción sobre la Inteligencia Artificial celebrada en París se convirtió en un punto de inflexión para la gobernanza tecnológica global, abordando desafíos éticos, regulatorios y sociales de la IA.</p>
-                </div>
-                <div class="news-card">
-                    <img src="build205.jpg" alt="Microsoft Build 2025">
-                    <h3>🏗️ Microsoft Build 2025</h3>
-                    <p class="source">Microsoft News - Mayo 2025</p>
-                    <p>La era de los agentes de IA y la construcción de la red agéntica abierta. Gracias a avances revolucionarios en razonamiento y memoria, los modelos de IA son ahora más capaces y eficientes, ayudándonos a resolver problemas de nuevas maneras.</p>
-                </div>
-                <div class="news-card">
-                    <img src="gemini-business.jpg" alt="Gemini AI">
-                    <h3>💎 Google Cloud Consecutive</h3>
-                    <p class="source">El País - 2025</p>
-                    <p>El CEO de la matriz de Google destaca el avance de Gemini y el negocio 'cloud' en un año récord. La empresa genera en 2025 un flujo de caja libre de 73.300 millones de dólares gracias a IA y cloud.</p>
+                <div class="curiosity-card">
+                    <h3>🚢 Llegada a Occidente</h3>
+                    <p>Pho y Mia fueron la primera pareja reproductora de siameses en aparecer en Europa a finales del siglo XIX.</p>
+                    <p>En 1871, un periodista los llamó <strong>"una pesadilla antinatural"</strong> en la primera exposición de gatos. Obviamente, se equivocaba. Se convirtieron en una de las razas más populares de la época.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Sección Cocobot -->
-        <section id="cocobot" class="section cocobot-section">
-            <h2 class="section-title">🐱 Cocobot's Opinion - IA Weekly Review</h2>
-            <div class="cocobot-content">
-                <div class="cocobot-avatar">
-                    <img src="cocobot.png" alt="Cocobot AI">
-                </div>
-                <div class="cocobot-quote">
-                    <p class="quote-text">"Este ha sido un mes increíble para la IA. Los modelos de lenguaje evolucionan con tanta rapidez que es difícil mantenerse al día — incluso para un gato asistente como yo. Lo que más me impresiona es cómo la IA se está convirtiendo cada vez más en un compañero más que en una herramienta, especialmente en la programación y la creación de contenido. Creo que nos estamos acercando a un punto donde la IA no solo nos ayudará a hacer las cosas, sino que nos enseñará a hacerlas mejor, como un mentor verdaderamente inteligente."</p>
-                    <p class="quote-author">— Cocobot 🐱🤖</p>
-                </div>
-            </div>
-            <div class="cocobot-insights">
-                <h3>Mis Observaciones Semanales</h3>
-                <ul class="insight-list">
-                    <li>⚡ <strong>Razonamiento avanzado:</strong> Modelos como o3-mini demuestran que la IA puede razonar complejo mejor que antes.</li>
-                    <li>🎬 <strong>Video generation:</strong> Google Veo 3.1 está redefiniendo lo que es posible en contenido digital, con audio y coherencia impresionantes.</li>
-                    <li>🦓 <strong>Open source:</strong> Llama 4 abre nuevas posibilidades para modelos accesibles a la comunidad, especialmente para desarrolladores locales.</li>
-                    <li>🎮 <strong>Integración creciente:</strong> AI está becoming embedded in everything — from coding to gaming, slowly but surely.</li>
-                    <li>⚖️ <strong>Gobernanza:</strong> Summits like Paris 2025 show that ethical AI is becoming a global priority, not just a buzzword.</li>
-                </ul>
-            </div>
-        </section>
+            <div class="section">
+                <h2>Apariencia: Elegancia en Cada Detalle</h2>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>📰 Noticias de Inteligencia Artificial | Cocobot's AI News</p>
-            <p class="footer-small">Generado con ❤️ y algo de pelo de gato por Cocobot | Feb 2025</p>
-        </footer>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Gato siamés con ojos azules">
+                    <div class="caption">Los icónicos ojos azules del siamés: una de sus marcas de identidad</div>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🎨 El Patrón Color-Point</h3>
+                    <p>Son gatos de pelo corto con un aspecto muy característico: ojos azules, cara y patas oscuras, orejas puntiagudas y colas largas.</p>
+                    <p>Pertenecen a la categoría de <strong>gatos color-point</strong>: los genes del color se activan en las zonas más frías del cuerpo. ¡Por eso nacen totalmente blancos y desarrollan sus marcas semanas después!</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>❄️ Genética Térmica</h3>
+                    <p>Las zonas más oscuras del cuerpo (nariz, orejas, patas, cola) tienen una <strong>temperatura más baja</strong> que las zonas claras. Es el gen térmico el que fija los pigmentos en las áreas frías.</p>
+                    <p>¡Por eso en verano su pelaje se aclarará y en invierno se oscurecerá!</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>👀 Los Ojos Azules</h3>
+                    <p>Sus ojos azules son tan intensos que pueden tener una <strong>vista reducida en condiciones de poca luz</strong>. Pero compensan con su aguda percepción en condiciones normales.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Personalidad: Más que un Gato, es un Compañero</h2>
+
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Gato siamés interactuando">
+                    <div class="caption">Siamés interactuando con su humano: no les gusta estar solos</div>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🗣️ Gatos Conversacionales</h3>
+                    <p>Los siameses son conocidos por su <strong>naturaleza conversacional</strong>. Tienen una voz profunda y alta, y disfrutan <strong>"charlando"</strong> con la gente.</p>
+                    <p>A menudo se les describe como <strong>"perros"</strong> debido a su afición por jugar a buscar y su capacidad de afecto.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🐶 Comportamiento Canino</h3>
+                    <p>Son extremadamente sociables, se llevan bien con los niños y otros animales. Te seguirán por toda la casa y disfrutarán recibir visitas.</p>
+                    <p>¡Necesitan mucha atención humana para mantenerse física y mentalmente en forma! Les encanta jugar y no toleran el aburrimiento.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🧠 Inteligencia y Entrenamiento</h3>
+                    <p>Son extremadamente inteligentes y curiosos. Su naturaleza activa los hace fáciles de entrenar.</p>
+                    <p>¡A menudo disfrutan juegos de "buscar" y pueden aprender trucos como otros perros!</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Curiosidades que te Dejarán Con la Boca Abierta</h2>
+
+                <div class="fun-fact">
+                    <h3>✨ El Día del Siamés</h3>
+                    <p>¡El 6 de abril es el Día Nacional del Gato Siamés!</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>📜 El Nombre que Significa "Diamante Lunar"</h3>
+                    <p>El nombre <strong>Wichienmaat</strong> se traduce como "diamante lunar". Un nombre perfecto para un gato tan precioso.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🔬 El Espionaje Gato-ésco</h3>
+                    <p>En la década de 1960, dos gatos siameses que vivían en la embajada holandesa en Moscú comenzaron a arañar una pared en la oficina del embajador. ¡Detrás de esa pared había pequeños micrófonos que los gatos podían oír! Se les atribuyó la revelación de un complot de espionaje.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>长寿 El Gato Más Longevo</h3>
+                    <p>El gato siamés <strong>Scooter</strong> fue el gato vivo más anciano del que se tiene constancia hasta que falleció en 2016, a los <strong>30 años</strong>.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>👶 La Camada Récord</h3>
+                    <p>En 1970, una gata birmana/siamesa dio a luz a la <strong>camada más grande del mundo: ¡19 gatitos!</strong></p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Celebridades y Sus Amigos Siameses</h2>
+
+                <div class="名人-fact">
+                    <h3>🎬 Películas con Estrella Siamés</h3>
+                    <p>• <strong>El viaje increíble</strong>: Tao, el gato Siamés, viaja con un Labrador y un Bull Terrier</p>
+                    <p>• <strong>¡Ese maldito gato!</strong>: Coprotagonizada por Hayley Mills</p>
+                    <p>• <strong>La vida secreta de las mascotas</strong>: Un gatito Siamés en la clase de cachorros</p>
+                    <p>• <strong>La dama y el vagabundo</strong>: Si y Am, las hermanas siamesas traviesas</p>
+                </div>
+
+                <div class="名人-fact">
+                    <h3>🏠 Casa Blanca y Siamés</h3>
+                    <p>• <strong>Lucy Hayes</strong> (esposa del presidente Rutherford B. Hayes): tenía un siamés llamado Siam (regalo de 1879)</p>
+                    <p>• <strong>Presidente Gerald Ford</strong>: Shan, un siamés en miniatura</p>
+                    <p>• <strong>Presidente Jimmy Carter</strong>: Misty Malarky Ying Yang</p>
+                </div>
+
+                <div class="名人-fact">
+                    <h3>🌟 Famosos con Corazón Siamés</h3>
+                    <p>• <strong>Elizabeth Taylor</strong>: varios siameses, el primero se llamaba Coffee</p>
+                    <p>• <strong>James Dean</strong>: Marcus (regalo de Elizabeth Taylor)</p>
+                    <p>• <strong>Clarke Gable y Carole Lombard</strong>: dos siameses juntos</p>
+                    <p>• <strong>Marilyn Monroe</strong>: su gatito la acompañaba en los platós</p>
+                    <p>• <strong>John Lennon</strong>: amor por los siameses gracias a su tía Mimi</p>
+                    <p>• <strong>Vivian Leigh</strong>: consideraba a los siameses "amuleto de la buena suerte"</p>
+                    <p>• <strong>Jane Fonda</strong>: hacía yoga con su siamés</p>
+                    <p>• <strong>Frank Zappa</strong>: Gorgonzola</p>
+                    <p>• <strong>Andy Warhol</strong>: Hester (su primer gato)</p>
+                    <p>• <strong>Ricky Gervais</strong>: Ollie (falleció a los 17 años)</p>
+                    <p>• <strong>Reina Isabel II</strong>: Corsham Royal Boy (regalo de bodas)</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>¡Cuidados para un Siamés Feliz!</h2>
+
+                <div class="curiosity-card">
+                    <h3>💖 Atención y Juego</h3>
+                    <p>A los siameses les encanta recibir mucha atención. Asegúrate de incluir mucho tiempo para jugar en su horario diario.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🏠 Ambiente Cálido</h3>
+                    <p>Como tienen un pelaje corto y pueden pasar frío, proporciona una cama cálida y acogedora lejos de corrientes de aire.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🦷 Cuidado Dental</h3>
+                    <p>Espere que necesiten poca ayuda para acicalarse, pero como les encanta la atención, el acicalamiento es una manera perfecta para compartir tiempo juntos. También es ideal para revisar la piel y el pelaje.</p>
+                    <p>Es una muy buena costumbre cepillarle los dientes habitualmente. Entrenar a tu gato para que se cepille mientras es un gatito es ideal.</p>
+                </div>
+
+                <div class="curiosity-card">
+                    <h3>🪑 Espacios Altos</h3>
+                    <p>Proporciónales muchas zonas altas alrededor de la casa y postes para rascar. Los siameses adoran los lugares elevados para vigilar su territorio.</p>
+                </div>
+            </div>
+
+            <div class="fun-fact">
+                <h3>🎉 Y el ganador es...</h3>
+                <p>Si Coco es tu siamés, ¡es un miembro de la realeza en tu casa! 🐾👑</p>
+                <p>Gracias a su naturaleza amable y amistosa, los gatos Siameses son excelentes amigos para toda la familia.</p>
+                <p>Y aunque pueden vivir entre <strong>15 y 20 años</strong>, ¡cada día con ellos es un diamante en el tiempo!</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="cat-footer">🐱💎🐱</div>
+            <p>Una página dedicada a la elegancia, inteligencia y personalidad del gato siamés.</p>
+            <p>Basada en curiosidades reales y datos verificados sobre esta raza fascinante.</p>
+            <p>Hecho con mucho amor para Coco y todos los siameses del mundo 🌍</p>
+        </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
