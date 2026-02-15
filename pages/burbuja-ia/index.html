@@ -116,31 +116,37 @@
             margin: 0 20px 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
-            overflow: hidden;
         }
 
-        /* Fondo con patrón de gatos flotantes */
+        /* Fondo con patrón de gatos flotantes - z-index menor para que esté detrás del contenido */
         header::before {
             content: '🐱';
             position: absolute;
             font-size: 15rem;
-            opacity: 0.1;
+            opacity: 0.25;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             animation: floatCat 6s ease-in-out infinite;
-            z-index: 1;
+            z-index: 0;
+            pointer-events: none;
         }
 
         header::after {
             content: '🤖';
             position: absolute;
             font-size: 8rem;
-            opacity: 0.15;
+            opacity: 0.3;
             bottom: 20px;
             right: 30px;
             animation: floatCat 5s ease-in-out infinite reverse;
-            z-index: 1;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 10;
         }
 
         header h1 {
@@ -148,8 +154,6 @@
             margin-bottom: 20px;
             text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.3);
             animation: titleGlow 4s ease-in-out infinite alternate;
-            position: relative;
-            z-index: 2;
         }
 
         header .subtitle {
@@ -161,8 +165,6 @@
             border-radius: 50px;
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 2;
             animation: fadeInUp 1s ease-out;
         }
 
@@ -634,8 +636,10 @@
 
     <div class="container">
         <header>
-            <h1>La Burbuja de la IA</h1>
-            <p class="subtitle">¿Realidad o Exageración? 🐱🤖</p>
+            <div class="header-content">
+                <h1>La Burbuja de la IA</h1>
+                <p class="subtitle">¿Realidad o Exageración? 🐱🤖</p>
+            </div>
         </header>
 
         <section id="introduccion" class="section">
