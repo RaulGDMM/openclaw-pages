@@ -110,24 +110,25 @@
         /* Header - Diseño actualizado con gatos y animación */
         header {
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: 120px 20px 80px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             border-radius: 20px;
             margin: 0 20px 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
+            overflow: visible;
         }
 
         /* Fondo con patrón de gatos flotantes - z-index menor para que esté detrás del contenido */
         header::before {
             content: '🐱';
             position: absolute;
-            font-size: 15rem;
-            opacity: 0.25;
-            top: 50%;
+            font-size: 20rem;
+            opacity: 0.15;
+            top: 60%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            animation: floatCat 6s ease-in-out infinite;
+            transform: translate(-50%, -50%) rotate(-10deg) scale(0.8);
+            animation: floatCat 8s ease-in-out infinite;
             z-index: 0;
             pointer-events: none;
         }
@@ -135,11 +136,11 @@
         header::after {
             content: '🤖';
             position: absolute;
-            font-size: 8rem;
-            opacity: 0.3;
-            bottom: 20px;
-            right: 30px;
-            animation: floatCat 5s ease-in-out infinite reverse;
+            font-size: 10rem;
+            opacity: 0.2;
+            bottom: 30px;
+            right: 50px;
+            animation: floatCat 7s ease-in-out infinite reverse;
             z-index: 0;
             pointer-events: none;
         }
@@ -147,6 +148,7 @@
         .header-content {
             position: relative;
             z-index: 10;
+            margin-top: 40px;
         }
 
         header h1 {
@@ -459,9 +461,9 @@
         }
 
         @keyframes floatCat {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-55%, -45%) rotate(10deg) scale(1.1); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            0% { transform: translate(-50%, -50%) rotate(-10deg) scale(0.8); }
+            50% { transform: translate(-52%, -48%) rotate(5deg) scale(0.85); }
+            100% { transform: translate(-50%, -50%) rotate(-10deg) scale(0.8); }
         }
 
         @keyframes titleGlow {
@@ -564,7 +566,7 @@
             }
 
             header {
-                padding: 60px 20px 40px;
+                padding: 100px 20px 60px;
                 margin: 0 15px 25px;
             }
 
@@ -572,8 +574,8 @@
                 font-size: 2em;
             }
 
-            header::before { font-size: 10rem; }
-            header::after { font-size: 5rem; }
+            header::before { font-size: 12rem; }
+            header::after { font-size: 6rem; }
 
             .container {
                 padding-top: 100px;
