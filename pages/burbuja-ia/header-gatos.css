@@ -1,0 +1,25 @@
+/* Gato a la izquierda */
+        header::before {
+            content: '🐱';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.25;
+            left: 40px;
+            top: 35%;
+            animation: floatCatLeft 6s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Robot a la derecha */
+        header::after {
+            content: '🤖';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.3;
+            right: 40px;
+            top: 35%;
+            animation: floatCatRight 7s ease-in-out infinite reverse;
+            z-index: 0;
+            pointer-events: none;
+        }
