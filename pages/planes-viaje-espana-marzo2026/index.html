@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes de Viaje por España en Marzo 2026</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .subtitle {
+            text-align: center;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        select, input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .category h2 {
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .destination-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .destination-card h3 {
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .tag {
+            background: #e0e7ff;
+            color: #1a1a2e;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .info-item strong {
+            display: block;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        .info-item span {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .description {
+            color: #555;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .highlight {
+            background: #fff3cd !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✈️ Planes de Viaje por España en Marzo 2026</h1>
+        <p class="subtitle">Descubre los mejores destinos, qué ver y hacer según tus intereses</p>
+        
+        <div class="filters">
+            <input type="text" id="search" placeholder="Buscar destino...">
+            <select id="categoryFilter">
+                <option value="all">Todos los tipos</option>
+                <option value="nature">Naturaleza / Montaña</option>
+                <option value="beach">Playa / Costa</option>
+                <option value="culture">Cultura / Patrimonio</option>
+                <option value="gastronomy">Gastronomía / Vino</option>
+                <option value="festival">Fiestas / Eventos</option>
+            </select>
+        </div>
+        
+        <!-- NATURALEZA -->
+        <div class="category" data-category="nature">
+            <h2>🏔️ Naturaleza y Montaña</h2>
+            
+            <div class="destination-card">
+                <h3>Ordesa y Monte Perdido (Huesca)</h3>
+                <div class="tags">
+                    <span class="tag">Parque Nacional</span>
+                    <span class="tag">Senderismo</span>
+                    <span class="tag">Pirineos</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>1-2 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>40-80€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>1.500m</strong>
+                        <span>Altitud</span>
+                    </div>
+                </div>
+                <p class="description">En marzo, el deshielo llena de vida sus cascadas y ríos, y los bosques muestran un verde vibrante. Ideal para senderismo, fotografía y observación de flora y fauna.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Valle del Jerte (Cáceres)</h3>
+                <div class="tags">
+                    <span class="tag">Floración</span>
+                    <span class="tag">Cerezos</span>
+                    <span class="tag">Pueblos Blancos</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>50-100€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>900m</strong>
+                        <span>Altitud</span>
+                    </div>
+                </div>
+                <p class="description">El mejor momento para visitar el Valle del Jerte es a finales de marzo, cuando florecen los cerezos y se transforma en un paisaje blanco espectacular. Declarado Bien de Interés Cultural.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Monfragüe (Cáceres/Salamanca)</h3>
+                <div class="tags">
+                    <span class="tag">Reserva Biosfera</span>
+                    <span class="tag">Observación aves</span>
+                    <span class="tag">Naturaleza</span>
+                </div>
+                    <div class="info-grid">
+                    <div class="info-item">
+                        <strong>1-2 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>40-80€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>500m</strong>
+                        <span>Altitud</span>
+                    </div>
+                </div>
+                <p class="description">Naturaleza en estado puro. En marzo es ideal para la observación de aves rapaces. Puedes hacer rutas en coche, a pie o en balsa por el río Tajo.</p>
+            </div>
+        </div>
+        
+        <!-- PLAYA -->
+        <div class="category" data-category="beach">
+            <h2>🏖️ Playa y Costa</h2>
+            
+            <div class="destination-card highlight">
+                <h3>Lanzarote (Islas Canarias)</h3>
+                <div class="tags">
+                    <span class="tag">Playa</span>
+                    <span class="tag">Volcánico</span>
+                    <span class="tag">Sol garantizado</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>4-5 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>250-400€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>20-25°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">En marzo, Lanzarote es genial porque aún no es temporada alta, así que menos gente y precios más razonables. Todo el año tiene buen clima, pero en marzo evitas las multitudes de verano.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Costa del Sol (Málaga)</h3>
+                <div class="tags">
+                    <span class="tag">Costa</span>
+                    <span class="tag">Málaga</span>
+                    <span class="tag">Sol</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>3-4 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>200-350€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>18-22°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">320 días de sol al año y 34 playas con bandera azul. En marzo, evitas las multitudes de verano pero disfrutas de buen clima. Ideal para pasear por el paseo marítimo y probar la gastronomía local.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Costa da Morte (A Coruña)</h3>
+                <div class="tags">
+                    <span class="tag">Costa</span>
+                    <span class="tag">Salvaje</span>
+                    <span class="tag">Miradores</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2-3 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>150-250€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>15-18°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Uno de los lugares más bonitos de Galicia. El mirador de Ézaro y el faro de cabo Vidio ofrecen vistas fabulosas. En marzo, la costa está menos concurrida y puedes disfrutar de los pueblos costeros con calma.</p>
+            </div>
+        </div>
+        
+        <!-- CULTURA -->
+        <div class="category" data-category="culture">
+            <h2>🏛️ Cultura y Patrimonio</h2>
+            
+            <div class="destination-card highlight">
+                <h3>Sevilla</h3>
+                <div class="tags">
+                    <span class="tag">Flamenco</span>
+                    <span class="tag">Semana Santa</span>
+                    <span class="tag">Patrimonio</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>3-4 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>150-250€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>18-20°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">En marzo, Sevilla está animada con las celebraciones previas a la Semana Santa. Visita la Giralda, el Alcázar, la Catedral y disfruta de tapas en el barrio de Santa Cruz.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Granada</h3>
+                <div class="tags">
+                    <span class="tag">Alhambra</span>
+                    <span class="tag">Patrimonio</span>
+                    <span class="tag">Tapas gratis</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2-3 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>120-200€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>16-19°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">La Alhambra es imprescindible. En marzo, el clima es ideal para visitarla sin las aglomeraciones de verano. ¡No olvides reservar con antelación!</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Barcelona</h3>
+                <div class="tags">
+                    <span class="tag">Gaudí</span>
+                    <span class="tag">Arquitectura</span>
+                    <span class="tag">Cultura</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>3-4 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>200-350€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>14-18°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Barcelona en marzo está animada pero menos congestionada que en temporada alta. Explora la Sagrada Familia, Park Güell y el Barrio Gótico. Ideal para amantes de la arquitectura modernista.</p>
+            </div>
+        </div>
+        
+        <!-- GASTRONOMÍA -->
+        <div class="category" data-category="gastronomy">
+            <h2>🍷 Gastronomía y Vino</h2>
+            
+            <div class="destination-card highlight">
+                <h3>La Rioja</h3>
+                <div class="tags">
+                    <span class="tag">Vino</span>
+                    <span class="tag">Bodegas</span>
+                    <span class="tag">Cultura</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2-3 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>150-250€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>12-16°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">En marzo, aún es temporada baja, así que puedes hacer visitas a bodegas sin colas. Disfruta de catas de vino y combínalo con visitas a ciudades como Logroño y Haro.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Valencia</h3>
+                <div class="tags">
+                    <span class="tag">Paella</span>
+                    <span class="tag">Hortofrutícola</span>
+                    <span class="tag">Gastronomía</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2-3 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>120-200€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>16-19°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Valencia es la cuna de la paella. En marzo, puedes probar platos típicos como el arroz al horno, el arroz negro y el arroz con costra. ¡No te olvides de las horchatas!</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Salamanca</h3>
+                <div class="tags">
+                    <span class="tag">Tapas</span>
+                    <span class="tag">Universidad</span>
+                    <span class="tag">Patrimonio</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>100-180€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>12-16°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Salamanca es famosa por sus tapas gratis con la bebida. En marzo, el clima es ideal para pasear por su plaza mayor y disfrutar de la gastronomía local.</p>
+            </div>
+        </div>
+        
+        <!-- FESTIVOS -->
+        <div class="category" data-category="festival">
+            <h2>🎉 Fiestas y Eventos</h2>
+            
+            <div class="destination-card highlight">
+                <h3>Valencia - Las Fallas</h3>
+                <div class="tags">
+                    <span class="tag">Fallas</span>
+                    <span class="tag">Fuegos artificiales</span>
+                    <span class="tag">Cultura</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>5 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>200-350€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>16-19°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Las Fallas tienen lugar entre el 15 y el 19 de marzo. Es una de las fiestas más importantes de España, con monumentos gigantes que se queman la noche del 19. ¡Una experiencia inolvidable!</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>Madrid - Feria de San José</h3>
+                <div class="tags">
+                    <span class="tag">Feria</span>
+                    <span class="tag">Artesanía</span>
+                    <span class="tag">Cultura</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>2-3 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>150-250€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>12-16°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Madrid celebra su feria en marzo, con actividades culturales, conciertos y gastronomía. Ideal para conocer la ciudad en un momento festivo pero sin la afluencia de verano.</p>
+            </div>
+            
+            <div class="destination-card">
+                <h3>San Sebastián - Semana Grande</h3>
+                <div class="tags">
+                    <span class="tag">Fiestas</span>
+                    <span class="tag">Parrandas</span>
+                    <span class="tag">Música</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>3-4 días</strong>
+                        <span>Tiempo recomendado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>200-350€</strong>
+                        <span>Presupuesto</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>14-18°C</strong>
+                        <span>Temperatura</span>
+                    </div>
+                </div>
+                <p class="description">Aunque la Semana Grande es en agosto, en marzo San Sebastián tiene sus fiestas de invierno con actividades culturales y gastronómicas. Ideal para disfrutar de la ciudad sin las multitudes.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const searchInput = document.getElementById('search');
+        const categoryFilter = document.getElementById('categoryFilter');
+        
+        function filterDestinations() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+            
+            const cards = document.querySelectorAll('.destination-card');
+            const categories = document.querySelectorAll('.category');
+            
+            let visibleDestinations = 0;
+            
+            cards.forEach(card => {
+                const cardCategory = card.parentElement.dataset.category;
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const tags = card.querySelector('.tags').innerText.toLowerCase();
+                
+                let show = true;
+                
+                if (category !== 'all' && cardCategory !== category) {
+                    show = false;
+                }
+                
+                if (searchTerm && !title.includes(searchTerm) && !tags.includes(searchTerm)) {
+                    show = false;
+                }
+                
+                card.style.display = show ? '' : 'none';
+                if (show) visibleDestinations++;
+            });
+            
+            categories.forEach(cat => {
+                const catCards = cat.querySelectorAll('.destination-card');
+                let visibleCards = 0;
+                
+                catCards.forEach(card => {
+                    if (card.style.display !== 'none') visibleCards++;
+                });
+                
+                cat.style.display = visibleCards > 0 ? '' : 'none';
+            });
+        }
+        
+        searchInput.addEventListener('input', filterDestinations);
+        categoryFilter.addEventListener('change', filterDestinations);
+        
+        // Add click handlers to cards
+        document.querySelectorAll('.destination-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('highlight');
+                // Add your custom logic here (e.g., show details, add to itinerary, etc.)
+            });
+        });
+    </script>
+</body>
+</html>
