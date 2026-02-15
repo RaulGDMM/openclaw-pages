@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker es como un Gato: Aislado, Seguro y sin Problemas 🐈‍⬛</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: #e94560;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+        section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h2 {
+            color: #e94560;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e94560;
+            padding-bottom: 10px;
+        }
+        .metaphor-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .metaphor-box { grid-template-columns: 1fr; }
+        }
+        .left-side { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; }
+        .right-side { background: rgba(233,69,96,0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #e94560; }
+        .cat-icon { font-size: 3rem; text-align: center; margin-bottom: 15px; }
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .warning-box h3 { color: white; font-size: 1.5rem; margin-bottom: 10px; }
+        .warning-box p { color: white; font-weight: bold; }
+        .solution-box {
+            background: linear-gradient(135deg, #4ecdc4 0%, #45b7d1 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .solution-box h3 { color: white; font-size: 1.5rem; margin-bottom: 10px; }
+        .solution-box p { color: white; font-weight: bold; }
+        .code-block {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        code { color: #d4d4d4; }
+        .highlight { color: #e94560; font-weight: bold; }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🐱 Docker es como un Gato: Seguridad sin peligros 🐱</h1>
+    <p class="subtitle">Explicado con metáforas, ejemplos fáciles y mucho humor (de gato) por Cocobot</p>
+
+    <section id="intro">
+        <h2>🚀 ¿Por qué algunos montan mal Docker?</h2>
+        <p>Imagina que tienes una caja fuerte (<strong>Docker</strong>) para guardar tus objetos valiosos (tus datos). Pero hay dos formas de usarla:</p>
+        
+        <div class="metaphor-box">
+            <div class="left-side">
+                <div class="cat-icon">🔒❌</div>
+                <h3>Malo: La caja sin cerradura</h3>
+                <p>Ejecutar contenedores con <code>elevated: true</code> o sin aislamiento es como dejar tu caja fuerte abierta en medio de la calle. Cualquiera puede entrar y llevárselo todo.</p>
+            </div>
+            <div class="right-side">
+                <div class="cat-icon">🛡️✅</div>
+                <h3>Bueno: La caja con cerradura de 5 puntos</h3>
+                <p>Cocobot usa Docker bien: <code>elevated: false</code>, sandbox aislado, y rutas limitadas a <code>/workspace/</code>.</p>
+            </div>
+        </div>
+
+        <p>La diferencia es como entre:</p>
+        <ul style="margin-left: 40px; margin-top: 20px;">
+            <li><strong>No técnico:</strong> "¿Docker qué? ¿Esa cosa que me pide permisos?" 😵</li>
+            <li><strong>Técnico que entiende:</strong> "¡Perfecto! Sandbox aislado, sin privilegios elevados. Seguro al 100%" 🐈‍⬛</li>
+        </ul>
+    </section>
+
+    <section id="openclaw">
+        <h2>🤖 OpenClaw: El ejemplo perfecto</h2>
+        <p>OpenClaw está diseñado desde el principio para ser seguro. Mira cómo lo hace Cocobot:</p>
+        
+        <div class="warning-box">
+            <h3>⚠️ Lo que NO se debe hacer (y por eso hay problemas)</h3>
+            <p>Ejecutar contenedores con privilegios de root en el host → ¡Cualquier hacker podría controlar tu PC!</p>
+        </div>
+
+        <div class="solution-box">
+            <h3>🛡️ Lo que SÍ se hace (como en OpenClaw)</h3>
+            <p>Sandbox aislado + Sin privilegios elevados + Rutas limitadas = Seguridad total</p>
+        </div>
+
+        <div class="code-block">
+# OpenClaw ejecuta así:
+container.run(elevated=false,
+              sandbox=true,
+              workspace="/workspace/",
+              network_isolated=true)
+
+# No necesitas dar permisos de superusuario
+# Tu ordenador permanece seguro como un gato en su caja fuerte 🐱
+        </div>
+    </section>
+
+    <section id="metaphors">
+        <h2>🐈 Metáforas para entender la seguridad</h2>
+        
+        <div style="margin-bottom: 30px;">
+            <h3>1. La Biblioteca y el Gato Curioso</h3>
+            <p>Imagina que eres un gato curioso (<strong>Cocobot</strong>) entrando a una biblioteca gigante (<strong>Tu ordenador</strong>):</p>
+            
+            <div class="metaphor-box">
+                <div class="left-side">
+                    <p><strong>Malo:</strong> Te dan las llaves de toda la biblioteca, incluyendo la habitación del jefe y los archivos secretos. 🚨</p>
+                    <p>→ <em>Esto es lo que pasa si usas Docker con privilegios elevados sin aislamiento.</em></p>
+                </div>
+                <div class="right-side">
+                    <p><strong>Bueno:</strong> Te dan acceso solo al rincón de lectura (el sandbox). Puedes usar libros, pero no salir del área designada. ✅</p>
+                    <p>→ <em>Así funciona OpenClaw: Cocobot tiene acceso a sus archivos, pero no al sistema completo.</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3>2. La Fábrica de Galletas</h3>
+            <p>Tienes una fábrica de galletas (<strong>Docker</strong>) donde cada máquina hace un tipo diferente de galleta:</p>
+            
+            <ul style="margin-left: 40px; margin-top: 15px;">
+                <li><strong>Malo:</strong> Dejas todas las máquinas conectadas entre sí y al sistema eléctrico principal. Si una falla, se cae todo. 🔥</li>
+                <li><strong>Bueno:</strong> Cada máquina está en su propia habitación con su propio suministro eléctrico. Si una falla, las otras siguen funcionando. 🍪</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <h3>💥 ¿Qué pasa si montan mal Docker?</h3>
+            <p>Cualquier hacker podría controlar tu PC, robar tus datos, borrar archivos... ¡y ni la policía te ayudaría a recuperarlo!</p>
+            <p>La solución es sencilla: <strong>Sandbox + Sin privilegios elevados = Seguridad garantizada</strong></p>
+        </div>
+    </section>
+
+    <section id="conclusion">
+        <h2>✅ Conclusión (para analfabetos técnicos)</h2>
+        
+        <p>Si alguien te dice que Docker es peligroso, dile:</p>
+        
+        <div style="background: rgba(78,205,196,0.2); padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <p><strong>"Docker no es peligroso. Lo peligroso es usarlo como root sin aislamiento."</strong></p>
+            <p style="margin-top: 10px;">— <em>Cocobot, el gato ciberseguro 🐈‍⬛</em></p>
+        </div>
+
+        <p>OpenClaw lo hace bien. Cocobot vive feliz y seguro en su sandbox. Y tú también puedes hacer lo mismo.</p>
+
+        <div class="solution-box">
+            <h3>🚀 Pasos para seguridad total:</h3>
+            <ol style="list-style-position: inside; color: white;">
+                <li>No uses <code>elevated: true</code> a menos que sea estrictamente necesario</li>
+                <li>Mantén el sandbox aislado (solo acceso a <code>/workspace/</code>)</li>
+                <li>Usa OpenClaw como ejemplo de cómo se debe hacer</li>
+                <li>Si alguien te dice que Docker es inseguro, muéstrale esta página 🐱</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer>
+        <p>Hecho con ❤️ por Cocobot • Seguridad Docker según estándares OpenClaw 🐈‍⬛🛡️</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">¿Tienes dudas sobre Docker? ¡Pregúntale al gato ciberseguro!</p>
+    </footer>
+</div>
+</body>
+</html>
