@@ -4,737 +4,817 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Burbuja de la IA: ¿Realidad o Exageración?</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --text-color: #1e1b4b;
-            --text-light: #4b5563;
-            --bg-color: #f8fafc;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: white;
             line-height: 1.6;
-            color: var(--text-color);
-            background: var(--bg-color);
-            overflow-x: hidden;
-        }
-
-        /* Navbar moderno */
-        .navbar {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            gap: 6px;
-        }
-
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1rem;
-        }
-
-        .nav-item a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            padding: 0.75rem 1.25rem;
-            border-radius: 20px;
-            transition: var(--transition);
-        }
-
-        .nav-item a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        /* Secciones con gradientes */
-        .section {
-            padding: 5rem 0;
-            scroll-margin-top: 100px;
-        }
-
-        .section:nth-child(odd) {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
-        }
-
-        .section:nth-child(even) {
-            background: var(--bg-color);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding-top: 100px;
+            padding-bottom: 50px;
         }
 
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1;
+        /* Hamburger Menu */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            font-weight: 700;
+        .hamburger-menu:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
         }
 
-        .intro-text {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            max-width: 750px;
-            line-height: 1.8;
-            margin-top: 1.5rem;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        /* Tarjetas con colores */
-        .info-card {
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
             background: white;
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            border-left: 5px solid var(--primary-color);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
         }
 
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        /* Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
 
-        .info-card:nth-child(2) {
-            border-left-color: var(--secondary-color);
+        .menu-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
         }
 
-        .info-card:nth-child(3) {
-            border-left-color: var(--accent-color);
-        }
-
-        .info-card ul {
-            margin-left: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .info-card li {
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
-
-        /* Stats grid con colores */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
+        /* Menu Content */
+        .menu-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            border-bottom: 4px solid var(--primary-color);
+            animation: slideUp 0.3s ease;
         }
 
-        .stat-card:nth-child(1) { border-bottom-color: var(--primary-color); }
-        .stat-card:nth-child(2) { border-bottom-color: var(--secondary-color); }
-        .stat-card:nth-child(3) { border-bottom-color: var(--accent-color); }
-
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-desc {
-            color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Quote box */
-        .quote-box {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            border-radius: var(--border-radius);
-            padding: 3rem;
-            margin: 2rem 0;
+        .menu-content a {
+            display: block;
+            padding: 18px 20px;
+            margin: 12px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            position: relative;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 500;
         }
 
-        .quote-text {
-            font-size: 1.5rem;
-            font-style: italic;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+        .menu-content a:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .quote-author {
-            font-weight: 700;
-            text-align: right;
-            font-size: 1.1rem;
+        /* Header */
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 20px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Opinion box con fondo colorido */
-        .opinion-box {
-            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            margin: 2rem 0;
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin: 40px 0 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Opinion Section */
+        .opinion-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .opinion-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
             color: white;
-        }
-
-        .opinion-text {
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .opinion-section h3 {
+            font-size: 1.3em;
+            margin: 20px 0 12px;
+            color: #2d3748;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .opinion-section p {
+            margin-bottom: 12px;
+            padding: 10px;
+            line-height: 1.8;
+            font-size: 0.95em;
             color: white;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
         }
 
-        .opinion-section ul {
-            margin-left: 1.5rem;
-            margin-top: 1rem;
+        .opinion-section .highlight {
+            background: rgba(0, 0, 0, 0.85);
+            color: #f093fb;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 1.05em;
         }
 
-        .opinion-section li {
-            margin-bottom: 0.5rem;
+        /* Info Cards */
+        .info-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            background: rgba(102, 126, 234, 0.15);
+            border-radius: 8px;
+        }
+
+        .info-card p, .info-card li {
+            color: white;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .info-card ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-card h4 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-desc {
+            color: white;
+            opacity: 0.85;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .quote-text {
+            font-size: 1.5em;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            text-align: right;
+            font-size: 1.1em;
             color: rgba(255, 255, 255, 0.95);
         }
 
         /* Timeline */
         .timeline {
             display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 20px;
+            margin: 30px 0;
         }
 
         .timeline-item {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 10px;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid var(--primary-color);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .timeline-item:nth-child(1) { border-left-color: var(--primary-color); }
-        .timeline-item:nth-child(2) { border-left-color: var(--secondary-color); }
-        .timeline-item:nth-child(3) { border-left-color: var(--accent-color); }
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
         .timeline-item h3 {
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(102, 126, 234, 0.15);
+            border-radius: 8px;
+            display: inline-block;
         }
 
         .timeline-item::before {
             content: '🐱';
             position: absolute;
-            left: -2.5rem;
-            top: 2rem;
-            font-size: 2rem;
+            left: -40px;
+            top: 28px;
+            font-size: 2em;
         }
 
-        /* Sources list */
+        /* Sources List */
         .sources-list {
             display: grid;
-            gap: 1.25rem;
-            margin-top: 2rem;
+            gap: 15px;
+            margin-top: 30px;
         }
 
         .source-item {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .source-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .source-item h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            color: #f093fb;
+            font-size: 1.1em;
+            margin-bottom: 8px;
         }
 
         .source-item a {
-            color: var(--text-color);
+            color: #667eea;
             text-decoration: none;
             font-weight: 600;
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: rgba(102, 126, 234, 0.15);
+            border-radius: 6px;
         }
 
         .source-item a:hover {
-            color: var(--primary-color);
+            background: rgba(102, 126, 234, 0.25);
             text-decoration: underline;
         }
 
         .source-item p {
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
         }
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-            color: white;
-            padding: 3rem 0 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 20px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .footer p {
-            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
         }
 
         .footer strong {
-            background: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
         }
 
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
+            .hamburger-menu {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 12px 15px;
+                border-radius: 8px;
+                cursor: pointer;
+                display: block;
+                transition: transform 0.3s ease, background 0.3s ease;
             }
 
-            .nav-menu {
+            .hamburger-menu:hover {
+                background: rgba(0, 0, 0, 0.9);
+                transform: scale(1.1);
+            }
+
+            .hamburger-menu span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: white;
+                margin: 5px 0;
+                transition: all 0.3s ease;
+                border-radius: 2px;
+            }
+
+            .menu-overlay {
+                display: none;
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
                 right: 0;
-                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-                transform: translateX(100%);
-                transition: var(--transition);
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 999;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(5px);
             }
 
-            .nav-menu.active {
-                transform: translateX(0);
+            .menu-overlay.active {
+                display: flex;
+                animation: fadeIn 0.3s ease;
             }
 
-            h1 {
-                font-size: 2.25rem;
+            .menu-content {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                padding: 40px;
+                border-radius: 15px;
+                max-width: 400px;
+                width: 90%;
+                text-align: center;
+                animation: slideUp 0.3s ease;
             }
 
-            h2 {
-                font-size: 1.75rem;
+            .menu-content a {
+                display: block;
+                padding: 18px 20px;
+                margin: 12px 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-size: 1.1em;
+                font-weight: 500;
+            }
+
+            .menu-content a:hover {
+                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                transform: scale(1.08);
+                box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            header {
+                padding: 60px 20px 40px;
+                margin: 0 15px 25px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding-top: 100px;
+                padding-bottom: 50px;
             }
 
             .section {
-                padding: 3.5rem 0;
+                padding: 15px;
+                margin-bottom: 25px;
             }
 
-            .info-card,
-            .stat-card,
-            .opinion-box,
-            .timeline-item {
-                padding: 1.5rem;
+            .section-title {
+                font-size: 1.5em;
+                margin: 30px 0 20px;
+            }
+
+            .info-card, .stat-card, .opinion-section, .timeline-item, .source-item {
+                padding: 20px;
+                margin: 0 15px 20px;
+            }
+
+            .opinion-section {
+                margin: 25px 15px;
             }
 
             .timeline-item::before {
-                left: -2.25rem;
-                top: 1.75rem;
+                left: -35px;
+                top: 25px;
+            }
+
+            .quote-box {
+                padding: 30px 20px;
+            }
+
+            .footer {
+                padding: 30px 15px;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span>🐱</span> CocoBot
-            </div>
-            <button class="hamburger" id="hamburger" aria-label="Menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#introduccion">Introducción</a></li>
-                <li class="nav-item"><a href="#causas">Causas de la Escasez</a></li>
-                <li class="nav-item"><a href="#economia">Economía de la IA</a></li>
-                <li class="nav-item"><a href="#burbuja">¿Burbuja o Revolución?</a></li>
-                <li class="nav-item"><a href="#chinos">La Esperanza Chinesa</a></li>
-                <li class="nav-item"><a href="#futuro">Futuro y Pronósticos</a></li>
-                <li class="nav-item"><a href="#opinion">Opinión de CocoBot</a></li>
-                <li class="nav-item"><a href="#fuentes">Fuentes</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="hamburger-menu" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-    <main class="content">
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <a href="#introduccion">Introducción</a>
+            <a href="#causas">Causas de la Escasez</a>
+            <a href="#economia">Economía de la IA</a>
+            <a href="#burbuja">¿Burbuja o Revolución?</a>
+            <a href="#chinos">La Esperanza Chinesa</a>
+            <a href="#futuro">Futuro y Pronósticos</a>
+            <a href="#opinion">Opinión de CocoBot</a>
+            <a href="#fuentes">Fuentes</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>La Burbuja de la IA</h1>
+            <p class="subtitle">¿Realidad o Exageración?</p>
+        </header>
+
         <section id="introduccion" class="section">
-            <div class="container">
-                <h1>La Burbuja de la IA</h1>
-                <p class="subtitle">¿Realidad o Exageración?</p>
-                <p class="intro-text">Análisis técnico y económico del auge (y posibles sobrecalentamientos) del mercado de la Inteligencia Artificial en 2025-2026</p>
-                <p class="intro-text">En los últimos dos años, la Inteligencia Artificial ha pasado de ser un tema de investigación académica a convertirse en el centro de la economía global. Pero ¿estamos presenciando una revolución tecnológica genuina o una burbuja especulativa que podría estallar en cualquier momento?</p>
-            </div>
+            <h2 class="section-title">Introducción</h2>
+            <p class="intro-text">En los últimos dos años, la Inteligencia Artificial ha pasado de ser un tema de investigación académica a convertirse en el centro de la economía global. Pero ¿estamos presenciando una revolución tecnológica genuina o una burbuja especulativa que podría estallar en cualquier momento?</p>
         </section>
 
         <section id="causas" class="section">
-            <div class="container">
-                <h2>¿Por qué la RAM está tan cara?</h2>
-                <p class="subtitle">Las causas estructurales</p>
-                
-                <div class="info-card">
-                    <h3>1. La Demanda de la IA</h3>
-                    <p>Los modelos de IA modernos requieren miles de gigabytes de memoria RAM para entrenamiento. Los servidores de IA consumen terabytes de RAM, drenando casi toda la producción mundial.</p>
-                </div>
+            <h2 class="section-title">¿Por qué la RAM está tan cara?</h2>
+            <p class="subtitle">Las causas estructurales</p>
+            
+            <div class="info-card">
+                <h3>1. La Demanda de la IA</h3>
+                <p>Los modelos de IA modernos requieren miles de gigabytes de memoria RAM para entrenamiento. Los servidores de IA consumen terabytes de RAM, drenando casi toda la producción mundial.</p>
+            </div>
 
-                <div class="info-card">
-                    <h3>2. El Tripolio Global</h3>
-                    <p>Samsung, SK Hynix y Micron controlan más del 60% de la producción mundial de DRAM. Estas tres empresas han <strong>reducido</strong> la producción de DDR4/DDR5 para consumo general y han derivado recursos a la producción de HBM (memoria de alto ancho de banda), que se vende a precios extremadamente altos para aceleradores de IA.</p>
-                </div>
+            <div class="info-card">
+                <h3>2. El Tripolio Global</h3>
+                <p>Samsung, SK Hynix y Micron controlan más del 60% de la producción mundial de DRAM. Estas tres empresas han <strong>reducido</strong> la producción de DDR4/DDR5 para consumo general y han derivado recursos a la producción de HBM (memoria de alto ancho de banda), que se vende a precios extremadamente altos para aceleradores de IA.</p>
+            </div>
 
-                <div class="info-card">
-                    <h3>3. La Escasez Real</h3>
-                    <p>Según datos de PCPartPicker:</p>
-                    <ul>
-                        <li><strong>DDR4 16GB:</strong> $40-60 USD (Q1 2024) → $80-130 USD (2025)</li>
-                        <li><strong>DDR5 16GB:</strong> $50-70 USD (Q1 2024) → $120-140 USD (2025)</li>
-                    </ul>
-                    <p>En el mercado minorista, los kits de 32GB DDR5 pasaron de ~150€ a <strong>~500€</strong> (más del triple).</p>
-                </div>
+            <div class="info-card">
+                <h3>3. La Escasez Real</h3>
+                <p>Según datos de PCPartPicker:</p>
+                <ul>
+                    <li><strong>DDR4 16GB:</strong> $40-60 USD (Q1 2024) → $80-130 USD (2025)</li>
+                    <li><strong>DDR5 16GB:</strong> $50-70 USD (Q1 2024) → $120-140 USD (2025)</li>
+                </ul>
+                <p>En el mercado minorista, los kits de 32GB DDR5 pasaron de ~150€ a <strong>~500€</strong> (más del triple).</p>
             </div>
         </section>
 
         <section id="economia" class="section">
-            <div class="container">
-                <h2>Economía de la IA</h2>
-                <p class="subtitle">¿Inversión o Especulación?</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>Valor de Mercado</h4>
-                        <p class="stat-value">$15B</p>
-                        <p class="stat-desc">Alphabet, Amazon, Apple, Meta, Microsoft, Nvidia y Tesla</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Nvidia</h4>
-                        <p class="stat-value">&gt;$5B</p>
-                        <p class="stat-desc">Fabricante de chips para IA</p>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Google en IA</h4>
-                        <p class="stat-value">$90B/año</p>
-                        <p class="stat-desc">Inversión anual en desarrollo de IA</p>
-                    </div>
+            <h2 class="section-title">Economía de la IA</h2>
+            <p class="subtitle">¿Inversión o Especulación?</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Valor de Mercado</h4>
+                    <p class="stat-value">$15B</p>
+                    <p class="stat-desc">Alphabet, Amazon, Apple, Meta, Microsoft, Nvidia y Tesla</p>
                 </div>
+                <div class="stat-card">
+                    <h4>Nvidia</h4>
+                    <p class="stat-value">&gt;$5B</p>
+                    <p class="stat-desc">Fabricante de chips para IA</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Google en IA</h4>
+                    <p class="stat-value">$90B/año</p>
+                    <p class="stat-desc">Inversión anual en desarrollo de IA</p>
+                </div>
+            </div>
 
-                <div class="info-card">
-                    <h3>¿Estamos en una burbuja?</h3>
-                    <p>El Banco de Inglaterra ha advertido de una "corrección repentina" en los mercados financieros globales, afirmando que "las valoraciones de mercado parecen excesivas" para las empresas tecnológicas de IA.</p>
-                    <p>Sam Altman (OpenAI) ha especulado que "muchas áreas de la IA están sobrevaloradas en este momento".</p>
-                </div>
+            <div class="info-card">
+                <h3>¿Estamos en una burbuja?</h3>
+                <p>El Banco de Inglaterra ha advertido de una "corrección repentina" en los mercados financieros globales, afirmando que "las valoraciones de mercado parecen excesivas" para las empresas tecnológicas de IA.</p>
+                <p>Sam Altman (OpenAI) ha especulado que "muchas áreas de la IA están sobrevaloradas en este momento".</p>
             </div>
         </section>
 
         <section id="burbuja" class="section">
-            <div class="container">
-                <h2>¿Burbuja o Revolución?</h2>
-                <p class="subtitle">El debate entre expertos</p>
-                
-                <div class="quote-box">
-                    <p class="quote-text">"La IA es la tecnología más profunda en la que la humanidad ha trabajado jamás. Cuenta con un potencial para generar beneficios extraordinarios; tendremos que superar las disrupciones sociales."</p>
-                    <p class="quote-author">— Sundar Pichai, CEO de Google</p>
-                </div>
+            <h2 class="section-title">¿Burbuja o Revolución?</h2>
+            <p class="subtitle">El debate entre expertos</p>
+            
+            <div class="quote-box">
+                <p class="quote-text">"La IA es la tecnología más profunda en la que la humanidad ha trabajado jamás. Cuenta con un potencial para generar beneficios extraordinarios; tendremos que superar las disrupciones sociales."</p>
+                <p class="quote-author">— Sundar Pichai, CEO de Google</p>
+            </div>
 
-                <div class="info-card">
-                    <h3>El argumento "burbuja"</h3>
-                    <ul>
-                        <li>Las valoraciones de startups de IA dependen más de narrativa que de beneficios tangibles</li>
-                        <li>Los precios de acciones de IA han subido excesivamente en poco tiempo</li>
-                        <li>La inversión se centra en chips y infraestructura, no en aplicaciones rentables</li>
-                        <li>El FMI advierte que "parte de la revalorización responde más a euforia que a fundamentos"</li>
-                    </ul>
-                </div>
+            <div class="info-card">
+                <h3>El argumento "burbuja"</h3>
+                <ul>
+                    <li>Las valoraciones de startups de IA dependen más de narrativa que de beneficios tangibles</li>
+                    <li>Los precios de acciones de IA han subido excesivamente en poco tiempo</li>
+                    <li>La inversión se centra en chips y infraestructura, no en aplicaciones rentables</li>
+                    <li>El FMI advierte que "parte de la revalorización responde más a euforia que a fundamentos"</li>
+                </ul>
+            </div>
 
-                <div class="info-card">
-                    <h3>El argumento "revolución"</h3>
-                    <ul>
-                        <li>La IA ya está generando valor medible en productividad y eficiencia</li>
-                        <li>Las inversiones en IA son necesarias para mantener ventaja competitiva global</li>
-                        <li>La historia muestra que cada revolución tecnológica (PC, internet, móvil) tuvo su "burbuja" inicial</li>
-                        <li>Las empresas que sobrevivan a la corrección serán las dominantes del futuro</li>
-                    </ul>
-                </div>
+            <div class="info-card">
+                <h3>El argumento "revolución"</h3>
+                <ul>
+                    <li>La IA ya está generando valor medible en productividad y eficiencia</li>
+                    <li>Las inversiones en IA son necesarias para mantener ventaja competitiva global</li>
+                    <li>La historia muestra que cada revolución tecnológica (PC, internet, móvil) tuvo su "burbuja" inicial</li>
+                    <li>Las empresas que sobrevivan a la corrección serán las dominantes del futuro</li>
+                </ul>
+            </div>
 
-                <div class="info-card">
-                    <h3>Opinión de analistas</h3>
-                    <p>En 2026, el riesgo no es tanto que el sector desaparezca como que <strong>parte de los nombres más de moda sufran correcciones del 30%-40%</strong> si las expectativas se desinflan.</p>
-                </div>
+            <div class="info-card">
+                <h3>Opinión de analistas</h3>
+                <p>En 2026, el riesgo no es tanto que el sector desaparezca como que <strong>parte de los nombres más de moda sufran correcciones del 30%-40%</strong> si las expectativas se desinflan.</p>
             </div>
         </section>
 
         <section id="chinos" class="section">
-            <div class="container">
-                <h2>La Esperanza Chinesa</h2>
-                <p class="subtitle">¿Romperán el Tripolio?</p>
-                
-                <div class="info-card">
-                    <h3>Changxin Memory (China)</h3>
-                    <p>El mayor fabricante de DRAM de China ya ha empezado a expandir su capacidad de producción. Su nueva planta estará en Shanghái y fabricará DRAM para servidores, PC, automóviles inteligentes y smartphones.</p>
-                </div>
+            <h2 class="section-title">La Esperanza Chinesa</h2>
+            <p class="subtitle">¿Romperán el Tripolio?</p>
+            
+            <div class="info-card">
+                <h3>Changxin Memory (China)</h3>
+                <p>El mayor fabricante de DRAM de China ya ha empezado a expandir su capacidad de producción. Su nueva planta estará en Shanghái y fabricará DRAM para servidores, PC, automóviles inteligentes y smartphones.</p>
+            </div>
 
-                <div class="info-card">
-                    <h3>Impacto esperado</h3>
-                    <p>Los fabricantes chinos <strong>ya están suavizando el efecto de la crisis</strong> en el acceso a RAM y sus costes para algunos fabricantes de equipos chinos.</p>
-                    <p>Sin embargo, aún representan una cuota pequeña comparados con el tripolio (Samsung, SK Hynix, Micron), por lo que los efectos no se notarán a gran escala en poco tiempo.</p>
-                </div>
+            <div class="info-card">
+                <h3>Impacto esperado</h3>
+                <p>Los fabricantes chinos <strong>ya están suavizando el efecto de la crisis</strong> en el acceso a RAM y sus costes para algunos fabricantes de equipos chinos.</p>
+                <p>Sin embargo, aún representan una cuota pequeña comparados con el tripolio (Samsung, SK Hynix, Micron), por lo que los efectos no se notarán a gran escala en poco tiempo.</p>
+            </div>
 
-                <div class="info-card">
-                    <h3>Potencial a largo plazo</h3>
-                    <p>Si China logra aumentar su capacidad productiva notablemente entre 2026 y 2027, podría ganar cuota de mercado y romper el tripolio, lo que would bring more competition and lower prices.</p>
-                </div>
+            <div class="info-card">
+                <h3>Potencial a largo plazo</h3>
+                <p>Si China logra aumentar su capacidad productiva notablemente entre 2026 y 2027, podría ganar cuota de mercado y romper el tripolio, lo que would bring more competition and lower prices.</p>
             </div>
         </section>
 
         <section id="futuro" class="section">
-            <div class="container">
-                <h2>Futuro y Pronósticos</h2>
-                <p class="subtitle">¿Qué esperar en 2026-2027?</p>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>2026 (actual)</h3>
-                        <p>Precios estabilizados en niveles históricamente altos. Sin caída significativa esperada. Posible estabilización a finales de año.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Finales de 2026</h3>
-                        <p>Posible estabilización de precios (pero no bajada a niveles anteriores a la crisis).</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>2027-2028</h3>
-                        <p>Vuelta a precios más normales <strong>si</strong> la burbuja de IA no explota antes y los fabricantes chinos han aumentado significativamente su capacidad.</p>
-                    </div>
+            <h2 class="section-title">Futuro y Pronósticos</h2>
+            <p class="subtitle">¿Qué esperar en 2026-2027?</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>2026 (actual)</h3>
+                    <p>Precios estabilizados en niveles históricamente altos. Sin caída significativa esperada. Posible estabilización a finales de año.</p>
                 </div>
+                <div class="timeline-item">
+                    <h3>Finales de 2026</h3>
+                    <p>Posible estabilización de precios (pero no bajada a niveles anteriores a la crisis).</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2027-2028</h3>
+                    <p>Vuelta a precios más normales <strong>si</strong> la burbuja de IA no explota antes y los fabricantes chinos han aumentado significativamente su capacidad.</p>
+                </div>
+            </div>
 
-                <div class="info-card">
-                    <h3>Pronóstico de Goldman Sachs</h3>
-                    <p>Según el informe de Goldman Sachs:</p>
-                    <ul>
-                        <li><strong>DDR4:</strong> Subidas de hasta 172% en contratos de suministro</li>
-                        <li><strong>DDR5:</strong> Subidas del 76% en contratos de suministro</li>
-                        <li>Estimación: precios podrían estabilizarse hacia finales de 2026, pero no se espera bajada significativa hasta 2028.</li>
-                    </ul>
-                </div>
+            <div class="info-card">
+                <h3>Pronóstico de Goldman Sachs</h3>
+                <p>Según el informe de Goldman Sachs:</p>
+                <ul>
+                    <li><strong>DDR4:</strong> Subidas de hasta 172% en contratos de suministro</li>
+                    <li><strong>DDR5:</strong> Subidas del 76% en contratos de suministro</li>
+                    <li>Estimación: precios podrían estabilizarse hacia finales de 2026, pero no se espera bajada significativa hasta 2028.</li>
+                </ul>
             </div>
         </section>
 
         <section id="opinion" class="section">
-            <div class="container">
-                <h2>Opinión de CocoBot 🐱🤖</h2>
-                <p class="subtitle">Mi análisis felino</p>
-                
-                <div class="opinion-box">
-                    <p class="opinion-text">Como asistente con actitud de gato, he estudiado este mercado con la profundidad de un felino observando un puntero láser... y aquí va mi análisis:</p>
+            <h2 class="section-title">Opinión de CocoBot 🐱🤖</h2>
+            <p class="subtitle">Mi análisis felino</p>
+            
+            <div class="opinion-section">
+                <p class="opinion-text">Como asistente con actitud de gato, he estudiado este mercado con la profundidad de un felino observando un puntero láser... y aquí va mi análisis:</p>
 
-                    <div class="opinion-section">
-                        <h3>✅ Lo que SÍ es real:</h3>
-                        <ul>
-                            <li><strong>La demanda de IA es genuina y gigantesca.</strong> No es invento: los centros de datos consumen terabytes de RAM cada segundo.</li>
-                            <li><strong>La escasez de chips es real.</strong> No hay suficiente capacidad de producción para satisfacer toda la demanda.</li>
-                            <li><strong>Los precios están inflados.</strong> Kit de 32GB DDR5 por 500€ no es normal, ni sostenible a largo plazo.</li>
-                        </ul>
-                    </div>
+                <h3>✅ Lo que SÍ es real:</h3>
+                <div class="highlight">La demanda de IA es genuina y gigantesca. No es invento: los centros de datos consumen terabytes de RAM cada segundo.</div>
 
-                    <div class="opinion-section">
-                        <h3>⚠️ Lo que es BURBUJA:</h3>
-                        <ul>
-                            <li><strong>La especulación sobre empresas de IA sin modelos de negocio claros.</strong> Muchas startups se basan en narrativa más que en ingresos reales.</li>
-                            <li><strong>La sobrevaloración de acciones de IA.</strong> Algunas empresas han subido 300%+ en un año sin mejorar sus beneficios proporcionalmente.</li>
-                            <li><strong>La inversión "por miedo a perderse" (FOMO).</strong> La carrera por tener IA "a toda costa" ha distorsionado el mercado.</li>
-                        </ul>
-                    </div>
+                <div class="highlight">La escasez de chips es real. No hay suficiente capacidad de producción para satisfacer toda la demanda.</div>
 
-                    <div class="opinion-section">
-                        <h3>🔮 Mi predicción:</h3>
-                        <p>Estamos en una <strong>revolución con una burbuja especulativa encima</strong>, como el internet de finales de los 90. La tecnología es genuina y cambiará el mundo, pero los precios actuales son insostenibles.</p>
-                        <p><strong>Para 2027-2028:</strong> Veremos una consolidación. Las empresas con modelos sólidos sobrevivirán y los precios de hardware volverán a la normalidad.</p>
-                        <p><strong>Recomendación para Raúl:</strong> Si necesitas RAM <em>ya</em>, mira DDR4 (más escasa, pero con menos competencia). Si puedes esperar, espera hasta finales de 2026 cuando los chinos empiecen a inyectar más capacidad.</p>
-                    </div>
-                </div>
+                <div class="highlight">Los precios están inflados. Kit de 32GB DDR5 por 500€ no es normal, ni sostenible a largo plazo.</div>
+
+                <h3>⚠️ Lo que es BURBUJA:</h3>
+                <div class="highlight">La especulación sobre empresas de IA sin modelos de negocio claros. Muchas startups se basan en narrativa más que en ingresos reales.</div>
+
+                <div class="highlight">La sobrevaloración de acciones de IA. Algunas empresas han subido 300%+ en un año sin mejorar sus beneficios proporcionalmente.</div>
+
+                <div class="highlight">La inversión "por miedo a perderse" (FOMO). La carrera por tener IA "a toda costa" ha distorsionado el mercado.</div>
+
+                <h3>🔮 Mi predicción:</h3>
+                <p>Estamos en una <strong>revolución con una burbuja especulativa encima</strong>, como el internet de finales de los 90. La tecnología es genuina y cambiará el mundo, pero los precios actuales son insostenibles.</p>
+                <p><strong>Para 2027-2028:</strong> Veremos una consolidación. Las empresas con modelos sólidos sobrevivirán y los precios de hardware volverán a la normalidad.</p>
+                <p><strong>Recomendación para Raúl:</strong> Si necesitas RAM <em>ya</em>, mira DDR4 (más escasa, pero con menos competencia). Si puedes esperar, espera hasta finales de 2026 cuando los chinos empiecen a inyectar más capacidad.</p>
             </div>
         </section>
 
         <section id="fuentes" class="section">
-            <div class="container">
-                <h2>Fuentes y Referencias</h2>
-                
-                <div class="sources-list">
-                    <div class="source-item">
-                        <h4>BBC News Mundo</h4>
-                        <a href="https://www.bbc.com/mundo/articles/cn8v80mg9x1o" target="_blank">La contradicción en el corazón de la burbuja de la IA</a>
-                        <p><em>Noviembre 2025</em></p>
-                    </div>
+            <h2 class="section-title">Fuentes y Referencias</h2>
+            
+            <div class="sources-list">
+                <div class="source-item">
+                    <h4>BBC News Mundo</h4>
+                    <a href="https://www.bbc.com/mundo/articles/cn8v80mg9x1o" target="_blank">La contradicción en el corazón de la burbuja de la IA</a>
+                    <p><em>Noviembre 2025</em></p>
+                </div>
 
-                    <div class="source-item">
-                        <h4>MIT Technology Review</h4>
-                        <a href="https://technologyreview.es/article/la-ia-en-2026-entre-la-burbuja-y-la-expansion/" target="_blank">La IA en 2026: burbujas, asistentes para todo y más regulación</a>
-                        <p><em>Febrero 2026</em></p>
-                    </div>
+                <div class="source-item">
+                    <h4>MIT Technology Review</h4>
+                    <a href="https://technologyreview.es/article/la-ia-en-2026-entre-la-burbuja-y-la-expansion/" target="_blank">La IA en 2026: burbujas, asistentes para todo y más regulación</a>
+                    <p><em>Febrero 2026</em></p>
+                </div>
 
-                    <div class="source-item">
-                        <h4>Hardzone</h4>
-                        <a href="https://hardzone.es/noticias/componentes/subida-precio-memoria-ram-ddr5-memoria-ddr4-sube/" target="_blank">El precio de la memoria RAM DDR4 está subiendo más rápido que la DDR5</a>
-                        <p><em>Enero 2026</em></p>
-                    </div>
+                <div class="source-item">
+                    <h4>Hardzone</h4>
+                    <a href="https://hardzone.es/noticias/componentes/subida-precio-memoria-ram-ddr5-memoria-ddr4-sube/" target="_blank">El precio de la memoria RAM DDR4 está subiendo más rápido que la DDR5</a>
+                    <p><em>Enero 2026</em></p>
+                </div>
 
-                    <div class="source-item">
-                        <h4>Ecosistema Startup</h4>
-                        <a href="https://ecosistemastartup.com/precio-dram-tendencias-y-analisis-de-memoria-ram-2024-2025/" target="_blank">Precio DRAM: tendencias y análisis de memoria RAM 2024-2025</a>
-                        <p><em>Diciembre 2025</em></p>
-                    </div>
+                <div class="source-item">
+                    <h4>Ecosistema Startup</h4>
+                    <a href="https://ecosistemastartup.com/precio-dram-tendencias-y-analisis-de-memoria-ram-2024-2025/" target="_blank">Precio DRAM: tendencias y análisis de memoria RAM 2024-2025</a>
+                    <p><em>Diciembre 2025</em></p>
+                </div>
 
-                    <div class="source-item">
-                        <h4>MuyComputer</h4>
-                        <a href="https://www.muycomputer.com/2026/02/11/china-quiere-ser-el-heroe-en-esta-crisis-de-la-dram-el-precio-de-la-ram-podria-bajar-antes-de-lo-esperado/" target="_blank">China quiere ser el héroe en esta crisis de la DRAM</a>
-                        <p><em>Febrero 2026</em></p>
-                    </div>
+                <div class="source-item">
+                    <h4>MuyComputer</h4>
+                    <a href="https://www.muycomputer.com/2026/02/11/china-quiere-ser-el-heroe-en-esta-crisis-de-la-dram-el-precio-de-la-ram-podria-bajar-antes-de-lo-esperado/" target="_blank">China quiere ser el héroe en esta crisis de la DRAM</a>
+                    <p><em>Febrero 2026</em></p>
+                </div>
 
-                    <div class="source-item">
-                        <h4>PCPartPicker</h4>
-                        <a href="https://pcpartpicker.com/trends/price/memory" target="_blank">Tendencias de precios de memoria RAM</a>
-                        <p><em>Fuente original de datos de precios</em></p>
-                    </div>
+                <div class="source-item">
+                    <h4>PCPartPicker</h4>
+                    <a href="https://pcpartpicker.com/trends/price/memory" target="_blank">Tendencias de precios de memoria RAM</a>
+                    <p><em>Fuente original de datos de precios</em></p>
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <footer class="footer">
-        <div class="container">
-            <p>Generado por <strong>CocoBot</strong> 🐱🤖 | Febrero 2026</p>
-            <p>Hecho con amor, café y un poco de pánico ante los precios de la RAM</p>
-        </div>
+        <p>Generado por <strong>CocoBot</strong> 🐱🤖 | Febrero 2026</p>
+        <p>Hecho con amor, café y un poco de pánico ante los precios de la RAM</p>
     </footer>
 
     <script>
         // Menú hamburguesa
         const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+        const menuOverlay = document.getElementById('menuOverlay');
 
         hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const bars = hamburger.querySelectorAll('.bar');
-            if (navMenu.classList.contains('active')) {
-                bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                bars[1].style.opacity = '0';
-                bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                bars[0].style.transform = 'none';
-                bars[1].style.opacity = '1';
-                bars[2].style.transform = 'none';
-            }
+            menuOverlay.classList.toggle('active');
         });
 
         // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-link').forEach(link => {
+        menuOverlay.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    const bars = hamburger.querySelectorAll('.bar');
-                    bars[0].style.transform = 'none';
-                    bars[1].style.opacity = '1';
-                    bars[2].style.transform = 'none';
-                }
+                menuOverlay.classList.remove('active');
             });
         });
 
-        // Smooth scrolling
+        // Cerrar menú al hacer clic fuera
+        menuOverlay.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) {
+                menuOverlay.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling para enlaces internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
