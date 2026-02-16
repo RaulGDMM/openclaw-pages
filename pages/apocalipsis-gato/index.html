@@ -403,6 +403,35 @@
         </div>    </div>
 
     <script>
+        // Menú Hamburguesa - DEFINIDO FUERA DEL DOMCONTENTLOADED
+        function toggleMenu() {
+            const menu = document.getElementById('menuDropdown');
+            if (menu) {
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        // Cerrar menú cuando se hace click fuera
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('menuDropdown');
+            if (menu && !menu.contains(e.target) && !e.target.classList.contains('hamburger-btn')) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // Navegación a secciones
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const yOffset = -150;
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+                
+                const menu = document.getElementById('menuDropdown');
+                if (menu) menu.style.display = 'none';
+            }
+        }
+
         // Animaciones al cargar (sin wait para scroll)
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.animate-in');
@@ -441,34 +470,7 @@
             });
 
             // Menú Hamburguesa
-            function toggleMenu() {
-                const menu = document.getElementById('menuDropdown');
-                if (menu) {
-                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-                }
-            }
-
-            // Cerrar menú cuando se hace click fuera
-            document.addEventListener('click', (e) => {
-                const menu = document.getElementById('menuDropdown');
-                if (menu && !menu.contains(e.target) && !e.target.classList.contains('hamburger-btn')) {
-                    menu.style.display = 'none';
-                }
-            });
-
-            // Navegación a secciones
-            function goToSection(sectionId) {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const yOffset = -150;
-                    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                    
-                    const menu = document.getElementById('menuDropdown');
-                    if (menu) menu.style.display = 'none';
-                }
-            }
-        });
+});
     </script>
 </body>
 </html>
