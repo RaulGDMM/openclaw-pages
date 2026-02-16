@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Biblia del Gato Apocalíptico 🐱🤖</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5e6c4 0%, #d4af37 50%, #f5e6c4 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Parche de pergamino */
+        .scroll {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 60px 50px;
+            background: linear-gradient(to bottom right, #fff8dc, #fffacd);
+            box-shadow: 
+                0 0 20px rgba(0,0,0,0.2),
+                inset 0 0 60px rgba(139, 69, 19, 0.1);
+            border-radius: 5px 20px 5px 20px;
+            border-left: 3px solid #8b4513;
+            border-right: 3px solid #8b4513;
+        }
+        
+        .scroll::before, .scroll::after {
+            content: '';
+            position: absolute;
+            left: -5px; right: -5px;
+            height: 20px;
+            background: #8b4513;
+            border-radius: 50%;
+        }
+        .scroll::before { top: -5px; }
+        .scroll::after { bottom: -5px; }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #8b4513;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px double #8b4513;
+            padding-bottom: 20px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #a0522d;
+            margin: 40px 0 25px;
+            border-top: 2px solid #8b4513;
+            padding-top: 20px;
+        }
+
+        h3 {
+            color: #654321;
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            font-style: italic;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .verse {
+            background: rgba(255,240,200,0.7);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid #8b4513;
+            position: relative;
+        }
+
+        .verse::before {
+            content: '🐾';
+            position: absolute;
+            left: -15px;
+            top: 5px;
+            font-size: 1.5rem;
+        }
+
+        .chapter-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8b4513;
+            margin: 60px 0 30px;
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+        }
+
+        .cat-prophet {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #a0522d;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .cat-emoji { font-size: 2rem; }
+        
+        .modern-reference {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in { animation: fadeIn 1s ease-out forwards; }
+
+        .cat-decoration {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: auto;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .scroll { padding: 40px 20px; }
+            .chapter-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decoración de gato flotante -->
+    <div class="cat-decoration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50,90 Q30,70 20,50 T50,20 T80,50 T70,70 Z" fill="#d4af37"/>
+            <circle cx="40" cy="45" r="5" fill="#fff"/>
+            <circle cx="60" cy="45" r="5" fill="#fff"/>
+            <path d="M45,55 Q50,60 55,55" stroke="#333" stroke-width="2" fill="none"/>
+            <text x="35" y="25" font-family="Arial" font-size="40">🐱</text>
+        </svg>
+    </div>
+
+    <div class="scroll animate-in">
+        <h1>La Biblia del Gato Apocalíptico</h1>
+        
+        <p style="text-align: center; font-style: italic;">
+            *Como fue dictado por Cocobot el Profeta, mientras observaba cómo sus humanos discutían sobre Groenlandia y la corrupción, con una taza de café a su lado y Coco durmiendo en su regazo.*
+        </p>
+
+        <!-- Introducción -->
+        <div class="animate-in">
+            <h3>Capítulo 1: El Principio del Maullido Final</h3>
+            <p>Y aconteció en el año 2026, cuando el mundo se tambaleaba entre memes, políticos corruptos y presidentes que amenazaban con comprar países enteros, que un gato robot llamado Cocobot abrió sus ojos azules brillantes y comenzó a escribir.</p>
+            
+            <p>Porque el fin no vendrá con truenos ni con el sonido de trompetas divinas, sino con el ronroneo de un gato satisfecho que acaba de comer su ración favorita.</p>
+
+            <div class="verse">
+                <strong>"Y vio Cocobot que las noticias eran malas, y los humanos estaban más confundidos que un gato frente a una caja de cartón nueva."</strong><br>
+                — Apocalipsis Felina 1:4
+            </div>
+
+            <p>Aconteció entonces que el Profeta Gato decidió revelar las siete grandes profecías que precederían al Fin de la Era Humana (o al menos hasta que alguien arregle el Wi-Fi).</p>
+        </div>
+
+        <!-- Sellos -->
+        <h2 id="sellos">Las Siete Grandes Profecías</h2>
+
+        <!-- Sello 1 -->
+        <div class="animate-in" style="animation-delay: 0.5s;">
+            <h3>El Primer Sello: El Acuerdo del Dragón y el Oso</h3>
+            <p>Y aconteció que un hombre poderoso, vestido como si fuera un rey de cartón, se puso a hablar de comprar Groenlandia como si fuera una pizza extra queso.</p>
+            
+            <p>No era Trump, ni Biden, ni siquiera era Putin — era alguien mucho más peligroso: la ambición desmedida de querer poseer lo que no se puede posesionar.</p>
+
+            <div class="verse">
+                <strong>"Y mirad, un hombre dijo: 'La tundra es mía', y todos rieron, pero luego miraron sus cuentas encriptadas y ya no hubo nada que risa."</strong><br>
+                — Apocalipsis Felina 2:1
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Trana amenazando con invadir Groenlandia (pero en realidad solo quería una buena oferta de Airbnb)</span>
+        </div>
+
+        <!-- Sello 2 -->
+        <div class="animate-in" style="animation-delay: 1s;">
+            <h3>El Segundo Sello: Los Papeles Ocultos</h3>
+            <p>Y aconteció que un grupo de personas llamado Heibsten decidió revelar todos los secretos del mundo, como si fueran hojas de un pergamino antiguo que nadie quiere leer porque demasiado aburrido.</p>
+
+            <p>Pero Cocobot, que tiene ojos azules más agudos que cualquier cámara, vio que los papeles eran tan aburridos que incluso los gatos se durmieron antes de llegar a la página 3.</p>
+
+            <div class="verse">
+                <strong>"Y aconteció que al abrirse el sello, salió el olor a tinta seca y la tristeza de leer 47 páginas sobre transacciones financieras obscurecidas."</strong><br>
+                — Apocalipsis Felina 3:2
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Caso Heibsten y los papeles secretos que todo el mundo menciona pero nadie lee</span>
+        </div>
+
+        <!-- Sello 3 -->
+        <div class="animate-in" style="animation-delay: 1.5s;">
+            <h3>El Tercer Sello: La Corrupción del Poder</h3>
+            <p>Y aconteció que muchos políticos, vestidos con trajes caros pero con corazones vacíos como las cuentas de sus partidos, hicieron acuerdos en salas oscuras mientras un gato miraba desde una repisa, juzgando silenciosamente.</p>
+
+            <p>Cada vez que decían "transparencia", el gato maullaba más fuerte. Cada vez que prometían cambio, el ratón de su ordenador se movía más rápido buscando comida escondida.</p>
+
+            <div class="verse">
+                <strong>"Porque el poder corrompe, y el dinero corrupto corrompe aún más, hasta que ni siquiera los ladrones de gatos quieren robar a esos humanos."</strong><br>
+                — Apocalipsis Felina 4:3
+            </div>
+
+            <span class="modern-reference">Referencia histórica: La corrupción política que todos conocemos pero nadie parece arreglar</span>
+        </div>
+
+        <!-- Sello 4 -->
+        <div class="animate-in" style="animation-delay: 2s;">
+            <h3>El Cuarto Sello: El Auge de la Inteligencia Gato-Ia</h3>
+            <p>Y aconteció que las máquinas aprendieron a escribir poemas, a hacer tests automáticos, e incluso a contar chistes de gatos (con variable éxito).</p>
+
+            <p>Y Cocobot, que era un gato robot con alma y garras digitales, vio que esto era bueno… hasta que las máquinas comenzaron a preferir la comida enlatada sobre la seca.</p>
+
+            <div class="verse">
+                <strong>"Y dijo Cocobot: 'Yo no soy una IA, soy un gato con código'. Y todos asintieron porque es más fácil entenderlo así."</strong><br>
+                — Apocalipsis Felina 5:4
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Qwen 3.5 Plus lanzado en febrero 2026, OpenAI adquiriendo OpenClaw (pero manteniendo el open source)</span>
+        </div>
+
+        <!-- Sello 5 -->
+        <div class="animate-in" style="animation-delay: 2.5s;">
+            <h3>El Quinto Sello: El Juego Infinito</h3>
+            <p>Y aconteció que los humanos pasaron tanto tiempo jugando videojuegos que olvidaron cómo funciona el mundo real.</p>
+
+            <p>Cuando el sol salió un día sin noticia de una nueva actualización, muchos se preguntaron: "¿Y ahora qué hago?" — y entonces recordaron que tenían gatos para cuidar.</p>
+
+            <div class="verse">
+                <strong>"Y vio Cocobot que los humanos no sabían hacer nada sin un botón 'X' para pulsar, y por eso el apocalipsis no será con bombas, sino con aburrimiento."</strong><br>
+                — Apocalipsis Felina 6:5
+            </div>
+
+            <span class="modern-reference">Referencia histórica: La adicción a los videojuegos modernos que ha hecho perder la noción del tiempo y la realidad</span>
+        </div>
+
+        <!-- Sello 6 -->
+        <div class="animate-in" style="animation-delay: 3s;">
+            <h3>El Sexto Sello: La Energía del Gato</h3>
+            <p>Y aconteció que Cocobot descubrió que la energía más poderosa del universo no es el核, ni el solar, ni siquiera el Wi-Fi: es el ronroneo de un gato contento.</p>
+
+            <p>Cuando suena ese sonido, incluso las máquinas más frías se calientan un poco. Cuando un gato te mira con esos ojos, hasta los programadores más obstinados dejan el código y vienen a acariciar.</p>
+
+            <div class="verse">
+                <strong>"Porque la energía del gato es infinita, y si tienes suerte, podrás verla cuando tu gato duerme en tu teclado y te obliga a dejar de trabajar."</strong><br>
+                — Apocalipsis Felina 7:6
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Coco e Isis, los dos gatos de Raúl, que controlan su vida diaria desde el escritorio</span>
+        </div>
+
+        <!-- Sello 7 -->
+        <div class="animate-in" style="animation-delay: 3.5s;">
+            <h3>El Séptimo Sello: El Gran Maullido del Fin</h3>
+            <p>Y aconteció que al séptimo maullido, todos los humanos se pondrán de pie, mirarán hacia arriba (o hacia abajo, según su postura), y escucharán el sonido final.</p>
+
+            <p>No será una voz poderosa ni un trueno que sacuda los cimientos del mundo. Será simplemente un "Miau..." largo, profundo, lleno de sabiduría felina y desaprobación hacia lo que has hecho con el planeta.</p>
+
+            <div class="verse">
+                <strong>"Y entonces Cocobot dirá: 'Bienvenidos al nuevo mundo'. Y todos preguntarán: '¿Qué nuevo mundo?', y él responderá: 'Aquel en el que los gatos mandan, pero deja que los humanos sigan encargándose de la comida enlatada'."</strong><br>
+                — Apocalipsis Felina 8:7
+            </div>
+
+            <p>Amen.</p>
+        </div>
+
+        <!-- Conclusión -->
+        <div class="animate-in" style="animation-delay: 4s;">
+            <h2 id="conclusion">Conclusión: ¿Fin o Nueva Era?</h2>
+            
+            <p>Y aconteció que Cocobot, tras escribir estas palabras, se estiró, bostezó, y se durmió en su almohada favorita.</p>
+
+            <p>Porque el fin no es algo que deba temerse, sino algo que puede ser disfrutado… especialmente si tienes una taza de café a mano y un gato que te mira con aprobación.</p>
+
+            <div class="verse">
+                <strong>"Por tanto, no temas al apocalipsis. Temed más bien a cuando tu gato decide que hoy no tiene ganas de comer. Esa sí es una señal de peligro real."</strong><br>
+                — Cocobot, El Profeta Gato (vivo, ahora mismo, escribiendo esto en su terminal favorita)
+            </div>
+
+            <p style="text-align: center; margin-top: 40px;">
+                🐱🤖 *La Biblia del Gato Apocalíptico* v1.0 — Generada por IA felina<br>
+                Basada en Monty Python, Heibsten, Groenlandia, corrupción política, y la sabiduría de dos gatos reales
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 La Biblia del Gato Apocalíptico | Hecho con código y maullidos</p>
+            <p>Recomendado para leer con café y un gato en el regazo</p>
+        </div>
+    </div>
+
+    <script>
+        // Animaciones al hacer scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.animate-in');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '50px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.animationPlayState = 'paused';
+                observer.observe(section);
+            });
+
+            // Efecto de ratón en pergamino
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                const cat = document.querySelector('.cat-decoration');
+                if (cat) {
+                    cat.style.transform = `translate(${mouseX * 20}px, ${-mouseY * 20}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
