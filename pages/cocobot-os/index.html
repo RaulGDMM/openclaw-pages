@@ -13,6 +13,25 @@
         <!-- Wallpaper: cardboard texture with subtle cat patterns -->
         <div class="wallpaper"></div>
 
+        <!-- Menu Bar (como Windows/Mac) -->
+        <div class="menubar">
+            <button id="start-btn">🍎 Cocobot</button>
+            <div class="menu-dropdown" id="start-menu">
+                <div class="menu-item" data-target="terminal"><span>💻</span> Terminal</div>
+                <div class="menu-item" data-target="snake-game"><span>🐍</span> Cat Snake</div>
+                <div class="menu-item" data-target="file-manager"><span>📦</span> File Manager</div>
+                <div class="menu-item" data-target="qa-dashboard"><span>📊</span> QA Dashboard</div>
+                <div class="menu-item" data-target="settings"><span>⚙️</span> Settings</div>
+                <hr>
+                <div class="menu-item" onclick="resetOS()">🔄 Reiniciar SO</div>
+            </div>
+            
+            <div class="menu-title">Archivo</div>
+            <div class="menu-title">Editar</div>
+            <div class="menu-title">Vista</div>
+            <div class="menu-title">Ayuda</div>
+        </div>
+
         <!-- Icons -->
         <div class="icons">
             <div class="icon" data-target="terminal">
@@ -35,144 +54,123 @@
                 <span>⚙️</span>
                 <span>Settings</span>
             </div>
-        </div>
-
-        <!-- Terminal Window -->
-        <div id="window-terminal" class="window active">
-            <div class="window-header">
-                <span>Terminal — Cocobot OS v1.0</span>
-                <button onclick="closeWindow('terminal')">✕</button>
-            </div>
-            <div class="window-content terminal">
-                <div class="output"></div>
-                <div class="input-line">root@cocobot:~# <input type="text" id="term-input" autocomplete="off" autofocus></div>
+            <!-- Easter egg: 3 quick right-clicks = Coco appears -->
+            <div id="coco-plushie" class="icon hidden">
+                <span>🧸</span>
+                <span>Coco</span>
             </div>
         </div>
 
-        <!-- Snake Game Window -->
-        <div id="window-snake-game" class="window">
-            <div class="window-header">
-                <span>🐍 Cat Snake Game</span>
-                <button onclick="closeWindow('snake-game')">✕</button>
-            </div>
-            <div class="window-content game-container">
-                <canvas id="snake-canvas" width="400" height="300"></canvas>
-                <div class="score-board">
-                    <p>Puntuación: <span id="snake-score">0</span></p>
-                    <p>Ratones comidos: <span id="mice-eaten">0</span></p>
+        <!-- Window Container (for z-index management) -->
+        <div id="windows-container">
+            <!-- Terminal Window -->
+            <div id="window-terminal" class="window">
+                <div class="window-header">
+                    <span>Terminal — Cocobot OS v1.0</span>
+                    <button onclick="closeWindow('terminal')">✕</button>
                 </div>
-                <p>Usa las flechas del teclado para jugar</p>
+                <div class="window-content terminal">
+                    <div class="output"></div>
+                    <div class="input-line">root@cocobot:~# <input type="text" id="term-input" autocomplete="off"></div>
+                </div>
             </div>
-        </div>
 
-        <!-- File Manager Window -->
-        <div id="window-file-manager" class="window">
-            <div class="window-header">
-                <span>📦 File Manager — Cajas de Cartón</span>
-                <button onclick="closeWindow('file-manager')">✕</button>
+            <!-- Snake Game Window -->
+            <div id="window-snake-game" class="window">
+                <div class="window-header">
+                    <span>🐍 Cat Snake Game</span>
+                    <button onclick="closeWindow('snake-game')">✕</button>
+                </div>
+                <div class="window-content game-container">
+                    <canvas id="snake-canvas" width="480" height="360"></canvas>
+                    <div class="score-board">
+                        <p>Puntuación: <span id="snake-score">0</span></p>
+                        <p>Ratones comidos: <span id="mice-eaten">0</span></p>
+                    </div>
+                    <p style="margin-top: 5px;">Usa las flechas del teclado para jugar</p>
+                </div>
             </div>
-            <div class="window-content file-manager">
-                <div class="path-bar">/home/cocobot</div>
-                <div class="files-grid">
-                    <div class="file-box">
-                        <span>📂</span>
-                        <span>tests/</span>
-                    </div>
-                    <div class="file-box">
-                        <span>📄</span>
-                        <span>script.py</span>
-                    </div>
-                    <div class="file-box">
-                        <span>🧪</span>
-                        <span>report.html</span>
-                    </div>
-                    <div class="file-box">
-                        <span>📦</span>
-                        <span>node_modules/</span>
-                    </div>
-                    <div class="file-box">
-                        <span>🐱</span>
-                        <span>coco_photo.jpg</span>
+
+            <!-- File Manager Window -->
+            <div id="window-file-manager" class="window">
+                <div class="window-header">
+                    <span>📦 File Manager — Cajas de Cartón</span>
+                    <button onclick="closeWindow('file-manager')">✕</button>
+                </div>
+                <div class="window-content file-manager">
+                    <div class="path-bar">/home/cocobot</div>
+                    <div class="files-grid">
+                        <div class="file-box"><span>📂</span><span>tests/</span></div>
+                        <div class="file-box"><span>📄</span><span>script.py</span></div>
+                        <div class="file-box"><span>🧪</span><span>report.html</span></div>
+                        <div class="file-box"><span>📦</span><span>node_modules/</span></div>
+                        <div class="file-box"><span>🐱</span><span>coco_photo.jpg</span></div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- QA Dashboard Window -->
-        <div id="window-qa-dashboard" class="window">
-            <div class="window-header">
-                <span>📊 QA Dashboard — Coverage en Vivo</span>
-                <button onclick="closeWindow('qa-dashboard')">✕</button>
-            </div>
-            <div class="window-content qa-dashboard">
-                <div class="stats-row">
-                    <div class="stat">
-                        <h4>Coverage</h4>
-                        <p id="coverage-val">87%</p>
+            <!-- QA Dashboard Window -->
+            <div id="window-qa-dashboard" class="window">
+                <div class="window-header">
+                    <span>📊 QA Dashboard — Coverage en Vivo</span>
+                    <button onclick="closeWindow('qa-dashboard')">✕</button>
+                </div>
+                <div class="window-content qa-dashboard">
+                    <div class="stats-row">
+                        <div class="stat"><h4>Coverage</h4><p id="coverage-val">87%</p></div>
+                        <div class="stat"><h4>Tests</h4><p><span class="pass">✅ 124</span> / <span class="fail">❌ 3</span></p></div>
+                        <div class="stat"><h4>Pipeline</h4><p>🚀 <span class="status-green">Passing</span></p></div>
                     </div>
-                    <div class="stat">
-                        <h4>Tests</h4>
-                        <p><span class="pass">✅ 124</span> / <span class="fail">❌ 3</span></p>
-                    </div>
-                    <div class="stat">
-                        <h4>Pipeline</h4>
-                        <p>🚀 <span class="status-green">Passing</span></p>
+                    <div class="test-log">
+                        <h5>Últimos tests ejecutados:</h5>
+                        <ul id="test-list">
+                            <li class="test-pass">✅ test_login_user (0.2s)</li>
+                            <li class="test-pass">✅ test_checkout_flow (0.5s)</li>
+                            <li class="test-fail">❌ test_payment_gateway (1.2s) — Timeout</li>
+                            <li class="test-pass">✅ test_product_search (0.1s)</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="test-log">
-                    <h5>Últimos tests ejecutados:</h5>
-                    <ul id="test-list">
-                        <li class="test-pass">✅ test_login_user (0.2s)</li>
-                        <li class="test-pass">✅ test_checkout_flow (0.5s)</li>
-                        <li class="test-fail">❌ test_payment_gateway (1.2s) — Timeout</li>
-                        <li class="test-pass">✅ test_product_search (0.1s)</li>
-                    </ul>
-                </div>
             </div>
-        </div>
 
-        <!-- Settings Window -->
-        <div id="window-settings" class="window">
-            <div class="window-header">
-                <span>⚙️ Settings — Configuración del Gato</span>
-                <button onclick="closeWindow('settings')">✕</button>
-            </div>
-            <div class="window-content settings">
-                <form>
-                    <label>
-                        <input type="radio" name="theme" value="day" checked> 🌞 Día (caja clara)
-                    </label>
-                    <label>
-                        <input type="radio" name="theme" value="night"> 🌙 Noche (caja oscura)
-                    </label>
-                    <hr>
-                    <label>
-                        <input type="checkbox" id="sound-toggle" checked> 🔊 Activar sonidos
-                    </label>
-                    <label>
-                        <input type="checkbox" id="auto-test-toggle" checked> 🔄 Ejecutar tests automáticamente
-                    </label>
-                    <hr>
-                    <label>
-                        <select id="meow-sound">
-                            <option value="soft"> Miau suave (Coco)</option>
-                            <option value="loud"> Miau fuerte (Isis)</option>
-                            <option value="angry"> Miau enojado (cuando falla un test)</option>
-                        </select>
-                    </label>
-                </form>
+            <!-- Settings Window -->
+            <div id="window-settings" class="window">
+                <div class="window-header">
+                    <span>⚙️ Settings — Configuración del Gato</span>
+                    <button onclick="closeWindow('settings')">✕</button>
+                </div>
+                <div class="window-content settings">
+                    <form>
+                        <label><input type="radio" name="theme" value="day" checked> 🌞 Día (caja clara)</label>
+                        <label><input type="radio" name="theme" value="night"> 🌙 Noche (caja oscura)</label>
+                        <hr>
+                        <label><input type="checkbox" id="sound-toggle" checked> 🔊 Activar sonidos</label>
+                        <label><input type="checkbox" id="auto-test-toggle" checked> 🔄 Ejecutar tests automáticamente</label>
+                        <hr>
+                        <label>Miau preferido:
+                            <select id="meow-sound">
+                                <option value="soft"> Miau suave (Coco)</option>
+                                <option value="loud"> Miau fuerte (Isis)</option>
+                                <option value="angry"> Miau enojado</option>
+                            </select>
+                        </label>
+                    </form>
+                </div>
             </div>
         </div>
 
         <!-- Taskbar -->
         <div class="taskbar">
-            <button onclick="openWindow('terminal')">💻</button>
-            <button onclick="openWindow('snake-game')">🐍</button>
-            <button onclick="openWindow('file-manager')">📦</button>
-            <button onclick="openWindow('qa-dashboard')">📊</button>
-            <button onclick="openWindow('settings')">⚙️</button>
+            <button onclick="openWindow('terminal')" id="btn-terminal" class="active">💻</button>
+            <button onclick="openWindow('snake-game')" id="btn-snake-game" class="active">🐍</button>
+            <button onclick="openWindow('file-manager')" id="btn-file-manager" class="active">📦</button>
+            <button onclick="openWindow('qa-dashboard')" id="btn-qa-dashboard" class="active">📊</button>
+            <button onclick="openWindow('settings')" id="btn-settings" class="active">⚙️</button>
             <div class="clock">🕒 <span id="clock-time">08:15</span></div>
         </div>
     </div>
+    
+    <!-- Resizer handles for windows -->
+    <div id="resizers"></div>
 </body>
 </html>
