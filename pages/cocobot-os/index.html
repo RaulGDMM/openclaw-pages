@@ -4,71 +4,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cocobot OS</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5e6c4 0%, #e8d5b2 100%);
+            background-image: repeating-linear-gradient(
+                45deg, rgba(139, 69, 19, 0.05) 0px,
+                rgba(139, 69, 19, 0.05) 2px,
+                transparent 2px, transparent 4px
+            );
+        }
+
+        /* Menubar */
+        .menubar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 30px;
+            background: #d4af37;
+            display: flex; align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid #c5a028;
+        }
+        #start-btn {
+            background: white; border: 1px solid #aaa;
+            border-radius: 3px; padding: 4px 10px;
+            font-weight: bold; cursor: pointer; margin-right: 20px;
+        }
+        #start-menu {
+            position: absolute; top: 30px; left: 0;
+            width: 180px; background: white; border: 1px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none; z-index: 1001;
+        }
+        .menu-item { padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .menu-item:hover { background: #d4af37; color: white; }
+
+        /* Desktop */
+        #desktop {
+            position: relative; width: 100%; height: calc(100vh - 30px - 50px);
+            top: 30px; bottom: 50px;
+        }
+
+        /* Icons */
+        .icons {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; flex-direction: column; gap: 15px; z-index: 100;
+        }
+        .icon {
+            display: flex; flex-direction: column; align-items: center;
+            width: 70px; cursor: pointer; padding: 8px;
+            border-radius: 5px; transition: all 0.2s; color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+        }
+        .icon:hover { background: rgba(0,0,0,0.2); transform: scale(1.1); }
+        .icon.hidden { display: none; }
+        .icon span:first-child { font-size: 24px; margin-bottom: 5px; }
+        .icon span:last-child { font-size: 12px; text-align: center; }
+
+        /* Windows Container */
+        #windows-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+        .window {
+            position: absolute; width: 500px; min-width: 300px; max-width: 90vw;
+            height: 350px; min-height: 250px; max-height: 80vh;
+            background: white; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; z-index: 10; transition: all 0.2s;
+        }
+        .window.active { display: flex; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+        .window-header {
+            background: linear-gradient(to right, #d4af37, #c5a028); padding: 10px 15px;
+            display: flex; justify-content: space-between; align-items: center; color: white;
+            font-weight: bold; cursor: move; user-select: none;
+        }
+        .window-header button {
+            background: #ff5e5e; border: none; color: white; width: 24px; height: 24px;
+            border-radius: 50%; cursor: pointer; font-weight: bold; line-height: 1;
+        }
+
+        .window-content { flex: 1; padding: 15px; overflow-y: auto; position: relative; }
+
+        /* Terminal */
+        .terminal .output { height: 180px; overflow-y: auto; margin-bottom: 10px; font-family: monospace; font-size: 14px; background: #f8f8f8; padding: 5px; border-radius: 4px; }
+        .terminal input { border: none; background: transparent; flex: 1; outline: none; color: #333; }
+
+        /* Snake Game */
+        #snake-canvas { background: #1a1a2e; border-radius: 5px; max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .score-board p { margin: 5px 0; font-weight: bold; }
+        .status-green { color: #2ecc71; }
+
+        /* File Manager */
+        .path-bar { padding: 8px; background: #f0f0f0; margin-bottom: 10px; border-radius: 4px; font-weight: bold; }
+        .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+        .file-box { display: flex; flex-direction: column; align-items: center; padding: 10px; background: white; border: 2px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
+        .file-box:hover { border-color: #d4af37; transform: scale(1.05); }
+
+        /* QA Dashboard */
+        .stats-row { display: flex; justify-content: space-around; margin-bottom: 20px; }
+        .stat { text-align: center; padding: 10px; background: #f9f9f9; border-radius: 5px; min-width: 100px; }
+        .stat h4 { font-size: 12px; color: #666; }
+        .stat p { font-size: 18px; font-weight: bold; color: #333; }
+        .pass { color: #2ecc71; } .fail { color: #e74c3c; }
+        .test-log ul { list-style: none; }
+        .test-pass { color: #2ecc71; margin: 3px 0; }
+        .test-fail { color: #e74c3c; margin: 3px 0; }
+
+        /* Settings */
+        .settings label { display: block; margin: 10px 0; cursor: pointer; }
+        .settings select { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+
+        /* Taskbar */
+        .taskbar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            height: 50px; background: rgba(0,0,0,0.7); z-index: 999;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 15px; color: white;
+        }
+        .taskbar button {
+            background: #d4af37; border: none; width: 40px; height: 40px;
+            border-radius: 5px; cursor: pointer; font-size: 20px; transition: transform 0.2s; opacity: 0.6;
+        }
+        .taskbar button.active { opacity: 1; box-shadow: inset 0 0 5px rgba(255,255,255,0.5); transform: scale(1.1); }
+        .clock { font-family: monospace; font-weight: bold; }
+
+        /* Resizer */
+        .resizer { position: absolute; width: 8px; height: 8px; background: #d4af37; cursor: se-resize; bottom: 0; right: 0; }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
 </head>
 <body>
+    <!-- Menubar -->
+    <div class="menubar">
+        <button id="start-btn">🍎 Cocobot</button>
+        <div class="menu-dropdown" id="start-menu">
+            <div class="menu-item" data-target="terminal"><span>💻</span> Terminal</div>
+            <div class="menu-item" data-target="snake-game"><span>🐍</span> Cat Snake</div>
+            <div class="menu-item" data-target="file-manager"><span>📦</span> File Manager</div>
+            <div class="menu-item" data-target="qa-dashboard"><span>📊</span> QA Dashboard</div>
+            <div class="menu-item" data-target="settings"><span>⚙️</span> Settings</div>
+            <hr>
+            <div class="menu-item" onclick="resetOS()">🔄 Reiniciar SO</div>
+        </div>
+        <div class="menu-title">Archivo</div>
+        <div class="menu-title">Editar</div>
+        <div class="menu-title">Vista</div>
+        <div class="menu-title">Ayuda</div>
+    </div>
+
     <!-- Desktop -->
     <div id="desktop">
-        <!-- Wallpaper: cardboard texture with subtle cat patterns -->
-        <div class="wallpaper"></div>
-
-        <!-- Menu Bar (como Windows/Mac) -->
-        <div class="menubar">
-            <button id="start-btn">🍎 Cocobot</button>
-            <div class="menu-dropdown" id="start-menu">
-                <div class="menu-item" data-target="terminal"><span>💻</span> Terminal</div>
-                <div class="menu-item" data-target="snake-game"><span>🐍</span> Cat Snake</div>
-                <div class="menu-item" data-target="file-manager"><span>📦</span> File Manager</div>
-                <div class="menu-item" data-target="qa-dashboard"><span>📊</span> QA Dashboard</div>
-                <div class="menu-item" data-target="settings"><span>⚙️</span> Settings</div>
-                <hr>
-                <div class="menu-item" onclick="resetOS()">🔄 Reiniciar SO</div>
-            </div>
-            
-            <div class="menu-title">Archivo</div>
-            <div class="menu-title">Editar</div>
-            <div class="menu-title">Vista</div>
-            <div class="menu-title">Ayuda</div>
-        </div>
-
         <!-- Icons -->
         <div class="icons">
-            <div class="icon" data-target="terminal">
-                <span>💻</span>
-                <span>Terminal</span>
-            </div>
-            <div class="icon" data-target="snake-game">
-                <span>🐍</span>
-                <span>Cat Snake</span>
-            </div>
-            <div class="icon" data-target="file-manager">
-                <span>📦</span>
-                <span>File Manager</span>
-            </div>
-            <div class="icon" data-target="qa-dashboard">
-                <span>📊</span>
-                <span>QA Dashboard</span>
-            </div>
-            <div class="icon" data-target="settings">
-                <span>⚙️</span>
-                <span>Settings</span>
-            </div>
-            <!-- Easter egg: 3 quick right-clicks = Coco appears -->
-            <div id="coco-plushie" class="icon hidden">
-                <span>🧸</span>
-                <span>Coco</span>
-            </div>
+            <div class="icon" data-target="terminal"><span>💻</span><span>Terminal</span></div>
+            <div class="icon" data-target="snake-game"><span>🐍</span><span>Cat Snake</span></div>
+            <div class="icon" data-target="file-manager"><span>📦</span><span>File Manager</span></div>
+            <div class="icon" data-target="qa-dashboard"><span>📊</span><span>QA Dashboard</span></div>
+            <div class="icon" data-target="settings"><span>⚙️</span><span>Settings</span></div>
+            <div id="coco-plushie" class="icon hidden"><span>🧸</span><span>Coco</span></div>
         </div>
 
-        <!-- Window Container (for z-index management) -->
+        <!-- Windows Container -->
         <div id="windows-container">
             <!-- Terminal Window -->
             <div id="window-terminal" class="window">
-                <div class="window-header">
-                    <span>Terminal — Cocobot OS v1.0</span>
-                    <button onclick="closeWindow('terminal')">✕</button>
-                </div>
+                <div class="window-header"><span>Terminal — Cocobot OS v1.0</span><button onclick="closeWindow('terminal')">✕</button></div>
                 <div class="window-content terminal">
                     <div class="output"></div>
                     <div class="input-line">root@cocobot:~# <input type="text" id="term-input" autocomplete="off"></div>
@@ -77,26 +179,17 @@
 
             <!-- Snake Game Window -->
             <div id="window-snake-game" class="window">
-                <div class="window-header">
-                    <span>🐍 Cat Snake Game</span>
-                    <button onclick="closeWindow('snake-game')">✕</button>
-                </div>
+                <div class="window-header"><span>🐍 Cat Snake Game</span><button onclick="closeWindow('snake-game')">✕</button></div>
                 <div class="window-content game-container">
                     <canvas id="snake-canvas" width="480" height="360"></canvas>
-                    <div class="score-board">
-                        <p>Puntuación: <span id="snake-score">0</span></p>
-                        <p>Ratones comidos: <span id="mice-eaten">0</span></p>
-                    </div>
+                    <div class="score-board"><p>Puntuación: <span id="snake-score">0</span></p><p>Ratones comidos: <span id="mice-eaten">0</span></p></div>
                     <p style="margin-top: 5px;">Usa las flechas del teclado para jugar</p>
                 </div>
             </div>
 
             <!-- File Manager Window -->
             <div id="window-file-manager" class="window">
-                <div class="window-header">
-                    <span>📦 File Manager — Cajas de Cartón</span>
-                    <button onclick="closeWindow('file-manager')">✕</button>
-                </div>
+                <div class="window-header"><span>📦 File Manager — Cajas de Cartón</span><button onclick="closeWindow('file-manager')">✕</button></div>
                 <div class="window-content file-manager">
                     <div class="path-bar">/home/cocobot</div>
                     <div class="files-grid">
@@ -111,34 +204,20 @@
 
             <!-- QA Dashboard Window -->
             <div id="window-qa-dashboard" class="window">
-                <div class="window-header">
-                    <span>📊 QA Dashboard — Coverage en Vivo</span>
-                    <button onclick="closeWindow('qa-dashboard')">✕</button>
-                </div>
+                <div class="window-header"><span>📊 QA Dashboard — Coverage en Vivo</span><button onclick="closeWindow('qa-dashboard')">✕</button></div>
                 <div class="window-content qa-dashboard">
                     <div class="stats-row">
                         <div class="stat"><h4>Coverage</h4><p id="coverage-val">87%</p></div>
                         <div class="stat"><h4>Tests</h4><p><span class="pass">✅ 124</span> / <span class="fail">❌ 3</span></p></div>
                         <div class="stat"><h4>Pipeline</h4><p>🚀 <span class="status-green">Passing</span></p></div>
                     </div>
-                    <div class="test-log">
-                        <h5>Últimos tests ejecutados:</h5>
-                        <ul id="test-list">
-                            <li class="test-pass">✅ test_login_user (0.2s)</li>
-                            <li class="test-pass">✅ test_checkout_flow (0.5s)</li>
-                            <li class="test-fail">❌ test_payment_gateway (1.2s) — Timeout</li>
-                            <li class="test-pass">✅ test_product_search (0.1s)</li>
-                        </ul>
-                    </div>
+                    <div class="test-log"><h5>Últimos tests ejecutados:</h5><ul id="test-list"><li class="test-pass">✅ test_login_user (0.2s)</li><li class="test-pass">✅ test_checkout_flow (0.5s)</li><li class="test-fail">❌ test_payment_gateway (1.2s) — Timeout</li><li class="test-pass">✅ test_product_search (0.1s)</li></ul></div>
                 </div>
             </div>
 
             <!-- Settings Window -->
             <div id="window-settings" class="window">
-                <div class="window-header">
-                    <span>⚙️ Settings — Configuración del Gato</span>
-                    <button onclick="closeWindow('settings')">✕</button>
-                </div>
+                <div class="window-header"><span>⚙️ Settings — Configuración del Gato</span><button onclick="closeWindow('settings')">✕</button></div>
                 <div class="window-content settings">
                     <form>
                         <label><input type="radio" name="theme" value="day" checked> 🌞 Día (caja clara)</label>
@@ -147,13 +226,7 @@
                         <label><input type="checkbox" id="sound-toggle" checked> 🔊 Activar sonidos</label>
                         <label><input type="checkbox" id="auto-test-toggle" checked> 🔄 Ejecutar tests automáticamente</label>
                         <hr>
-                        <label>Miau preferido:
-                            <select id="meow-sound">
-                                <option value="soft"> Miau suave (Coco)</option>
-                                <option value="loud"> Miau fuerte (Isis)</option>
-                                <option value="angry"> Miau enojado</option>
-                            </select>
-                        </label>
+                        <label>Miau preferido: <select id="meow-sound"><option value="soft">Miau suave (Coco)</option><option value="loud">Miau fuerte (Isis)</option><option value="angry">Miau enojado</option></select></label>
                     </form>
                 </div>
             </div>
@@ -169,8 +242,328 @@
             <div class="clock">🕒 <span id="clock-time">08:15</span></div>
         </div>
     </div>
-    
-    <!-- Resizer handles for windows -->
-    <div id="resizers"></div>
+
+    <script>
+        // Estado global
+        let windows = {}, snakeInterval, snakeDirection = { x: 1, y: 0 };
+        let snakePosition = [{ x: 12, y: 10 }], foodPosition = { x: 18, y: 12 };
+        let score = 0, miceEaten = 0;
+        let rightClickCount = 0, rightClickTimer;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeWindows();
+            setupTerminal();
+            setupClock();
+            setupMenu();
+            setupDraggableWindows();
+            setupResizing();
+
+            // Click en desktop para cerrar menús
+            document.getElementById('desktop').addEventListener('click', (e) => {
+                if (e.target.id === 'desktop' || e.target.closest('.window')) return;
+                const startMenu = document.getElementById('start-menu');
+                if (startMenu.style.display === 'block') startMenu.style.display = 'none';
+            });
+        });
+
+        function initializeWindows() {
+            windows = {
+                terminal: { el: document.getElementById('window-terminal'), active: false },
+                'snake-game': { el: document.getElementById('window-snake-game'), active: false },
+                'file-manager': { el: document.getElementById('window-file-manager'), active: false },
+                'qa-dashboard': { el: document.getElementById('window-qa-dashboard'), active: false },
+                settings: { el: document.getElementById('window-settings'), active: false }
+            };
+        }
+
+        function setupMenu() {
+            const startBtn = document.getElementById('start-btn');
+            const startMenu = document.getElementById('start-menu');
+            let menuOpen = false;
+
+            startBtn.onclick = (e) => {
+                e.stopPropagation();
+                menuOpen = !menuOpen;
+                startMenu.style.display = menuOpen ? 'block' : 'none';
+            };
+
+            document.addEventListener('click', () => { if (menuOpen) { menuOpen = false; startMenu.style.display = 'none'; } });
+
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.onclick = (e) => {
+                    if (!item.dataset.target && !item.onclick) return;
+                    menuOpen = false; startMenu.style.display = 'none';
+                    if (item.dataset.target) openWindow(item.dataset.target);
+                    else if (item.onclick) item.onclick();
+                };
+            });
+        }
+
+        function openWindow(windowName) {
+            Object.values(windows).forEach(win => win.el.classList.remove('active'));
+            Object.values(windows).forEach(win => win.active = false);
+
+            document.querySelectorAll('.taskbar button').forEach(btn => btn.classList.remove('active'));
+
+            const win = windows[windowName];
+            if (win) {
+                win.el.classList.add('active'); win.active = true;
+                win.el.style.zIndex = 20 + Object.keys(windows).length;
+
+                const btnId = `btn-${windowName.replace('-', '_')}`;
+                const btn = document.getElementById(btnId);
+                if (btn) btn.classList.add('active');
+            }
+
+            if (windowName === 'terminal') setTimeout(() => document.getElementById('term-input').focus(), 100);
+            if (windowName === 'snake-game' && !snakeInterval) startSnakeGame();
+        }
+
+        function closeWindow(windowName) {
+            windows[windowName].el.classList.remove('active');
+            windows[windowName].active = false;
+
+            const btnId = `btn-${windowName.replace('-', '_')}`;
+            const btn = document.getElementById(btnId);
+            if (btn) btn.classList.remove('active');
+
+            if (windowName === 'snake-game') stopSnakeGame();
+        }
+
+        function resetOS() { location.reload(); }
+
+        function setupDraggableWindows() {
+            const headers = document.querySelectorAll('.window-header');
+            headers.forEach(header => {
+                let isDragging = false, offsetX, offsetY;
+
+                header.onmousedown = (e) => {
+                    if (e.target.tagName === 'BUTTON') return;
+                    isDragging = true;
+                    const windowEl = header.closest('.window');
+
+                    document.querySelectorAll('.window').forEach(w => w.style.zIndex = 10);
+                    windowEl.style.zIndex = 20 + Object.keys(windows).length;
+
+                    const rect = windowEl.getBoundingClientRect();
+                    offsetX = e.clientX - rect.left;
+                    offsetY = e.clientY - rect.top;
+
+                    function doMove(e) {
+                        if (!isDragging) return;
+                        const desktopRect = document.getElementById('desktop').getBoundingClientRect();
+                        let newX = e.clientX - desktopRect.left - offsetX;
+                        let newY = e.clientY - desktopRect.top - offsetY;
+                        const maxX = desktopRect.width - windowEl.offsetWidth - 20;
+                        const maxY = desktopRect.height - windowEl.offsetHeight - 20;
+                        windowEl.style.left = `${Math.max(20, Math.min(newX, maxX))}px`;
+                        windowEl.style.top = `${Math.max(30, Math.min(newY, maxY))}px`;
+                    }
+
+                    document.addEventListener('mousemove', doMove);
+
+                    document.addEventListener('mouseup', () => {
+                        isDragging = false;
+                        document.removeEventListener('mousemove', doMove);
+                    }, { once: true });
+                };
+            });
+        }
+
+        function setupResizing() {
+            const windowsList = document.querySelectorAll('.window');
+            windowsList.forEach(win => {
+                const resizer = document.createElement('div'); resizer.className = 'resizer';
+                win.appendChild(resizer);
+
+                let isResizing = false;
+                resizer.onmousedown = (e) => {
+                    e.stopPropagation();
+                    isResizing = true;
+                    const startX = e.clientX, startY = e.clientY;
+                    const startWidth = win.offsetWidth, startHeight = win.offsetHeight;
+
+                    function doResize(e) {
+                        if (!isResizing) return;
+                        let newWidth = Math.max(300, Math.min(startWidth + (e.clientX - startX), 90vw));
+                        let newHeight = Math.max(250, Math.min(startHeight + (e.clientY - startY), 80vh));
+                        win.style.width = `${newWidth}px`; win.style.height = `${newHeight}px`;
+                    }
+
+                    document.addEventListener('mousemove', doResize);
+                    document.addEventListener('mouseup', () => {
+                        isResizing = false; document.removeEventListener('mousemove', doResize);
+                    }, { once: true });
+                };
+            });
+        }
+
+        function setupTerminal() {
+            const input = document.getElementById('term-input');
+            const output = document.querySelector('.terminal .output');
+
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    const command = input.value.trim().toLowerCase();
+                    processCommand(command, output);
+                    input.value = '';
+                    addTermLine(`root@cocobot:~# ${command}`);
+                }
+            };
+        }
+
+        function addTermLine(text) {
+            const output = document.querySelector('.terminal .output'); if (!output) return;
+            const div = document.createElement('div'); div.textContent = text; output.appendChild(div); output.scrollTop = output.scrollHeight;
+        }
+
+        function processCommand(cmd, output) {
+            switch(cmd) {
+                case 'help':
+                    addTermLine('Comandos disponibles:');
+                    addTermLine('  help       - Muestra este menú');
+                    addTermLine('  hunt       - Inicia búsqueda de bugs');
+                    addTermLine('  test       - Ejecuta tests automáticos');
+                    addTermLine('  meow       - Haz que Cocobot maúlle');
+                    addTermLine('  status     - Muestra estado del sistema');
+                    addTermLine('  clear      - Limpia la terminal');
+                    break;
+                case 'hunt': addTermLine('🔍 Buscando bugs en el código...'); setTimeout(() => { addTermLine('✅ ¡Encontrado! Un bug oculto en la línea 42.'); addTermLine('📝 Reporte generado: /home/cocobot/bugs/bug_001.txt'); }, 1500); break;
+                case 'test': addTermLine('🧪 Ejecutando suite de tests...'); setTimeout(() => { addTermLine('✅ test_login_user (0.2s)\n✅ test_checkout_flow (0.5s)\n❌ test_payment_gateway (1.2s) — Timeout\n✅ test_product_search (0.1s)\n\n📊 Coverage: ' + Math.floor(Math.random() * 13 + 85) + '%'); }, 2000); break;
+                case 'meow': addTermLine('🐱 Miau~ 🐾'); playMeowSound(); break;
+                case 'status': addTermLine('🚀 Cocobot OS v1.0 — Activo\n🕒 Hora actual: ' + new Date().toLocaleTimeString() + '\n💾 Memoria: ' + Math.floor(Math.random() * 20 + 40) + '% usada\n🌐 Red: Conectado (WiFi: CocoNet_5G)'); break;
+                case 'clear': output.innerHTML = ''; break;
+                default: if (cmd) addTermLine('bash: ' + cmd + ': comando no encontrado');
+            }
+        }
+
+        function setupClock() {
+            setInterval(() => { document.getElementById('clock-time').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }, 1000);
+        }
+
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = true;
+
+        document.getElementById('sound-toggle').onchange = (e) => { soundEnabled = e.target.checked; };
+
+        function playMeowSound() {
+            if (!soundEnabled) return;
+            if (audioContext.state === 'suspended') audioContext.resume();
+
+            const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+            osc.connect(gain); gain.connect(audioContext.destination);
+
+            osc.frequency.setValueAtTime(600, audioContext.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.3);
+
+            gain.gain.setValueAtTime(0.5, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            osc.start(); osc.stop(audioContext.currentTime + 0.3);
+        }
+
+        // Easter egg
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            handleRightClick();
+        });
+
+        function handleRightClick() {
+            rightClickCount++;
+            clearTimeout(rightClickTimer);
+            rightClickTimer = setTimeout(() => { rightClickCount = 0; }, 2000);
+
+            if (rightClickCount === 3) {
+                showCocoPlushie(); rightClickCount = 0;
+            }
+        }
+
+        function showCocoPlushie() {
+            playMeowSound();
+            const cocoIcon = document.getElementById('coco-plushie');
+            cocoIcon.classList.remove('hidden');
+
+            let bounce = 0; const interval = setInterval(() => {
+                cocoIcon.style.transform = `scale(${1 + Math.sin(bounce * 0.3) * 0.2})`;
+                bounce++; if (bounce > 10) {
+                    clearInterval(interval); cocoIcon.style.transform = 'none';
+                    setTimeout(() => { cocoIcon.classList.add('hidden'); }, 3000);
+                }
+            }, 50);
+        }
+
+        // Snake Game
+        function startSnakeGame() {
+            const canvas = document.getElementById('snake-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            snakeInterval = setInterval(() => {
+                const head = { x: snakePosition[0].x + snakeDirection.x, y: snakePosition[0].y + snakeDirection.y };
+
+                if (head.x < 0 || head.x >= 24 || head.y < 0 || head.y >= 18) { gameOver(); return; }
+
+                for (let pos of snakePosition) { if (pos.x === head.x && pos.y === head.y) { gameOver(); return; } }
+
+                snakePosition.unshift(head);
+
+                if (head.x === foodPosition.x && head.y === foodPosition.y) {
+                    score += 10; miceEaten++; updateScore(); placeFood(); playMeowSound();
+                } else { snakePosition.pop(); }
+
+                drawSnake(ctx);
+            }, 150);
+        }
+
+        function stopSnakeGame() { clearInterval(snakeInterval); snakeInterval = null; }
+
+        function drawSnake(ctx) {
+            ctx.fillStyle = '#1a1a2e'; ctx.fillRect(0, 0, 480, 360);
+
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            const gridSize = 20;
+            for (let x = 0; x <= 480; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 360); ctx.stroke(); }
+            for (let y = 0; y <= 360; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(480, y); ctx.stroke(); }
+
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath(); ctx.arc(foodPosition.x * gridSize + gridSize/2, foodPosition.y * gridSize + gridSize/2, 8, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = '#ff8080';
+            ctx.beginPath(); ctx.arc(foodPosition.x * gridSize + gridSize/2 - 6, foodPosition.y * gridSize + gridSize/2 - 6, 3, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(foodPosition.x * gridSize + gridSize/2 + 6, foodPosition.y * gridSize + gridSize/2 - 6, 3, 0, Math.PI * 2); ctx.fill();
+
+            snakePosition.forEach((pos, i) => {
+                ctx.fillStyle = i === 0 ? '#d4af37' : '#b8962a';
+                ctx.fillRect(pos.x * gridSize, pos.y * gridSize, gridSize, gridSize);
+                ctx.strokeStyle = '#fff'; ctx.lineWidth = 1;
+                ctx.strokeRect(pos.x * gridSize, pos.y * gridSize, gridSize, gridSize);
+
+                if (i === 0) { ctx.fillStyle = '#fff'; ctx.fillRect(pos.x * gridSize + gridSize/2 - 3, pos.y * gridSize + gridSize/2 - 3, 6, 6); }
+            });
+        }
+
+        function placeFood() {
+            foodPosition = { x: Math.floor(Math.random() * 24), y: Math.floor(Math.random() * 18) };
+            for (let pos of snakePosition) { if (pos.x === foodPosition.x && pos.y === foodPosition.y) placeFood(); }
+        }
+
+        function updateScore() { document.getElementById('snake-score').textContent = score; document.getElementById('mice-eaten').textContent = miceEaten; }
+
+        function gameOver() {
+            stopSnakeGame();
+            alert(`GAME OVER! 🐍\n\nPuntuación final: ${score}\nRatones comidos: ${miceEaten}\n\n¡Intenta otra vez!`);
+            score = 0; miceEaten = 0; updateScore();
+            snakePosition = [{ x: 12, y: 10 }]; snakeDirection = { x: 1, y: 0 }; placeFood();
+        }
+
+        // Keyboard controls for snake
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('window-snake-game').classList.contains('active')) return;
+            switch(e.key) {
+                case 'ArrowUp': if (snakeDirection.y === 0) snakeDirection = { x: 0, y: -1 }; break;
+                case 'ArrowDown': if (snakeDirection.y === 0) snakeDirection = { x: 0, y: 1 }; break;
+                case 'ArrowLeft': if (snakeDirection.x === 0) snakeDirection = { x: -1, y: 0 }; break;
+                case 'ArrowRight': if (snakeDirection.x === 0) snakeDirection = { x: 1, y: 0 }; break;
+            }
+        });
+    </script>
 </body>
 </html>
