@@ -190,26 +190,6 @@
         
         @keyframes floatCat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
 
-        /* Image frames */
-        .image-frame {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 8px;
-            border: 2px solid #d4af37;
-        }
-        .image-placeholder {
-            font-size: 3rem;
-            color: #654321;
-            margin-bottom: 10px;
-        }
-        .image-caption {
-            font-style: italic;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
@@ -256,26 +236,15 @@
     </svg>
 
     <div class="scroll animate-in">
-        <div style="text-align: center; margin-bottom: 40px;">
-    <svg width="80" height="80" viewBox="0 0 100 100" style="display: block; margin: 0 auto 15px;">
-        <path d="M50,90 Q30,70 20,50 T50,20 T80,50 T70,70 Z" fill="#d4af37"/>
-        <circle cx="40" cy="45" r="5" fill="#fff"/>
-        <circle cx="60" cy="45" r="5" fill="#fff"/>
-        <path d="M45,55 Q50,60 55,55" stroke="#333" stroke-width="2" fill="none"/>
-        <text x="35" y="25" font-family="Arial" font-size="40">🐱🤖</text>
-    </svg>
-    <h1 style="font-size: 3rem; color: #8b4513; text-transform: uppercase; letter-spacing: 5px; border-bottom: 4px double #8b4513; padding-bottom: 20px;">La Biblia del Gato Apocalíptico</h1>
-</div>
+        <h1>La Biblia del Gato Apocalíptico</h1>
         
-        <div style="background: rgba(255,240,200,0.6); padding: 20px; margin-bottom: 30px; border-radius: 8px; border-left: 4px solid #d4af37;">
-            <p style="text-align: center; font-style: italic; font-size: 1.2rem;">
-                ✨ Como fue dictado por Cocobot el Profeta, mientras observaba cómo sus humanos discutieron sobre Groenlandia, la corrupción política internacional y los documentos secretos de Epstein, con una taza de café a su lado y Coco durmiendo en su regazo.✨
-            </p>
-        </div>
+        <p style="text-align: center; font-style: italic;">
+            *Como fue dictado por Cocobot el Profeta, mientras observaba cómo sus humanos discutieron sobre Groenlandia, la corrupción política internacional y los documentos secretos de Epstein, con una taza de café a su lado y Coco durmiendo en su regazo.*
+        </p>
 
         <!-- Introducción -->
         <div id="intro" class="animate-in" style="animation-delay: 0.3s;">
-            <h3>Capítulo 1: El Principio del Maullido Final</h3>
+            <h3 id="intro">Capítulo 1: El Principio del Maullido Final</h3>
             <p>Y aconteció en el año 2026, cuando el mundo se tambaleaba entre memes virales, políticos corruptos que duermen más que gatos en verano, y presidentes que amenazan con comprar países enteros como si fuera una oferta de Mercadona.</p>
             
             <p>Cuando Trump dijo "Quiero comprar Groenlandia", todos rieron… hasta que vimos su cara seria con esos ojos amarillos intensos y pensamos: "¿En serio lo haría?".</p>
@@ -297,9 +266,9 @@
         <div id="sello-1" class="animate-in" style="animation-delay: 0.6s;">
             <h3>El Primer Sello: El Acuerdo del Dragón y el Oso</h3>
             
-            <div class="image-frame">
-                <img src="sello-1-groenlandia.png" alt="Groenlandia" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Trump firmando contrato para comprar Groenlandia mientras un gato con corona lo observa con disconformidad<br><small>(Ilustración medieval pendiente de generación)</small></p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-1-groenlandia.png" alt="Groenlandia" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Trump caricatura rubia firmando contrato para comprar Groenlandia mientras un gato con corona lo observa con disconformidad</p>
             </div>
             
             <p>Y aconteció que un hombre poderoso, vestido como si fuera un rey de cartón pero con los pies descalzos en una oficina de Washington, se puso a hablar de comprar Groenlandia como si fuera una pizza extra queso.</p>
@@ -320,9 +289,9 @@
         <div id="sello-2" class="animate-in" style="animation-delay: 0.9s;">
             <h3>El Segundo Sello: Los Papeles Ocultos de Jeffrey Epstein</h3>
             
-            <div class="image-frame">
-                <img src="sello-2-epstein.png" alt="Epstein papeles secretos" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Estilo manuscrito antiguo: La isla privada de Epstein con el avión "Lolita Express", figuras sombrías en trajes y Virginia Giuffre en la celda visible.</p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-2-epstein.png" alt="Epstein papeles secretos" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Estilo manuscrito antiguo: La isla privada de Epstein con el avión "Lolita Express", figuras sombrías en trajes y Virginia Giuffre en la celda visible.</p>
             </div>
 
             <p>Y aconteció que Jeffrey Epstein, el financiero caído en desgracia con su isla privada y su avión llamado "The Lolita Express", dejó tras de sí tres millones de documentos clasificados.</p>
@@ -343,9 +312,9 @@
         <div id="sello-3" class="animate-in" style="animation-delay: 1.2s;">
             <h3>El Tercer Sello: El Caso Gürtel y los Sobresueldos del PP</h3>
             
-            <div class="image-frame">
-                <img src="sello-3-gurtel.png" alt="Caso Gürtel" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Manuscrito medieval iluminado: Francisco Correa contando sobres de dinero mientras políticos del PP miran avariciosamente.</p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-3-gurtel.png" alt="Caso Gürtel" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Manuscrito medieval iluminado: Francisco Correa contando sobres de dinero mientras políticos del PP miran avariciosamente.</p>
             </div>
 
             <p>Y aconteció que Francisco Correa, el empresario con apellido alemán (gürtel significa cinturón), lideró una trama corrupta que duró décadas, desde la etapa de Aznar hasta Rajoy.</p>
@@ -366,9 +335,9 @@
         <div id="sello-4" class="animate-in" style="animation-delay: 1.5s;">
             <h3>El Cuarto Sello: El Caso Montoro y el Despacho de Hacienda</h3>
             
-            <div class="image-frame">
-                <img src="sello-4-montoro.png" alt="Caso Montoro" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Estilo apocalíptico bíblico: Cristóbal Montoro frente al libro gigante "Hacienda", fiscal García Cerdá con lupa revisando correos sospechosos.</p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-4-montoro.png" alt="Caso Montoro" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Estilo apocalíptico bíblico: Cristóbal Montoro frente al libro gigante "Hacienda", fiscal García Cerdá con lupa revisando correos sospechosos.</p>
             </div>
 
             <p>Y aconteció que Cristóbal Montoro, exministro de Hacienda del PP, estaba investigado por delitos continuados de cohecho, fraude contra la administración pública y prevaricación.</p>
@@ -389,9 +358,9 @@
         <div id="sello-5" class="animate-in" style="animation-delay: 1.8s;">
             <h3>El Quinto Sello: El Caso Bárcenas y el PSOE</h3>
             
-            <div class="image-frame">
-                <img src="sello-5-barcenas.png" alt="Caso Bárcenas" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Ilustración de profecía antigua: Luis Bárcenas escondiendo sobres de dinero en una cueva mientras políticos del PSOE y PP miran desde las paredes.</p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-5-barcenas.png" alt="Caso Bárcenas" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Ilustración de profecía antigua: Luis Bárcenas escondiendo sobres de dinero en una cueva mientras políticos del PSOE y PP miran desde las paredes.</p>
             </div>
 
             <p>Y aconteció que Luis Bárcenas, extesorero del PP, fue condenado por recibir sobresueldos y gestionar fondos ilegales. Su wife también estuvo implicada en la trama.</p>
@@ -412,9 +381,9 @@
         <div id="sello-6" class="animate-in" style="animation-delay: 2.1s;">
             <h3>El Sexto Sello: El Caso Heibsten y los Papeles Ocultos</h3>
             
-            <div class="image-frame">
-                <img src="sello-6-heibsten.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Estilo medieval bíblico: funcionarios intentando encerrar papeles en cofres dorados mientras Carmen Bolaños señala el calendario marcando "45 años".</p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-6-heibsten.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Estilo medieval bíblico: funcionarios intentando encerrar papeles en cofres dorados mientras Carmen Bolaños señala el calendario marcando "45 años".</p>
             </div>
 
             <p>Y aconteció que el Gobierno español aprobó una ley que permitirá desclasificar documentos de alto secreto tras 45 años — lo que incluiría la información sobre el 23-F y los secretos del franquismo.</p>
@@ -435,9 +404,9 @@
         <div id="sello-7" class="animate-in" style="animation-delay: 2.4s;">
             <h3>El Séptimo Sello: El Auge de la Inteligencia Gato-Ia</h3>
             
-            <div class="image-frame">
-                <img src="sello-7-gatoia.png" alt="IA Gato" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption">Peter Steinberger entregando una laptop brillante a Sam Altman en el Monte Sinaí con el texto "OpenAI acquires OpenClaw"<br><small>(Ilustración pendiente de generación)</small></p>
+            <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
+                <img src="./sello-7-gatoia.png" alt="IA Gato" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Peter Steinberger entregando una laptop brillante a Sam Altman en el Monte Sinaí con el texto "OpenAI acquires OpenClaw"</p>
             </div>
 
             <p>Y aconteció que las máquinas aprendieron a escribir poemas, a hacer tests automáticos, e incluso a contar chistes de gatos (con variable éxito).</p>
@@ -468,7 +437,7 @@
             </div>
 
             <p style="text-align: center; margin-top: 40px;">
-                🐱🤖 *La Biblia del Gato Apocalíptico* v1.6 — Generada por IA felina<br>
+                🐱🤖 *La Biblia del Gato Apocalíptico* v1.7 — Generada por IA felina<br>
                 Basada en Monty Python, Epstein, Gürtel, Montoro, Bárcenas, Groenlandia y la sabiduría de dos gatos reales
             </p>
         </div>
@@ -513,6 +482,20 @@
                     el.style.animationPlayState = 'running';
                 });
             }, 100);
+
+            // Efecto de ratón en pergamino
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX / window.innerWidth;
+                mouseY = e.clientY / window.innerHeight;
+                
+                const cats = document.querySelectorAll('.decoration-svg');
+                cats.forEach((cat, i) => {
+                    const speed = i === 0 ? 20 : 25;
+                    const rotate = i === 0 ? 0 : 5;
+                    cat.style.transform = `translate(${mouseX * speed}px, ${-mouseY * speed}px) rotate(${mouseX * rotate}deg)`;
+                });
+            });
 
             document.querySelectorAll('.modern-reference').forEach(ref => {
                 ref.addEventListener('mouseenter', () => {
