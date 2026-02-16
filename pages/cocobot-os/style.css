@@ -1,0 +1,256 @@
+/* Cocobot OS - Estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+#desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f5e6c4 0%, #e8d5b2 100%);
+    /* Cardboard texture pattern via CSS */
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            rgba(139, 69, 19, 0.05) 0px,
+            rgba(139, 69, 19, 0.05) 2px,
+            transparent 2px,
+            transparent 4px
+        );
+    cursor: default;
+}
+
+.wallpaper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.3;
+    background-image: radial-gradient(#8b4513 2px, transparent 2px);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+/* Icons */
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    max-width: 400px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+.icon:hover {
+    background: rgba(0,0,0,0.2);
+    transform: scale(1.1);
+}
+
+.icon span:first-child { font-size: 24px; margin-bottom: 5px; }
+.icon span:last-child { font-size: 12px; text-align: center; }
+
+/* Windows */
+.window {
+    position: absolute;
+    width: 500px;
+    height: 350px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.window.active {
+    display: flex;
+}
+
+.window-header {
+    background: linear-gradient(to right, #d4af37, #c5a028);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.window-header button {
+    background: #ff5e5e;
+    border: none;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.window-header button:hover {
+    background: #ff8080;
+}
+
+.window-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Terminal */
+.terminal .output {
+    height: 180px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-family: monospace;
+    font-size: 14px;
+}
+.terminal .output div { margin-bottom: 5px; }
+.terminal .input-line {
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 14px;
+}
+.terminal input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    outline: none;
+    color: #333;
+}
+
+/* Snake Game */
+.game-container {
+    text-align: center;
+}
+#snake-canvas {
+    background: #1a1a2e;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.score-board p { margin: 5px 0; font-weight: bold; }
+.status-green { color: #2ecc71; }
+
+/* File Manager */
+.file-manager {
+    font-size: 14px;
+}
+.path-bar {
+    padding: 8px;
+    background: #f0f0f0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+.file-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.file-box:hover {
+    border-color: #d4af37;
+    transform: scale(1.05);
+}
+
+/* QA Dashboard */
+.stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.stat {
+    text-align: center;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    min-width: 100px;
+}
+.stat h4 { font-size: 12px; color: #666; }
+.stat p { font-size: 18px; font-weight: bold; color: #333; }
+.pass { color: #2ecc71; }
+.fail { color: #e74c3c; }
+.test-log ul { list-style: none; }
+.test-pass { color: #2ecc71; margin: 3px 0; }
+.test-fail { color: #e74c3c; margin: 3px 0; }
+
+/* Settings */
+.settings label {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.settings input[type="radio"], .settings input[type="checkbox"] { margin-right: 8px; }
+.settings select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Taskbar */
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: white;
+}
+.taskbar button {
+    background: #d4af37;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: transform 0.2s;
+}
+.taskbar button:hover { transform: scale(1.1); }
+.clock { font-family: monospace; font-weight: bold; }
+
+/* Cat animations */
+@keyframes tail-wag {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.cat-anim { animation: tail-wag 0.5s ease-in-out infinite; }
