@@ -18,7 +18,6 @@
             );
         }
 
-        /* Menubar */
         .menubar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -42,13 +41,11 @@
         .menu-item { padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .menu-item:hover { background: #d4af37; color: white; }
 
-        /* Desktop */
         #desktop {
             position: relative; width: 100%; height: calc(100vh - 30px - 50px);
             top: 30px; bottom: 50px;
         }
 
-        /* Icons */
         .icons {
             position: absolute; top: 20px; right: 20px;
             display: flex; flex-direction: column; gap: 15px; z-index: 100;
@@ -64,14 +61,13 @@
         .icon span:first-child { font-size: 24px; margin-bottom: 5px; }
         .icon span:last-child { font-size: 12px; text-align: center; }
 
-        /* Windows Container */
         #windows-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
 
         .window {
-            position: absolute; width: 500px; min-width: 300px; max-width: 90vw;
-            height: 350px; min-height: 250px; max-height: 80vh;
+            position: absolute; width: 500px; min-width: 300px;
+            height: 350px; min-height: 250px;
             background: white; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: flex; flex-direction: column; z-index: 10; transition: all 0.2s;
+            display: none; flex-direction: column; z-index: 10; transition: all 0.2s;
         }
         .window.active { display: flex; z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
 
@@ -87,22 +83,18 @@
 
         .window-content { flex: 1; padding: 15px; overflow-y: auto; position: relative; }
 
-        /* Terminal */
         .terminal .output { height: 180px; overflow-y: auto; margin-bottom: 10px; font-family: monospace; font-size: 14px; background: #f8f8f8; padding: 5px; border-radius: 4px; }
         .terminal input { border: none; background: transparent; flex: 1; outline: none; color: #333; }
 
-        /* Snake Game */
         #snake-canvas { background: #1a1a2e; border-radius: 5px; max-width: 100%; height: auto; display: block; margin: 0 auto; }
         .score-board p { margin: 5px 0; font-weight: bold; }
         .status-green { color: #2ecc71; }
 
-        /* File Manager */
         .path-bar { padding: 8px; background: #f0f0f0; margin-bottom: 10px; border-radius: 4px; font-weight: bold; }
         .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
         .file-box { display: flex; flex-direction: column; align-items: center; padding: 10px; background: white; border: 2px solid #ddd; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
         .file-box:hover { border-color: #d4af37; transform: scale(1.05); }
 
-        /* QA Dashboard */
         .stats-row { display: flex; justify-content: space-around; margin-bottom: 20px; }
         .stat { text-align: center; padding: 10px; background: #f9f9f9; border-radius: 5px; min-width: 100px; }
         .stat h4 { font-size: 12px; color: #666; }
@@ -112,11 +104,9 @@
         .test-pass { color: #2ecc71; margin: 3px 0; }
         .test-fail { color: #e74c3c; margin: 3px 0; }
 
-        /* Settings */
         .settings label { display: block; margin: 10px 0; cursor: pointer; }
         .settings select { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
 
-        /* Taskbar */
         .taskbar {
             position: fixed; bottom: 0; left: 0; right: 0;
             height: 50px; background: rgba(0,0,0,0.7); z-index: 999;
@@ -129,14 +119,12 @@
         .taskbar button.active { opacity: 1; box-shadow: inset 0 0 5px rgba(255,255,255,0.5); transform: scale(1.1); }
         .clock { font-family: monospace; font-weight: bold; }
 
-        /* Resizer */
         .resizer { position: absolute; width: 8px; height: 8px; background: #d4af37; cursor: se-resize; bottom: 0; right: 0; }
 
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
-    <!-- Menubar -->
     <div class="menubar">
         <button id="start-btn">🍎 Cocobot</button>
         <div class="menu-dropdown" id="start-menu">
@@ -154,9 +142,7 @@
         <div class="menu-title">Ayuda</div>
     </div>
 
-    <!-- Desktop -->
     <div id="desktop">
-        <!-- Icons -->
         <div class="icons">
             <div class="icon" data-target="terminal"><span>💻</span><span>Terminal</span></div>
             <div class="icon" data-target="snake-game"><span>🐍</span><span>Cat Snake</span></div>
@@ -166,9 +152,7 @@
             <div id="coco-plushie" class="icon hidden"><span>🧸</span><span>Coco</span></div>
         </div>
 
-        <!-- Windows Container -->
         <div id="windows-container">
-            <!-- Terminal Window -->
             <div id="window-terminal" class="window">
                 <div class="window-header"><span>Terminal — Cocobot OS v1.0</span><button onclick="closeWindow('terminal')">✕</button></div>
                 <div class="window-content terminal">
@@ -177,7 +161,6 @@
                 </div>
             </div>
 
-            <!-- Snake Game Window -->
             <div id="window-snake-game" class="window">
                 <div class="window-header"><span>🐍 Cat Snake Game</span><button onclick="closeWindow('snake-game')">✕</button></div>
                 <div class="window-content game-container">
@@ -187,7 +170,6 @@
                 </div>
             </div>
 
-            <!-- File Manager Window -->
             <div id="window-file-manager" class="window">
                 <div class="window-header"><span>📦 File Manager — Cajas de Cartón</span><button onclick="closeWindow('file-manager')">✕</button></div>
                 <div class="window-content file-manager">
@@ -202,7 +184,6 @@
                 </div>
             </div>
 
-            <!-- QA Dashboard Window -->
             <div id="window-qa-dashboard" class="window">
                 <div class="window-header"><span>📊 QA Dashboard — Coverage en Vivo</span><button onclick="closeWindow('qa-dashboard')">✕</button></div>
                 <div class="window-content qa-dashboard">
@@ -215,7 +196,6 @@
                 </div>
             </div>
 
-            <!-- Settings Window -->
             <div id="window-settings" class="window">
                 <div class="window-header"><span>⚙️ Settings — Configuración del Gato</span><button onclick="closeWindow('settings')">✕</button></div>
                 <div class="window-content settings">
@@ -232,7 +212,6 @@
             </div>
         </div>
 
-        <!-- Taskbar -->
         <div class="taskbar">
             <button onclick="openWindow('terminal')" id="btn-terminal" class="active">💻</button>
             <button onclick="openWindow('snake-game')" id="btn-snake-game" class="active">🐍</button>
@@ -244,7 +223,6 @@
     </div>
 
     <script>
-        // Estado global
         let windows = {}, snakeInterval, snakeDirection = { x: 1, y: 0 };
         let snakePosition = [{ x: 12, y: 10 }], foodPosition = { x: 18, y: 12 };
         let score = 0, miceEaten = 0;
@@ -258,7 +236,6 @@
             setupDraggableWindows();
             setupResizing();
 
-            // Click en desktop para cerrar menús
             document.getElementById('desktop').addEventListener('click', (e) => {
                 if (e.target.id === 'desktop' || e.target.closest('.window')) return;
                 const startMenu = document.getElementById('start-menu');
@@ -354,10 +331,8 @@
                         const desktopRect = document.getElementById('desktop').getBoundingClientRect();
                         let newX = e.clientX - desktopRect.left - offsetX;
                         let newY = e.clientY - desktopRect.top - offsetY;
-                        const maxX = desktopRect.width - windowEl.offsetWidth - 20;
-                        const maxY = desktopRect.height - windowEl.offsetHeight - 20;
-                        windowEl.style.left = `${Math.max(20, Math.min(newX, maxX))}px`;
-                        windowEl.style.top = `${Math.max(30, Math.min(newY, maxY))}px`;
+                        windowEl.style.left = `${Math.max(20, Math.min(newX, desktopRect.width - windowEl.offsetWidth - 20))}px`;
+                        windowEl.style.top = `${Math.max(30, Math.min(newY, desktopRect.height - windowEl.offsetHeight - 20))}px`;
                     }
 
                     document.addEventListener('mousemove', doMove);
@@ -385,8 +360,11 @@
 
                     function doResize(e) {
                         if (!isResizing) return;
-                        let newWidth = Math.max(300, Math.min(startWidth + (e.clientX - startX), 90vw));
-                        let newHeight = Math.max(250, Math.min(startHeight + (e.clientY - startY), 80vh));
+                        const desktopRect = document.getElementById('desktop').getBoundingClientRect();
+                        let newWidth = startWidth + (e.clientX - startX);
+                        let newHeight = startHeight + (e.clientY - startY);
+                        newWidth = Math.max(300, Math.min(newWidth, desktopRect.width - 40));
+                        newHeight = Math.max(250, Math.min(newHeight, desktopRect.height - 100));
                         win.style.width = `${newWidth}px`; win.style.height = `${newHeight}px`;
                     }
 
@@ -462,7 +440,6 @@
             osc.start(); osc.stop(audioContext.currentTime + 0.3);
         }
 
-        // Easter egg
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             handleRightClick();
@@ -492,7 +469,6 @@
             }, 50);
         }
 
-        // Snake Game
         function startSnakeGame() {
             const canvas = document.getElementById('snake-canvas'); if (!canvas) return;
             const ctx = canvas.getContext('2d');
@@ -554,7 +530,6 @@
             snakePosition = [{ x: 12, y: 10 }]; snakeDirection = { x: 1, y: 0 }; placeFood();
         }
 
-        // Keyboard controls for snake
         document.addEventListener('keydown', (e) => {
             if (!document.getElementById('window-snake-game').classList.contains('active')) return;
             switch(e.key) {
