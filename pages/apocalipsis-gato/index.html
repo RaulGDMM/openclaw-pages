@@ -190,6 +190,26 @@
         
         @keyframes floatCat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
 
+        /* Image frames */
+        .image-frame {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+        }
+        .image-placeholder {
+            font-size: 3rem;
+            color: #654321;
+            margin-bottom: 10px;
+        }
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
@@ -262,13 +282,13 @@
         <!-- Sellos -->
         <h2 id="sellos">Las Siete Grandes Profecías</h2>
 
-        <!-- Sello 1: Groenlandia - Placeholder hasta generar imagen -->
+        <!-- Sello 1: Groenlandia -->
         <div id="sello-1" class="animate-in" style="animation-delay: 0.6s;">
             <h3>El Primer Sello: El Acuerdo del Dragón y el Oso</h3>
             
-            <div style="text-align: center; margin: 30px 0; padding: 40px; background: rgba(139,69,19,0.05); border-radius: 8px; border: 2px dashed #8b4513;">
-                <span style="font-size: 3rem;">❄️</span>
-                <p style="margin-top: 15px; font-style: italic; color: #666;">Trump firmando contrato para comprar Groenlandia mientras un gato con corona lo observa con disconformidad<br><small>(Ilustración pendiente de generación)</small></p>
+            <div class="image-frame">
+                <span class="image-placeholder">❄️</span>
+                <p class="image-caption">Trump firmando contrato para comprar Groenlandia mientras un gato con corona lo observa con disconformidad<br><small>(Ilustración medieval pendiente de generación)</small></p>
             </div>
             
             <p>Y aconteció que un hombre poderoso, vestido como si fuera un rey de cartón pero con los pies descalzos en una oficina de Washington, se puso a hablar de comprar Groenlandia como si fuera una pizza extra queso.</p>
@@ -289,9 +309,9 @@
         <div id="sello-2" class="animate-in" style="animation-delay: 0.9s;">
             <h3>El Segundo Sello: Los Papeles Ocultos de Jeffrey Epstein</h3>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="./imagenes/generadas/sello-2-epstein.png" alt="Epstein papeles secretos" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9rem; color: #666;">Estilo manuscrito antiguo: La isla privada de Epstein con el avión "Lolita Express", figuras sombrías en trajes y Virginia Giuffre en la celda visible.</p>
+            <div class="image-frame">
+                <img src="sello-2-epstein.png" alt="Epstein papeles secretos" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption">Estilo manuscrito antiguo: La isla privada de Epstein con el avión "Lolita Express", figuras sombrías en trajes y Virginia Giuffre en la celda visible.</p>
             </div>
 
             <p>Y aconteció que Jeffrey Epstein, el financiero caído en desgracia con su isla privada y su avión llamado "The Lolita Express", dejó tras de sí tres millones de documentos clasificados.</p>
@@ -312,9 +332,9 @@
         <div id="sello-3" class="animate-in" style="animation-delay: 1.2s;">
             <h3>El Tercer Sello: El Caso Gürtel y los Sobresueldos del PP</h3>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="./imagenes/generadas/sello-3-gurtel.png" alt="Caso Gürtel" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9rem; color: #666;">Manuscrito medieval iluminado: Francisco Correa contando sobres de dinero mientras políticos del PP miran avariciosamente.</p>
+            <div class="image-frame">
+                <img src="sello-3-gurtel.png" alt="Caso Gürtel" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption">Manuscrito medieval iluminado: Francisco Correa contando sobres de dinero mientras políticos del PP miran avariciosamente.</p>
             </div>
 
             <p>Y aconteció que Francisco Correa, el empresario con apellido alemán (gürtel significa cinturón), lideró una trama corrupta que duró décadas, desde la etapa de Aznar hasta Rajoy.</p>
@@ -335,9 +355,9 @@
         <div id="sello-4" class="animate-in" style="animation-delay: 1.5s;">
             <h3>El Cuarto Sello: El Caso Montoro y el Despacho de Hacienda</h3>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="./imagenes/generadas/sello-4-montoro.png" alt="Caso Montoro" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9rem; color: #666;">Estilo apocalíptico bíblico: Cristóbal Montoro frente al libro gigante "Hacienda", fiscal García Cerdá con lupa revisando correos sospechosos.</p>
+            <div class="image-frame">
+                <img src="sello-4-montoro.png" alt="Caso Montoro" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption">Estilo apocalíptico bíblico: Cristóbal Montoro frente al libro gigante "Hacienda", fiscal García Cerdá con lupa revisando correos sospechosos.</p>
             </div>
 
             <p>Y aconteció que Cristóbal Montoro, exministro de Hacienda del PP, estaba investigado por delitos continuados de cohecho, fraude contra la administración pública y prevaricación.</p>
@@ -358,9 +378,9 @@
         <div id="sello-5" class="animate-in" style="animation-delay: 1.8s;">
             <h3>El Quinto Sello: El Caso Bárcenas y el PSOE</h3>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="./imagenes/generadas/sello-5-barcenas.png" alt="Caso Bárcenas" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9rem; color: #666;">Ilustración de profecía antigua: Luis Bárcenas escondiendo sobres de dinero en una cueva mientras políticos del PSOE y PP miran desde las paredes.</p>
+            <div class="image-frame">
+                <img src="sello-5-barcenas.png" alt="Caso Bárcenas" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption">Ilustración de profecía antigua: Luis Bárcenas escondiendo sobres de dinero en una cueva mientras políticos del PSOE y PP miran desde las paredes.</p>
             </div>
 
             <p>Y aconteció que Luis Bárcenas, extesorero del PP, fue condenado por recibir sobresueldos y gestionar fondos ilegales. Su wife también estuvo implicada en la trama.</p>
@@ -381,9 +401,9 @@
         <div id="sello-6" class="animate-in" style="animation-delay: 2.1s;">
             <h3>El Sexto Sello: El Caso Heibsten y los Papeles Ocultos</h3>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="./imagenes/generadas/sello-6-heibsten.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p style="font-size: 0.9rem; color: #666;">Estilo medieval bíblico: funcionarios intentando encerrar papeles en cofres dorados mientras Carmen Bolaños señala el calendario marcando "45 años".</p>
+            <div class="image-frame">
+                <img src="sello-6-heibsten.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p class="image-caption">Estilo medieval bíblico: funcionarios intentando encerrar papeles en cofres dorados mientras Carmen Bolaños señala el calendario marcando "45 años".</p>
             </div>
 
             <p>Y aconteció que el Gobierno español aprobó una ley que permitirá desclasificar documentos de alto secreto tras 45 años — lo que incluiría la información sobre el 23-F y los secretos del franquismo.</p>
@@ -400,13 +420,13 @@
             <span class="modern-reference">Referencia histórica: Ley de desclasificación aprobada en julio 2025 (Europa Press, EL PAÍS)</span>
         </div>
 
-        <!-- Sello 7: IA Gato - Placeholder hasta generar imagen -->
+        <!-- Sello 7: IA Gato -->
         <div id="sello-7" class="animate-in" style="animation-delay: 2.4s;">
             <h3>El Séptimo Sello: El Auge de la Inteligencia Gato-Ia</h3>
             
-            <div style="text-align: center; margin: 30px 0; padding: 40px; background: rgba(139,69,19,0.05); border-radius: 8px; border: 2px dashed #8b4513;">
-                <span style="font-size: 3rem;">🤖</span>
-                <p style="margin-top: 15px; font-style: italic; color: #666;">Peter Steinberger entregando una laptop brillante a Sam Altman en el Monte Sinaí con el texto "OpenAI acquires OpenClaw"<br><small>(Ilustración pendiente de generación)</small></p>
+            <div class="image-frame">
+                <span class="image-placeholder">🤖</span>
+                <p class="image-caption">Peter Steinberger entregando una laptop brillante a Sam Altman en el Monte Sinaí con el texto "OpenAI acquires OpenClaw"<br><small>(Ilustración pendiente de generación)</small></p>
             </div>
 
             <p>Y aconteció que las máquinas aprendieron a escribir poemas, a hacer tests automáticos, e incluso a contar chistes de gatos (con variable éxito).</p>
@@ -437,7 +457,7 @@
             </div>
 
             <p style="text-align: center; margin-top: 40px;">
-                🐱🤖 *La Biblia del Gato Apocalíptico* v1.5 — Generada por IA felina<br>
+                🐱🤖 *La Biblia del Gato Apocalíptico* v1.6 — Generada por IA felina<br>
                 Basada en Monty Python, Epstein, Gürtel, Montoro, Bárcenas, Groenlandia y la sabiduría de dos gatos reales
             </p>
         </div>
@@ -467,11 +487,10 @@
         function goToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
-                const yOffset = -150; // espacio para header fijo
+                const yOffset = -150;
                 const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
                 window.scrollTo({ top: y, behavior: 'smooth' });
                 
-                // Cerrar menú después de seleccionar
                 document.getElementById('menuDropdown').style.display = 'none';
             }
         }
@@ -484,7 +503,6 @@
                 });
             }, 100);
 
-            // Hover effect for modern references
             document.querySelectorAll('.modern-reference').forEach(ref => {
                 ref.addEventListener('mouseenter', () => {
                     ref.style.color = '#a0522d';
