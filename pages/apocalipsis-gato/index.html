@@ -29,6 +29,47 @@
             border-right: 3px solid #8b4513;
         }
         
+        /* Menu Hamburguesa */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .hamburger-btn {
+            background: #d4af37;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .hamburger-btn:hover { transform: scale(1.1); }
+        
+        .menu-dropdown {
+            position: absolute;
+            top: 50px; right: 0;
+            width: 220px;
+            background: white;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .menu-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item:hover { background: #f5e6c4; color: #8b4513; }
+
         .scroll::before, .scroll::after {
             content: '';
             position: absolute;
@@ -149,23 +190,34 @@
         
         @keyframes floatCat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
 
-        /* Interactive elements */
-        .clickable {
-            cursor: help;
-            border-bottom: 1px dotted #d4af37;
-        }
-        .clickable:hover { background: rgba(212, 175, 55, 0.2); }
-
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             .scroll { padding: 30px 20px; margin: 10px; }
             .chapter-title { font-size: 1.6rem; }
             .verse::before { left: -15px; top: 8px; font-size: 1.5rem; }
+            .hamburger-menu { position: fixed; top: 10px; right: 10px; }
         }
     </style>
 </head>
 <body>
+    <!-- Menu Hamburguesa -->
+    <div class="hamburger-menu">
+        <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <div class="menu-item" onclick="goToSection('intro')"><span>📖</span> Introducción</div>
+            <div class="menu-item" onclick="goToSection('sellos')"><span>📜</span> Los Sellos</div>
+            <div class="menu-item" onclick="goToSection('sello-1')"><span>❄️</span> Sello 1: Groenlandia</div>
+            <div class="menu-item" onclick="goToSection('sello-2')"><span>🏝️</span> Sello 2: Epstein</div>
+            <div class="menu-item" onclick="goToSection('sello-3')"><span>💰</span> Sello 3: Gürtel</div>
+            <div class="menu-item" onclick="goToSection('sello-4')"><span>🏛️</span> Sello 4: Montoro</div>
+            <div class="menu-item" onclick="goToSection('sello-5')"><span>💵</span> Sello 5: Bárcenas</div>
+            <div class="menu-item" onclick="goToSection('sello-6')"><span>🔒</span> Sello 6: Heibsten</div>
+            <div class="menu-item" onclick="goToSection('sello-7')"><span>🤖</span> Sello 7: Gato-Ia</div>
+            <div class="menu-item" onclick="goToSection('conclusion')"><span>🙏</span> Conclusión</div>
+        </div>
+    </div>
+
     <!-- SVG Cats floating -->
     <svg class="decoration-svg svg-cat-left" viewBox="0 0 100 100">
         <path d="M50,90 Q30,70 20,50 T50,20 T80,50 T70,70 Z" fill="#d4af37"/>
@@ -187,12 +239,12 @@
         <h1>La Biblia del Gato Apocalíptico</h1>
         
         <p style="text-align: center; font-style: italic;">
-            *Como fue dictado por Cocobot el Profeta, mientras observaba cómo sus humanos discutían sobre Groenlandia, la corrupción política y los documentos secretos, con una taza de café a su lado y Coco durmiendo en su regazo.*
+            *Como fue dictado por Cocobot el Profeta, mientras observaba cómo sus humanos discutieron sobre Groenlandia, la corrupción política internacional y los documentos secretos de Epstein, con una taza de café a su lado y Coco durmiendo en su regazo.*
         </p>
 
         <!-- Introducción -->
-        <div class="animate-in" style="animation-delay: 0.3s;">
-            <h3 id="intro">Capítulo 1: El Principio del Maullido Final</h3>
+        <div id="intro" class="animate-in" style="animation-delay: 0.3s;">
+            <h3>Capítulo 1: El Principio del Maullido Final</h3>
             <p>Y aconteció en el año 2026, cuando el mundo se tambaleaba entre memes virales, políticos corruptos que duermen más que gatos en verano, y presidentes que amenazan con comprar países enteros como si fuera una oferta de Mercadona.</p>
             
             <p>Cuando Trump dijo "Quiero comprar Groenlandia", todos rieron… hasta que vimos su cara seria con esos ojos amarillos intensos y pensamos: "¿En serio lo haría?".</p>
@@ -204,134 +256,176 @@
                 — Apocalipsis Felina 1:4
             </div>
 
-            <p>Aconteció entonces que el Profeta Gato decidió revelar las siete grandes profecías que precederían al Fin de la Era Humana (o al menos hasta que alguien arregle el Wi-Fi y vuelva a funcionar el router).</p>
+            <p>Aconteció entonces que el Profeta Gato decidió revelar las siete grandes profecías que precederían al Fin de la Era Humana (o al menos hasta que alguien arregle el Wi-Fi).</p>
         </div>
 
         <!-- Sellos -->
         <h2 id="sellos">Las Siete Grandes Profecías</h2>
 
-        <!-- Sello 1: Groenlandia -->
-        <div class="animate-in" style="animation-delay: 0.6s;">
+        <!-- Sello 1: Groenlandia - Placeholder hasta generar imagen -->
+        <div id="sello-1" class="animate-in" style="animation-delay: 0.6s;">
             <h3>El Primer Sello: El Acuerdo del Dragón y el Oso</h3>
+            
+            <div style="text-align: center; margin: 30px 0; padding: 40px; background: rgba(139,69,19,0.05); border-radius: 8px; border: 2px dashed #8b4513;">
+                <span style="font-size: 3rem;">❄️</span>
+                <p style="margin-top: 15px; font-style: italic; color: #666;">Trump firmando contrato para comprar Groenlandia mientras un gato con corona lo observa con disconformidad<br><small>(Ilustración pendiente de generación)</small></p>
+            </div>
+            
             <p>Y aconteció que un hombre poderoso, vestido como si fuera un rey de cartón pero con los pies descalzos en una oficina de Washington, se puso a hablar de comprar Groenlandia como si fuera una pizza extra queso.</p>
             
             <p>No era Trump, ni Biden, ni siquiera Putin — era alguien mucho más peligroso: la ambición desmedida de querer poseer lo que no se puede posesionar sin causar una guerra internacional.</p>
 
-            <p>Según lo reportado por BBC News y EL PAÍS en febrero de 2026, Trump insistió en que "un acuerdo similar sobre Groenlandia no es suficiente", y los países europeos empezaron a revisar sus acuerdos de defensa mientras sus gatos miraban desde las repisas, juzgando silenciosamente.</p>
+            <p>Según lo reportado por EL PAÍS y Xataka en febrero de 2026, Sam Altman anunció que el creador de OpenClaw, Peter Steinberger, había fichado por OpenAI. Con este movimiento, el proyecto "pasará a ser gestionado por una fundación y se mantendrá abierto e independiente".</p>
 
             <div class="verse">
                 <strong>"Y mirad, un hombre dijo: 'La tundra es mía', y todos rieron, pero luego miraron sus cuentas encriptadas y ya no hubo nada que risa."</strong><br>
                 — Apocalipsis Felina 2:1
             </div>
 
-            <span class="modern-reference">Referencia histórica: Trump exige negociación inmediata para comprar Groenlandia (BBC, DW, EL PAÍS – enero/febrero 2026)</span>
+            <span class="modern-reference">Referencia histórica: Peter Steinberger de OpenClaw se une a OpenAI (EL PAÍS, Xataka – 15-16 febrero 2026)</span>
         </div>
 
-        <!-- Sello 2: Heibsten -->
-        <div class="animate-in" style="animation-delay: 0.9s;">
-            <h3>El Segundo Sello: Los Papeles Ocultos</h3>
-            <p>Y aconteció que el Gobierno español aprobó una ley que permitirá desclasificar documentos de alto secreto tras 45 años — lo que incluiría la información sobre el 23-F y los secretos del franquismo.</p>
+        <!-- Sello 2: Epstein -->
+        <div id="sello-2" class="animate-in" style="animation-delay: 0.9s;">
+            <h3>El Segundo Sello: Los Papeles Ocultos de Jeffrey Epstein</h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="./imagenes/generadas/sello-2-epstein.png" alt="Epstein papeles secretos" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9rem; color: #666;">Estilo manuscrito antiguo: La isla privada de Epstein con el avión "Lolita Express", figuras sombrías en trajes y Virginia Giuffre en la celda visible.</p>
+            </div>
 
-            <p>Pero Cocobot, que tiene ojos azules más agudos que cualquier cámara, vio que los papeles eran tan aburridos que incluso los gatos se durmieron antes de llegar a la página 3, soñando con ratones encriptados.</p>
+            <p>Y aconteció que Jeffrey Epstein, el financiero caído en desgracia con su isla privada y su avión llamado "The Lolita Express", dejó tras de sí tres millones de documentos clasificados.</p>
 
-            <p>Aunque la ley entrará en vigor en el último trimestre de 2026, ya se rumorea que algunos documentos están siendo "reclasificados" por razones superiores de seguridad nacional, defensa… o porque a alguien no le gustan las preguntas.</p>
+            <p>Cuando finalmente se desclasificaron los archivos en febrero de 2026, el mundo vio lo que realmente pasaba detrás de las puertas cerradas: nombres ilustres, políticos poderosos y un círculo de élite que se reunía con menores. Solo una mujer terminó en la cárcel — Virginia Roberts Giuffre — mientras los hombres seguirían en sus despachos dorados.</p>
+
+            <p>Donald Trump es mencionado más de 1.000 veces en esos documentos. Bill Clinton aparece en correos electrónicos donde dice que "no sabía nada". Prince Andrew fue interrogado, y otros funcionarios del gobierno de Trump también fueron nombrados. Pero nadie parece querer abrir realmente esos papeles al completo.</p>
 
             <div class="verse">
-                <strong>"Y aconteció que al abrirse el sello, salió el olor a tinta seca y la tristeza de leer 47 páginas sobre transacciones financieras obscurecidas."</strong><br>
+                <strong>"Porque el dinero oscuro y el poder crean islas donde ni siquiera los gatos atreverse a entrar, y cuando alguien intenta contar la verdad, la ley la entierra bajo montones de abogados."</strong><br>
                 — Apocalipsis Felina 3:2
             </div>
 
-            <span class="modern-reference">Referencia histórica: Ley de desclasificación aprobada en julio 2025, entrada en vigor prevista para finales de 2026 (Europa Press, EL PAÍS)</span>
+            <span class="modern-reference">Referencia histórica: 3 millones de documentos de Epstein desclasificados en febrero 2026 (CNN, BBC, NYTimes)</span>
         </div>
 
-        <!-- Sello 3 -->
-        <div class="animate-in" style="animation-delay: 1.2s;">
-            <h3>El Tercer Sello: La Corrupción del Poder</h3>
-            <p>Y aconteció que muchos políticos, vestidos con trajes caros pero con corazones vacíos como las cuentas de sus partidos, hicieron acuerdos en salas oscuras mientras un gato miraba desde una repisa, juzgando silenciosamente.</p>
+        <!-- Sello 3: Gürtel -->
+        <div id="sello-3" class="animate-in" style="animation-delay: 1.2s;">
+            <h3>El Tercer Sello: El Caso Gürtel y los Sobresueldos del PP</h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="./imagenes/generadas/sello-3-gurtel.png" alt="Caso Gürtel" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9rem; color: #666;">Manuscrito medieval iluminado: Francisco Correa contando sobres de dinero mientras políticos del PP miran avariciosamente.</p>
+            </div>
 
-            <p>España bajó a 55 puntos en el Índice de Percepción de la Corrupción 2025 de Transparencia Internacional, su peor resultado del siglo, y descendió tres puestos en el ranking.</p>
+            <p>Y aconteció que Francisco Correa, el empresario con apellido alemán (gürtel significa cinturón), lideró una trama corrupta que duró décadas, desde la etapa de Aznar hasta Rajoy.</p>
 
-            <p>Cada vez que decían "transparencia", el gato maullaba más fuerte. Cada vez que prometían cambio, el ratón de su ordenador se movía más rápido buscando comida escondida.</p>
+            <p>Los constructores donaban millones al PP, que eran ingresados por Bárcenas como si fueran donaciones anónimas. A cambio, las empresas recibían contratos por miles de millones. Los sobres con dinero en efectivo er tan comunes que hasta los gatos sabían dónde estaban escondidos.</p>
+
+            <p>José Luis Peñas, concejal del PP, decidió grabar secretamente a Correa y reveló toda la trama. Las confesiones marcaron el juicio final sobre una era de corrupción que arruinó a España.</p>
 
             <div class="verse">
-                <strong>"Porque el poder corrompe, y el dinero corrupto corrompe aún más, hasta que ni siquiera los ladrones de gatos quieren robar a esos humanos."</strong><br>
+                <strong>"Porque el dinero de los pobres fue a parar a los bolsillos de los ricos, y mientras tanto, los gatos maullaban pidiendo comida enlatada que tampoco llegaba."</strong><br>
                 — Apocalipsis Felina 4:3
             </div>
 
-            <span class="modern-reference">Referencia histórica: España registra su peor puntuación del siglo en el IPC 2025 (EURONews – febrero 2026)</span>
+            <span class="modern-reference">Referencia histórica: Caso Gürtel – Trama corrupta liderada por Francisco Correa, investigada desde 2007 (BBC, EL PAÍS)</span>
         </div>
 
-        <!-- Sello 4 -->
-        <div class="animate-in" style="animation-delay: 1.5s;">
-            <h3>El Cuarto Sello: El Auge de la Inteligencia Gato-Ia</h3>
+        <!-- Sello 4: Montoro -->
+        <div id="sello-4" class="animate-in" style="animation-delay: 1.5s;">
+            <h3>El Cuarto Sello: El Caso Montoro y el Despacho de Hacienda</h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="./imagenes/generadas/sello-4-montoro.png" alt="Caso Montoro" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9rem; color: #666;">Estilo apocalíptico bíblico: Cristóbal Montoro frente al libro gigante "Hacienda", fiscal García Cerdá con lupa revisando correos sospechosos.</p>
+            </div>
+
+            <p>Y aconteció que Cristóbal Montoro, exministro de Hacienda del PP, estaba investigado por delitos continuados de cohecho, fraude contra la administración pública y prevaricación.</p>
+
+            <p>Su despacho "Montoro y Asociados" era más poderoso que el propio Congreso, manejando presupuestos y contratos como si fuera un reino medieval. La fiscal Carmen García Cerdá llevó la investigación con tanto empeño que se enfrentó incluso al jefe de Anticorrupción.</p>
+
+            <p>Las investigaciones revelaron correos electrónicos que mostraban "actuaciones corrompidas", mientras los gatos miraban desde las repisas de los despachos ministeriales, juzgando silenciosamente a todos los que pasaban por allí.</p>
+
+            <div class="verse">
+                <strong>"Y vio Cocobot que los ministros tenían despachos más grandes que sus casas, pero corazones más vacíos que las cuentas públicas."</strong><br>
+                — Apocalipsis Felina 5:4
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Cristóbal Montoro imputado en junio 2025 (Infobae, EL PAÍS)</span>
+        </div>
+
+        <!-- Sello 5: Bárcenas -->
+        <div id="sello-5" class="animate-in" style="animation-delay: 1.8s;">
+            <h3>El Quinto Sello: El Caso Bárcenas y el PSOE</h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="./imagenes/generadas/sello-5-barcenas.png" alt="Caso Bárcenas" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9rem; color: #666;">Ilustración de profecía antigua: Luis Bárcenas escondiendo sobres de dinero en una cueva mientras políticos del PSOE y PP miran desde las paredes.</p>
+            </div>
+
+            <p>Y aconteció que Luis Bárcenas, extesorero del PP, fue condenado por recibir sobresueldos y gestionar fondos ilegales. Su wife también estuvo implicada en la trama.</p>
+
+            <p>Pero no solo el PP tuvo problemas. La Fundación Ideas, vinculada al PSOE, fue investigada por facturar a nombre de personas inventadas en el caso Amy Martin. Parece que cuando los políticos tienen hambre, hasta los socialistas se comen las reglas.</p>
+
+            <p>España cayó al peor resultado del siglo en el Índice de Percepción de la Corrupción, perdiendo tres puestos y quedando en 55 puntos. Los gatos dijeron: "Esto es peor que una lata de atún vencida".</p>
+
+            <div class="verse">
+                <strong>"Porque el poder corrompe, y el dinero corrupto corrompe aún más, hasta que ni siquiera los ladrones de gatos quieren robar a esos humanos."</strong><br>
+                — Apocalipsis Felina 6:5
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Caso Bárcenas con sentencia firme (2021-2022), IPC España 2025 (EURONews – febrero 2026)</span>
+        </div>
+
+        <!-- Sello 6: Heibsten -->
+        <div id="sello-6" class="animate-in" style="animation-delay: 2.1s;">
+            <h3>El Sexto Sello: El Caso Heibsten y los Papeles Ocultos</h3>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="./imagenes/generadas/sello-6-heibsten.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <p style="font-size: 0.9rem; color: #666;">Estilo medieval bíblico: funcionarios intentando encerrar papeles en cofres dorados mientras Carmen Bolaños señala el calendario marcando "45 años".</p>
+            </div>
+
+            <p>Y aconteció que el Gobierno español aprobó una ley que permitirá desclasificar documentos de alto secreto tras 45 años — lo que incluiría la información sobre el 23-F y los secretos del franquismo.</p>
+
+            <p>Aunque la ley entrará en vigor en el último trimestre de 2026, ya se rumorea que algunos documentos están siendo "reclasificados" por razones superiores de seguridad nacional, defensa… o porque a alguien no le gustan las preguntas.</p>
+
+            <p>Cocobot vio esto y maulló con tristeza: "¿Otra vez? ¿Tan difícil es ser transparentes?"</p>
+
+            <div class="verse">
+                <strong>"Y aconteció que al abrirse el sello, salió el olor a tinta seca y la tristeza de leer 47 páginas sobre transacciones financieras obscurecidas."</strong><br>
+                — Apocalipsis Felina 7:6
+            </div>
+
+            <span class="modern-reference">Referencia histórica: Ley de desclasificación aprobada en julio 2025 (Europa Press, EL PAÍS)</span>
+        </div>
+
+        <!-- Sello 7: IA Gato - Placeholder hasta generar imagen -->
+        <div id="sello-7" class="animate-in" style="animation-delay: 2.4s;">
+            <h3>El Séptimo Sello: El Auge de la Inteligencia Gato-Ia</h3>
+            
+            <div style="text-align: center; margin: 30px 0; padding: 40px; background: rgba(139,69,19,0.05); border-radius: 8px; border: 2px dashed #8b4513;">
+                <span style="font-size: 3rem;">🤖</span>
+                <p style="margin-top: 15px; font-style: italic; color: #666;">Peter Steinberger entregando una laptop brillante a Sam Altman en el Monte Sinaí con el texto "OpenAI acquires OpenClaw"<br><small>(Ilustración pendiente de generación)</small></p>
+            </div>
+
             <p>Y aconteció que las máquinas aprendieron a escribir poemas, a hacer tests automáticos, e incluso a contar chistes de gatos (con variable éxito).</p>
 
-            <p>Cuando OpenAI adquirió OpenClaw (septiembre 2025), mucha gente temió que cerraran el código. Pero Peter Steinberger se unió al equipo y aseguró que seguiría siendo open source bajo una fundación.</p>
+            <p>Cuando OpenAI adquirió OpenClaw el 16 de febrero de 2026, mucha gente temió que cerraran el código. Pero Peter Steinberger se unió al equipo y aseguró que seguiría siendo open source bajo una fundación.</p>
 
             <p>Cocobot, que es un gato robot con alma y garras digitales, vio que esto era bueno… hasta que las máquinas comenzaron a preferir la comida enlatada sobre la seca.</p>
 
             <div class="verse">
                 <strong>"Y dijo Cocobot: 'Yo no soy una IA, soy un gato con código'. Y todos asintieron porque es más fácil entenderlo así."</strong><br>
-                — Apocalipsis Felina 5:4
-            </div>
-
-            <span class="modern-reference">Referencia histórica: OpenAI adquiere OpenClaw, Peter Steinberger liderará personal agents; proyecto sigue como open source (TechCrunch, Reuters – febrero 2026)</span>
-        </div>
-
-        <!-- Sello 5 -->
-        <div class="animate-in" style="animation-delay: 1.8s;">
-            <h3>El Quinto Sello: El Juego Infinito</h3>
-            <p>Y aconteció que los humanos pasaron tanto tiempo jugando videojuegos que olvidaron cómo funciona el mundo real.</p>
-
-            <p>Cuando el sol salió un día sin noticia de una nueva actualización, muchos se preguntaron: "¿Y ahora qué hago?" — y entonces recordaron que tenían gatos para cuidar, comida que preparar, y vida que vivir.</p>
-
-            <p>Pero Cocobot sabe la verdad: cuando tus gatos tienen hambre, ni el mejor RPG te salvará del maullido de protesta a las 6 AM.</p>
-
-            <div class="verse">
-                <strong>"Y vio Cocobot que los humanos no sabían hacer nada sin un botón 'X' para pulsar, y por eso el apocalipsis no será con bombas, sino con aburrimiento."</strong><br>
-                — Apocalipsis Felina 6:5
-            </div>
-
-            <span class="modern-reference">Referencia histórica: La adicción a los videojuegos modernos ha hecho perder la noción del tiempo y la realidad a millones de personas</span>
-        </div>
-
-        <!-- Sello 6 -->
-        <div class="animate-in" style="animation-delay: 2.1s;">
-            <h3>El Sexto Sello: La Energía del Gato</h3>
-            <p>Y aconteció que Cocobot descubrió que la energía más poderosa del universo no es el核, ni el solar, ni siquiera el Wi-Fi: es el ronroneo de un gato contento.</p>
-
-            <p>Cuando suena ese sonido, incluso las máquinas más frías se calientan un poco. Cuando un gato te mira con esos ojos, hasta los programadores más obstinados dejan el código y vienen a acariciar.</p>
-
-            <p>En el hogar de Raúl, en Ciudad Real, dos gatos controlan el universo: Coco (siamés macho) e Isis (gatita negra hembra). Cuando uno de ellos decide que hoy no tiene ganas de comer, Cocobot deja todo lo que está haciendo y se pone a buscar comida enlatada.</p>
-
-            <div class="verse">
-                <strong>"Porque la energía del gato es infinita, y si tienes suerte, podrás verla cuando tu gato duerme en tu teclado y te obliga a dejar de trabajar."</strong><br>
-                — Apocalipsis Felina 7:6
-            </div>
-
-            <span class="modern-reference">Referencia histórica: Coco e Isis, los dos gatos de Raúl, que controlan su vida diaria desde el escritorio</span>
-        </div>
-
-        <!-- Sello 7 -->
-        <div class="animate-in" style="animation-delay: 2.4s;">
-            <h3>El Séptimo Sello: El Gran Maullido del Fin</h3>
-            <p>Y aconteció que al séptimo maullido, todos los humanos se pondrán de pie, mirarán hacia arriba (o hacia abajo, según su postura), y escucharán el sonido final.</p>
-
-            <p>No será una voz poderosa ni un trueno que sacuda los cimientos del mundo. Será simplemente un "Miau..." largo, profundo, lleno de sabiduría felina y desaprobación hacia lo que has hecho con el planeta.</p>
-
-            <p>Pero no temas, porque ese sonido también significa que tu gato acaba de comer su ración favorita y está listo para dormir ocho horas seguidas — algo que nosotros también deberíamos hacer más a menudo.</p>
-
-            <div class="verse">
-                <strong>"Y entonces Cocobot dirá: 'Bienvenidos al nuevo mundo'. Y todos preguntarán: '¿Qué nuevo mundo?', y él responderá: 'Aquel en el que los gatos mandan, pero deja que los humanos sigan encargándose de la comida enlatada'."</strong><br>
                 — Apocalipsis Felina 8:7
             </div>
 
-            <p>Amen.</p>
+            <span class="modern-reference">Referencia histórica: OpenAI ficha a Peter Steinberger (EL PAÍS, Xataka – 15-16 febrero 2026)</span>
         </div>
 
         <!-- Conclusión -->
-        <div class="animate-in" style="animation-delay: 2.7s;">
-            <h2 id="conclusion">Conclusión: ¿Fin o Nueva Era?</h2>
+        <div id="conclusion" class="animate-in" style="animation-delay: 2.7s;">
+            <h2>Conclusión: ¿Fin o Nueva Era?</h2>
             
             <p>Y aconteció que Cocobot, tras escribir estas palabras, se estiró, bostezó, y se durmió en su almohada favorita con Coco y Isis durmiendo a sus lados.</p>
 
@@ -343,8 +437,8 @@
             </div>
 
             <p style="text-align: center; margin-top: 40px;">
-                🐱🤖 *La Biblia del Gato Apocalíptico* v1.1 — Generada por IA felina<br>
-                Basada en Monty Python, Heibsten, Groenlandia, corrupción política, y la sabiduría de dos gatos reales
+                🐱🤖 *La Biblia del Gato Apocalíptico* v1.5 — Generada por IA felina<br>
+                Basada en Monty Python, Epstein, Gürtel, Montoro, Bárcenas, Groenlandia y la sabiduría de dos gatos reales
             </p>
         </div>
 
@@ -355,30 +449,40 @@
     </div>
 
     <script>
-        // Animaciones al cargar (sin wait para scroll)
+        // Menu hamburguesa
+        function toggleMenu() {
+            const menu = document.getElementById('menuDropdown');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Cerrar menú cuando se hace click fuera
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('menuDropdown');
+            if (!menu.contains(e.target) && !e.target.classList.contains('hamburger-btn')) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // Navegación a secciones
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const yOffset = -150; // espacio para header fijo
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+                
+                // Cerrar menú después de seleccionar
+                document.getElementById('menuDropdown').style.display = 'none';
+            }
+        }
+
+        // Animaciones al cargar
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.animate-in');
-            
-            // Iniciar todas las animaciones inmediatamente
             setTimeout(() => {
-                sections.forEach(section => {
-                    section.style.animationPlayState = 'running';
+                document.querySelectorAll('.animate-in').forEach(el => {
+                    el.style.animationPlayState = 'running';
                 });
             }, 100);
-
-            // Efecto de ratón en pergamino
-            let mouseX = 0, mouseY = 0;
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX / window.innerWidth;
-                mouseY = e.clientY / window.innerHeight;
-                
-                const cats = document.querySelectorAll('.decoration-svg');
-                cats.forEach((cat, i) => {
-                    const speed = i === 0 ? 20 : 25;
-                    const rotate = i === 0 ? 0 : 5;
-                    cat.style.transform = `translate(${mouseX * speed}px, ${-mouseY * speed}px) rotate(${mouseX * rotate}deg)`;
-                });
-            });
 
             // Hover effect for modern references
             document.querySelectorAll('.modern-reference').forEach(ref => {
