@@ -378,9 +378,9 @@
         </div>
 
 
-                <!-- Sello 6: Heibsten -->
+                <!-- Sello 6 -->
         <div class="animate-in" style="animation-delay: 2.1s;">
-            <h3>El Sexto Sello: El Caso Koldo Ábalos y los Sobres del PSOE</h3>
+            <h3>El Sexto Sello: El Caso Heibsten y los Papeles Ocultos</h3>
             
             <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
                 <img src="./sello-6-koldo_abalos.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
@@ -388,20 +388,87 @@
             </div>
             
             <div class="image-frame" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 2px solid #d4af37;">
-                <img src="./sello-6-koldo_abalos.png" alt="Caso Heibsten" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                <p class="image-caption" style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 10px;">Ilustración medieval: Koldo Ábalos y otros políticos del PSOE escondiendo sobres de dinero mientras gatos investigan desde las paredes</p>
-            </div>
+                
 
-            <p>Y aconteció que el Gobierno español aprobó una ley que permitirá desclasificar documentos de alto secreto tras 45 años — lo que incluiría la información sobre el 23-F y los secretos del franquismo.</p>
+            <p>Y aconteció que Koldo Ábalos y otros responsables del PSOE se vieron involucrados en una trama de sobresueldos que reveló la profunda corrupción dentro del partido.</p>
 
-            <p>Aunque la ley entrará en vigor en el último trimestre de 2026, ya se rumorea que algunos documentos están siendo "reclasificados" por razones superiores de seguridad nacional, defensa… o porque a alguien no le gustan las preguntas.</p>
-
-            <p>Cocobot vio esto y maulló con tristeza: "¿Otra vez? ¿Tan difícil es ser transparentes?"</p>
+            <p>Cuando Cocobot vio esto, maulló con tristeza: "¿Otra vez? ¿Tan difícil es ser transparentes?"</p>
 
             <div class="verse">
-                <strong>"Y aconteció que al abrirse el sello, salió el olor a tinta seca y la tristeza de leer 47 páginas sobre transacciones financieras obscurecidas."</strong><br>
-                — Apocalipsis Felina 7:6
+                <strong>"Porque el poder corrompe, y el dinero corrupto corrompe aún más, hasta que ni siquiera los ladrones de gatos quieren robar a esos humanos."</strong><br>
+                — Apocalipsis Felina 6:5
             </div>
 
-            <span class="modern-reference">Referencia histórica: Ley de desclasificación aprobada en julio 2025 (Europa Press, EL PAÍS)</span>
-        </div>>
+            <span class="modern-reference">Referencia histórica: Caso Koldo Ábalos y sobresueldos en el PSOE (2024-2025)</span>
+        </div>    </div>
+
+    <script>
+        // Animaciones al cargar (sin wait para scroll)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.animate-in');
+            
+            // Iniciar todas las animaciones inmediatamente
+            setTimeout(() => {
+                sections.forEach(section => {
+                    section.style.animationPlayState = 'running';
+                });
+            }, 100);
+
+            // Efecto de ratón en pergamino
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX / window.innerWidth;
+                mouseY = e.clientY / window.innerHeight;
+                
+                const cats = document.querySelectorAll('.decoration-svg');
+                cats.forEach((cat, i) => {
+                    const speed = i === 0 ? 20 : 25;
+                    const rotate = i === 0 ? 0 : 5;
+                    cat.style.transform = `translate(${mouseX * speed}px, ${-mouseY * speed}px) rotate(${mouseX * rotate}deg)`;
+                });
+            });
+
+            // Hover effect for modern references
+            document.querySelectorAll('.modern-reference').forEach(ref => {
+                ref.addEventListener('mouseenter', () => {
+                    ref.style.color = '#a0522d';
+                    ref.style.fontWeight = 'bold';
+                });
+                ref.addEventListener('mouseleave', () => {
+                    ref.style.color = '#666';
+                    ref.style.fontWeight = 'normal';
+                });
+            });
+
+            // Menú Hamburguesa
+            function toggleMenu() {
+                const menu = document.getElementById('menuDropdown');
+                if (menu) {
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                }
+            }
+
+            // Cerrar menú cuando se hace click fuera
+            document.addEventListener('click', (e) => {
+                const menu = document.getElementById('menuDropdown');
+                if (menu && !menu.contains(e.target) && !e.target.classList.contains('hamburger-btn')) {
+                    menu.style.display = 'none';
+                }
+            });
+
+            // Navegación a secciones
+            function goToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const yOffset = -150;
+                    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    
+                    const menu = document.getElementById('menuDropdown');
+                    if (menu) menu.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
