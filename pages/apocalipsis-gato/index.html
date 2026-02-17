@@ -204,31 +204,23 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 250%;
-            height: 250%;
-            transform: translate(-50%, -50%);
+            width: 140%;
+            height: 140%;
             background: conic-gradient(
                 from 0deg,
                 transparent 0deg,
-                rgba(212, 175, 55, 0.35) 4deg,
-                transparent 8deg,
-                transparent 18deg,
-                rgba(180, 60, 0, 0.25) 22deg,
-                transparent 26deg,
-                transparent 36deg,
-                rgba(255, 120, 0, 0.2) 40deg,
-                transparent 44deg,
-                transparent 51deg,
-                rgba(212, 175, 55, 0.3) 55deg,
-                transparent 59deg,
-                transparent 69deg,
-                rgba(139, 0, 0, 0.2) 73deg,
-                transparent 77deg,
-                transparent 87deg,
-                rgba(255, 200, 50, 0.25) 91deg,
+                rgba(212, 175, 55, 0.3) 5deg,
+                transparent 10deg,
+                transparent 40deg,
+                rgba(180, 60, 0, 0.2) 45deg,
+                transparent 50deg,
+                transparent 85deg,
+                rgba(255, 200, 50, 0.25) 90deg,
                 transparent 95deg
             );
-            animation: rotateRays 25s linear infinite;
+            animation: rotateRays 40s linear infinite;
+            will-change: transform;
+            contain: strict;
             z-index: 0;
         }
 
@@ -247,13 +239,9 @@
                 0 0 30px rgba(255, 140, 0, 0.6),
                 0 0 60px rgba(255, 69, 0, 0.4),
                 0 0 100px rgba(139, 0, 0, 0.3);
-            animation: titlePulse 4s ease-in-out infinite, titleGlow 2.5s ease-in-out infinite alternate;
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            will-change: text-shadow;
             margin-bottom: 10px;
-        }
-
-        @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
         }
 
         @keyframes titleGlow {
@@ -261,7 +249,7 @@
                 text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6), 0 0 60px rgba(255, 69, 0, 0.4);
             }
             to { 
-                text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 140, 0, 0.8), 0 0 90px rgba(255, 69, 0, 0.6), 0 0 140px rgba(139, 0, 0, 0.4);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 140, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.5);
             }
         }
 
@@ -291,24 +279,20 @@
             opacity: 0;
             z-index: 1;
             border-radius: 2px;
-            box-shadow: 0 0 8px rgba(255, 255, 200, 0.6);
+            will-change: opacity;
         }
 
-        .lightning-1 { top: 0; left: 12%; height: 90px; animation: flash 4s 0.5s infinite; transform: rotate(-20deg); }
-        .lightning-2 { top: 0; right: 15%; height: 75px; animation: flash 5s 1.8s infinite; transform: rotate(15deg); }
-        .lightning-3 { top: 5px; left: 35%; height: 65px; animation: flash 3.5s 3s infinite; transform: rotate(-8deg); }
-        .lightning-4 { top: 0; right: 38%; height: 80px; animation: flash 6s 0.2s infinite; transform: rotate(12deg); }
+        .lightning-1 { top: 0; left: 12%; height: 90px; animation: flash 6s 0.5s infinite; transform: rotate(-20deg); }
+        .lightning-2 { top: 0; right: 15%; height: 75px; animation: flash 8s 2s infinite; transform: rotate(15deg); }
 
         @keyframes flash {
-            0%, 94%, 100% { opacity: 0; }
-            95% { opacity: 1; }
-            96% { opacity: 0.2; }
+            0%, 96%, 100% { opacity: 0; }
             97% { opacity: 0.9; }
-            98% { opacity: 0.1; }
+            98% { opacity: 0.15; }
             99% { opacity: 0.7; }
         }
 
-        /* Floating embers */
+        /* Floating embers - GPU-only transforms */
         .ember {
             position: absolute;
             bottom: 0;
@@ -316,22 +300,19 @@
             height: 4px;
             border-radius: 50%;
             z-index: 1;
-            animation: emberRise linear infinite;
+            will-change: transform, opacity;
+            animation: emberRise 5s linear infinite;
         }
 
-        .ember:nth-child(1) { left: 8%; background: #ff6b35; animation-duration: 4s; animation-delay: 0s; }
-        .ember:nth-child(2) { left: 22%; background: #ffd700; animation-duration: 3.5s; animation-delay: 0.8s; width: 3px; height: 3px; }
-        .ember:nth-child(3) { left: 45%; background: #ff4500; animation-duration: 5s; animation-delay: 0.3s; }
-        .ember:nth-child(4) { left: 65%; background: #ffa500; animation-duration: 3.8s; animation-delay: 1.2s; width: 5px; height: 5px; }
-        .ember:nth-child(5) { left: 78%; background: #ff6347; animation-duration: 4.5s; animation-delay: 0.6s; }
-        .ember:nth-child(6) { left: 90%; background: #ffd700; animation-duration: 3.2s; animation-delay: 1.5s; width: 3px; height: 3px; }
+        .ember:nth-child(1) { left: 15%; background: #ff6b35; animation-delay: 0s; }
+        .ember:nth-child(2) { left: 50%; background: #ffd700; animation-duration: 6s; animation-delay: 1.5s; width: 3px; height: 3px; }
+        .ember:nth-child(3) { left: 80%; background: #ffa500; animation-duration: 4.5s; animation-delay: 0.8s; }
 
         @keyframes emberRise {
-            0% { bottom: 0; opacity: 0; transform: scale(0.5) translateX(0); }
-            10% { opacity: 1; transform: scale(1) translateX(5px); }
-            50% { transform: scale(0.8) translateX(-8px); }
-            80% { opacity: 0.6; transform: scale(0.4) translateX(3px); }
-            100% { bottom: 100%; opacity: 0; transform: scale(0) translateX(-5px); }
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            10% { opacity: 1; transform: translateY(-20px) scale(1); }
+            50% { opacity: 0.7; transform: translateY(-80px) translateX(-5px) scale(0.7); }
+            100% { opacity: 0; transform: translateY(-160px) translateX(3px) scale(0); }
         }
 
         /* Cat eyes in the dark header */
@@ -363,6 +344,16 @@
             .header-container h1 { font-size: 1.6rem; letter-spacing: 1px; }
             .subtitle-bar { font-size: 0.75rem; letter-spacing: 1px; }
             .lightning { display: none; }
+            .ember { display: none; }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .apocalyptic-rays { animation: none; }
+            .lightning, .ember { display: none; }
+            .header-container h1 { animation: none; }
+            .cat-eyes { animation: none; opacity: 0.6; }
+            .subtitle-bar { animation: none; opacity: 1; }
         }
     </style>
 </head>
@@ -406,11 +397,6 @@
             <div class="apocalyptic-rays"></div>
             <div class="lightning lightning-1"></div>
             <div class="lightning lightning-2"></div>
-            <div class="lightning lightning-3"></div>
-            <div class="lightning lightning-4"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
-            <div class="ember"></div>
             <div class="ember"></div>
             <div class="ember"></div>
             <div class="ember"></div>
