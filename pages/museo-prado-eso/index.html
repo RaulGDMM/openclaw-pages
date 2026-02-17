@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Cuadros Imprescindibles del Museo del Prado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h2 {
+            color: #ff6b6b;
+            margin-top: 30px;
+            font-size: 2em;
+            border-left: 5px solid #ff6b6b;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #ffd93d;
+            margin: 20px 0 10px;
+            font-size: 1.5em;
+        }
+        .artist-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .artwork-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .artwork-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+        }
+        .artwork-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: white;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+        .artwork-info h4 {
+            color: #fff;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+        .artwork-info p {
+            color: #ccc;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .visit-guide {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        .visit-guide h2 {
+            color: #6bcb77;
+            border-left-color: #6bcb77;
+        }
+        .suggested-route {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .route-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .activity {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #888;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .artwork-card { flex-direction: column; text-align: center; }
+            .artwork-number { margin-right: 0; margin-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 15 Cuadros Imprescindibles del Museo del Prado</h1>
+            <p>Para visitas escolares de 4º de la ESO</p>
+        </header>
+
+        <!-- Velázquez -->
+        <section class="artist-section">
+            <h2> Diego Velázquez - Máxima expresión del arte español</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">1</div>
+                <div class="artwork-info">
+                    <h4>Las Meninas (1656)</h4>
+                    <p>El cuadro más famoso del museo, un enigma pictórico sin igual. Velázquez se pinta a sí mismo pintando al rey y la reina, que están reflejados en el espejo.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">2</div>
+                <div class="artwork-info">
+                    <h4>La infanta Margarita Teresa en marrón y azul (1659)</h4>
+                    <p>Retrato perfecto de la niña protagonista de Las Meninas. Muestra su elegancia y dulzura con una paleta de colores delicada.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">3</div>
+                <div class="artwork-info">
+                    <h4>Retrato de Innocent X (1650)</h4>
+                    <p>Una de las mejores obras de retrato del mundo. Velázquez capturó la personalidad fuerte del Papa con una técnica impecable.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goya -->
+        <section class="artist-section">
+            <h2> Francisco de Goya - Puente entre el Antiguo Régimen y la modernidad</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">4</div>
+                <div class="artwork-info">
+                    <h4>El 3 de mayo de 1808 (1814)</h4>
+                    <p>La obra más importante del romanticismo español. Representa la ejecución de españoles por los franceses durante la Guerra de la Independencia.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">5</div>
+                <div class="artwork-info">
+                    <h4>La maja vestida / La maja desnuda (1797-1800)</h4>
+                    <p>Una curiosidad que siempre llama la atención. Es la primera vez que se representa una mujer desnuda sin mitología o alegoría.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">6</div>
+                <div class="artwork-info">
+                    <h4>Saturno devorando a un hijo (1819-1823)</h4>
+                    <p>Uno de los "Pintores Negros". Un cuadro oscuro y fascinante sobre el tiempo que todo lo consume. ¡Compara este con el de Rubens!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- El Bosco -->
+        <section class="artist-section">
+            <h2> El Bosco - Misterio y simbolismo</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">7</div>
+                <div class="artwork-info">
+                    <h4>El jardín de las Delicias (1490-1500)</h4>
+                    <p>El tríptico más famoso del museo, lleno de detalles ocultos. Lee la historia de izquierda a derecha: Paraíso → Mundo terrenal → Infierno.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">8</div>
+                <div class="artwork-info">
+                    <h4>San Juan Evangelista (1495-1500)</h4>
+                    <p>Demostración del estilo único de El Bosco, tan diferente al de El Greco. Un detalle fascinante para comparar versiones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tiziano -->
+        <section class="artist-section">
+            <h2> Tiziano - Maestro del color Veneciano</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">9</div>
+                <div class="artwork-info">
+                    <h4>La Danaé (1545-1553)</h4>
+                    <p>Obra maestra del color y la luz veneciana. La piel brillante y el tacto sedoso demuestran el genio del colorista veneciano.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">10</div>
+                <div class="artwork-info">
+                    <h4>Carlos V en Mühlberg (1548-1550)</h4>
+                    <p>Definitiva imagen imperial del emperador. Tiziano captura la majestuosidad y el poder con una composición dinámica.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- El Greco -->
+        <section class="artist-section">
+            <h2> El Greco - Estilo único y expresivo</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">11</div>
+                <div class="artwork-info">
+                    <h4>El cardenal Fernando de Austria (1595)</h4>
+                    <p>Retrato con la luz característica del cretense. El uso del verde y rojo crea una sensación de profundidad y vida.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">12</div>
+                <div class="artwork-info">
+                    <h4>San Juan Evangelista (1600)</h4>
+                    <p>Su versión del tema, muy distinta a la de El Bosco. El estilo alargado y la expresión mística son características del Greco.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rubens -->
+        <section class="artist-section">
+            <h2> Peter Paul Rubens - Barroco flamenco vibrante</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">13</div>
+                <div class="artwork-info">
+                    <h4>Las tres Gracias (1635)</h4>
+                    <p>Elegancia y movimiento al máximo. Rubens muestra su dominio del cuerpo humano y la textura de la piel con maestría.</p>
+                </div>
+            </div>
+
+            <div class="artwork-card">
+                <div class="artwork-number">14</div>
+                <div class="artwork-info">
+                    <h4>Saturno devorando a un hijo (1615-1620)</h4>
+                    <p>Compara este cuadro con el de Goya. Dos visiones distintas del mismo mito, separadas por 200 años de historia.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Otras joyas -->
+        <section class="artist-section">
+            <h2>Otras joyas absolutas</h2>
+            
+            <div class="artwork-card">
+                <div class="artwork-number">15</div>
+                <div class="artwork-info">
+                    <h4>El descanso durante la huida a Egipto (Fra Angelico, 1430-1432)</h4>
+                    <p>Una muestra de la pintura temprana del museo. Fra Angelico representa la serenidad y la fe con una delicateza admirable.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guía de visita -->
+        <section class="visit-guide">
+            <h2> 📋 Ruta Recomendada para tu Visita (2 horas) </h2>
+            
+            <div class="suggested-route">
+                <div class="route-item">
+                    <span>📍 Sala 064 → Las Meninas</span>
+                    <span>⭐ ¡No te lo pierdas!</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 071 → La infanta Margarita</span>
+                    <span>🎨 Retrato perfecto</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 086 → Retrato de Innocent X</span>
+                    <span>👁️ Maestría en retrato</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 139B → El 3 de mayo</span>
+                    <span>💥 Romántico español</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 140A → Las majas</span>
+                    <span>🎨 Curiosidad atrevida</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 066B → Saturno de Goya</span>
+                    <span>🌌 Pintores negros</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 059A → El jardín de las Delicias</span>
+                    <span>🌳 Tríptico completo</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 034A → Danaé</span>
+                    <span>✨ Luz veneciana</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 028A → Carlos V en Mühlberg</span>
+                    <span>👑 Imagen imperial</span>
+                </div>
+                <div class="route-item">
+                    <span>📍 Sala 046A → El Greco (dos obras)</span>
+                    <span>🕯️ Estilo único</span>
+                </div>
+            </div>
+
+            <div class="activity">
+                <h3> 🎯 Actividad para los alumnos</h3>
+                <p>Pide a tus alumnos que elijan 3 cuadros y escriban una pequeña explicación de por qué les llamó la atención. Pueden considerar:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>¿Qué emociones te despierta?</li>
+                    <li>¿Qué detalles observas?</li>
+                    <li>¿Qué historia crees que cuenta?</li>
+                    <li>¿Qué técnica destaca?</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p>¡Disfruta de tu visita al Museo del Prado! 🐱🤖</p>
+            <p style="font-size: 0.9em; margin-top: 5px;">Generado por Cocobot - Asistente IA con toque felino</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animación suave al hacer scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
