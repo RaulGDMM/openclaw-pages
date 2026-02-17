@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFETERÍAS CERCA DEL PRADO - Guía para Estudiantes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h2 {
+            color: #feca57;
+            margin-top: 35px;
+            font-size: 1.8em;
+            border-left: 5px solid #feca57;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #ff9ff3;
+            margin: 15px 0 8px;
+            font-size: 1.4em;
+        }
+        .cafe-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cafe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+        }
+        .location {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #a8dadc;
+        }
+        .price {
+            display: inline-block;
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        .features {
+            margin-top: 12px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #cfd8dc;
+        }
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .tips-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        .weather-warning {
+            background: rgba(255, 107, 107, 0.15);
+            border-left: 5px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ Cafeterías Cercanas al Museo del Prado</h1>
+            <p>Guía económica para estudiantes - Jueves 26 de febrero</p>
+        </header>
+
+        <!-- Weather Warning -->
+        <div class="weather-warning">
+            <h3>⚠️ El Tiempo en Madrid (Jueves 26 Feb)</h3>
+            <p>Temperatura: <strong>17°C / 12°C</strong> • Probabilidad de llovizna • Viento noroeste de ~11 km/h</p>
+            <p style="margin-top: 10px;">**Consejo:** Traer paraguas o impermeable ligero por si acaso. ¡No os desesperéis con el cielo gris!</p>
+        </div>
+
+        <!-- Café 1 -->
+        <section class="cafe-card">
+            <h2>1. Café de las Filosofías</h2>
+            <div class="location">📍 Calle de la Argumosa, 16 (a 7 min a pie del Prado)</div>
+            <div class="price">€€€ (8-10€ menú completo)</div>
+            
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">🏠</span>Ambiente bohemio y tranquilo</div>
+                <div class="feature-item"><span class="feature-icon">💻</span>WiFi gratis y espacio para grupos pequeños</div>
+                <div class="feature-item"><span class="feature-icon">🍰</span>Pasteles caseros que encantan a los jóvenes</div>
+                <div class="feature-item"><span class="feature-icon">☕</span>Café desde 1.50€</div>
+            </div>
+        </section>
+
+        <!-- Café 2 -->
+        <section class="cafe-card">
+            <h2>2. La Mallorquina</h2>
+            <div class="location">📍 Plaza de San Francisco, 1 (muy cerca, 5 min a pie)</div>
+            <div class="price">€€ (3-4€ churros+chocolate • 9-11€ menú)</div>
+            
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">📅</span>Cafetería tradicional desde 1894</div>
+                <div class="feature-item"><span class="feature-icon">🍩</span>Churros con chocolate por ~3-4€ (¡ideal para compartir!)</div>
+                <div class="feature-item"><span class="feature-icon">🏠</span>Atmosfera cálida y acogedora</div>
+                <div class="feature-item"><span class="feature-icon">💰</span>Muy económica para lo que ofrece</div>
+            </div>
+        </section>
+
+        <!-- Café 3 -->
+        <section class="cafe-card">
+            <h2>3. Casa Labra</h2>
+            <div class="location">📍 Calle de Tetuán, 25 (10 min a pie o parada de metro Isla de Flores)</div>
+            <div class="price">€ (4-6€ bocadillo • café desde 1.50€)</div>
+            
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">🏛️</span>Clásico madrileño desde 1895</div>
+                <div class="feature-item"><span class="feature-icon">🥪</span>Bocadillos de tortilla o callos por ~4-6€</div>
+                <div class="feature-item"><span class="feature-icon">⚡</span>Ideal si quieren algo rápido y económico antes de entrar al museo</div>
+                <div class="feature-item"><span class="feature-icon">🚶</span>A 10 min caminando o con una parada de metro</div>
+            </div>
+        </section>
+
+        <!-- Café 4 -->
+        <section class="cafe-card">
+            <h2>4. El Círculo Artístico</h2>
+            <div class="location">📍 Calle de la Princesa, 2 (a 8 min caminando)</div>
+            <div class="price">€€ (5-7€ café+bocadillo)</div>
+            
+            <div class="features">
+                <div class="feature-item"><span class="feature-icon">🎨</span>Ambiente cultural y artístico</div>
+                <div class="feature-item"><span class="feature-icon">☕</span>Café + bocadillo: ~5-7€</div>
+                <div class="feature-item"><span class="feature-icon">🎭</span>A veces tienen conciertos pequeños o exposiciones</div>
+                <div class="feature-item"><span class="feature-icon">💬</span>Muy agradable para charlar sobre lo visto en el museo</div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h2>🎯 Planificación Rápida para tu Visita</h2>
+            
+            <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h3>☀️ Mañana (antes del Prado):</h3>
+                <p><strong>📍 La Mallorquina</strong> → churros con chocolate (¡desayuno feliz asegurado!)</p>
+                
+                <h3 style="margin-top: 15px;">🍽️ Almuerzo rápido:</h3>
+                <p><strong>📍 Casa Labra</strong> → bocadillo de tortilla + café (económico y saciante)</p>
+                
+                <h3 style="margin-top: 15px;">☕ Tarde (después del Museo):</h3>
+                <p><strong>📍 Café de las Filosofías</strong> → merienda + café para comentar lo visto en el museo</p>
+            </div>
+
+            <h3 style="margin-top: 25px;">💡 Consejos Extra:</h3>
+            <ul style="list-style-position: inside; line-height: 1.8;">
+                <li><strong>Horarios:</strong> Las cafeterías suelen estar más tranquilas antes de las 11:00 o después de las 14:30</li>
+                <li><strong>Reservas:</strong> Para grupos grandes, es buena idea llamar un día antes</li>
+                <li><strong>Efectivo:</strong> Algunos sitios pequeños aceptan solo efectivo — traed algo de cambio</li>
+                <li><strong>Cuidado con las filas:</strong> El Prado abre a las 10:00, llegad con tiempo si queréis entrar sin esperar</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>¡Que disfruten del arte y del café! 🐱🤖☕</p>
+            <p style="font-size: 0.9em; margin-top: 5px;">Generado por Cocobot - Asistente IA con toque felino</p>
+        </footer>
+    </div>
+</body>
+</html>
