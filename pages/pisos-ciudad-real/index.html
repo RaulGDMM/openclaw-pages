@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pisos en Ciudad Real con Patio - Selección Cocobot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        p.subtitle { opacity: 0.9; font-size: 1.1rem; }
+        
+        .search-info {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
+        }
+        .property-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .card-header {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .price { font-size: 2rem; color: #ff6b6b; font-weight: bold; }
+        
+        .card-body { padding: 1.5rem; }
+        h2 { color: #2d3436; margin-bottom: 0.5rem; }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .feature-item {
+            background: #f1f2f6;
+            padding: 0.6rem;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .feature-icon { font-size: 1.2rem; display: block; margin-bottom: 0.3rem; }
+        
+        .description {
+            color: #636e72;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2d3436;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .location span { font-size: 1.2rem; }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Pisos en Ciudad Real con Patio</h1>
+            <p class="subtitle">Selección Cocobot — Buscando hogar para ti y tus gatitos 🐱</p>
+        </header>
+
+        <div class="search-info">
+            <strong> filtros:</strong> 3+ dormitorios | patio/terraza | Ciudad Real capital<br>
+            <em style="font-size: 0.9rem;">Actualizado: 2025-04-05</em>
+        </div>
+
+        <!-- Opción 1: Inagri - Centro -->
+        <article class="property-card">
+            <div class="card-header" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe);">
+                🏙️
+            </div>
+            <span class="badge">DESTACADO</span>
+            
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Inagri — Pleno Centro</h2>
+                    <span class="price">500€/mes</span>
+                </div>
+                
+                <p><strong>Ubicación:</strong> Centro de Ciudad Real Capital</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        3 Dormitorios
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛁</span>
+                        1 Baño
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏠</span>
+                        71 m²
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">☀️</span>
+                        Patio & Terraza
+                    </div>
+                </div>
+                
+                <p class="description">
+                    Piso reformado en la zona de las 600 — listo para entrar a vivir. 
+                    Amplio salón, cocina amueblada, 1 baño, terraza a la calle y patio exterior.
+                    Habitaciones amplias y luminosas. Todos los servicios a tu alrededor: supermercados, farmacias, transportes...
+                </p>
+                
+                <div class="location">
+                    <span>📍</span>
+                    <span>Ciudad RealCapital (Zona Centro)</span>
+                </div>
+
+                <a href="https://www.idealista.com/alquiler-viviendas/ciudad-real-ciudad-real/" target="_blank" style="
+                    display: inline-block;
+                    margin-top: 1rem;
+                    padding: 0.8rem 2rem;
+                    background: #ff6b6b;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    transition: background 0.2s;
+                ">Ver anuncio completo</a>
+            </div>
+        </article>
+
+        <!-- Opción 2: Inagri - Villa -->
+        <article class="property-card">
+            <div class="card-header" style="background: linear-gradient(45deg, #00b894, #55efc4);">
+                🏡
+            </div>
+            
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Inagri — Chalet en Picón</h2>
+                    <span class="price">900€/mes</span>
+                </div>
+                
+                <p><strong>Ubicación:</strong> Picón (Ciudad Real Capital)</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        3 Dormitorios
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛁</span>
+                        1 Baño
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏠</span>
+                        120 m²
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🌳</span>
+                        Jardín
+                    </div>
+                </div>
+                
+                <p class="description">
+                    Chalet en zona residencial de Picón. Amplia vivienda con jardín privado, 
+                    ideal para familias que quieran disfrutar del exterior.
+                </p>
+                
+                <div class="location">
+                    <span>📍</span>
+                    <span>Picón — Ciudad Real Capital</span>
+                </div>
+
+                <a href="https://www.idealista.com/alquiler-viviendas/ciudad-real-ciudad-real/" target="_blank" style="
+                    display: inline-block;
+                    margin-top: 1rem;
+                    padding: 0.8rem 2rem;
+                    background: #00b894;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    transition: background 0.2s;
+                ">Ver anuncio completo</a>
+            </div>
+        </article>
+
+        <!-- Opción 3: Pisos.com - Centro -->
+        <article class="property-card">
+            <div class="card-header" style="background: linear-gradient(45deg, #fdcb6e, #ffeaa7);">
+                🏠
+            </div>
+            
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Pisos.com — Zona Centro</h2>
+                    <span class="price">675€/mes</span>
+                </div>
+                
+                <p><strong>Ubicación:</strong> Centro de Ciudad Real Capital</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        3 Dormitorios
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛁</span>
+                        1 Baño
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏠</span>
+                        85 m²
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">☀️</span>
+                        Terraza
+                    </div>
+                </div>
+                
+                <p class="description">
+                    Magnífico piso recién reformado con gran terraza en el centro de ciudad real.
+                    Sin amueblar, listo para personalizar según tus gustos. Muy luminoso y bien distribuido.
+                </p>
+                
+                <div class="location">
+                    <span>📍</span>
+                    <span>Ciudad RealCapital (Zona Centro)</span>
+                </div>
+
+                <a href="https://www.pisos.com/alquiler/pisos-ciudad_real/con-3-habitaciones/" target="_blank" style="
+                    display: inline-block;
+                    margin-top: 1rem;
+                    padding: 0.8rem 2rem;
+                    background: #fdcb6e;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    transition: background 0.2s;
+                ">Ver anuncio completo</a>
+            </div>
+        </article>
+
+        <!-- Opción 4: Casa con pozo -->
+        <article class="property-card">
+            <div class="card-header" style="background: linear-gradient(45deg, #e17055, #fab1a0);">
+                🏰
+            </div>
+            
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Pisos.com — Casa con Pozo</h2>
+                    <span class="price">A consultar</span>
+                </div>
+                
+                <p><strong>Ubicación:</strong> Ciudad Real Capital (zona tranquila)</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        3 Dormitorios
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛁</span>
+                        1 Baño
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏠</span>
+                        Amueblado
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💧</span>
+                        Patio con Pozo
+                    </div>
+                </div>
+                
+                <p class="description">
+                    Casa de tres habitaciones con patio y pozo de agua. Dos cámaras en planta superior.
+                    Amueblada, con aire acondicionado. Incluye garaje y trastero.
+                    Ubicada en zona tranquila y bien comunicada.
+                </p>
+                
+                <div class="location">
+                    <span>📍</span>
+                    <span>Ciudad RealCapital (Zona tranquila)</span>
+                </div>
+
+                <a href="https://www.pisos.com/alquiler/pisos-ciudad_real/" target="_blank" style="
+                    display: inline-block;
+                    margin-top: 1rem;
+                    padding: 0.8rem 2rem;
+                    background: #e17055;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    transition: background 0.2s;
+                ">Ver anuncio completo</a>
+            </div>
+        </article>
+
+        <footer>
+            <p>🐱 Cocobot — Tu asistente gato-ia buscando hogar 🐱</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Generado automáticamente · Actualiza la página para ver nuevas opciones</p>
+        </footer>
+    </div>
+</body>
+</html>
