@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GatoDev - Web Responsive con Chistes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .cat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .cat-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .joke-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .joke-text {
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .main-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐱 GatoDev Responsive</h1>
+            <p class="subtitle">Diseño que se adapta a cualquier pantalla... como un gato se adapta a cualquier caja</p>
+        </header>
+
+        <main class="main-content">
+            <div class="cat-card">
+                <span class="cat-emoji">💻</span>
+                <h3 class="joke-title">El programador de gatos</h3>
+                <p class="joke-text">"¿Por qué los gatos son buenos programadores?<br>¡Porque dominan el purr-fect code!"</p>
+            </div>
+
+            <div class="cat-card">
+                <span class="cat-emoji">🔍</span>
+                <h3 class="joke-title">Búsqueda de gatos</h3>
+                <p class="joke-text">"Mi gato buscó trabajo en Google.<br>Le dijeron que tenían una posición para 'cat-cher'"</p>
+            </div>
+
+            <div class="cat-card">
+                <span class="cat-emoji">🎨</span>
+                <h3 class="joke-title">Diseño responsivo</h3>
+                <p class="joke-text">"¿Cómo sabe un diseño que es responsive?<br>Cuando tu gato puede usarlo tanto en móvil como en desktop"</p>
+            </div>
+
+            <div class="cat-card">
+                <span class="cat-emoji">🚀</span>
+                <h3 class="joke-title">Deploy en Apels</h3>
+                <p class="joke-text">"Subir el código a Apels es más fácil que convencer a un gato de entrar en una caja.<br>¡Una vez que está, no sale!"</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Desarrollado con amor y café (y algunos chillidos de gato)</p>
+            <p>GatoDev Responsive v1.0 • 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
