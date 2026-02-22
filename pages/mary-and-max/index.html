@@ -10,80 +10,120 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
         }
         .container {
             max-width: 900px;
             margin: auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            color: #333;
         }
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #1a1a2e;
             margin-bottom: 10px;
+            font-size: 2.8em;
         }
         .subtitle {
             text-align: center;
             color: #7f8c8d;
             margin-bottom: 30px;
+            font-style: italic;
         }
         .section {
             margin-bottom: 40px;
-            padding: 20px;
-            border-left: 4px solid #3498db;
-            background: #fafafa;
-            border-radius: 5px;
+            padding: 25px;
+            border-left: 5px solid #6a1b9a;
+            background: linear-gradient(to right, #fafafa, #ffffff);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .section h2 {
-            color: #3498db;
+            color: #6a1b9a;
             margin-top: 0;
+            font-size: 1.8em;
         }
         .quote {
             font-style: italic;
             color: #555;
-            border-left: 3px solid #bdc3c7;
-            padding-left: 15px;
-            margin: 15px 0;
+            border-left: 4px solid #8e44ad;
+            padding-left: 20px;
+            margin: 20px 0;
+            background: rgba(238, 130, 238, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .quote strong {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: #4a148c;
         }
         .rating {
             display: inline-block;
-            background: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 25px;
             font-weight: bold;
             margin-right: 10px;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
         }
         iframe {
             width: 100%;
-            max-width: 640px;
-            height: 360px;
-            margin: 20px 0;
-            border-radius: 8px;
+            max-width: 720px;
+            height: 405px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
         .key-facts {
-            background: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: linear-gradient(to right, #ecf0f1, #dfe6e9);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #bdc3c7;
         }
         .fact-item {
-            margin: 8px 0;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
         }
         .fact-label {
             font-weight: bold;
             color: #2c3e50;
+            min-width: 140px;
+        }
+        .cult-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #8e44ad, #6a1b9a);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
         }
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 2px solid #bdc3c7;
             color: #7f8c8d;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 10px 0;
+        }
+        strong {
+            color: #2c3e50;
         }
     </style>
 </head>
@@ -113,6 +153,8 @@
                 <li><strong>Liberación del dogma Disney:</strong> Rompe con los finales felices forzados y presenta una historia honesta, compleja y emotiva.</li>
             </ul>
 
+            <p class="cult-badge">Culto desde 2009 • Creadora de comunidades globales</p>
+
             <p>La película creció en popularidad año tras año gracias al boca a boca, llegando a ser considerada por muchos como "la película de animación más subestimada de todos los tiempos".</p>
         </div>
 
@@ -121,22 +163,22 @@
             
             <div class="quote">
                 "Una obra maestra de la animación independiente. Mary and Max es tan triste como divertida, tan honesta como fantástica."
-                <br><strong>— Roger Ebert</strong>
+                <strong>Roger Ebert</strong>
             </div>
 
             <div class="quote">
                 "Elliot ha creado algo verdaderamente único: una película que respeta la inteligencia de su audiencia y no teme explorar lo oscuro para encontrar la luz."
-                <br><strong>— The Guardian</strong>
+                <strong>The Guardian</strong>
             </div>
 
             <div class="quote">
                 "La animación stop-motion nunca se sintió tan íntima y emocionalmente resonante. Una joya que brilla con luz propia."
-                <br><strong>— Variety</strong>
+                <strong>Variety</strong>
             </div>
 
             <div class="quote">
                 "No es solo una película para niños o para amantes de la animación. Es una historia humana universal sobre conectividad en un mundo de aislamiento."
-                <br><strong>— IndieWire</strong>
+                <strong>IndieWire</strong>
             </div>
         </div>
 
