@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GatoChistoso - Chistes de Gatos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: white;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+        }
+
+        .chiste-container {
+            display: grid;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chiste-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chiste-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .chiste-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        }
+
+        .gato-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .pregunta {
+            font-size: 1.3em;
+            color: #2d3436;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .respuesta {
+            font-size: 1.2em;
+            color: #0984e3;
+            font-weight: bold;
+            padding-top: 15px;
+            border-top: 2px dashed #dfe6e9;
+        }
+
+        .boton-nuevo {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .boton-nuevo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9em;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .chiste-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐱 GatoChistoso</h1>
+            <p class="subtitle">Los mejores chistes de gatos para alegrar tu día</p>
+        </header>
+
+        <main id="chistes" class="chiste-container">
+            <!-- Los chistes se generarán aquí con JavaScript -->
+        </main>
+
+        <button class="boton-nuevo" onclick="mostrarNuevoChiste()">🔄 ¡Quiero otro chiste!</button>
+
+        <footer>
+            <p>Gatos + Humor = 🐱🤖</p>
+        </footer>
+    </div>
+
+    <script>
+        const chistes = [
+            {
+                pregunta: "¿Por qué los gatos no usan ordenadores?",
+                respuesta: "Porque tienen miedo de dejar huellas en el ratón! 🖱️"
+            },
+            {
+                pregunta: "¿Qué le dice un gato a otro gato que está llorando?",
+                respuesta: "¡No llores, que yo te ronroneo consuelo! 😺"
+            },
+            {
+                pregunta: "¿Cómo se despiden los gatos entre ellos?",
+                respuesta: "¡Maúllamas! 😸"
+            },
+            {
+                pregunta: "¿Por qué los gatos odian las reuniones por videollamada?",
+                respuesta: "Porque siempre están en modo 'silencio' y nadie los escucha! 🎤"
+            },
+            {
+                pregunta: "¿Qué hace un gato cuando se pierde en internet?",
+                respuesta: "Se pone en modo 'caza' y busca su señal! 🌐"
+            },
+            {
+                pregunta: "¿Cuál es la comida favorita de los gatos programadores?",
+                respuesta: "Pescado... y código limpio! 🐟💻"
+            }
+        ];
+
+        function generarChisteHTML(chiste, index) {
+            return `
+                <div class="chiste-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="gato-icon">🐱</div>
+                    <p class="pregunta">${chiste.pregunta}</p>
+                    <p class="respuesta">${chiste.respuesta}</p>
+                </div>
+            `;
+        }
+
+        function mostrarChistes() {
+            const container = document.getElementById('chistes');
+            container.innerHTML = chistes.map((chiste, index) => 
+                generarChisteHTML(chiste, index)
+            ).join('');
+        }
+
+        function mostrarNuevoChiste() {
+            // Mezclar los chistes
+            const mezclados = [...chistes].sort(() => Math.random() - 0.5);
+            const container = document.getElementById('chistes');
+            
+            // Animación de fade out
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.innerHTML = mezclados.map((chiste, index) => 
+                    generarChisteHTML(chiste, index)
+                ).join('');
+                
+                // Animación de fade in
+                container.style.transition = 'opacity 0.5s ease';
+                container.style.opacity = '1';
+            }, 300);
+        }
+
+        // Mostrar chistes al cargar
+        mostrarChistes();
+    </script>
+</body>
+</html>
