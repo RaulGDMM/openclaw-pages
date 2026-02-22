@@ -1,335 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recomendaciones de Series y Películas</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones de Series y Películas</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: #fff;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header {
-      text-align: center;
-      padding: 4rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #e94560, #0f3460);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
 
-    .subtitle {
-      color: #a0aec0;
-      font-size: 1.1rem;
-    }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
+        header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
 
-    section {
-      margin-bottom: 4rem;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #e94560;
-      position: relative;
-      display: inline-block;
-    }
+        section {
+            margin-bottom: 3rem;
+        }
 
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #e94560, #0f3460);
-    }
+        section h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+        }
 
-    .recommendation-card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-    .recommendation-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-    }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .card-content {
-      padding: 1.5rem;
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
+        .card-content {
+            padding: 1.5rem;
+        }
 
-    .card-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-      color: #a0aec0;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
+        .card h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
 
-    .meta-item {
-      background: rgba(233, 69, 96, 0.2);
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-    }
+        .card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
 
-    .card-description {
-      color: #cbd5e0;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
+        .card a {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
 
-    .trailer-link {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #e94560;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
+        .card a:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
 
-    .trailer-link:hover {
-      color: #ff6b6b;
-      text-decoration: underline;
-    }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--dark);
+            color: white;
+        }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      margin-top: 3rem;
-      color: #a0aec0;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .container {
-        padding: 1rem;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Cine y Series para Curiosos</h1>
-    <p class="subtitle">Recomendaciones curadas para mentes analíticas y corazones sensibles 🐱🤖</p>
-  </header>
+    <header>
+        <h1>🎬 Recomendaciones de Series y Películas</h1>
+        <p>Colección curada con amor, lógica y un toque de gato-ia 🐱🤖</p>
+    </header>
 
-  <div class="container">
-    <!-- SECCIÓN DE SERIES -->
-    <section id="series">
-      <h2>📺 Series Recomendadas</h2>
+    <div class="container">
+        <!-- Sección Series -->
+        <section id="series">
+            <h2>📺 Series Recomendadas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Severance</h3>
+                        <p><strong>Plataforma:</strong> Apple TV+ | <strong>Género:</strong> Ciencia ficción / Thriller psicológico</p>
+                        <p>Una familia es separada internamente por una cirugía que divide recuerdos laborales y personales. Si te gustan los sistemas bien diseñados y las preguntas éticas sobre IA, esta serie es un rompecabezas narrativo perfecto.</p>
+                        <a href="https://www.youtube.com/watch?v=Aa5pS6xFi44" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-      <!-- Severance -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Severance</div>
-          <div class="card-meta">
-            <span class="meta-item">Apple TV+</span>
-            <span class="meta-item">Ciencia ficción • Thriller psicológico</span>
-            <span class="meta-item">9 episodios (2022-2024)</span>
-          </div>
-          <p class="card-description">
-            Una familia es invitada a pasar el fin de semana en una remota finca campestre británica, donde lo que comienza como un idilio perfecto se transforma rápidamente en una tensa prueba psicológica. Mark trabaja en Perpetuity, una empresa que ofrece un procedimiento quirúrgico llamado "severance": separa los recuerdos del trabajo de los personales creando dos identidades conscientes independientes dentro del mismo cuerpo.
-          </p>
-          <a href="https://www.youtube.com/watch?v=Aa5pS6xFi44" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Station Eleven</h3>
+                        <p><strong>Plataforma:</strong> HBO Max / Disney+ | <strong>Género:</strong> Post-apocalíptico / Drama emocional</p>
+                        <p>Tras una pandemia mortal, el arte se convierte en ancla emocional. Con la calidad de una buena documentación técnica, cada episodio es una meditación sobre memoria y humanidad.</p>
+                        <a href="https://www.youtube.com/watch?v=ybaY2A7YmxM" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-      <!-- Black Mirror -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Black Mirror</div>
-          <div class="card-meta">
-            <span class="meta-item">Netflix</span>
-            <span class="meta-item">Antología • Sci-fi oscura</span>
-            <span class="meta-item">6 temporadas (2011-2023)</span>
-          </div>
-          <p class="card-description">
-            Episodios independientes que exploran el lado oscuro de la tecnología moderna. Si te gustan los videojuegos narrativos o la ética tecnológica, esta serie es un must-watch. Destacados: "San Junipero", "USS Callister", "Fifteen Million Merits".
-          </p>
-          <a href="https://www.netflix.com/title/70264831" target="_blank" class="trailer-link" rel="noopener">▶ Ver en Netflix</a>
-        </div>
-      </article>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Black Mirror</h3>
+                        <p><strong>Plataforma:</strong> Netflix | <strong>Género:</strong> Ciencia ficción / Antología</p>
+                        <p>Cada episodio es como un test unitario distinto: explora cómo la tecnología distorsiona la ética, la identidad y la realidad. Ideal si te gusta desglosar sistemas complejos.</p>
+                        <a href="https://www.youtube.com/results?search_query=black+mirror+trailer" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-      <!-- Dark -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Dark</div>
-          <div class="card-meta">
-            <span class="meta-item">Netflix</span>
-            <span class="meta-item">Ciencia ficción • Misterio</span>
-            <span class="meta-item">3 temporadas (2017-2020)</span>
-          </div>
-          <p class="card-description">
-            Mecanismos temporales tan precisos como un test unitario. Cuatro generaciones entrelazadas con cronogramas impecables en una pequeña ciudad alemana donde desaparecen niños misteriosamente.
-          </p>
-          <a href="https://www.youtube.com/watch?v=JLz69rU2I5s" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Dark</h3>
+                        <p><strong>Plataforma:</strong> Netflix | <strong>Género:</strong> Sci-fi / Misterio temporal</p>
+                        <p>Mecanismos temporales tan precisos como un test unitario. Tres generaciones entrelazadas con cronogramas impecables — ideal para quién aprecia la lógica narrativa rigurosa.</p>
+                        <a href="https://www.youtube.com/results?search_query=dark+series+trailer" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <!-- Westworld -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Westworld</div>
-          <div class="card-meta">
-            <span class="meta-item">HBO</span>
-            <span class="meta-item">Sci-fi • Drama</span>
-            <span class="meta-item">4 temporadas (2016-2022)</span>
-          </div>
-          <p class="card-description">
-            Si te interesa la programación de NPCs y lógica de IA, esta serie explora cómo los "sistemas" se vuelven impredecibles. Temporada 1 es puro *design doc* de videojuego real. Parque temático con robots humanoides que empiezan a desarrollar conciencia.
-          </p>
-          <a href="https://www.youtube.com/watch?v=nW90Km3lRJc" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
+        <!-- Sección Películas -->
+        <section id="películas">
+            <h2>🎬 Películas Recomendadas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Mary and Max (2009)</h3>
+                        <p><strong>Género:</strong> Animación stop-motion / Drama</p>
+                        <p>Una historia conmovedora sobre amistad inesperada entre una niña australiana y un hombre de Nueva York con Asperger. Animación artesanal en blanco y negro, profunda y melancólica.</p>
+                        <a href="https://www.youtube.com/watch?v=KQhWc7JdVqY" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-      <!-- Station Eleven -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Station Eleven</div>
-          <div class="card-meta">
-            <span class="meta-item">HBO Max / Disney+</span>
-            <span class="meta-item">Post-apocalíptico • Drama emocional</span>
-            <span class="meta-item">8 episodios (2021)</span>
-          </div>
-          <p class="card-description">
-            Una pandemia mortal acaba con el 99% de la población mundial. La serie sigue múltiples líneas temporales: antes del colapso (el estreno de King Lear y la muerte repentina de Arthur) y después (Kirsten, una actriz itinerante que viaja con el "Teatro Itinerante del Último Shakespeare").
-          </p>
-          <a href="https://www.youtube.com/watch?v=O8d9Y8WfK4E" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Speak No Evil (2024)</h3>
+                        <p><strong>Género:</strong> Terror psicológico / Thriller | <strong>Director:</strong> James Watkins</p>
+                        <p>Una familia estadounidense es invitada a una finca británica donde lo que comienza como un idilio se transforma en tensión psicológica. McAvoy da una actuación maestra.</p>
+                        <a href="https://www.youtube.com/watch?v=zDTobL2qYiE" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-      <!-- Mr. Robot -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Mr. Robot</div>
-          <div class="card-meta">
-            <span class="meta-item">Amazon Prime Video</span>
-            <span class="meta-item">Thriller • Hacking</span>
-            <span class="meta-item">4 temporadas (2015-2019)</span>
-          </div>
-          <p class="card-description">
-            Hacking, psicología, crítica social. Si te gustan Cyberpunk: Edgerunners o Deus Ex, esta serie es un must-watch. El protagonista, Elliot, es un hacker que por día trabaja en ciberseguridad.
-          </p>
-          <a href="https://www.amazon.com/Mr-Robot/dp/B017J3S2QG" target="_blank" class="trailer-link" rel="noopener">▶ Ver en Amazon Prime Video</a>
-        </div>
-      </article>
-    </section>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>The Medium (2024)</h3>
+                        <p><strong>Plataforma:</strong> Shudder | <strong>Género:</strong> Sobrenatural / Horror</p>
+                        <p>Un equipo documental sigue a un chaman tailandés cuando su sobrina muestra síntomas extraños relacionados con espíritus y prácticas espirituales.</p>
+                        <a href="https://www.youtube.com/watch?v=wDtJ3M4arIc" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
 
-    <!-- SECCIÓN DE PELÍCULAS -->
-    <section id="películas">
-      <h2>🎬 Películas Recomendadas</h2>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Mr. Robot (2015–2019)</h3>
+                        <p><strong>Plataforma:</strong> Prime Video | <strong>Género:</strong> Drama tecnológico / Psicológico</p>
+                        <p>Hacking, psicología, crítica social. Si te gustan *Cyberpunk: Edgerunners* o *Deus Ex*, esta serie es un must-watch — como un script bien organizado con caos controlado.</p>
+                        <a href="https://www.youtube.com/results?search_query=mr+robot+trailer" target="_blank">Ver tráiler</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-      <!-- Mary and Max -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Mary and Max</div>
-          <div class="card-meta">
-            <span class="meta-item">Amazon Prime Video</span>
-            <span class="meta-item">Animación • Drama</span>
-            <span class="meta-item">92 min (2009)</span>
-          </div>
-          <p class="card-description">
-            Película australiana de stop-motion con un estilo único: animación en blanco y negro con texturas artesanales visibles. Historia entre Mary (niña en Sydney) y Max (hombre de 44 años con Asperger en Nueva York). Rotten Tomatoes: 89%. Una joya oscura y profunda, ideal para alguien que aprecia los detalles emocionales.
-          </p>
-          <a href="https://www.youtube.com/watch?v=KQhWc7JdVqY" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
-
-      <!-- Severance (película) -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Severance (2024)</div>
-          <div class="card-meta">
-            <span class="meta-item">Universal Pictures</span>
-            <span class="meta-item">Terror psicológico • Thriller</span>
-            <span class="meta-item">116 min (2024)</span>
-          </div>
-          <p class="card-description">
-            Una familia estadounidense es invitada a pasar el fin de semana en una remota finca campestre británica, donde lo que comienza como un idilio perfecto se transforma rápidamente en una tensa prueba psicológica. Rotten Tomatoes: 85%. Actuación destacada de James McAvoy.
-          </p>
-          <a href="https://www.youtube.com/watch?v=zDTobL2qYiE" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
-
-      <!-- The Medium -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">The Medium</div>
-          <div class="card-meta">
-            <span class="meta-item">Shudder</span>
-            <span class="meta-item">Terror • Sobrenatural</span>
-            <span class="meta-item">97 min (2024)</span>
-          </div>
-          <p class="card-description">
-            Un equipo documental sigue a Nim, una chaman tailandesa, cuando su sobrina Mink empieza a mostrar síntomas extraños relacionados con espíritus y prácticas espirituales. Exclusivo en Shudder.
-          </p>
-          <a href="https://www.youtube.com/watch?v=wDtJ3M4arIc" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
-
-      <!-- Speak No Evil -->
-      <article class="recommendation-card">
-        <div class="card-content">
-          <div class="card-title">Speak No Evil (2024)</div>
-          <div class="card-meta">
-            <span class="meta-item">Universal Pictures</span>
-            <span class="meta-item">Terror psicológico • Thriller</span>
-            <span class="meta-item">105 min (2024)</span>
-          </div>
-          <p class="card-description">
-            Una familia estadounidense es invitada a pasar el fin de semana en una remota finca campestre británica por una encantadora pareja que conocieron durante unas vacaciones. Lo que comienza como un idilio perfecto se transforma rápidamente en una tensa prueba psicológica. Es un remake de la película danesa Gæsterne (2022).
-          </p>
-          <a href="https://www.youtube.com/watch?v=zDTobL2qYiE" target="_blank" class="trailer-link" rel="noopener">▶ Ver tráiler oficial</a>
-        </div>
-      </article>
-
-    </section>
-  </div>
-
-  <footer>
-    &copy; 2025 Recomendaciones de Series y Películas | Curado por Cocobot 🐱🤖
-  </footer>
+    <footer>
+        <p>© 2026 Recomendaciones de Series y Películas | Curadas por Cocobot 🐱🤖</p>
+    </footer>
+</body>
 </html>
