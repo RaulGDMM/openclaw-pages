@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GatoJokes - Chistes de Gatos 🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .jokes-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-top: 2rem;
+        }
+
+        .joke-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .joke-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .joke-card::before {
+            content: '🐾';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 4rem;
+            opacity: 0.1;
+            transition: all 0.3s ease;
+        }
+
+        .joke-card:hover::before {
+            opacity: 0.2;
+            transform: scale(1.2);
+        }
+
+        .joke-number {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .joke-punchline {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .emoji-deco {
+            font-size: 1.5rem;
+            display: block;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .controls {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐱 GatoJokes</h1>
+            <p class="subtitle">Los mejores chistes de gatos para alegrar tu día 🐾</p>
+        </header>
+
+        <div class="jokes-container" id="jokesContainer">
+            <!-- Los chistes se generarán aquí con JavaScript -->
+        </div>
+
+        <div class="controls">
+            <button onclick="randomJoke()">🎲 Obtener Chiste Aleatorio</button>
+        </div>
+
+        <footer>
+            <p>Hecho con ❤️ y mucho café ☕</p>
+            <p>© 2026 GatoJokes - Todos los maullidos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        const jokes = [
+            {
+                setup: "¿Por qué los gatos no usan ordenadores?",
+                punchline: "Porque tienen miedo de dejar rastros en el mouse! 🐭"
+            },
+            {
+                setup: "¿Qué le dice un gato a otro gato que está en el mar?",
+                punchline: "¡Meow! Meow! (Mateo!) 🌊"
+            },
+            {
+                setup: "¿Cómo se despiden dos gatos?",
+                punchline: "Nos vemos, maúl! 👋"
+            },
+            {
+                setup: "¿Por qué los gatos son malos en videojuegos?",
+                punchline: "Porque siempre se les olvida que hay vida después del juego! 🎮"
+            },
+            {
+                setup: "¿Qué hace un gato cuando se cae al agua?",
+                punchline: "Se moja! 🚿"
+            },
+            {
+                setup: "¿Por qué los gatos no juegan cartas?",
+                punchline: "Porque siempre se les escapan las cartas! 🃏"
+            },
+            {
+                setup: "¿Cuál es la ciudad favorita de los gatos?",
+                punchline: "Gatolandia! 🗺️"
+            },
+            {
+                setup: "¿Qué le dice un gato a una gata?",
+                punchline: "Eres increíblemente gatil! 💕"
+            }
+        ];
+
+        function renderJokes() {
+            const container = document.getElementById('jokesContainer');
+            
+            let html = '';
+            jokes.forEach((joke, index) => {
+                html += `
+                    <div class="joke-card" onclick="showJoke(${index})">
+                        <div class="joke-number">Chiste #${index + 1}</div>
+                        <p>${joke.setup}</p>
+                        <div class="emoji-deco">🤔➡️😂</div>
+                        <p class="joke-punchline">${joke.punchline}</p>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function showJoke(index) {
+            const joke = jokes[index];
+            alert(`"${joke.setup}"\n\n${joke.punchline}`);
+        }
+
+        function randomJoke() {
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            showJoke(randomIndex);
+        }
+
+        // Renderizar al cargar
+        renderJokes();
+    </script>
+</body>
+</html>
