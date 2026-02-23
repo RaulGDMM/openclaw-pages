@@ -29,66 +29,74 @@
             pointer-events: none;
         }
         
-        #planet-info-panel {
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
+        /* Menú Hamburguesa */
+        #menu-toggle {
+            display: none;
+        }
+        
+        #menu-label {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            z-index: 100;
+            pointer-events: auto;
+        }
+        
+        #menu-label:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .hamburger-icon {
+            width: 25px;
+            height: 18px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hamburger-icon span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            margin-bottom: 4px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        #menu-content {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            width: 280px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
             background: rgba(0, 0, 0, 0.9);
             border-radius: 15px;
             padding: 20px;
-            border: 3px solid gold;
-            display: none;
-            animation: slideInRight 0.5s ease-out;
+            backdrop-filter: blur(10px);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out;
+            pointer-events: auto;
+            z-index: 99;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.5);
         }
         
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        #menu-content.active {
+            transform: translateX(0);
         }
         
-        #planet-name {
-            font-size: 2em;
+        #menu-content h3 {
             color: gold;
             text-align: center;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        #planet-description {
-            line-height: 1.6;
-            font-size: 1.1em;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        
-        #planet-facts {
-            margin-top: 15px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .fact-item {
-            background: rgba(255, 215, 0, 0.2);
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9em;
-        }
-        
-        .fact-label {
-            font-weight: bold;
-            color: lightblue;
-        }
-        
-        #controls-top {
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+            font-size: 1.3em;
         }
         
         .control-group { margin-bottom: 10px; }
@@ -145,40 +153,35 @@
             border-left: 4px solid gold;
         }
         
-        .achievement-icon { margin-right: 10px; font-size: 1.5em; }
-        
         #instructions {
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 0.9em;
-        }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: gold; border-radius: 4px; }
-    </style>
 </head>
 <body>
     <div id="canvas-container"></div>
     
-    <!-- Controles Superiores -->
-    <div class="ui-overlay" id="controls-top">
+    <!-- Menú Hamburguesa -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" id="menu-label" class="ui-overlay">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </label>
+    
+    <div id="menu-content" class="ui-overlay">
         <h3>🚀 Control del Sistema Solar</h3>
-        <div class="control-group">
-            <label for="speedSlider">Velocidad de órbita:</label>
-            <input type="range" id="speedSlider" min="0" max="5" step="0.1" value="1">
-            <span id="speedValue">1x</span>
+        
+        <div style="margin-bottom: 15px;">
+            <label for="speedSlider">Velocidad de órbita:</label><br>
+            <input type="range" id="speedSlider" min="0" max="5" step="0.1" value="1" style="width: 100%; margin-top: 5px;">
+            <span id="speedValue" style="display: block; text-align: center; margin-top: 5px;">1x</span>
         </div>
-        <div class="control-group">
-            <button class="btn-primary" onclick="resetCamera()">📍 Reset Cámara</button>
-            <button class="btn-secondary" onclick="showAllPlanets()">👁️ Mostrar Todos</button>
-        </div>
-        <div class="control-group">
-            <button class="btn-info" onclick="toggleStarfield()">✨ Alternar Estrellas</button>
-            <button class="btn-info" onclick="takeScreenshot()">📸 Capturar Pantalla</button>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="btn-primary" onclick="resetCamera()" style="text-align: center;">📍 Reset Cámara</button>
+            <button class="btn-secondary" onclick="showAllPlanets()" style="text-align: center;">👁️ Mostrar Todos</button>
+            <button class="btn-info" onclick="toggleStarfield()" style="text-align: center;">✨ Alternar Estrellas</button>
+            <button class="btn-info" onclick="takeScreenshot()" style="text-align: center;">📸 Capturar Pantalla</button>
         </div>
     </div>
     
@@ -320,21 +323,45 @@
             try {
                 const stars = [];
                 for (let i = 0; i < 5000; i++) {
-                    stars.push(new THREE.Vector3(
-                        (Math.random() - 0.5) * 2000,
-                        (Math.random() - 0.5) * 2000,
-                        (Math.random() - 0.5) * 2000
-                    ));
+                    // Generar valores aleatorios válidos sin NaN
+                    let x = (Math.random() - 0.5) * 2000;
+                    let y = (Math.random() - 0.5) * 2000;
+                    let z = (Math.random() - 0.5) * 2000;
+                    
+                    // Asegurar que sean números finitos
+                    if (!isNaN(x) && !isNaN(y) && !isNaN(z) && isFinite(x) && isFinite(y) && isFinite(z)) {
+                        stars.push(new THREE.Vector3(x, y, z));
+                    }
                 }
                 
-                if (stars.length > 0 && !isNaN(stars[0].x)) {
-                    const positions = new Float32Array(stars.flat());
+                if (stars.length > 0) {
+                    const positions = new Float32Array(stars.length * 3);
+                    for (let i = 0; i < stars.length; i++) {
+                        const vec = stars[i];
+                        positions[i * 3] = vec.x;
+                        positions[i * 3 + 1] = vec.y;
+                        positions[i * 3 + 2] = vec.z;
+                    }
+                    
                     const starGeometry = new THREE.BufferGeometry();
                     starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
                     
-                    // Calcular boundingSphere explícitamente con valores válidos
+                    // Calcular boundingSphere explícitamente con validación
                     try {
-                        starGeometry.computeBoundingSphere();
+                        // Verificar que no haya valores NaN antes de calcular
+                        let hasNaN = false;
+                        for (let i = 0; i < positions.length; i++) {
+                            if (isNaN(positions[i]) || !isFinite(positions[i])) {
+                                hasNaN = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!hasNaN) {
+                            starGeometry.computeBoundingSphere();
+                        } else {
+                            console.warn("Valores NaN encontrados en starfield, saltando computeBoundingSphere");
+                        }
                     } catch (e) {
                         console.warn("No se pudo calcular bounding sphere:", e);
                     }
@@ -918,7 +945,6 @@
         window.resetCamera = resetCamera;
         window.showAllPlanets = showAllPlanets;
         window.toggleStarfield = toggleStarfield;
-        window.takeScreenshot = takeScreenshot;
         window.initializeGame = initializeGame;
         window.updateScore = updateScore;
         
@@ -932,8 +958,187 @@
             showNotification("Captura de pantalla guardada");
         }
         
+        window.takeScreenshot = takeScreenshot;
+        
+        // Gamificación
+        let achievements = [];
+        
+        function initializeGame() {
+            score = 0; 
+            unlockedAchievements.clear();
+            updateScoreDisplay(); 
+            updateAchievementsList();
+            
+            addAchievement("Explorador Novato", "Haz clic en un planeta por primera vez", "🌟");
+            addAchievement("Amante de los Anillos", "Descubre Saturno y sus anillos", "🪐");
+            addAchievement("Planeta Rojo", "Investiga Marte", "🔴");
+            addAchievement("Gigante Joviano", "Explora el gigante gaseoso", "🔵");
+            addAchievement("Maestro Solar", "Visita todos los planetas", "🏆");
+        }
+        
+        function addAchievement(name, description, icon) {
+            achievements.push({ name, description, icon, unlocked: false });
+        }
+        
+        function unlockAchievement(planetName) {
+            try {
+                const planetLower = typeof planetName === 'string' ? planetName.toLowerCase() : '';
+                
+                if (planetName === "Mercurio" && !unlockedAchievements.has("explorado_mercurio")) {
+                    unlockedAchievements.add("explorado_mercurio"); 
+                    unlockSpecificAchievement("Explorador Novato");
+                } else if (planetName === "Saturno" && !unlockedAchievements.has("saturn_visited")) {
+                    unlockedAchievements.add("saturn_visited"); 
+                    unlockSpecificAchievement("Amante de los Anillos");
+                } else if (planetName === "Marte" && !unlockedAchievements.has("mars_visited")) {
+                    unlockedAchievements.add("mars_visited"); 
+                    unlockSpecificAchievement("Planeta Rojo");
+                } else if (planetName === "Júpiter") {
+                    unlockedAchievements.add("jupiter_visited"); 
+                    unlockSpecificAchievement("Gigante Joviano");
+                }
+                checkFinalAchievement();
+            } catch (e) {
+                console.error("Error in unlockAchievement:", e);
+            }
+        }
+        
+        function unlockSpecificAchievement(achievementName) {
+            try {
+                const achievementIndex = achievements.findIndex(a => a.name === achievementName);
+                if (achievementIndex !== -1 && !achievements[achievementIndex].unlocked) {
+                    achievements[achievementIndex].unlocked = true;
+                    showNotification(`¡Logro desbloqueado! ${achievements[achievementIndex].icon} ${achievementName}`);
+                    playSound('coin');
+                }
+                updateAchievementsList();
+            } catch (e) {
+                console.error("Error in unlockSpecificAchievement:", e);
+            }
+        }
+        
+        function checkFinalAchievement() {
+            try {
+                if (unlockedAchievements.size >= 4 && !unlockedAchievements.has("final_achieved")) {
+                    unlockedAchievements.add("final_achieved"); 
+                    unlockSpecificAchievement("Maestro Solar");
+                    score += 500; 
+                    updateScoreDisplay();
+                }
+            } catch (e) {
+                console.error("Error in checkFinalAchievement:", e);
+            }
+        }
+        
+        function resetGame() { 
+            initializeGame(); 
+            showNotification("Misión reiniciada. ¡Buena suerte!"); 
+        }
+        
+        function updateScore(points) { 
+            score += points; 
+            updateScoreDisplay(); 
+        }
+        
+        function updateScoreDisplay() { 
+            const el = document.getElementById('score');
+            if (el) el.textContent = score; 
+        }
+        
+        function updateAchievementsList() {
+            try {
+                const list = document.getElementById('achievementsList'); 
+                if (!list) return;
+                
+                list.innerHTML = '';
+                achievements.forEach((achievement, index) => {
+                    const li = document.createElement('li');
+                    li.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
+                    
+                    let contentHTML = '';
+                    if (!achievement.unlocked) {
+                        contentHTML = `<span class="achievement-icon">🔒</span><span>${achievement.name}: ${achievement.description}</span>`;
+                    } else {
+                        contentHTML = `<span class="achievement-icon">${achievement.icon}</span><span>${achievement.name}</span>`;
+                    }
+                    
+                    li.innerHTML = contentHTML;
+                    list.appendChild(li);
+                });
+            } catch (e) {
+                console.error("Error in updateAchievementsList:", e);
+            }
+        }
+        
+        function playSound(type) {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const audioContext = new AudioContext();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode); 
+                gainNode.connect(audioContext.destination);
+                
+                if (type === 'coin') {
+                    oscillator.type = 'sine'; 
+                    oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(1760, audioContext.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                    oscillator.start(); 
+                    oscillator.stop(audioContext.currentTime + 0.2);
+                }
+            } catch (e) {
+                console.error("Error in playSound:", e);
+            }
+        }
+        
+        function showNotification(message) {
+            try {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background: linear-gradient(45deg, #ff6b6b, #feca57); color: white;
+                    padding: 15px 30px; border-radius: 30px; font-weight: bold; z-index: 100;
+                    box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: slideDown 0.5s ease-out;
+                `;
+                notification.textContent = message; 
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            } catch (e) {
+                console.error("Error in showNotification:", e);
+            }
+        }
+        
         // Iniciar
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            
+            // Código para el menú hamburguesa
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuContent = document.getElementById('menu-content');
+            
+            if (menuToggle && menuContent) {
+                menuToggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        menuContent.classList.add('active');
+                    } else {
+                        menuContent.classList.remove('active');
+                    }
+                });
+                
+                // Cerrar menú al hacer clic fuera del contenido
+                document.addEventListener('click', function(event) {
+                    if (!menuContent.contains(event.target) && !document.querySelector('#menu-label').contains(event.target)) {
+                        menuToggle.checked = false;
+                        menuContent.classList.remove('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
