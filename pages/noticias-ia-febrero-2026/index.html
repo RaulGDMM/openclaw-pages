@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Últimas Noticias de IA - Febrero 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-date {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            transform: scale(1.05);
+        }
+
+        .models-comparison {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(102, 126, 234, 0.2);
+            font-weight: 600;
+        }
+
+        .winner {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0.7;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .news-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🤖 Últimas Noticias de IA</h1>
+        <p class="subtitle">Febrero 2026 - La era de la superinteligencia personal</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">🔥 Noticias Destacadas</h2>
+        
+        <div class="news-grid">
+            <!-- Noticia 1 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">Gemini 3.1 Pro Lanzado</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>Google lanza Gemini 3.1 Pro</strong> con récords en benchmarks y capacidades agentic avanzadas.</p>
+                    <p>Destaca en GPQA Diamond (94.3%) y ARC-AGI-2 (77.1%), ofreciendo el mejor ratio calidad-costo.</p>
+                    <a href="https://onedigital.mx/2026/02/21/gemini-3-1-pro-lanzamiento-evaluaciones-y-comparacion-con-gpt-5-2-y-claude-opus-4-6/" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Noticia 2 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">Claude Opus 4.6 Continúa Dominando</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>Anthropic's Claude Opus 4.6</strong> sigue dominando las preferencias de expertos y tareas complejas.</p>
+                    <p>Sigue siendo líder en razonamiento y es el modelo preferido por muchos profesionales.</p>
+                    <a href="https://www.nxcode.io/en/resources/news/gemini-3-1-pro-vs-claude-opus-4-6-vs-gpt-5-comparison-2026" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Noticia 3 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">GPT-5.3-Codex: El Especialista en Coding</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>GPT-5.3-Codex</strong> se consolida como el mejor modelo para programación terminal-bench con un impresionante 77.3%.</p>
+                    <p>Modelo especializado que supera a Gemini 3.1 Pro (68.5%) en tareas de terminal.</p>
+                    <a href="https://www.trendingtopics.eu/gemini-3-1-pro-leads-most-benchmarks-but-trails-claude-opus-4-6-in-some-tasks/" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Noticia 4 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">La Era de la Superinteligencia Personal</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>Meta sitúa 2026 como el inicio</strong> de la era de la "superinteligencia personal" de la IA.</p>
+                    <p>Con despliegue masivo de agentes autónomos y evolución hacia inteligencia personalizada.</p>
+                    <a href="https://lopezdoriga.com/ciencia-tecnologia/meta-situa-2026-inicio-era-superinteligencia-personal-ia/" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Noticia 5 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">Bloomberg: Caída Bursátil Inminente</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>Bloomberg advierte</strong> que muchas empresas de IA no tienen plan de negocio sólido.</p>
+                    <p>Sugiere que una caída bursátil tendría efectos enormes para todo el ecosistema tecnológico.</p>
+                    <a href="https://www.bbc.com/mundo/articles/c2d7nggng49o" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Noticia 6 -->
+            <div class="news-card">
+                <div class="card-header">
+                    <div class="card-date">📅 Febrero 2026</div>
+                    <h3 class="card-title">China lanza sus propios Modelos 3D de IA</h3>
+                </div>
+                <div class="card-content">
+                    <p>La gigante china de los videojuegos está desarrollando algunos de los modelos 3D de inteligencia artificial más avanzados del mundo.</p>
+                    <a href="https://es.wired.com/tag/inteligencia-artificial" target="_blank" class="read-more">Leer más →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparativa de Modelos -->
+        <div class="models-comparison">
+            <h2 style="text-align: center; margin-bottom: 30px;">🏆 Comparativa de Modelos (Febrero 2026)</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Desarrollador</th>
+                        <th>Benchmark Destacado</th>
+                        <th>Puntuación</th>
+                        <th>Especialidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gemini 3.1 Pro</td>
+                        <td>Google</td>
+                        <td>GPQA Diamond</td>
+                        <td><span class="winner">94.3%</span></td>
+                        <td>Razonamiento científico</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini 3.1 Pro</td>
+                        <td>Google</td>
+                        <td>ARC-AGI-2</td>
+                        <td><span class="winner">77.1%</span></td>
+                        <td>Inteligencia general</td>
+                    </tr>
+                    <tr>
+                        <td>Claude Opus 4.6</td>
+                        <td>Anthropic</td>
+                        <td>SWE-Bench Verified</td>
+                        <td><span class="winner">80.8%</span></td>
+                        <td>Coding general</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-5.3-Codex</td>
+                        <td>OpenAI</td>
+                        <td>Terminal-Bench 2.0</td>
+                        <td><span class="winner">77.3%</span></td>
+                        <td>Coding terminal especializado</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-5.3-Codex</td>
+                        <td>OpenAI</td>
+                        <td>LiveCodeBench</td>
+                        <td>2887 Elo</td>
+                        <td>Coding en vivo</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-style: italic; opacity: 0.8;">Fuente: Comparativa basada en datos de febrero 2026</p>
+            </div>
+        </div>
+
+        <!-- Nota sobre fecha -->
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <p style="margin-bottom: 10px;"><strong>Nota importante:</strong> Esta página fue generada el 22/02/2026.</p>
+            <p style="opacity: 0.8; font-size: 0.9rem;">Para noticias más recientes, consulta las fuentes originales enlazadas en cada artículo.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>🤖 Generado por Cocobot - Tu asistente IA con espíritu gato</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Última actualización: Febrero 2026</p>
+    </footer>
+</body>
+</html>
