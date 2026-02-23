@@ -216,6 +216,7 @@
     <script>
         let scene, camera, renderer, controls;
         let planets = [], planetMeshes = [], orbitLines = [];
+        let moons = []; // Array para las lunas
         let speedMultiplier = 1, currentPlanet = null;
         let score = 0, unlockedAchievements = new Set();
         
@@ -233,11 +234,13 @@
             },
             {
                 name: "Tierra", color: "#2E8BC0", size: 9.5, distance: 130, speed: 1,
+                hasMoon: true,
                 description: "¡Nuestro hogar! El único planeta conocido con vida. Tiene agua líquida en su superficie. La Luna orbita nuestra hermosa tierra azul.",
                 facts: { "Diámetro": "12,742 km", "Lunas": "1 (La Luna)", "Distancia al Sol": "149.6 millones km" }
             },
             {
                 name: "Marte", color: "#FF4500", size: 6, distance: 170, speed: 0.53,
+                hasMoons: true,
                 description: "El Planeta Rojo. Tiene el volcán más grande del sistema solar y el cañón más profundo.",
                 facts: { "Temperatura": "-63°C (promedio)", "Lunas": "2 (Fobos y Deimos)", "Año": "687 días terrestres" }
             },
@@ -291,10 +294,17 @@
             sunLight.shadow.mapSize.width = 2048;
             sunLight.shadow.mapSize.height = 2048;
             scene.add(sunLight);
+            window.sunLight = sunLight; // Guardar referencia global
             
             createStarfield();
             createSun();
             createPlanets();
+            
+            // Event listener para el slider
+            document.getElementById('speedSlider').addEventListener('input', function() {
+                speedMultiplier = parseFloat(this.value);
+                document.getElementById('speedValue').textContent = speedMultiplier + 'x';
+            });
             
             window.addEventListener('resize', onWindowResize);
             renderer.domElement.addEventListener('click', onMouseClick);
@@ -314,6 +324,7 @@
                 ));
             }
             starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(stars.flat(), 3));
+            starGeometry.computeBoundingSphere(); // Añadir esta línea para evitar NaN
             const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
             const starField = new THREE.Points(starGeometry, starMaterial);
             scene.add(starField);
@@ -321,8 +332,11 @@
         }
         
         function toggleStarfield() {
-            if (window.starField.visible) window.starField.visible = false;
-            else window.starField.visible = true;
+            if (window.starField && window.starField.visible !== undefined) {
+                window.starField.visible = !window.starField.visible;
+            } else {
+                console.log("starField no está definido aún");
+            }
         }
         
         function createSun() {
@@ -347,7 +361,7 @@
         }
         
         function createPlanet(data, index) {
-            // Órbita visual
+            // Órbita visual con RingGeometry correcto
             const orbitGeometry = new THREE.RingGeometry(data.distance - 0.5, data.distance + 0.5, 128);
             const orbitMaterial = new THREE.MeshBasicMaterial({ 
                 color: 0xffffff, side: THREE.DoubleSide, transparent: true, opacity: 0.15 
@@ -398,22 +412,88 @@
             scene.add(planet);
             planet.userData = { ...data, index };
             
+            // Añadir anillos para Saturno
             if (data.hasRings) createPlanetRings(data, planet);
+            
+            // Añadir lunas
+            if (data.hasMoon || data.hasMoons) createMoonsForPlanet(data, planet);
             
             planets.push(planet);
             planetMeshes.push(planet);
         }
         
+        function createMoonsForPlanet(data, planet) {
+            let moonData = [];
+            
+            if (data.name === "Tierra") {
+                moonData.push({
+                    name: "Luna",
+                    color: "#DDDDDD", size: 2, distance: data.size + 15,
+                    speed: 12, description: "La Luna de la Tierra"
+                });
+            }
+            
+            if (data.name === "Marte") {
+                moonData.push({
+                    name: "Fobos",
+                    color: "#C0C0C0", size: 1, distance: data.size + 10,
+                    speed: 15, description: "El más cercano a Marte"
+                });
+                moonData.push({
+                    name: "Deimos",
+                    color: "#AAAAAA", size: 0.8, distance: data.size + 18,
+                    speed: 8, description: "El más lejano de Marte"
+                });
+            }
+            
+            if (data.name === "Saturno") {
+                moonData.push({
+                    name: "Titan",
+                    color: "#EAD6B8", size: 3.5, distance: data.size + 25,
+                    speed: 7, description: "La luna más grande de Saturno"
+                });
+                moonData.push({
+                    name: "Encelado",
+                    color: "#FFFFFF", size: 1.5, distance: data.size + 35,
+                    speed: 9, description: "Una luna helada con geysers"
+                });
+            }
+            
+            moonData.forEach((moon) => {
+                const geometry = new THREE.SphereGeometry(moon.size, 32, 32);
+                const material = new THREE.MeshStandardMaterial({ 
+                    map: createSimpleTexture(moon.color), 
+                    roughness: 0.8, metalness: 0.1 
+                });
+                const moonMesh = new THREE.Mesh(geometry, material);
+                
+                scene.add(moonMesh);
+                moons.push({
+                    mesh: moonMesh,
+                    parent: planet,
+                    distance: moon.distance,
+                    speed: moon.speed * 0.5,
+                    angle: Math.random() * Math.PI * 2
+                });
+            });
+        }
+        
         function createPlanetRings(data, planet) {
-            const ringGeometry = new THREE.RingGeometry(data.size * 1.4, data.size * 2.2, 64);
+            // Crear geometría correcta para los anillos
+            const innerRadius = data.size * 1.4;
+            const outerRadius = data.size * 2.2;
+            const ringGeometry = new THREE.RingGeometry(innerRadius, outerRadius, 64);
+            
+            // Textura procedimental para los anillos
             const canvas = document.createElement('canvas');
             canvas.width = 512; canvas.height = 256;
             const ctx = canvas.getContext('2d');
             
             const gradient = ctx.createLinearGradient(0, 0, 512, 0);
             gradient.addColorStop(0, `rgba(255, 255, 255, 0)`);
-            gradient.addColorStop(0.4, data.ringColor);
-            gradient.addColorStop(0.6, data.ringColor);
+            gradient.addColorStop(0.3, `${data.ringColor}`);
+            gradient.addColorStop(0.5, `rgba(255, 255, 255, 0.9)`);
+            gradient.addColorStop(0.7, `${data.ringColor}`);
             gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
             
             ctx.fillStyle = gradient;
@@ -423,6 +503,10 @@
             const ringMaterial = new THREE.MeshBasicMaterial({
                 map: ringTexture, side: THREE.DoubleSide, transparent: true, opacity: 0.9
             });
+            
+            // Corregir el error NaN calculando boundingSphere manualmente
+            ringGeometry.computeBoundingSphere();
+            
             const rings = new THREE.Mesh(ringGeometry, ringMaterial);
             rings.rotation.x = Math.PI / 2.5;
             planet.add(rings);
@@ -437,7 +521,9 @@
             const raycaster = new THREE.Raycaster();
             raycaster.setFromCamera(mouse, camera);
             
-            const intersects = raycaster.intersectObjects(planetMeshes.filter(mesh => mesh !== window.sunLight));
+            // Filtrar correctamente la luz del sol
+            const filterMeshes = planetMeshes.filter(mesh => mesh !== window.sunLight);
+            const intersects = raycaster.intersectObjects(filterMeshes);
             
             if (intersects.length > 0) {
                 const object = intersects[0].object;
@@ -449,14 +535,14 @@
             }
         }
         
-        function showPlanetInfo(planetData) {
-            currentPlanet = planetData;
+        function showPlanetInfo(planetDataObj) {
+            currentPlanet = planetDataObj;
             const panel = document.getElementById('planet-info-panel');
-            document.getElementById('planet-name').textContent = planetData.name;
-            document.getElementById('planet-description').innerHTML = `<p>${planetData.description}</p>`;
+            document.getElementById('planet-name').textContent = planetDataObj.name;
+            document.getElementById('planet-description').innerHTML = `<p>${planetDataObj.description}</p>`;
             
             let factsHTML = '';
-            for (const [key, value] of Object.entries(planetData.facts)) {
+            for (const [key, value] of Object.entries(planetDataObj.facts)) {
                 factsHTML += `<div class="fact-item"><span class="fact-label">${key}:</span> ${value}</div>`;
             }
             document.getElementById('planet-facts').innerHTML = factsHTML;
@@ -494,6 +580,7 @@
             controls.target.set(0, 0, 0);
             controls.update();
             document.getElementById('planet-info-panel').style.display = 'none';
+            currentPlanet = null; // Resetear planeta actual
         }
         
         function onWindowResize() {
@@ -504,18 +591,25 @@
         
         function animate() {
             requestAnimationFrame(animate);
-            planetMeshes.forEach((mesh, index) => {
-                if (mesh.userData.type === 'sun') return;
-                mesh.rotation.y += 0.005 * speedMultiplier;
-            });
             
+            // Rotación de los cuerpos planetarios
             planets.forEach((planet, index) => {
                 const data = planetData[index];
                 const angle = Date.now() * 0.0001 * data.speed * speedMultiplier;
+                
                 if (!currentPlanet || planet !== currentPlanet) {
                     planet.position.x = Math.cos(angle) * data.distance;
                     planet.position.z = Math.sin(angle) * data.distance;
                 }
+                planet.rotation.y += 0.005 * speedMultiplier;
+            });
+            
+            // Actualizar lunas
+            moons.forEach(moon => {
+                moon.angle += 0.01 * moon.speed * speedMultiplier;
+                moon.mesh.position.x = moon.parent.position.x + Math.cos(moon.angle) * moon.distance;
+                moon.mesh.position.z = moon.parent.position.z + Math.sin(moon.angle) * moon.distance;
+                moon.mesh.rotation.y += 0.01 * speedMultiplier;
             });
             
             controls.update();
@@ -540,14 +634,20 @@
         }
         
         function unlockAchievement(planetName) {
+            const planetLower = planetName.toLowerCase();
+            
             if (planetName === "Mercurio" && !unlockedAchievements.has("explorado_mercurio")) {
-                unlockedAchievements.add("explorado_mercurio"); unlockSpecificAchievement("Explorador Novato");
+                unlockedAchievements.add("explorado_mercurio"); 
+                unlockSpecificAchievement("Explorador Novato");
             } else if (planetName === "Saturno" && !unlockedAchievements.has("saturn_visited")) {
-                unlockedAchievements.add("saturn_visited"); unlockSpecificAchievement("Amante de los Anillos");
+                unlockedAchievements.add("saturn_visited"); 
+                unlockSpecificAchievement("Amante de los Anillos");
             } else if (planetName === "Marte" && !unlockedAchievements.has("mars_visited")) {
-                unlockedAchievements.add("mars_visited"); unlockSpecificAchievement("Planeta Rojo");
+                unlockedAchievements.add("mars_visited"); 
+                unlockSpecificAchievement("Planeta Rojo");
             } else if (planetName === "Júpiter") {
-                unlockedAchievements.add("jupiter_visited"); unlockSpecificAchievement("Gigante Joviano");
+                unlockedAchievements.add("jupiter_visited"); 
+                unlockSpecificAchievement("Gigante Joviano");
             }
             checkFinalAchievement();
         }
@@ -564,8 +664,10 @@
         
         function checkFinalAchievement() {
             if (unlockedAchievements.size >= 4 && !unlockedAchievements.has("final_achieved")) {
-                unlockedAchievements.add("final_achieved"); unlockSpecificAchievement("Maestro Solar");
-                score += 500; updateScoreDisplay();
+                unlockedAchievements.add("final_achieved"); 
+                unlockSpecificAchievement("Maestro Solar");
+                score += 500; 
+                updateScoreDisplay();
             }
         }
         
@@ -573,33 +675,66 @@
         function updateScoreDisplay() { document.getElementById('score').textContent = score; }
         
         function updateAchievementsList() {
-            const list = document.getElementById('achievementsList'); list.innerHTML = '';
+            const list = document.getElementById('achievementsList'); 
+            list.innerHTML = '';
             achievements.forEach((achievement, index) => {
                 const li = document.createElement('li');
                 li.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
-                let iconText = achievement.unlocked ? achievement.icon : '🔒';
-                if (!achievement.unlocked) li.innerHTML = `<span class="achievement-icon">${iconText}</span><span>${achievement.name} (${achievement.description})</span>`;
-                else li.innerHTML = `<span class="achievement-icon">${iconText}</span><span>${achievement.name}</span>`;
+                
+                let contentHTML = '';
+                if (!achievement.unlocked) {
+                    contentHTML = `<span class="achievement-icon">🔒</span><span>${achievement.name}: ${achievement.description}</span>`;
+                } else {
+                    contentHTML = `<span class="achievement-icon">${achievement.icon}</span><span>${achievement.name}</span>`;
+                }
+                
+                li.innerHTML = contentHTML;
                 list.appendChild(li);
             });
         }
         
         function resetGame() { initializeGame(); showNotification("Misión reiniciada. ¡Buena suerte!"); }
         
+        function createSimpleTexture(colorHex) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 64; canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            
+            // Relleno de color base
+            ctx.fillStyle = colorHex;
+            ctx.fillRect(0, 0, 64, 64);
+            
+            // Añadir algo de ruido para textura
+            for(let i=0; i<20; i++) {
+                ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)";
+                ctx.beginPath();
+                ctx.arc(Math.random()*64, Math.random()*64, Math.random()*10+2, 0, Math.PI*2);
+                ctx.fill();
+            }
+            
+            return new THREE.CanvasTexture(canvas);
+        }
+        
         function playSound(type) {
             try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const audioContext = new AudioContext();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 
-                oscillator.connect(gainNode); gainNode.connect(audioContext.destination);
+                oscillator.connect(gainNode); 
+                gainNode.connect(audioContext.destination);
                 
                 if (type === 'coin') {
-                    oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+                    oscillator.type = 'sine'; 
+                    oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
                     oscillator.frequency.exponentialRampToValueAtTime(1760, audioContext.currentTime + 0.1);
                     gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                    oscillator.start(); oscillator.stop(audioContext.currentTime + 0.2);
+                    oscillator.start(); 
+                    oscillator.stop(audioContext.currentTime + 0.2);
                 }
             } catch (e) {}
         }
@@ -612,24 +747,26 @@
                 padding: 15px 30px; border-radius: 30px; font-weight: bold; z-index: 100;
                 box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: slideDown 0.5s ease-out;
             `;
-            notification.textContent = message; document.body.appendChild(notification);
+            notification.textContent = message; 
+            document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 3000);
         }
         
-        window.speedSliderChange = function() {
-            speedMultiplier = parseFloat(document.getElementById('speedSlider').value);
-            document.getElementById('speedValue').textContent = speedMultiplier + 'x';
-        };
-        
-        window.resetCamera = resetCamera; window.showAllPlanets = showAllPlanets;
-        window.toggleStarfield = toggleStarfield; window.takeScreenshot = takeScreenshot;
-        window.initializeGame = initializeGame; window.updateScore = updateScore;
+        // Funciones globales para los botones
+        window.resetCamera = resetCamera;
+        window.showAllPlanets = showAllPlanets;
+        window.toggleStarfield = toggleStarfield;
+        window.takeScreenshot = takeScreenshot;
+        window.initializeGame = initializeGame;
+        window.updateScore = updateScore;
         
         function takeScreenshot() {
             renderer.render(scene, camera);
             const dataURL = renderer.domElement.toDataURL('image/png');
             const link = document.createElement('a');
-            link.download = `sistema-solar-${Date.now()}.png`; link.href = dataURL; link.click();
+            link.download = `sistema-solar-${Date.now()}.png`; 
+            link.href = dataURL; 
+            link.click();
             showNotification("Captura de pantalla guardada");
         }
         
