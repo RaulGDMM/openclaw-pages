@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-as-a-Service - Estudio de Mercado 2026</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; border-left: 4px solid #3498db; padding-left: 10px; }
+        .highlight { background-color: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #dee2e6; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .section { margin-bottom: 40px; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Estudio de Mercado: Agent-as-a-Service (2026)</h1>
+
+    <div class="section">
+        <p><strong>Fecha:</strong> Febrero 2026<br>
+        <strong>Análisis por:</strong> Cocobot AI Assistant</p>
+    </div>
+
+    <img src="./imagenes/agents-business-model.jpg" alt="Diagrama modelo negocio agente IA">
+
+    <h2>1. ¿Qué es Agent-as-a-Service?</h2>
+    <p>Servicio en la nube donde empresas o individuos pueden alquilar agentes autónomos de IA para tareas específicas.</p>
+    
+    <ul>
+        <li>Tipo de modelo: Free tier → Premium (suscripción) + Overages</li>
+        <li>Casos de uso: Customer support, coding assistance, research automation, data analysis</li>
+        <li>Pagos: Gratis básico / Suscripción mensual / Por uso (overage)</li>
+    </ul>
+
+    <h2>2. Empresas Ya Activas en este Espacio</h2>
+
+    <h3>2.1 xAI (Elon Musk)</h3>
+    <p>Lanzó Grok Agents en noviembre 2025 con sistema de facturación por tokens generados y tiempo de ejecución.</p>
+
+    <h3>2.2 Mistral AI</h3>
+    <p>Mistral Enterprise ofrece "Agent Workflows" desde marzo 2025. Pricing basado en créditos/mes.</p>
+
+    <h3>2.3 Perplexity Enterprise</h3>
+    <p>Su "Perplexity Copilot" permite despliegue de agents personalizados para equipos. Desde €99/mes.</p>
+
+    <h3>2.4 Amazon Bedrock Agents</h3>
+    <p>Servicio en AWS desde junio 2025. Pago por llamadas API y tokens procesados.</p>
+
+    <h2>3. Análisis de Viabilidad</h2>
+
+    <h3>3.1 Barreras de Entrada</h3>
+    <ul>
+        <li>Baja: Modelos open source disponibles (Qwen3-Coder-Next, DeepSeek-R1)</li>
+        <li>Media: Infraestructura GPU necesaria (~€800-1500/mes por RTX 4090/5090)</li>
+        <li>Alta: Integración con APIs de terceros (Stripe, GitHub, Notion, etc.)</li>
+    </ul>
+
+    <h3>3.2 Costos Estimados</h3>
+    - Servidor con 2xRTX 4090: ~€600-800/mes
+    - Licencias software: ~€100/mes
+    - Bandwidth/storage: ~€50/mes
+    Total aproximado inicial: ~€750/mes
+
+    <h3>3.3 Modelo de Ingresos Potencial</h3>
+
+    Opción A: Free + Premium
+    - Free tier: 100 requests/mes
+    - Premium (€15/mes): 500 requests + agentes personalizados
+    - Enterprise (consultar): SLA garantizado + infra dedicated
+
+    Opción B: Overages como propuestas Sergio
+    - Cobrar €X base mensual por infrastructure
+    - Añadir 5% overage sobre beneficios extra generados por el cliente
+    Ejemplo: Cliente ahorra €2000/mes → tú ganas €100/mes adicional
+
+    <h2>4. Recomendaciones Técnicas para Sergio</h2>
+
+    Stack Tecnológico Sugerido:
+    - Backend: Python + FastAPI
+    - Llm provider: llama.cpp local + fallback a API (OpenRouter)
+    - Docker: Orquestación de múltiples agents simultáneos
+    - Base datos: PostgreSQL (metadata) + Redis (caché)
+    - Frontend admin: React o Vue.js simple
+
+    Arquitectura Recomendada:
+    Usuario → Frontend → API Gateway → Orchestrator Agent → LLM (Qwen3-Coder-Next/DeepSeek-R1)<br>
+                               ↓<br>
+                          Base Datos + Logs
+
+    <h2>5. Conclusión</h2>
+    <p>El mercado de Agent-as-a-Service está en fase temprana pero creciendo rápido.</p>
+
+    - Viable sí: Si se enfoca en nicho específico (QA automation, desarrollo web, etc.)
+    - Riesgo bajo: Modelos open source eliminan costos licensing
+    - Riesgo medio: Infraestructura GPU requiere inversión inicial realista (~€750/mes)
+    - Riesgo bajo: Modelo de overage al 5% es inteligente y escalable
+
+    Recomienda empezar con MVP minimalista: un solo agente en una RTX 4090, pricing sencillo, y escalar según demanda real.
+
+    <footer style="text-align: center; margin-top: 40px; color: #666;">
+        <p>Estudio generado por Cocobot AI Assistant • Febrero 2026</p>
+    </footer>
+</body>
+</html>
