@@ -3,328 +3,498 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Últimas Noticias de IA - Febrero 2026</title>
+    <title>Noticias de IA - Febrero 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-color: #667eea;
+            --text-dark: #1a1a2e;
+            --text-light: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-gradient);
             min-height: 100vh;
-            color: #fff;
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
+        header { text-align: center; padding: 3rem 0; animation: fadeInDown 0.8s ease-out; }
+        
         h1 {
             font-size: 3rem;
+            color: var(--text-light);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .subtitle { color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; }
+        .date-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .hero {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .hero img { width: 100%; height: 400px; object-fit: cover; }
+        
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 2rem;
+            color: white;
         }
 
         .section-title {
+            font-size: 2rem;
+            color: var(--text-light);
+            margin: 3rem 0 2rem;
             text-align: center;
-            margin-bottom: 50px;
-            color: #fff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
         }
 
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .news-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            overflow: hidden;
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 0.8s ease-out backwards;
         }
 
-        .news-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); }
 
-        .card-header {
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+        .card-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem; }
 
-        .card-date {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .card p { color: #666; line-height: 1.7; }
 
-        .card-title {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content p {
-            margin-bottom: 15px;
-            color: #e0e0e0;
-        }
-
-        .read-more {
+        .badge {
             display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .tech-resources {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .resource-list { list-style: none; }
+
+        .resource-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .resource-item h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
+
+        .stats-section {
+            text-align: center;
+            padding: 3rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-color), #a6c1ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        footer { text-align: center; padding: 3rem 0; color: white; }
+
+        .social-links { margin: 2rem 0; }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
             color: white;
             text-decoration: none;
-            border-radius: 25px;
             transition: all 0.3s ease;
+            margin: 0 10px;
         }
 
-        .read-more:hover {
-            transform: scale(1.05);
+        .social-icon:hover { transform: translateY(-5px); background: var(--accent-color); }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .models-comparison {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 40px;
-            margin-top: 50px;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .comparison-table th {
-            background: rgba(102, 126, 234, 0.2);
-            font-weight: 600;
-        }
-
-        .winner {
-            color: #4ade80;
-            font-weight: bold;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            opacity: 0.7;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .news-grid { grid-template-columns: 1fr; }
+            header { padding: 2rem 0; }
+            .hero img { height: 300px; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--accent-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); color: var(--text-dark); }
+
+        .timestamp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>🤖 Últimas Noticias de IA</h1>
-        <p class="subtitle">Febrero 2026 - La era de la superinteligencia personal</p>
-    </div>
-
     <div class="container">
-        <h2 class="section-title">🔥 Noticias Destacadas</h2>
-        
-        <div class="news-grid">
-            <!-- Noticia 1 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">Gemini 3.1 Pro Lanzado</h3>
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-brain"></i> Noticias de IA</h1>
+            <p class="subtitle">Resumen completo de las últimas novedades en Inteligencia Artificial</p>
+            <span class="date-badge">Actualizado: Febrero 2026</span>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="../imagenes/generadas/portada-ia.jpg" alt="Inteligencia Artificial">
+            <div class="hero-content">
+                <h2>Descubre el Futuro de la IA Hoy</h2>
+                <p>Modelos revolucionarios, avances tecnológicos y recursos esenciales para entender el ecosistema actual de inteligencia artificial.</p>
+                <a href="#noticias" class="cta-button"><i class="fas fa-arrow-down"></i> Explorar Noticias</a>
+            </div>
+        </section>
+
+        <!-- LLMs Grandes en la Nube -->
+        <section id="llms-nube">
+            <h2 class="section-title"><i class="fas fa-cloud"></i> LLMs Grandes en la Nube</h2>
+            <div class="news-grid">
+                <div class="card" style="animation-delay: 0.1s;">
+                    <div class="card-icon"><i class="fab fa-google"></i></div>
+                    <h3>Google Gemini 3.1 Pro</h3>
+                    <p>🚀 Lanzado hoy (19 feb) — 77.1% ARC-AGI-2, más del doble que la versión anterior 3 Pro.<br><br>
+                       ✨ 1M tokens de contexto, rendimiento excepcional en razonamiento complejo.</p>
+                    <span class="badge">Destacado</span>
                 </div>
-                <div class="card-content">
-                    <p><strong>Google lanza Gemini 3.1 Pro</strong> con récords en benchmarks y capacidades agentic avanzadas.</p>
-                    <p>Destaca en GPQA Diamond (94.3%) y ARC-AGI-2 (77.1%), ofreciendo el mejor ratio calidad-costo.</p>
-                    <a href="https://onedigital.mx/2026/02/21/gemini-3-1-pro-lanzamiento-evaluaciones-y-comparacion-con-gpt-5-2-y-claude-opus-4-6/" target="_blank" class="read-more">Leer más →</a>
+
+                <div class="card" style="animation-delay: 0.2s;">
+                    <div class="card-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Claude Opus 4.6 + Sonnet 4.6</h3>
+                    <p>Anthropic lanza su nueva generación con:<br><br>
+                       • <strong>Sonnet 4.6:</strong> Rendimiento nivel Opus con menor coste<br>
+                       • <strong>Opus 4.6:</strong> Mejoras en razonamiento y escritura creativa<br>
+                       • Sonnet 4.6 se convierte en el nuevo model por defecto</p>
+                    <span class="badge">Nuevo Default</span>
+                </div>
+
+                <div class="card" style="animation-delay: 0.3s;">
+                    <div class="card-icon"><i class="fab fa-openai"></i></div>
+                    <h3>GPT-5.3-Codex GA</h3>
+                    <p>Disponible desde el 9 febrero para GitHub Copilot:<br><br>
+                       ⚡ 25% más rápido que versiones anteriores<br>
+                       🎯 Optimizado para desarrollo de código<br>
+                       💼 Disponibilidad general (GA)</p>
+                    <span class="badge">GitHub Copilot</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Noticia 2 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">Claude Opus 4.6 Continúa Dominando</h3>
+        <!-- LLMs Locales -->
+        <section id="llms-locales">
+            <h2 class="section-title"><i class="fas fa-server"></i> LLMs Locales (RTX 5090 + 64GB RAM)</h2>
+            <div class="news-grid">
+                <div class="card" style="animation-delay: 0.4s;">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Qwen3-Coder-Next</h3>
+                    <p>80B total / 3B activos tras optimizaciones:<br><br>
+                       🚀 ~49 t/s en ejecución local<br>
+                       🔧 Compute graph GGML optimizado<br>
+                       📈 CUDA graphs y fused operations integradas</p>
+                    <span class="badge">Codificación Avanzada</span>
                 </div>
-                <div class="card-content">
-                    <p><strong>Anthropic's Claude Opus 4.6</strong> sigue dominando las preferencias de expertos y tareas complejas.</p>
-                    <p>Sigue siendo líder en razonamiento y es el modelo preferido por muchos profesionales.</p>
-                    <a href="https://www.nxcode.io/en/resources/news/gemini-3-1-pro-vs-claude-opus-4-6-vs-gpt-5-comparison-2026" target="_blank" class="read-more">Leer más →</a>
+
+                <div class="card" style="animation-delay: 0.5s;">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>DeepSeek R1</h3>
+                    <p>Razonnement avanzado disponible gratis en OpenRouter.<br><br>
+                       🔥 32B params, ~20 GB VRAM<br>
+                       💰 Coste cero para uso personal<br>
+                       🎯 Excelente rendimiento en lógica matemática</p>
+                    <span class="badge">Gratis</span>
+                </div>
+
+                <div class="card" style="animation-delay: 0.6s;">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Llama 3.3 70B</h3>
+                    <p>Súper modelo open source con rendimiento excepcional:<br><br>
+                       🏆 70B params, ~29 GB VRAM<br>
+                       🌍 Uso general con alta calidad<br>
+                       🎁 Gratis en OpenRouter sin restricciones</p>
+                    <span class="badge">Open Source</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Noticia 3 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">GPT-5.3-Codex: El Especialista en Coding</h3>
+        <!-- Generación Visual e Imágenes -->
+        <section id="imagenes">
+            <h2 class="section-title"><i class="fas fa-image"></i> Generación Visual e Imágenes</h2>
+            <div class="news-grid">
+                <div class="card" style="animation-delay: 0.7s;">
+                    <div class="card-icon"><i class="fab fa-openai"></i></div>
+                    <h3>DALL-E 3</h3>
+                    <p>Entiende mejor los matices del lenguaje natural:<br><br>
+                       🖼️ Mejor fidelidad a prompts complejos<br>
+                       🎨 Estilos más coherentes<br>
+                       ✨ Detalles mejorados en composición</p>
+                    <span class="badge">Integrado</span>
                 </div>
-                <div class="card-content">
-                    <p><strong>GPT-5.3-Codex</strong> se consolida como el mejor modelo para programación terminal-bench con un impresionante 77.3%.</p>
-                    <p>Modelo especializado que supera a Gemini 3.1 Pro (68.5%) en tareas de terminal.</p>
-                    <a href="https://www.trendingtopics.eu/gemini-3-1-pro-leads-most-benchmarks-but-trails-claude-opus-4-6-in-some-tasks/" target="_blank" class="read-more">Leer más →</a>
+
+                <div class="card" style="animation-delay: 0.8s;">
+                    <div class="card-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Stable Diffusion 3</h3>
+                    <p>Supera a DALL-E 3 en fidelidad al prompt:<br><br>
+                       📝 Comprende mejor textos largos<br>
+                       🎭 Mayor control estilístico<br>
+                       🌈 Paleta de colores más precisa</p>
+                    <span class="badge">Mejor Prompt</span>
+                </div>
+
+                <div class="card" style="animation-delay: 0.9s;">
+                    <div class="card-icon"><i class="fas fa-free-code-camp"></i></div>
+                    <h3>Flux Schnell 1.0</h3>
+                    <p>Disponible gratis para todos:<br><br>
+                       🚀 Inference extremadamente rápido<br>
+                       💰 Coste cero completo<br>
+                       🎯 Calidad profesional</p>
+                    <span class="badge">Gratis forever</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Noticia 4 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">La Era de la Superinteligencia Personal</h3>
-                </div>
-                <div class="card-content">
-                    <p><strong>Meta sitúa 2026 como el inicio</strong> de la era de la "superinteligencia personal" de la IA.</p>
-                    <p>Con despliegue masivo de agentes autónomos y evolución hacia inteligencia personalizada.</p>
-                    <a href="https://lopezdoriga.com/ciencia-tecnologia/meta-situa-2026-inicio-era-superinteligencia-personal-ia/" target="_blank" class="read-more">Leer más →</a>
+        <!-- Video Generativo -->
+        <section id="video">
+            <h2 class="section-title"><i class="fas fa-video"></i> Video Generativo</h2>
+            <div class="tech-resources">
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4><i class="fas fa-film"></i> Runway Gen-4.5</h4>
+                        <p>Cinematic quality video generation con hasta 4K a 60fps. Interfaz intuitiva y control avanzado.</p>
+                    </li>
+                    <li class="resource-item">
+                        <h4><i class="fas fa-dragon"></i> Sora 2</h4>
+                        <p>Fotorealismo excepcional. Capacidad para generar videos extensos con coherencia temporal superior.</p>
+                    </li>
+                    <li class="resource-item">
+                        <h4><i class="fab fa-google"></i> Google Veo 3.1</h4>
+                        <p>Integración nativa con Google Workspace. Optimizado para productividad y presentaciones.</p>
+                    </li>
+                    <li class="resource-item">
+                        <h4><i class="fas fa-play"></i> Pika 2.2</h4>
+                        <p>Comunidad activa y API accesible. Excelente relación calidad/velocidad de generación.</p>
+                    </li>
+                    <li class="resource-item">
+                        <h4><i class="fas fa-video"></i> Kling 3.0</h4>
+                        <p>Solución completa con edición integrada. Soporta motion control y efectos especiales.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="stats-section" style="margin-top: 2rem;">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">4K</div>
+                        <p>Pantallas soportadas</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">60fps</div>
+                        <p>Fotogramas por segundo</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <p>Principales plataformas</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Noticia 5 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">Bloomberg: Caída Bursátil Inminente</h3>
+        <!-- Recursos Técnicos -->
+        <section id="recursos">
+            <h2 class="section-title"><i class="fas fa-tools"></i> Recursos Técnicos</h2>
+            <div class="news-grid">
+                <div class="card" style="animation-delay: 1s;">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>vLLM vs TensorRT-LLM</h3>
+                    <p><strong>vLLM:</strong> 30-80% más rápido en inferencia.<br>
+                       🚀 Inference optimizado con PagedAttention<br>
+                       💡 Fácil de implementar<br>
+                       🔌 Soporte amplio para modelos</p>
+                    <span class="badge">Rendimiento</span>
                 </div>
-                <div class="card-content">
-                    <p><strong>Bloomberg advierte</strong> que muchas empresas de IA no tienen plan de negocio sólido.</p>
-                    <p>Sugiere que una caída bursátil tendría efectos enormes para todo el ecosistema tecnológico.</p>
-                    <a href="https://www.bbc.com/mundo/articles/c2d7nggng49o" target="_blank" class="read-more">Leer más →</a>
+
+                <div class="card" style="animation-delay: 1.1s;">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Hardware: RTX 5090</h3>
+                    <p>Nuevo super chip con DLSS 4:<br><br>
+                       ⚡ Hasta 8x mejora en renderizado<br>
+                       🎮 Ideal para modelado local<br>
+                       💪 64GB+ VRAM disponible</p>
+                    <span class="badge">Top Tier</span>
+                </div>
+
+                <div class="card" style="animation-delay: 1.2s;">
+                    <div class="card-icon"><i class="fab fa-amd"></i></div>
+                    <h3>AMD Ryzen AI 400</h3>
+                    <p>NPU integrada de alta eficiencia:<br><br>
+                       📊 50 TOPS de capacidad<br>
+                       💾 Optimizada para edge computing<br>
+                       🔋 Excelente relación rendimiento/energía</p>
+                    <span class="badge">Eficiente</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Noticia 6 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <div class="card-date">📅 Febrero 2026</div>
-                    <h3 class="card-title">China lanza sus propios Modelos 3D de IA</h3>
-                </div>
-                <div class="card-content">
-                    <p>La gigante china de los videojuegos está desarrollando algunos de los modelos 3D de inteligencia artificial más avanzados del mundo.</p>
-                    <a href="https://es.wired.com/tag/inteligencia-artificial" target="_blank" class="read-more">Leer más →</a>
-                </div>
+        <!-- Footer -->
+        <footer>
+            <p><i class="fas fa-copyright"></i> Febrero 2026 | Resumen de IA Actualizado</p>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
             </div>
-        </div>
-
-        <!-- Comparativa de Modelos -->
-        <div class="models-comparison">
-            <h2 style="text-align: center; margin-bottom: 30px;">🏆 Comparativa de Modelos (Febrero 2026)</h2>
-            
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Modelo</th>
-                        <th>Desarrollador</th>
-                        <th>Benchmark Destacado</th>
-                        <th>Puntuación</th>
-                        <th>Especialidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Gemini 3.1 Pro</td>
-                        <td>Google</td>
-                        <td>GPQA Diamond</td>
-                        <td><span class="winner">94.3%</span></td>
-                        <td>Razonamiento científico</td>
-                    </tr>
-                    <tr>
-                        <td>Gemini 3.1 Pro</td>
-                        <td>Google</td>
-                        <td>ARC-AGI-2</td>
-                        <td><span class="winner">77.1%</span></td>
-                        <td>Inteligencia general</td>
-                    </tr>
-                    <tr>
-                        <td>Claude Opus 4.6</td>
-                        <td>Anthropic</td>
-                        <td>SWE-Bench Verified</td>
-                        <td><span class="winner">80.8%</span></td>
-                        <td>Coding general</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-5.3-Codex</td>
-                        <td>OpenAI</td>
-                        <td>Terminal-Bench 2.0</td>
-                        <td><span class="winner">77.3%</span></td>
-                        <td>Coding terminal especializado</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-5.3-Codex</td>
-                        <td>OpenAI</td>
-                        <td>LiveCodeBench</td>
-                        <td>2887 Elo</td>
-                        <td>Coding en vivo</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div style="text-align: center; margin-top: 20px;">
-                <p style="font-style: italic; opacity: 0.8;">Fuente: Comparativa basada en datos de febrero 2026</p>
-            </div>
-        </div>
-
-        <!-- Nota sobre fecha -->
-        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-            <p style="margin-bottom: 10px;"><strong>Nota importante:</strong> Esta página fue generada el 22/02/2026.</p>
-            <p style="opacity: 0.8; font-size: 0.9rem;">Para noticias más recientes, consulta las fuentes originales enlazadas en cada artículo.</p>
-        </div>
+            <p>Generado automáticamente por Cocobot 🤖🐱</p>
+        </footer>
     </div>
 
-    <footer class="footer">
-        <p>🤖 Generado por Cocobot - Tu asistente IA con espíritu gato</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Última actualización: Febrero 2026</p>
-    </footer>
+    <!-- Timestamp flotante -->
+    <div class="timestamp">
+        <i class="far fa-clock"></i> Última actualización: Febrero 2026
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to cards on scroll
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
