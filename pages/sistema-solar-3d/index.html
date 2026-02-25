@@ -251,8 +251,8 @@
     <div id="controls">
         <div id="speed-control">
             <label>⚡ Velocidad:</label>
-            <input type="range" id="speed-slider" min="0" max="100" value="10">
-            <span id="speed-label">10%</span>
+            <input type="range" id="speed-slider" min="0" max="100" value="5">
+            <span id="speed-label">5%</span>
         </div>
     </div>
     
@@ -262,9 +262,25 @@
         // Configuración inicial
         let scene, camera, renderer, controls;
         let sun, planets = [];
-        let orbitSpeed = 0.01; // Velocidad inicial más lenta
+        let orbitSpeed = 0.005; // Velocidad inicial reducida a la mitad
         let selectedPlanet = null;
         let isMenuOpen = false;
+        
+        // URLs de texturas del sistema solar (NASA/Three.js examples)
+        const textureUrls = {
+            sun: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/sun.jpg',
+            mercury: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/mercury.jpg',
+            venus: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/venus_atmosphere.jpg',
+            earth: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg',
+            mars: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/mars.jpg',
+            jupiter: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/jupiter.jpg',
+            saturn: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/saturn.jpg',
+            uranus: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/uranus.jpg',
+            neptune: 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/neptune.jpg'
+        };
+        
+        // Loader de texturas
+        const textureLoader = new THREE.TextureLoader();
         
         // Datos de los planetas
         const planetData = {
@@ -438,13 +454,15 @@
         
         function createSun() {
             const geometry = new THREE.SphereGeometry(planetData.sun.radius, 32, 32);
+            const texture = textureLoader.load(textureUrls.sun);
             const material = new THREE.MeshBasicMaterial({
+                map: texture,
                 color: planetData.sun.color
             });
             sun = new THREE.Mesh(geometry, material);
             scene.add(sun);
             
-            // Brillo del sol (usando MeshBasicMaterial sin emissive)
+            // Brillo del sol
             const glowGeometry = new THREE.SphereGeometry(planetData.sun.radius * 1.2, 32, 32);
             const glowMaterial = new THREE.MeshBasicMaterial({
                 color: 0xffaa00,
@@ -464,10 +482,12 @@
                 // Grupo para el planeta y su órbita
                 const planetGroup = new THREE.Group();
                 
-                // Planeta
+                // Planeta con textura
                 const geometry = new THREE.SphereGeometry(data.radius, 32, 32);
+                const texture = textureLoader.load(textureUrls[key]);
                 const material = new THREE.MeshStandardMaterial({
-                    color: data.color,
+                    map: texture,
+                    color: 0xffffff, // Usar color blanco para que la textura se vea bien
                     roughness: 0.8,
                     metalness: 0.2
                 });
@@ -558,7 +578,7 @@
                 isMenuOpen = false;
             });
             
-            // Planet buttons
+            // Planet buttons - ahora cierra el menú al seleccionar
             document.querySelectorAll('.planet-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const planetKey = btn.dataset.planet;
@@ -567,6 +587,10 @@
                     // Update active state
                     document.querySelectorAll('.planet-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
+                    
+                    // Cerrar menú
+                    menu.classList.remove('active');
+                    isMenuOpen = false;
                 });
             });
             
@@ -613,33 +637,53 @@
             selectedPlanet = planetKey;
             const data = planetData[planetKey];
             
-            // Verificar que los elementos existen
+            // Update info panel - usando setTextContent y createElement para evitar perder referencias
             const infoTitle = document.getElementById('info-title');
             const infoDesc = document.getElementById('info-desc');
             const infoContainer = document.getElementById('planet-info');
             
-            if (!infoTitle || !infoDesc || !infoContainer) {
-                console.error('Elementos del DOM no encontrados');
-                return;
+            // Limpiar contenido existente excepto título y descripción
+            while (infoContainer.firstChild) {
+                infoContainer.removeChild(infoContainer.firstChild);
             }
             
-            // Update info panel
-            infoTitle.textContent = data.name;
+            // Crear nuevo título
+            const newTitle = document.createElement('h2');
+            newTitle.textContent = data.name;
+            infoContainer.appendChild(newTitle);
             
-            const infoHtml = `
-                <div class="info-row"><span class="info-label">Tipo:</span><span class="info-value">${data.info.type}</span></div>
-                <div class="info-row"><span class="info-label">Diámetro:</span><span class="info-value">${data.info.diameter}</span></div>
-                <div class="info-row"><span class="info-label">Temperatura:</span><span class="info-value">${data.info.temp}</span></div>
-                <div class="info-row"><span class="info-label">Día:</span><span class="info-value">${data.info.day}</span></div>
-            `;
+            // Crear filas de información
+            const infoRows = [
+                { label: 'Tipo:', value: data.info.type },
+                { label: 'Diámetro:', value: data.info.diameter },
+                { label: 'Temperatura:', value: data.info.temp },
+                { label: 'Día:', value: data.info.day }
+            ];
             
-            infoContainer.innerHTML = `
-                <h2>${data.name}</h2>
-                ${infoHtml}
-                <p style="margin-top: 15px;">${data.info.description}</p>
-            `;
+            infoRows.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'info-row';
+                
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'info-label';
+                labelSpan.textContent = row.label;
+                
+                const valueSpan = document.createElement('span');
+                valueSpan.className = 'info-value';
+                valueSpan.textContent = row.value;
+                
+                rowDiv.appendChild(labelSpan);
+                rowDiv.appendChild(valueSpan);
+                infoContainer.appendChild(rowDiv);
+            });
             
-            // Find planet
+            // Añadir descripción
+            const descP = document.createElement('p');
+            descP.style.marginTop = '15px';
+            descP.textContent = data.info.description;
+            infoContainer.appendChild(descP);
+            
+            // Find planet y centrar cámara
             const planetObj = planets.find(p => p.data.key === planetKey);
             
             if (planetKey === 'sun') {
