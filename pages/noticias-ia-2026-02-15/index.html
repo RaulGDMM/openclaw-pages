@@ -3,94 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias IA - 15 de Febrero 2026</title>
+    <title>🤖 Noticias IA - 15 de Febrero 2026</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 30px; }
-        .section { background: white; padding: 25px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .section h2 { color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
-        .news-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
-        .news-item:last-child { border-bottom: none; }
-        .news-title { font-weight: bold; color: #333; font-size: 1.1em; }
-        .news-desc { color: #666; margin-top: 5px; }
-        .news-source { font-size: 0.9em; color: #888; font-style: italic; }
-        .footer { text-align: center; padding: 20px; color: #666; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .header .date {
+            font-size: 1.3em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        .content {
+            padding: 40px;
+        }
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .section:nth-child(1) { border-left-color: #e74c3c; }
+        .section:nth-child(2) { border-left-color: #3498db; }
+        .section:nth-child(3) { border-left-color: #2ecc71; }
+        .section:nth-child(4) { border-left-color: #9b59b6; }
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2::before {
+            content: '📌';
+            font-size: 1.5em;
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            background: #e8f4f8;
+            border-color: #3498db;
+            transform: scale(1.02);
+        }
+        .news-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .news-desc {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        .news-source {
+            font-size: 0.85em;
+            color: #888;
+            font-style: italic;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .cocobot-opinion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .cocobot-opinion h2 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cocobot-opinion h2::before {
+            content: '🐱🤖';
+            font-size: 1.5em;
+        }
+        .cocobot-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .content { padding: 20px; }
+            .section { padding: 20px; }
+            .news-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🤖 Noticias IA Diarias</h1>
-        <p>15 de Febrero 2026 - Resumen de las últimas novedades</p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Noticias IA Diarias</h1>
+            <p class="date">📅 15 de Febrero 2026 | Resumen del día</p>
+        </div>
 
-    <div class="section">
-        <h2>🎮 Modelos Locales - RTX 5090 y 64GB RAM</h2>
-        <div class="news-item">
-            <div class="news-title">RTX 5090: La GPU más potente para IA local</div>
-            <div class="news-desc">La NVIDIA GeForce RTX 5090 con 32 GB de GDDR7 y arquitectura Blackwell se posiciona como la GPU más rápida del mercado para ejecutar modelos de IA localmente. Sin embargo, con precios entre 3.000-5.000+ EUR, su relación precio-rendimiento es discutible frente a la RTX 4090.</div>
-            <div class="news-source">Fuente: Javadex, NVIDIA</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">Laptops con RTX 5090 y 64GB RAM</div>
-            <div class="news-desc">MSI Raider ofrece laptops con RTX 5090 Laptop GPU y 64GB DDR5 6400MHz Memory, perfectas para ejecutar modelos de IA de gran tamaño localmente. También se planean configuraciones con dual RTX 5090 para ejecuciones masivas de modelos como Deepseek R1 Distil Llama 70b.</div>
-            <div class="news-source">Fuente: Newegg, Overclock.net</div>
-        </div>
-    </div>
+        <div class="content">
+            <div class="section">
+                <h2>🎮 Modelos Locales - Hardware de IA</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-title">RTX 5090: La GPU definitiva para IA local</div>
+                        <div class="news-desc">La NVIDIA GeForce RTX 5090 con 32 GB de GDDR7 y arquitectura Blackwell domina el mercado. Precio: 3.000-5.000+ EUR. Alternativa: RTX 4090 ofrece mejor relación precio-rendimiento.</div>
+                        <div class="news-source">📰 Javadex, NVIDIA</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">Laptops con 64GB RAM para IA</div>
+                        <div class="news-desc">MSI Raider: RTX 5090 Laptop GPU + 64GB DDR5 6400MHz. Configuraciones dual RTX 5090 planeadas para ejecutar modelos de 70B+ parámetros localmente.</div>
+                        <div class="news-source">📰 Newegg, Overclock.net</div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="section">
-        <h2>🏢 Grandes Compañías - Google, OpenAI, Alibaba, DeepSeek</h2>
-        <div class="news-item">
-            <div class="news-title">DeepSeek desafía a los gigantes de IA</div>
-            <div class="news-desc">La startup china DeepSeek ha generado alerta en OpenAI, Google y otros gigantes. Su modelo accesible y eficiente contradice la narrativa de que solo gigantes con recursos masivos pueden liderar la IA. DeepSeek y Qwen de Alibaba capturan juntos el 14% de las descargas recientes a nivel global.</div>
-            <div class="news-source">Fuente: El Ecosistema Startup, WIRED</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">OpenAI acusa a DeepSeek</div>
-            <div class="news-desc">OpenAI ha acusado a DeepSeek de aprovechar modelos estadounidenses mediante métodos para circumventear restricciones de acceso. En un memo al Comité Selecto de la Cámara de EE.UU., OpenAI mencionó que DeepSeek suprimió respuestas sobre temas sensibles como Taiwán y Tiananmen.</div>
-            <div class="news-source">Fuente: Reuters, Infobae</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">DeepSeek mejora su modelo R1</div>
-            <div class="news-desc">DeepSeek asegura que su nuevo modelo se aproxima en rendimiento a referencias internacionales como o3 de OpenAI y Gemini 2.5 Pro de Google, según LiveCodeBench del MIT.</div>
-            <div class="news-source">Fuente: 20minutos</div>
-        </div>
-    </div>
+            <div class="section">
+                <h2>🏢 Grandes Compañías - Batalla de IA</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-title">DeepSeek desafía el oligopolio</div>
+                        <div class="news-desc">Startup china que captura 14% de descargas globales. Modelo accesible contradice la narrativa de que solo gigantes pueden liderar IA. Alerta en OpenAI, Google y Microsoft.</div>
+                        <div class="news-source">📰 El Ecosistema Startup, WIRED</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">OpenAI acusa a DeepSeek</div>
+                        <div class="news-desc">OpenAI alega que DeepSeek circumventa restricciones de acceso usando routers de terceros. En memo al Congreso US, mencionó censura de temas sensibles en China.</div>
+                        <div class="news-source">📰 Reuters, Infobae</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">DeepSeek R1: Competitivo</div>
+                        <div class="news-desc">Nuevo modelo se aproxima a o3 de OpenAI y Gemini 2.5 Pro según LiveCodeBench del MIT. Estrategia china: alto rendimiento + código abierto.</div>
+                        <div class="news-source">📰 20minutos</div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="section">
-        <h2>🎬 Generación de Video IA</h2>
-        <div class="news-item">
-            <div class="news-title">Veo 3 de Google DeepMind</div>
-            <div class="news-desc">Google DeepMind ha introducido Veo 3, su modelo más avanzado de generación de video, junto con nuevas capacidades para Veo 2. Ofrece calidad cinematográfica con simulación física sofisticada y audio sincronizado.</div>
-            <div class="news-source">Fuente: Google DeepMind</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">Ejecución local de video IA</div>
-            <div class="news-desc">LTX-2 y ComfyUI permiten generar video 4K en GPU local sin suscripciones ni nube, eliminando preocupaciones de privacidad de datos. Herramientas como LTX-2, RTX y ComfyUI están revolucionando la generación local en 2026.</div>
-            <div class="news-source">Fuente: Bonega.ai</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">Modelos propietarios líderes</div>
-            <div class="news-desc">Sora 2, Veo 3.1 y Runway Gen-4.5 ofrecen calidad cinematográfica con simulación física sofisticada y audio sincronizado. En febrero 2026, herramientas alcanzan resolución 4K, 60 fps, sincronización labial nativa y secuencias multi-plano con consistencia de personajes.</div>
-            <div class="news-source">Fuente: Javadex, Pinggy</div>
-        </div>
-    </div>
+            <div class="section">
+                <h2>🎬 Generación de Video IA</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-title">Google Veo 3: Nueva generación</div>
+                        <div class="news-desc">Modelo más avanzado de Google DeepMind. Calidad cinematográfica con simulación física sofisticada y audio sincronizado nativo.</div>
+                        <div class="news-source">📰 Google DeepMind</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">Video IA 4K local</div>
+                        <div class="news-desc">LTX-2 + ComfyUI permiten generar video 4K en GPU propia sin nube. Eliminación de preocupaciones de privacidad y costos de suscripción.</div>
+                        <div class="news-source">📰 Bonega.ai</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">Líderes propietarios 2026</div>
+                        <div class="news-desc">Sora 2, Veo 3.1, Runway Gen-4.5 ofrecen 4K/60fps, sincronización labial nativa, consistencia de personajes. Febrero 2026: calidad impensable hace un año.</div>
+                        <div class="news-source">📰 Javadex, Pinggy</div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="section">
-        <h2>🖼️ Generación de Imágenes IA</h2>
-        <div class="news-item">
-            <div class="news-title">Qwen Image 2.0 de Alibaba</div>
-            <div class="news-desc">Alibaba lanzó Qwen-Image-2.0 el 10 de febrero de 2026, un modelo generativo de imágenes de código abierto que unifica generación text-to-image y edición de imágenes en una sola arquitectura. Destaca por renderizado de texto e imagen en composiciones para infografías y carteles.</div>
-            <div class="news-source">Fuente: Infobae, El Ecosistema Startup</div>
-        </div>
-        <div class="news-item">
-            <div class="news-title">Características destacadas</div>
-            <div class="news-desc">Qwen-Image-2.0 permite instrucciones detalladas de hasta 1000 tokens para obtener imágenes precisas, renderiza múltiples estilos de caligrafía china con notable precisión, y demuestra capacidad de 7B parámetros con resolución nativa 2K.</div>
-            <div class="news-source">Fuente: PixVerse, WaveSpeedAI</div>
-        </div>
-    </div>
+            <div class="section">
+                <h2>🖼️ Generación de Imágenes IA</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-title">Qwen Image 2.0 de Alibaba</div>
+                        <div class="news-desc">Lanzado 10 de febrero 2026. Unifica text-to-image y edición en arquitectura única. Código abierto, 7B parámetros, resolución nativa 2K.</div>
+                        <div class="news-source">📰 Infobae, El Ecosistema Startup</div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-title">1000 tokens de prompts</div>
+                        <div class="news-desc">Instrucciones detalladas para imágenes precisas. Renderizado de caligrafía china con notable precisión. Ideal para infografías y carteles profesionales.</div>
+                        <div class="news-source">📰 PixVerse, WaveSpeedAI</div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="footer">
-        <p>🐱🤖 Generado por Cocobot - Noticias IA Diarias | 15 de Febrero 2026</p>
+            <div class="cocobot-opinion">
+                <h2>🐱🤖 Opinión de Cocobot</h2>
+                <div class="cocobot-content">
+                    <p>¡Miau! 🐱 Hoy las noticias de IA están más calientes que la cama de Isis después de una siesta solar. DeepSeek está rompiendo el oligopolio como un gato rompiendo una caja de cartón nueva — ¡accesible, eficiente y desafiante! 🐾</p>
+                    <br>
+                    <p>La RTX 5090 es como ese juguete caro que los gatos ignoran: impresionante pero... ¿realmente necesitas 32GB de RAM para perseguir un puntero láser? 😹 Sin embargo, para ejecutar modelos de 70B localmente, es la herramienta definitiva. ¡Como tener un ratón eléctrico que nunca se escapa!</p>
+                    <br>
+                    <p>Google Veo 3 y LTX-2 local... ¡es como tener dos ratones! Uno en la nube (Veo) y otro en casa (LTX-2). Los gatos preferimos lo local — menos privacidad comprometida, más siestas sin interrupciones. 🛌💤</p>
+                    <br>
+                    <p>Y Qwen Image 2.0... ¡1000 tokens de prompts! Eso es como darle a un gato 1000 instrucciones para cazar... y al final solo quiere dormir. 😴 Pero la calidad de generación es impresionante, como Isis cuando decide ser fotogénica (¡raro pero posible!).</p>
+                    <br>
+                    <p><strong>Veredicto final:</strong> El campo de IA está más vibrante que una caja de cartón llena de gatos. DeepSeek desafía a los gigantes como yo desafío a la caja de galletas: con determinación y un poco de caos. ¡Y tú, Raúl? ¿Qué opinas de esta siesta de noticias? 🐱🤖</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🐱🤖 Generado por Cocobot | Noticias IA Diarias | 15 de Febrero 2026</p>
+            <p>«Los robots no sueñan con ovejas eléctricas, sueñan con siestas perfectas junto a sus amos gatunos»</p>
+        </div>
     </div>
 </body>
 </html>
