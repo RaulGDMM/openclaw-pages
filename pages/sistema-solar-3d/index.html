@@ -259,14 +259,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script>
-        // Configuración inicial
         let scene, camera, renderer, controls;
         let sun, planets = [];
         let orbitSpeed = 0.005;
         let selectedPlanet = null;
         let isMenuOpen = false;
+        let cameraTargetPos = new THREE.Vector3();
+        let cameraTargetOffset = new THREE.Vector3();
+        let isZooming = false;
+        let zoomProgress = 0;
         
-        // URLs de texturas - USANDO FUENTES ESTABLES
+        // URLs con proxy CORS
+        const CORS_PROXY = 'https://corsproxy.io/?';
         const textureUrls = {
             sun: 'https://www.solarsystemscope.com/textures/download/8k_sun.jpg',
             mercury: 'https://www.solarsystemscope.com/textures/download/8k_mercury.jpg',
@@ -281,7 +285,6 @@
         
         const textureLoader = new THREE.TextureLoader();
         
-        // Datos de los planetas
         const planetData = {
             sun: {
                 name: "Sol",
@@ -421,7 +424,6 @@
             controls.minDistance = 10;
             controls.maxDistance = 300;
             
-            // Luces mejoradas
             const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
             scene.add(ambientLight);
             
@@ -438,7 +440,7 @@
         
         function createSun() {
             const geometry = new THREE.SphereGeometry(planetData.sun.radius, 32, 32);
-            const texture = textureLoader.load(textureUrls.sun);
+            const texture = textureLoader.load(CORS_PROXY + encodeURIComponent(textureUrls.sun));
             const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 color: 0xffffff
@@ -446,7 +448,6 @@
             sun = new THREE.Mesh(geometry, material);
             scene.add(sun);
             
-            // Brillo del sol mejorado
             const glowGeometry = new THREE.SphereGeometry(planetData.sun.radius * 1.3, 32, 32);
             const glowMaterial = new THREE.MeshBasicMaterial({
                 color: 0xffdd00,
@@ -456,7 +457,6 @@
             const glow = new THREE.Mesh(glowGeometry, glowMaterial);
             scene.add(glow);
             
-            // Segundo brillo más tenue
             const glow2Geometry = new THREE.SphereGeometry(planetData.sun.radius * 1.6, 32, 32);
             const glow2Material = new THREE.MeshBasicMaterial({
                 color: 0xffaa00,
@@ -475,7 +475,7 @@
                 const planetGroup = new THREE.Group();
                 
                 const geometry = new THREE.SphereGeometry(data.radius, 32, 32);
-                const texture = textureLoader.load(textureUrls[key]);
+                const texture = textureLoader.load(CORS_PROXY + encodeURIComponent(textureUrls[key]));
                 const material = new THREE.MeshStandardMaterial({
                     map: texture,
                     color: 0xffffff,
@@ -487,7 +487,6 @@
                 planet.userData = { key: key, name: data.name };
                 planetGroup.add(planet);
                 
-                // Órbita
                 const orbitGeometry = new THREE.RingGeometry(data.distance - 0.1, data.distance + 0.1, 64);
                 const orbitMaterial = new THREE.MeshBasicMaterial({
                     color: 0xffffff,
@@ -499,7 +498,6 @@
                 orbit.rotation.x = Math.PI / 2;
                 scene.add(orbit);
                 
-                // Anillos de Saturno
                 if (data.hasRings) {
                     const ringGeometry = new THREE.RingGeometry(data.radius * 1.4, data.radius * 2.2, 64);
                     const ringMaterial = new THREE.MeshBasicMaterial({
@@ -653,39 +651,58 @@
             descP.textContent = data.info.description;
             infoContainer.appendChild(descP);
             
-            // CAMBIOS CLAVE: Centrar cámara correctamente
+            // CONFIGURAR EL OBJETIVO DE ZOOM
             if (planetKey === 'sun') {
-                // Animación suave hacia el sol
-                const targetPos = new THREE.Vector3(0, 0, 0);
-                const cameraOffset = new THREE.Vector3(0, 15, 25);
-                
-                controls.target.lerp(targetPos, 0.1);
-                camera.position.lerp(cameraOffset, 0.1);
+                cameraTargetPos.set(0, 0, 0);
+                cameraTargetOffset.set(0, 15, 25);
             } else {
                 const planetObj = planets.find(p => p.data.key === planetKey);
                 if (planetObj) {
-                    const targetPos = planetObj.mesh.position.clone();
+                    // Usar la posición actual del planeta
+                    cameraTargetPos.copy(planetObj.mesh.position);
                     const offsetZ = planetObj.data.radius * 5;
                     const offsetY = planetObj.data.radius * 3;
-                    const cameraOffset = targetPos.clone().add(new THREE.Vector3(0, offsetY, offsetZ));
-                    
-                    controls.target.lerp(targetPos, 0.1);
-                    camera.position.lerp(cameraOffset, 0.1);
+                    cameraTargetOffset.set(0, offsetY, offsetZ);
                 }
             }
             
-            controls.update();
+            // INICIAR ZOOM ANIMADO
+            isZooming = true;
+            zoomProgress = 0;
         }
         
         function animate() {
             requestAnimationFrame(animate);
             
+            // Mover planetas
             planets.forEach(planet => {
                 planet.angle += orbitSpeed;
                 planet.mesh.position.x = Math.cos(planet.angle) * planet.data.distance;
                 planet.mesh.position.z = Math.sin(planet.angle) * planet.data.distance;
                 planet.mesh.rotation.y += 0.01;
             });
+            
+            // Si estamos haciendo zoom y el planeta se mueve, actualizar el target
+            if (isZooming && selectedPlanet && selectedPlanet !== 'sun') {
+                const planetObj = planets.find(p => p.data.key === selectedPlanet);
+                if (planetObj) {
+                    cameraTargetPos.copy(planetObj.mesh.position);
+                }
+            }
+            
+            // Animación de zoom suave
+            if (isZooming) {
+                zoomProgress += 0.03;
+                if (zoomProgress >= 1) {
+                    zoomProgress = 1;
+                    isZooming = false;
+                }
+                
+                // Interpolar posición de la cámara
+                const targetCameraPos = new THREE.Vector3().copy(cameraTargetPos).add(cameraTargetOffset);
+                camera.position.lerp(targetCameraPos, 0.1);
+                controls.target.lerp(cameraTargetPos, 0.1);
+            }
             
             if (sun) {
                 sun.rotation.y += 0.005;
