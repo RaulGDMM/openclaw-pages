@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias de Inteligencia Artificial - Febrero 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .timestamp {
+            display: inline-block;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #667eea;
+            border-bottom: 3px solid linear-gradient(90deg, #667eea, #764ba2);
+            padding-bottom: 10px;
+        }
+
+        .news-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .news-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .news-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #ffeaa7, #fdcb6e);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        ul li:before {
+            content: "🔹";
+            position: absolute;
+            left: 0;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .container { padding: 10px; }
+            section, header { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Noticias de Inteligencia Artificial</h1>
+            <p class="subtitle">Las últimas novedades del ecosistema IA - Actualizado 25 Febrero 2026</p>
+            <div class="timestamp">📅 Última actualización: 25/02/2026</div>
+        </header>
+
+        <div class="stats-section">
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">77.1%</div>
+                <div class="stat-label">ARC-AGI-2 (Gemini 3.1 Pro)</div>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">~49</div>
+                <div class="stat-label">Tokens/s (Qwen3 + llama.cpp)</div>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">1M</div>
+                <div class="stat-label">Tokens contexto (Gemini 3.1 Pro)</div>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">25%</div>
+                <div class="stat-label">Más rápido (GPT-5.3-Codex)</div>
+            </div>
+        </div>
+
+        <section class="animate-on-scroll">
+            <h2>🧠 LLMs Grandes en la Nube</h2>
+            
+            <div class="news-card">
+                <h3>Google Gemini 3.1 Pro <span class="badge">Nuevo!</span></h3>
+                <p><strong>Rendimiento revolucionario:</strong> Alcanza <span class="highlight">77.1% en ARC-AGI-2</span>, más del doble que la versión anterior (Gemini 3 Pro). Ventana de contexto masiva de <span class="highlight">1 millón de tokens</span> para generación de código y documentos.</p>
+                <p><strong>Lanzamiento:</strong> 19 de febrero 2026. Diseñado específicamente para agentes IA con capacidades mejoradas de razonamiento multimodal.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Anthropic Claude Sonnet 4.6 <span class="badge">Por defecto</span></h3>
+                <p><strong>Rendimiento nivel Opus:</strong> Ahora ofrece capacidades que antes requerían un modelo Opus, incluyendo tareas de oficina económicamente valiosas. Mejora significativa en habilidades de uso de computadora.</p>
+                <p><strong>Ventaja clave:</strong> Mejor relación calidad-precio para la mayoría de casos de uso empresariales.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Claude Opus 4.6</h3>
+                <p><strong>Líder en duración de tareas:</strong> Horizonte temporal del 50% de 14 horas y 30 minutos según METR (20 febrero 2026). Mejoras en codificación, sostenimiento de tareas a largo plazo y creación de productos profesionales de alta calidad.</p>
+                <p><strong>Novedad:</strong> Claude en PowerPoint para presentaciones empresariales.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>OpenAI GPT-5.3-Codex <span class="badge">GA</span></h3>
+                <p><strong>General Availability para GitHub Copilot:</strong> Lanzado el 9 de febrero 2026. <span class="highlight">25% más rápido</span> en tareas agénticas.</p>
+                <p><strong>Codificación agéntica:</strong> Capaz de llevar tareas complejas de programación desde el inicio hasta el final automáticamente.</p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <h2>💻 LLMs Locales (RTX 5090 + 64GB RAM)</h2>
+            
+            <div class="news-card">
+                <h3>Qwen3-Coder-Next</h3>
+                <p><strong>Especificaciones:</strong> 80B parámetros totales / 3B activos por token. Rendimiento optimizado con llama.cpp PR #19375.</p>
+                <p><strong>Rendimiento actual:</strong> <span class="highlight">~49 tokens/segundo</span> tras optimizaciones (compute graph GGML, CUDA graphs, operaciones fusionadas).</p>
+                <p><strong>Mejoras clave:</strong> Reducción de overhead de CPU y mejor utilización de memoria GPU.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Alternativas Populares</h3>
+                <ul>
+                    <li><strong>DeepSeek R1:</strong> Disponible gratis en OpenRouter, excelente relación rendimiento-costo</li>
+                    <li><strong>Llama 3.3 70B:</strong> También disponible gratis en OpenRouter, comunidad activa</li>
+                    <li><strong>Opciones cuantizadas:</strong> Q4_K_M y Q8_0 ofrecen buen balance calidad-velocidad</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <h2>🎨 Generación Visual e Imágenes</h2>
+            
+            <div class="news-card">
+                <h3>DALL-E 3</h3>
+                <p><strong>Puntos fuertes:</strong> Entiende matices mejor que versiones anteriores. La opción más fácil de usar, ideal para principiantes y generación rápida.</p>
+                <p><strong>Limitaciones:</strong> Tiende a duplicar y deformar palabras en texto integrado.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Stable Diffusion 3</h3>
+                <p><sup>**Supera a DALL-E 3**:</strong> Mayor fidelidad al prompt y mejor integración de tipografía. Mejora general en calidad de imagen y comprensión del prompt.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Flux Schnell 1.0</h3>
+                <p><strong>Ventaja clave:</strong> Disponible gratis con excelente rendimiento. Competitivo con modelos premium en calidad y velocidad de generación.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Ranking Calidad (Febrero 2026)</h3>
+                <ul>
+                    <li><strong>Máxima calidad:</strong> FLUX.1.1 Pro, Stable Diffusion 3.5, Aurora</li>
+                    <li><strong>Mejor texto integrado:</strong> Ideogram 2.0, Imagen 3</li>
+                    <li><strong>Mejor valor:</strong> Flux Schnell (gratis), Llama 3.3 70B (OpenRouter)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <h2>🎬 Video Generativo</h2>
+            
+            <div class="news-card">
+                <h3>Líderes del Mercado</h3>
+                <p>Todos los principales modelos ahora soportan <span class="highlight">4K a 60fps</span>:</p>
+                <ul>
+                    <li><strong>Runway Gen-4.5:</strong> 10 segundos por generación, sin audio automático (requiere herramientas separadas)</li>
+                    <li><strong>Sora 2:</strong> Créditos de contenido integrados (C2PA) y marcas de agua visibles</li>
+                    <li><strong>Google Veo 3.1:</strong> 8 segundos, modo "Veo 3 Fast" para YouTube Shorts con SynthID</li>
+                    <li><strong>Pika 2.5:</strong> 5 segundos (10s con extensión), genera efectos de sonido básicos</li>
+                    <li><strong>Kling 3.0:</strong> 15 segundos, sincronización nativa de audio</li>
+                </ul>
+            </div>
+
+            <div class="news-card">
+                <h3>Recomendación de Flujo de Trabajo</h3>
+                <p><strong>Enfoque híbrido:</strong> Usa Sora 2 para el material principal, Runway para refinamientos estilísticos y Pika para variantes rápidas de redes sociales.</p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <h2>🔧 Recursos Técnicos</h2>
+            
+            <div class="news-card">
+                <h3>vLLM vs TensorRT-LLM</h3>
+                <p><strong>Rendimiento:</strong> vLLM es <span class="highlight">30-80% más rápido</span> que alternativas tradicionales para inferencia de modelos grandes.</p>
+            </div>
+
+            <div class="news-card">
+                <h3>Hardware Destacado</h3>
+                <ul>
+                    <li><strong>RTX 5090:</strong> Con DLSS 4, ofrece hasta 8x mejora en rendimiento para tareas de IA</li>
+                    <li><strong>AMD Ryzen AI 400:</strong> NPU de 50 TOPS para procesamiento local eficiente</li>
+                </ul>
+            </div>
+
+            <div class="news-card">
+                <h3>llama.cpp - Optimizaciones Recientes</h3>
+                <p><strong>PR #19375:</strong> Mejoras específicas para Qwen3-Coder-Next incluyendo:</p>
+                <ul>
+                    <li>Compute graph GGML optimizado</li>
+                    <li>CUDA graphs para reducir overhead</li>
+                    <li>Operaciones fusionadas para mejor utilización de memoria</li>
+                    <li>Prompt evaluation hasta 509 tokens/s en hardware adecuado</li>
+                </ul>
+            </div>
+        </section>
+
+        <p class="footer-note">
+            🤖 Generado automáticamente por Cocobot | Actualizado: 25 de febrero 2026<br>
+            🔗 Fuente: https://raulgdmm.github.io/cocobot-pages/pages/noticias-ia-febrero2026-v2/
+        </p>
+    </div>
+
+    <script>
+        // Intersection Observer para animaciones al hacer scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = Math.random() * 0.2 + 's';
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-card, section').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
