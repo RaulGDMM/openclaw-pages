@@ -29,11 +29,15 @@
         #speed-slider { width: 150px; cursor: pointer; }
         #speed-label { min-width: 60px; font-size: 0.9em; }
         #instructions { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 20px; font-size: 0.85em; color: #aaa; text-align: center; }
+        #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001; background: rgba(0,0,0,0.9); padding: 30px 50px; border-radius: 15px; text-align: center; border: 2px solid #00d9ff; }
+        #loading-spinner { font-size: 3em; animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (max-width: 768px) { #menu { width: 100%; left: -100%; } #menu-header h1 { font-size: 1.4em; } #controls { bottom: 10px; padding: 10px 15px; } #speed-slider { width: 100px; } #instructions { bottom: 60px; font-size: 0.75em; padding: 8px 12px; } }
     </style>
 </head>
 <body>
     <div id="canvas-container"></div>
+    <div id="loading"><div id="loading-spinner">🌌</div><p>Cargando sistema solar...</p></div>
     <button id="hamburger-btn">☰</button>
     <div id="menu">
         <div id="menu-header">
@@ -77,20 +81,7 @@
         let isZooming = false;
         let zoomProgress = 0;
         
-        // TEXTURAS LOCALES (sin CORS)
-        const textureLoader = new THREE.TextureLoader();
-        const texturePaths = {
-            sun: './textures/sun.jpg',
-            mercury: './textures/mercury.jpg',
-            venus: './textures/venus.jpg',
-            earth: './textures/earth.jpg',
-            mars: './textures/mars.jpg',
-            jupiter: './textures/jupiter.jpg',
-            saturn: './textures/saturn.jpg',
-            uranus: './textures/uranus.jpg',
-            neptune: './textures/neptune.jpg'
-        };
-        
+        // DATOS DE PLANETAS con colores fallback
         const planetData = {
             sun: { name: "Sol", radius: 5, distance: 0, color: 0xffdd00, info: { type: "Estrella", diameter: "1.392.700 km", temp: "5.505°C (superficie)", age: "4.600 millones de años", description: "El Sol es la estrella del sistema solar. Es una esfera casi perfecta de plasma caliente, calentada por la fusión nuclear en su núcleo." } },
             mercury: { name: "Mercurio", radius: 0.8, distance: 12, color: 0xb5b5b5, info: { type: "Planeta rocoso", diameter: "4.879 km", temp: "-173°C a 427°C", day: "59 días terrestres", description: "Mercurio es el planeta más pequeño y cercano al Sol. Tiene una superficie llena de cráteres similar a la Luna." } },
@@ -118,7 +109,7 @@
             controls.minDistance = 10;
             controls.maxDistance = 300;
             
-            // Luces mejoradas para que se vea bien
+            // Luces mejoradas
             const ambientLight = new THREE.AmbientLight(0x555555, 2);
             scene.add(ambientLight);
             const pointLight = new THREE.PointLight(0xffffff, 5, 300);
@@ -129,13 +120,19 @@
             createPlanets();
             createStars();
             setupEvents();
+            
+            // Ocultar loading cuando esté listo
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 1000);
+            
             animate();
         }
         
         function createSun() {
             const geometry = new THREE.SphereGeometry(planetData.sun.radius, 32, 32);
-            const texture = textureLoader.load(texturePaths.sun);
-            const material = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff });
+            // Usar color directamente sin textura
+            const material = new THREE.MeshBasicMaterial({ color: planetData.sun.color });
             sun = new THREE.Mesh(geometry, material);
             sun.userData = { key: 'sun', name: 'Sol' };
             scene.add(sun);
@@ -153,10 +150,9 @@
                 const data = planetData[key];
                 const planetGroup = new THREE.Group();
                 const geometry = new THREE.SphereGeometry(data.radius, 32, 32);
-                const texture = textureLoader.load(texturePaths[key]);
+                // Usar color directamente sin textura (más simple y fiable)
                 const material = new THREE.MeshStandardMaterial({ 
-                    map: texture, 
-                    color: 0xffffff,
+                    color: data.color,
                     roughness: 0.7,
                     metalness: 0.1
                 });
@@ -280,28 +276,34 @@
             });
             if (sun) sun.rotation.y += 0.005;
             
-            // ZOOM ANIMADO
+            // ZOOM ANIMADO CORREGIDO
             if (isZooming && selectedPlanetKey) {
                 let targetMesh;
+                let radius;
+                
                 if (selectedPlanetKey === 'sun') {
                     targetMesh = sun;
+                    radius = planetData.sun.radius;
                 } else {
                     const planetObj = planets.find(p => p.data.key === selectedPlanetKey);
                     targetMesh = planetObj ? planetObj.mesh : null;
+                    radius = planetObj ? planetObj.data.radius : 1;
                 }
                 
                 if (targetMesh) {
+                    // Calcular posición objetivo para la cámara (cerca del planeta)
                     const targetPos = targetMesh.position.clone();
-                    const radius = selectedPlanetKey === 'sun' ? planetData.sun.radius : planets.find(p => p.data.key === selectedPlanetKey).data.radius;
-                    const offsetZ = radius * 5;
-                    const offsetY = radius * 3;
+                    const offsetZ = radius * 8; // Más cerca para ver mejor
+                    const offsetY = radius * 4;
                     const targetCameraPos = targetPos.clone().add(new THREE.Vector3(0, offsetY, offsetZ));
                     
-                    // Interpolación suave
-                    camera.position.lerp(targetCameraPos, 0.03);
-                    controls.target.lerp(targetPos, 0.03);
+                    // Interpolación suave de la cámara
+                    camera.position.lerp(targetCameraPos, 0.05);
                     
-                    zoomProgress += 0.03;
+                    // Interpolación suave del punto de enfoque
+                    controls.target.lerp(targetPos, 0.05);
+                    
+                    zoomProgress += 0.05;
                     if (zoomProgress >= 1) {
                         zoomProgress = 1;
                         isZooming = false;
