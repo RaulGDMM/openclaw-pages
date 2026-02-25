@@ -259,13 +259,52 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 40px 15px;
+            }
+            
+            section {
+                padding: 25px 20px;
+            }
+            
             .protagonist {
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .protagonist img {
+                width: 150px;
+                height: 150px;
+            }
 
             .video-container {
                 height: 315px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .platforms {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .platform-badge {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .price-card {
+                padding: 20px;
             }
         }
     </style>
@@ -294,8 +333,8 @@
             </p>
 
             <div class="protagonist">
-                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202601/2718/e5c4c3e9a3f3b3e3a3f3b3e3.png" 
-                     alt="Leon S. Kennedy" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Resident_Evil_2_Remake_Leon_Kennedy.jpg/220px-Resident_Evil_2_Remake_Leon_Kennedy.jpg'">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Resident_Evil_2_Remake_Leon_Kennedy.jpg/220px-Resident_Evil_2_Remake_Leon_Kennedy.jpg" 
+                     alt="Leon S. Kennedy">
                 <div class="protagonist-info">
                     <h3>Leon S. Kennedy</h3>
                     <p><strong>Papel:</strong> Agente del DSO (Department of State Outreach)</p>
@@ -309,8 +348,8 @@
             </div>
 
             <div class="protagonist">
-                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202601/2718/grace-ashcroft-re9.png" 
-                     alt="Grace Ashcroft" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/FBI_logo.svg/1200px-FBI_logo.svg.jpg'">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&h=400&fit=crop" 
+                     alt="Grace Ashcroft - Agente FBI">
                 <div class="protagonist-info">
                     <h3>Grace Ashcroft</h3>
                     <p><strong>Papel:</strong> Analista del FBI especializada en homicidios</p>
@@ -412,16 +451,16 @@
             <h2>🖼️ Galería</h2>
             <div class="gallery">
                 <div class="gallery-item">
-                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202510/0312/yC8xXvKzJvZfLqGvHqZvLqGv.png" 
-                         alt="Resident Evil Requiem Artwork 1">
+                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&h=338&fit=crop" 
+                         alt="Atmósfera de terror">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202601/2718/re9-key-art.png" 
-                         alt="Resident Evil Requiem Artwork 2" onerror="this.src='https://via.placeholder.com/400x225/ff3333/ffffff?text=RE+Requiem'">
+                    <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=600&h=338&fit=crop" 
+                         alt="Resident Evil Requiem - Ciudad en ruinas">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202601/2718/re9-gameplay.png" 
-                         alt="Resident Evil Requiem Gameplay" onerror="this.src='https://via.placeholder.com/400x225/cc0000/ffffff?text=Gameplay'">
+                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&h=338&fit=crop" 
+                         alt="Resident Evil Requiem - Gameplay">
                 </div>
             </div>
         </section>
