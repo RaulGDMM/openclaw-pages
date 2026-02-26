@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐱 Gatos vs Perros 🐶 | Batalla Épic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .game-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .team {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-cats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .team-dogs {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+        
+        .team-emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .team-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .team-score {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .vs {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0 20px;
+        }
+        
+        .game-area {
+            min-height: 400px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .click-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            position: relative;
+        }
+        
+        .target {
+            font-size: 4em;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            animation: bounce 0.5s ease-in-out infinite;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .target:active {
+            transform: scale(0.9);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        
+        .click-effect {
+            position: absolute;
+            font-size: 2em;
+            pointer-events: none;
+            animation: pop 0.5s ease-out forwards;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn-start {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn-reset:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.6);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .message {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            min-height: 40px;
+            margin: 15px 0;
+        }
+        
+        .timer-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .timer-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 5px;
+            transition: width 0.1s linear;
+        }
+        
+        .power-up {
+            position: absolute;
+            font-size: 2.5em;
+            cursor: pointer;
+            animation: spin 2s linear infinite;
+            user-select: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .combo-text {
+            position: absolute;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            animation: floatUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            z-index: 100;
+        }
+        
+        .game-over.hidden {
+            display: none;
+        }
+        
+        .game-over h2 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .game-over p {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .final-scores {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .final-scores .team {
+            background: #f8f9fa;
+            color: #333;
+            min-width: 120px;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .stats h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .score-board {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .vs {
+                transform: rotate(90deg);
+            }
+            
+            .target {
+                font-size: 3em;
+            }
+            
+            .team {
+                min-width: 100px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐱 Gatos vs Perros 🐶</h1>
+        <p class="subtitle">¡Haz clic rápido en los gatos para ganar!</p>
+        
+        <div class="game-info">
+            <div class="score-board">
+                <div class="team team-cats">
+                    <span class="team-emoji">🐱</span>
+                    <span class="team-name">TÚ (Gatos)</span>
+                    <span class="team-score" id="catScore">0</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team team-dogs">
+                    <span class="team-emoji">🐶</span>
+                    <span class="team-name">IA (Perros)</span>
+                    <span class="team-score" id="dogScore">0</span>
+                </div>
+            </div>
+            
+            <div class="timer-bar">
+                <div class="timer-fill" id="timerBar"></div>
+            </div>
+            
+            <div class="message" id="message">¡Haz clic en el botón de INICIAR!</div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="click-area" id="clickArea">
+                <div class="target" id="target">🐱</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn-start" id="startBtn">🎮 INICIAR JUEGO</button>
+            <button class="btn-reset" id="resetBtn" disabled>🔄 REINICIAR</button>
+        </div>
+        
+        <div class="stats">
+            <h3>📊 Estadísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="clicks">0</div>
+                    <div class="stat-label">Clicks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="combo">0</div>
+                    <div class="stat-label">Combo Max</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="accuracy">100%</div>
+                    <div class="stat-label">Precisión</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="powerups">0</div>
+                    <div class="stat-label">Power-ups</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-over hidden" id="gameOver">
+            <h2 id="gameOverTitle">¡JUEGO TERMINADO!</h2>
+            <div class="final-scores">
+                <div class="team">
+                    <span class="team-emoji">🐱</span>
+                    <span class="team-name">TÚ</span>
+                    <span class="team-score" id="finalCatScore">0</span>
+                </div>
+                <div class="team">
+                    <span class="team-emoji">🐶</span>
+                    <span class="team-name">IA</span>
+                    <span class="team-score" id="finalDogScore">0</span>
+                </div>
+            </div>
+            <p id="gameOverMessage"></p>
+            <button class="btn-start" onclick="game.resetGame()">🔄 JUGAR DE NUEVO</button>
+        </div>
+    </div>
+    
+    <script>
+        class Game {
+            constructor() {
+                this.catScore = 0;
+                this.dogScore = 0;
+                this.clicks = 0;
+                this.misses = 0;
+                this.maxCombo = 0;
+                this.currentCombo = 0;
+                this.powerupsCollected = 0;
+                this.isPlaying = false;
+                this.timer = null;
+                this.dogInterval = null;
+                this.gameDuration = 30; // segundos
+                this.timeLeft = this.gameDuration;
+                
+                this.targets = ['🐱', '🐈', '😺', '😻', '😼', '😽'];
+                this.dogEmojis = ['🐶', '🐕', '🦮', '🐩'];
+                
+                this.initElements();
+                this.initEvents();
+            }
+            
+            initElements() {
+                this.catScoreEl = document.getElementById('catScore');
+                this.dogScoreEl = document.getElementById('dogScore');
+                this.timerBar = document.getElementById('timerBar');
+                this.messageEl = document.getElementById('message');
+                this.targetEl = document.getElementById('target');
+                this.clickArea = document.getElementById('clickArea');
+                this.gameArea = document.getElementById('gameArea');
+                this.startBtn = document.getElementById('startBtn');
+                this.resetBtn = document.getElementById('resetBtn');
+                this.gameOverEl = document.getElementById('gameOver');
+                this.clicksEl = document.getElementById('clicks');
+                this.comboEl = document.getElementById('combo');
+                this.accuracyEl = document.getElementById('accuracy');
+                this.powerupsEl = document.getElementById('powerups');
+            }
+            
+            initEvents() {
+                this.startBtn.addEventListener('click', () => this.startGame());
+                this.resetBtn.addEventListener('click', () => this.resetGame());
+                this.targetEl.addEventListener('click', (e) => this.handleTargetClick(e));
+                
+                // Touch support
+                this.targetEl.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleTargetClick(e);
+                });
+            }
+            
+            startGame() {
+                this.isPlaying = true;
+                this.timeLeft = this.gameDuration;
+                this.catScore = 0;
+                this.dogScore = 0;
+                this.clicks = 0;
+                this.misses = 0;
+                this.maxCombo = 0;
+                this.currentCombo = 0;
+                this.powerupsCollected = 0;
+                
+                this.updateDisplay();
+                this.startBtn.disabled = true;
+                this.resetBtn.disabled = false;
+                this.gameOverEl.classList.add('hidden');
+                
+                this.messageEl.textContent = '¡RÁPIDO! Haz clic en los gatos 🐱';
+                this.spawnTarget();
+                
+                // Timer
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateTimer();
+                    
+                    if (this.timeLeft <= 0) {
+                        this.endGame();
+                    }
+                    
+                    // Spawn power-up every 5 seconds
+                    if (this.timeLeft % 5 === 0) {
+                        this.spawnPowerUp();
+                    }
+                }, 1000);
+                
+                // Dog AI scoring
+                this.dogInterval = setInterval(() => {
+                    if (this.isPlaying) {
+                        // Dog scores randomly, faster as time goes on
+                        const chance = 0.3 + (this.gameDuration - this.timeLeft) / 50;
+                        if (Math.random() < chance) {
+                            const points = Math.floor(Math.random() * 3) + 1;
+                            this.dogScore += points;
+                            this.updateDisplay();
+                            this.showMessage(`¡Los perros ganaron ${points} puntos!`);
+                        }
+                    }
+                }, 1500);
+            }
+            
+            spawnTarget() {
+                if (!this.isPlaying) return;
+                
+                // Remove old target
+                this.targetEl.remove();
+                
+                // Create new target
+                this.targetEl = document.createElement('div');
+                this.targetEl.className = 'target';
+                this.targetEl.textContent = this.targets[Math.floor(Math.random() * this.targets.length)];
+                this.targetEl.addEventListener('click', (e) => this.handleTargetClick(e));
+                this.targetEl.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleTargetClick(e);
+                });
+                
+                // Random position
+                const areaWidth = this.clickArea.offsetWidth;
+                const areaHeight = this.clickArea.offsetHeight;
+                const targetSize = 60;
+                
+                const x = Math.random() * (areaWidth - targetSize);
+                const y = Math.random() * (areaHeight - targetSize);
+                
+                this.targetEl.style.position = 'absolute';
+                this.targetEl.style.left = x + 'px';
+                this.targetEl.style.top = y + 'px';
+                
+                this.clickArea.appendChild(this.targetEl);
+            }
+            
+            handleTargetClick(e) {
+                if (!this.isPlaying) return;
+                
+                this.clicks++;
+                this.currentCombo++;
+                
+                if (this.currentCombo > this.maxCombo) {
+                    this.maxCombo = this.currentCombo;
+                }
+                
+                // Score calculation with combo bonus
+                const points = 1 + Math.floor(this.currentCombo / 5);
+                this.catScore += points;
+                
+                // Visual effects
+                this.createClickEffect(e.clientX, e.clientY, `+${points}`);
+                this.createComboText(e.clientX, e.clientY);
+                
+                // Random chance to spawn power-up
+                if (Math.random() < 0.1) {
+                    this.spawnPowerUp();
+                }
+                
+                this.updateDisplay();
+                this.spawnTarget();
+            }
+            
+            spawnPowerUp() {
+                if (!this.isPlaying) return;
+                
+                const powerUp = document.createElement('div');
+                powerUp.className = 'power-up';
+                powerUp.textContent = '⭐';
+                
+                const areaWidth = this.gameArea.offsetWidth;
+                const areaHeight = this.gameArea.offsetHeight;
+                
+                powerUp.style.left = Math.random() * (areaWidth - 50) + 'px';
+                powerUp.style.top = Math.random() * (areaHeight - 50) + 'px';
+                
+                powerUp.addEventListener('click', () => {
+                    this.catScore += 5;
+                    this.powerupsCollected++;
+                    this.updateDisplay();
+                    this.showMessage('¡Power-up! +5 puntos');
+                    powerUp.remove();
+                });
+                
+                this.gameArea.appendChild(powerUp);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    if (powerUp.parentNode) {
+                        powerUp.remove();
+                    }
+                }, 3000);
+            }
+            
+            createClickEffect(x, y, text) {
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                effect.textContent = text;
+                effect.style.left = x + 'px';
+                effect.style.top = y + 'px';
+                
+                document.body.appendChild(effect);
+                
+                setTimeout(() => effect.remove(), 500);
+            }
+            
+            createComboText(x, y) {
+                if (this.currentCombo >= 5) {
+                    const text = document.createElement('div');
+                    text.className = 'combo-text';
+                    text.textContent = `¡${this.currentCombo} COMBO! 🔥`;
+                    text.style.left = x + 'px';
+                    text.style.top = (y - 30) + 'px';
+                    
+                    document.body.appendChild(text);
+                    
+                    setTimeout(() => text.remove(), 1000);
+                }
+            }
+            
+            updateTimer() {
+                const percentage = (this.timeLeft / this.gameDuration) * 100;
+                this.timerBar.style.width = percentage + '%';
+                
+                if (this.timeLeft <= 5) {
+                    this.timerBar.style.background = 'linear-gradient(90deg, #f5576c, #f093fb)';
+                    this.messageEl.textContent = `¡${this.timeLeft} segundos restantes!`;
+                }
+            }
+            
+            showMessage(text) {
+                this.messageEl.textContent = text;
+                setTimeout(() => {
+                    if (this.isPlaying) {
+                        this.messageEl.textContent = '¡Sigue haciendo clic!';
+                    }
+                }, 1500);
+            }
+            
+            updateDisplay() {
+                this.catScoreEl.textContent = this.catScore;
+                this.dogScoreEl.textContent = this.dogScore;
+                this.clicksEl.textContent = this.clicks;
+                this.comboEl.textContent = this.maxCombo;
+                this.powerupsEl.textContent = this.powerupsCollected;
+                
+                const accuracy = this.clicks > 0 ? Math.round((this.clicks / (this.clicks + this.misses)) * 100) : 100;
+                this.accuracyEl.textContent = accuracy + '%';
+            }
+            
+            endGame() {
+                this.isPlaying = false;
+                clearInterval(this.timer);
+                clearInterval(this.dogInterval);
+                
+                document.getElementById('finalCatScore').textContent = this.catScore;
+                document.getElementById('finalDogScore').textContent = this.dogScore;
+                
+                const gameOverMessage = document.getElementById('gameOverMessage');
+                const gameOverTitle = document.getElementById('gameOverTitle');
+                
+                if (this.catScore > this.dogScore) {
+                    gameOverTitle.textContent = '¡LOS GATOS GANAN! 🐱🎉';
+                    gameOverMessage.textContent = `¡Increíble! ${this.catScore} - ${this.dogScore}`;
+                } else if (this.catScore < this.dogScore) {
+                    gameOverTitle.textContent = '¡LOS PERROS GANAN! 🐶🏆';
+                    gameOverMessage.textContent = `¡Suerte la próxima! ${this.catScore} - ${this.dogScore}`;
+                } else {
+                    gameOverTitle.textContent = '¡EMPATE! ⚖️';
+                    gameOverMessage.textContent = `¡Qué partida! ${this.catScore} - ${this.dogScore}`;
+                }
+                
+                this.gameOverEl.classList.remove('hidden');
+                this.startBtn.disabled = false;
+            }
+            
+            resetGame() {
+                this.gameOverEl.classList.add('hidden');
+                this.startBtn.disabled = false;
+                this.resetBtn.disabled = true;
+                this.messageEl.textContent = '¡Haz clic en el botón de INICIAR!';
+                
+                // Clear game area
+                const powerups = this.gameArea.querySelectorAll('.power-up');
+                powerups.forEach(p => p.remove());
+                
+                // Reset target
+                this.targetEl = document.createElement('div');
+                this.targetEl.className = 'target';
+                this.targetEl.textContent = '🐱';
+                this.targetEl.style.position = 'static';
+                this.targetEl.addEventListener('click', (e) => this.handleTargetClick(e));
+                this.clickArea.appendChild(this.targetEl);
+                
+                // Reset scores
+                this.catScoreEl.textContent = '0';
+                this.dogScoreEl.textContent = '0';
+                this.timerBar.style.width = '100%';
+                this.timerBar.style.background = 'linear-gradient(90deg, #667eea, #764ba2)';
+                
+                this.clicksEl.textContent = '0';
+                this.comboEl.textContent = '0';
+                this.accuracyEl.textContent = '100%';
+                this.powerupsEl.textContent = '0';
+            }
+        }
+        
+        // Initialize game
+        const game = new Game();
+    </script>
+</body>
+</html>
