@@ -6,14 +6,119 @@
     <title>Ataque EEUU-Israel a Irán - 28 Feb 2026</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #eee; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #eee; line-height: 1.6; padding-top: 80px; }
+        
+        /* Header fijo con menú hamburguesa */
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #1a1a2e, #16213e);
+            border-bottom: 2px solid #ff4757;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .header-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ff4757;
+        }
+        .header-menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px 15px;
+            background: rgba(255,71,87,0.2);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .header-menu-toggle:hover {
+            background: rgba(255,71,87,0.3);
+        }
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            width: 25px;
+        }
+        .hamburger-icon span {
+            width: 100%;
+            height: 3px;
+            background: #ff4757;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .header-menu-toggle.active .hamburger-icon span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .header-menu-toggle.active .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        .header-menu-toggle.active .hamburger-icon span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        /* Menú desplegable */
+        .nav-dropdown {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: rgba(26,26,46,0.98);
+            border: 2px solid #ff4757;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 280px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .nav-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .nav-dropdown h3 {
+            color: #ff4757;
+            margin-bottom: 15px;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-dropdown a {
+            display: block;
+            color: #eee;
+            text-decoration: none;
+            padding: 10px 12px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        .nav-dropdown a:hover {
+            background: rgba(255,71,87,0.2);
+            transform: translateX(5px);
+        }
+        .nav-dropdown a .icon {
+            margin-right: 8px;
+        }
+        
+        /* Contenido principal */
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
         h1 { color: #ff4757; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
         .date { text-align: center; color: #888; margin-bottom: 30px; font-size: 1.1em; }
         .alert-banner { background: linear-gradient(90deg, #ff4757, #ff6b7a); color: white; padding: 15px 20px; border-radius: 10px; margin-bottom: 30px; text-align: center; font-weight: bold; font-size: 1.1em; }
         .section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 20px; border-left: 4px solid #ff4757; }
         .section h2 { color: #ff4757; margin-bottom: 15px; font-size: 1.4em; display: flex; align-items: center; gap: 10px; }
-        .section h2:before { content: "📌"; }
+        .section h2 .icon { font-size: 1.6em; }
         .section ul { list-style: none; }
         .section li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-left: 20px; position: relative; }
         .section li:before { content: "•"; color: #ff4757; position: absolute; left: 0; font-weight: bold; }
@@ -29,49 +134,43 @@
         .sources h3 { color: #00d9ff; margin-bottom: 15px; font-size: 1.2em; }
         .sources a { color: #00d9ff; text-decoration: none; display: block; padding: 8px 0; border-bottom: 1px solid rgba(0,217,255,0.2); transition: padding-left 0.3s; }
         .sources a:hover { padding-left: 10px; color: #66f; }
-        /* Menú hamburguesa */
-        .menu-toggle { display: flex; align-items: center; justify-content: center; padding: 15px; background: rgba(255,71,87,0.2); border-radius: 10px; margin-bottom: 20px; cursor: pointer; position: sticky; top: 10px; z-index: 1000; }
-        .menu-toggle:hover { background: rgba(255,71,87,0.3); }
-        .menu-icon { width: 30px; height: 3px; background: #ff4757; position: relative; transition: all 0.3s; }
-        .menu-icon:before, .menu-icon:after { content: ""; position: absolute; width: 30px; height: 3px; background: #ff4757; transition: all 0.3s; }
-        .menu-icon:before { top: -10px; }
-        .menu-icon:after { top: 10px; }
-        .menu-toggle.active .menu-icon { background: transparent; }
-        .menu-toggle.active .menu-icon:before { transform: rotate(45deg); top: 0; }
-        .menu-toggle.active .menu-icon:after { transform: rotate(-45deg); top: 0; }
-        .nav-menu { display: none; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 15px; margin-bottom: 20px; }
-        .nav-menu.active { display: block; animation: slideDown 0.3s ease; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .nav-menu a { color: #eee; text-decoration: none; display: block; padding: 10px 15px; border-radius: 5px; margin-bottom: 5px; transition: background 0.3s; }
-        .nav-menu a:hover { background: rgba(255,71,87,0.2); }
-        .nav-menu a span { margin-right: 10px; }
     </style>
 </head>
 <body>
+    <!-- Header fijo con menú hamburguesa -->
+    <div class="header-fixed">
+        <div class="header-title">⚠️ GUERRA EEUU-ISRAEL VS IRÁN</div>
+        <div class="header-menu-toggle" onclick="toggleMenu()">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span>📋 Menú</span>
+        </div>
+    </div>
+    
+    <!-- Menú desplegable -->
+    <div class="nav-dropdown" id="navDropdown">
+        <h3>📑 Secciones</h3>
+        <a href="#resumen"><span class="icon">🎯</span>Operación "Furia Épica"</a>
+        <a href="#objetivos"><span class="icon">🎯</span>Objetivos Atacados</a>
+        <a href="#respuesta"><span class="icon">🚀</span>Respuesta de Irán</a>
+        <a href="#internacional"><span class="icon">🌍</span>Reacción Internacional</a>
+        <a href="#economico"><span class="icon">⚡</span>Impacto Económico</a>
+        <a href="#militar"><span class="icon">🛡️</span>Capacidad Militar</a>
+        <a href="#tiempo"><span class="icon">📊</span>Línea de Tiempo</a>
+        <a href="#fuentes"><span class="icon">📰</span>Fuentes de Información</a>
+    </div>
+
     <div class="container">
-        <h1>⚠️ GUERRA EEUU-ISRAEL VS IRÁN</h1>
+        <h1>GUERRA EEUU-ISRAEL VS IRÁN</h1>
         <p class="date">28 de Febrero, 2026 - Actualización en tiempo real</p>
         
-        <!-- Menú hamburguesa -->
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-            <span style="margin-left: 15px; font-weight: bold;">📋 Menú de Secciones</span>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <a href="#resumen"><span>🎯</span>Operación "Furia Épica"</a>
-            <a href="#objetivos"><span>🎯</span>Objetivos Atacados</a>
-            <a href="#respuesta"><span>🚀</span>Respuesta de Irán</a>
-            <a href="#internacional"><span>🌍</span>Reacción Internacional</a>
-            <a href="#economico"><span>⚡</span>Impacto Económico</a>
-            <a href="#militar"><span>🛡️</span>Capacidad Militar</a>
-            <a href="#tiempo"><span>📊</span>Línea de Tiempo</a>
-            <a href="#fuentes"><span>📰</span>Fuentes de Información</a>
-        </div>
-
         <div class="alert-banner">🚨 OPERACIÓN MILITAR EN CURSO - SITUACIÓN EN EVOLUCIÓN</div>
         
         <div class="section highlight" id="resumen">
-            <h2>OPERACIÓN "FURIA ÉPICA" - Resumen</h2>
+            <h2><span class="icon">🎯</span>OPERACIÓN "FURIA ÉPICA" - Resumen</h2>
             <div class="quote">"Nunca tendrá un arma nuclear. Arrasaremos su industria de misiles" - Donald Trump</div>
             <ul>
                 <li><strong>Hora del ataque:</strong> Amanecer del 28 de febrero de 2026</li>
@@ -83,7 +182,7 @@
         </div>
         
         <div class="section" id="objetivos">
-            <h2>Objetivos Atacados</h2>
+            <h2><span class="icon">🎯</span>Objetivos Atacados</h2>
             <ul>
                 <li>Agencia de Energía Atómica iraní - Instalaciones nucleares</li>
                 <li>Programa de misiles balísticos - Arsenal y lanzamientos</li>
@@ -95,7 +194,7 @@
         </div>
         
         <div class="section highlight" id="respuesta">
-            <h2>Respuesta de Irán</h2>
+            <h2><span class="icon">🚀</span>Respuesta de Irán</h2>
             <div class="quote">"Preparamos una respuesta aplastante" - Guardia Revolucionaria</div>
             <ul>
                 <li>Primera oleada: Misiles y drones contra Israel</li>
@@ -107,7 +206,7 @@
         </div>
         
         <div class="section" id="internacional">
-            <h2>Reacción Internacional</h2>
+            <h2><span class="icon">🌍</span>Reacción Internacional</h2>
             <ul>
                 <li><strong>Netanyahu:</strong> "Agradezco a Trump su liderazgo histórico"</li>
                 <li><strong>Objetivo:</strong> "Este régimen no debe armarse con armas nucleares"</li>
@@ -117,7 +216,7 @@
         </div>
         
         <div class="section" id="economico">
-            <h2>Impacto Económico</h2>
+            <h2><span class="icon">⚡</span>Impacto Económico</h2>
             <ul>
                 <li><strong>Petróleo:</strong> Riesgo de disparo de precios</li>
                 <li><strong>Estrecho de Ormuz:</strong> 30% del petróleo mundial pasa por aquí</li>
@@ -127,7 +226,7 @@
         </div>
         
         <div class="section highlight" id="militar">
-            <h2>Capacidad Militar</h2>
+            <h2><span class="icon">🛡️</span>Capacidad Militar</h2>
             <ul>
                 <li><strong>Irán:</strong> "Defensa por castigo" - Misiles, drones, milicias proxy</li>
                 <li><strong>Milicias chiíes:</strong> Hezbolá, hutíes, Iraq, Siria activadas</li>
@@ -137,7 +236,7 @@
         </div>
         
         <div class="section" id="tiempo">
-            <h2>Línea de Tiempo</h2>
+            <h2><span class="icon">📊</span>Línea de Tiempo</h2>
             <div class="timeline">
                 <div class="timeline-item"><div class="timeline-time">Amanecer</div><div>Inicio "Furia Épica" y "Rugido de León"</div></div>
                 <div class="timeline-item"><div class="timeline-time">+2 horas</div><div>Bombardeos a decenas de objetivos</div></div>
@@ -148,9 +247,9 @@
         
         <!-- Fuentes -->
         <div class="section" id="fuentes">
-            <h2>Fuentes de Información</h2>
+            <h2><span class="icon">📰</span>Fuentes de Información</h2>
             <div class="sources">
-                <h3>📰 Noticias Originales</h3>
+                <h3>Noticias Originales</h3>
                 <a href="https://www.elmundo.es/internacional/2026/02/28/69a28f1121efa07d7c8b458a.html" target="_blank">▶️ El Mundo: Israel y EEUU lanzan un ataque contra Irán</a>
                 <a href="https://cnnespanol.cnn.com/2026/02/28/mundo/israel-lanza-ataque-contra-iran-trax" target="_blank">▶️ CNN Español: Trump dice que está en marcha una "campaña masiva"</a>
                 <a href="https://www.vaticannews.va/es/mundo/news/2026-02/estados-unidos-israel-ataque-iran-trump-medio-oriente.html" target="_blank">▶️ Vatican News: Estados Unidos e Israel atacan Irán, Trump quiere un cambio de régimen</a>
@@ -173,17 +272,27 @@
     
     <script>
         function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            const toggle = document.querySelector('.menu-toggle');
-            menu.classList.toggle('active');
+            const dropdown = document.getElementById('navDropdown');
+            const toggle = document.querySelector('.header-menu-toggle');
+            dropdown.classList.toggle('active');
             toggle.classList.toggle('active');
         }
         
         // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-menu a').forEach(link => {
+        document.querySelectorAll('.nav-dropdown a').forEach(link => {
             link.addEventListener('click', () => {
                 toggleMenu();
             });
+        });
+        
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('navDropdown');
+            const toggle = document.querySelector('.header-menu-toggle');
+            if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
+                dropdown.classList.remove('active');
+                toggle.classList.remove('active');
+            }
         });
     </script>
 </body>
