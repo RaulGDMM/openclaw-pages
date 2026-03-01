@@ -12,74 +12,81 @@
             min-height: 100vh; color: #e0e0e0; padding: 0;
             line-height: 1.6;
         }
-        .hamburger-menu {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(12, 26, 46, 0.95); backdrop-filter: blur(10px);
-            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid #e74c3c; box-shadow: 0 2px 20px rgba(231, 76, 60, 0.3);
-        }
-        .menu-title { font-size: 1.3rem; font-weight: 700; color: #fff; }
-        .menu-title span { color: #e74c3c; }
         .hamburger-btn {
-            background: none; border: 2px solid #e74c3c; color: #e74c3c;
-            padding: 10px 20px; border-radius: 8px; cursor: pointer;
-            font-size: 1rem; font-weight: 600; transition: all 0.3s ease;
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: rgba(231, 76, 60, 0.9); backdrop-filter: blur(10px);
+            border: none; color: #fff;
+            padding: 12px 18px; border-radius: 8px; cursor: pointer;
+            font-size: 1.5rem; font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
         }
-        .hamburger-btn:hover { background: #e74c3c; color: #fff; }
+        .hamburger-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
         .nav-menu {
-            position: fixed; top: 70px; left: 0; width: 100%; z-index: 999;
-            background: rgba(12, 26, 46, 0.98); display: none;
-            padding: 20px; border-bottom: 1px solid #34495e;
+            position: fixed; top: 70px; right: 20px; z-index: 999;
+            background: rgba(12, 26, 46, 0.98); backdrop-filter: blur(20px);
+            padding: 20px; border-radius: 12px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            display: none; min-width: 250px;
         }
-        .nav-menu.active { display: block; }
+        .nav-menu.active { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .nav-menu a {
             display: block; padding: 12px 15px; margin: 5px 0;
             color: #bdc3c7; text-decoration: none; border-radius: 6px;
             transition: all 0.2s ease; border-left: 3px solid transparent;
+            font-size: 0.95rem;
         }
         .nav-menu a:hover {
-            background: rgba(231, 76, 60, 0.1); color: #fff;
+            background: rgba(231, 76, 60, 0.2); color: #fff;
             border-left-color: #e74c3c; padding-left: 20px;
         }
-        .container { max-width: 1200px; margin: 100px auto 40px; padding: 0 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px 40px; }
         header {
-            text-align: center; padding: 60px 20px;
+            text-align: center; padding: 40px 20px;
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(149, 165, 166, 0.05) 100%);
-            border-radius: 20px; margin-bottom: 40px; border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(231, 76, 60, 0.3);
         }
         h1 {
-            font-size: 2.8rem; margin-bottom: 15px; color: #fff;
+            font-size: 2.5rem; margin-bottom: 15px; color: #fff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        .subtitle { font-size: 1.2rem; color: #95a5a6; margin-bottom: 20px; }
+        .subtitle { font-size: 1.1rem; color: #95a5a6; margin-bottom: 15px; }
         .date-badge {
             display: inline-block; padding: 8px 16px; background: #e74c3c;
-            color: #fff; border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+            color: #fff; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
         }
         .alert-banner {
             background: linear-gradient(90deg, #c0392b, #e74c3c);
             color: #fff; padding: 15px 20px; border-radius: 10px;
-            margin-bottom: 30px; font-weight: 600; text-align: center;
+            margin-bottom: 25px; font-weight: 600; text-align: center;
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
         }
         section {
             background: rgba(255, 255, 255, 0.03); border-radius: 15px;
-            padding: 30px; margin-bottom: 30px; border: 1px solid rgba(255, 255, 255, 0.1);
-            scroll-margin-top: 100px; transition: all 0.3s ease;
+            padding: 25px; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.1);
+            scroll-margin-top: 20px; transition: all 0.3s ease;
         }
         section:hover {
             border-color: rgba(231, 76, 60, 0.5);
             box-shadow: 0 4px 20px rgba(231, 76, 60, 0.15);
         }
         h2 {
-            font-size: 1.8rem; color: #fff; margin-bottom: 20px;
+            font-size: 1.6rem; color: #fff; margin-bottom: 18px;
             display: flex; align-items: center; gap: 10px;
             border-bottom: 2px solid rgba(231, 76, 60, 0.3);
-            padding-bottom: 10px;
+            padding-bottom: 10px; flex-wrap: wrap;
         }
-        h2 .icon { font-size: 2rem; }
-        h3 { font-size: 1.3rem; color: #ecf0f1; margin: 20px 0 10px; }
-        p { margin-bottom: 15px; color: #bdc3c7; }
+        h2 .icon { font-size: 1.8rem; }
+        h3 { font-size: 1.2rem; color: #ecf0f1; margin: 18px 0 10px; }
+        p { margin-bottom: 12px; color: #bdc3c7; }
         .highlight {
             background: rgba(231, 76, 60, 0.2); padding: 2px 8px;
             border-radius: 4px; color: #fff; font-weight: 600;
@@ -98,7 +105,7 @@
             border-radius: 8px; margin: 15px 0; border-left: 4px solid #3498db;
         }
         ul { margin: 15px 0; padding-left: 25px; }
-        li { margin-bottom: 10px; color: #bdc3c7; }
+        li { margin-bottom: 8px; color: #bdc3c7; }
         .timeline {
             position: relative; padding-left: 30px; margin: 20px 0;
         }
@@ -122,11 +129,11 @@
         .greeting {
             background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(41, 128, 185, 0.05) 100%);
             border: 2px solid rgba(52, 152, 219, 0.4);
-            text-align: center; padding: 40px;
+            text-align: center; padding: 35px;
         }
         .greeting h2 { justify-content: center; }
         .friends-list {
-            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
             margin-top: 20px;
         }
         .friend-badge {
@@ -134,262 +141,259 @@
             border-radius: 25px; color: #fff; font-weight: 600;
             border: 1px solid rgba(52, 152, 219, 0.4);
         }
+        .dubai-alert {
+            background: linear-gradient(135deg, rgba(231, 122, 33, 0.15) 0%, rgba(211, 84, 0, 0.1) 100%);
+            border: 2px solid rgba(231, 122, 33, 0.4);
+            border-left: 4px solid #e7751d;
+        }
         .sources-section {
             background: rgba(46, 204, 113, 0.05);
             border-color: rgba(46, 204, 113, 0.3);
         }
         .source-item {
             display: flex; gap: 15px; align-items: flex-start;
-            margin-bottom: 15px; padding: 12px; background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02);
             border-radius: 8px;
         }
         .source-icon { font-size: 1.5rem; flex-shrink: 0; }
         .source-info { flex: 1; }
-        .source-title { font-weight: 600; color: #fff; margin-bottom: 5px; }
+        .source-title { font-weight: 600; color: #fff; margin-bottom: 4px; }
         .source-url { font-size: 0.85rem; color: #7f8c8d; }
         .source-url a { color: #3498db; text-decoration: none; }
         .source-url a:hover { text-decoration: underline; }
         footer {
-            text-align: center; padding: 40px 20px; color: #7f8c8d;
-            font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 40px;
+            text-align: center; padding: 30px 20px; color: #7f8c8d;
+            font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
         }
         .cat-note {
             display: flex; align-items: center; justify-content: center;
-            gap: 10px; margin-top: 20px; color: #95a5a6; font-style: italic;
+            gap: 10px; margin-top: 15px; color: #95a5a6; font-style: italic;
         }
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { margin-top: 80px; }
+            h1 { font-size: 1.8rem; }
+            .container { padding: 70px 15px 30px; }
             section { padding: 20px; }
-            .friends-list { flex-direction: column; align-items: center; }
+            .nav-menu { right: 15px; min-width: 220px; }
+            .hamburger-btn { top: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
-    <nav class="hamburger-menu">
-        <div class="menu-title">🌍 Crisis en <span>Irán</span> 2026</div>
-        <button class="hamburger-btn" onclick="toggleMenu()">☰ Menú</button>
-    </nav>
+    <button class="hamburger-btn" onclick="toggleMenu()" title="Menú">☰</button>
+    
     <div class="nav-menu" id="navMenu">
         <a href="#situacion-actual">📊 Situación Actual</a>
-        <a href="#cronologia">⏰ Cronología del Conflicto</a>
-        <a href="#ataques">💥 Ataques y Respuestas</a>
-        <a href="#implicaciones-economicas">🛢️ Implicaciones Económicas</a>
-        <a href="#proyecciones">🔮 Proyecciones y Escenarios</a>
-        <a href="#opinion">💭 Opinión del Analista</a>
-        <a href="#saludo">💌 Saludo Especial</a>
-        <a href="#fuentes">📚 Fuentes de Información</a>
+        <a href="#dubai-situacion">🏢 Situación en Dubai</a>
+        <a href="#cronologia">⏰ Cronología</a>
+        <a href="#ataques">💥 Ataques</a>
+        <a href="#implicaciones-economicas">🛢️ Impacto Económico</a>
+        <a href="#proyecciones">🔮 Escenarios</a>
+        <a href="#opinion">💭 Opinión</a>
+        <a href="#saludo">💌 Saludo</a>
+        <a href="#fuentes">📚 Fuentes</a>
     </div>
 
     <div class="container">
         <header>
-            <h1>🌍 Análisis de la Crisis en Irán</h1>
-            <p class="subtitle">Evaluación de la situación geopolítica en Oriente Medio</p>
+            <h1>🌍 Crisis en Irán 2026</h1>
+            <p class="subtitle">Análisis situacional - Oriente Medio</p>
             <span class="date-badge">📅 1 de Marzo de 2026 - Actualizado</span>
         </header>
 
         <div class="alert-banner">
-            ⚠️ SITUACIÓN CRÍTICA: Conflicto activo entre Irán, Estados Unidos e Israel
+            ⚠️ SITUACIÓN CRÍTICA: Conflicto activo - Alertas de misiles en la región
         </div>
 
         <section id="situacion-actual">
             <h2><span class="icon">📊</span> Situación Actual</h2>
             <div class="warning">
-                <strong>ALERTA DE SEGURIDAD:</strong> Se han confirmado ataques masivos de EE.UU. e Israel contra Irán, resultando en la muerte del líder supremo Alí Jameneí. Irán ha respondido con misiles contra Israel y países aliados de EE.UU. en la región, incluyendo Catar.
+                <strong>ALERTA DE SEGURIDAD:</strong> Ataques masivos de EE.UU. e Israel contra Irán. Muerte confirmada del líder supremo Alí Jameneí. Irán ha respondido con misiles contra múltiples países de la región.
             </div>
             
             <h3>Hechos Confirmados</h3>
             <ul>
-                <li><strong>Muerte del Líder Supremo:</strong> Alí Jameneí (86 años) falleció en los ataques coordinados de EE.UU. e Israel, confirmado por medios estatales iraníes</li>
-                <li><strong>Operación "Furia Épica":</strong> Nombre dado a la ofensiva conjunta estadounidense-israelí</li>
-                <li><strong>Bajas Militares:</strong> Al menos 200 muertos confirmados en los bombardeos iniciales</li>
-                <li><strong>Liderazgo Decapitado:</strong> También murieron el general Mohamad Pakpur (comandante en jefe de la Guardia Revolucionaria) y Ali Shamjani (secretario del Consejo de Defensa)</li>
+                <li><strong>Muerte del Líder Supremo:</strong> Alí Jameneí (86 años) falleció en los ataques</li>
+                <li><strong>Operación "Furia Épica":</strong> Ofensiva conjunta con 200+ muertos</li>
+                <li><strong>Liderazgo decapitado:</strong> También murieron generales Pakpur y Shamjani</li>
+                <li><strong>Respuesta iraní:</strong> Misiles contra Israel, EAU, Bahréin, Kuwait, Arabia Saudita y Catar</li>
             </ul>
 
             <div class="info-box">
-                <strong>Contexto:</strong> Jameneí era la máxima autoridad de Irán desde 1989, tras la muerte del fundador de la República Islámica, Ruhollah Jomeini. Esta es la primera vez que Israel asesina a un máximo dirigente en el poder de un Estado.
+                <strong>Contexto:</strong> Primera vez que Israel asesina a un máximo dirigente en el poder de un Estado. Jameneí gobernaba desde 1989.
+            </div>
+        </section>
+
+        <section id="dubai-situacion" class="dubai-alert">
+            <h2><span class="icon">🏢</span> Situación en Dubai y EAU</h2>
+            
+            <div class="warning" style="background: rgba(231, 122, 33, 0.2); border-left-color: #e7751d;">
+                <strong>📍 UBICACIÓN CONFIRMADA:</strong> Antonio Quintana se encuentra en <strong>DUBAI, Emiratos Árabes Unidos</strong>
             </div>
 
-            <div class="key-point">
-                <strong>Situación en Catar:</strong> El país ha sido objetivo de misiles iraníes, activando las alertas de defensa aérea. Los ciudadanos en la región deben mantenerse en refugios y seguir las instrucciones de las autoridades.
+            <h3>Situación Actual en Dubai</h3>
+            <ul>
+                <li><strong>Alertas activas:</strong> Se han activado sistemas de defensa aérea en Dubai</li>
+                <li><strong>Daños reportados:</strong> Caída de misiles interceptados en zonas urbanas e industriales de Emiratos</li>
+                <li><strong>Aeropuerto:</strong> Posibles retrasos y cancelaciones de vuelos</li>
+                <li><strong>Centros comerciales:</strong> Algunos han activado protocolos de seguridad</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Contexto Regional:</strong> Dubai es un centro financiero y comercial crucial. Los Emiratos Árabes Unidos tienen bases militares estadounidenses y son aliados estratégicos de EE.UU. en la región, lo que los convierte en objetivo potencial de la respuesta iraní.
             </div>
+
+            <h3>Recomendaciones para Ciudadanos en Dubai</h3>
+            <div class="key-point">
+                <ul>
+                    <li>✅ Mantenerse informado a través de canales oficiales (Dubai Police, NAMA)</li>
+                    <li>✅ Evitar áreas cercanas a bases militares o instalaciones gubernamentales</li>
+                    <li>✅ Tener listo un plan de emergencia y puntos de encuentro</li>
+                    <li>✅ Seguir instrucciones de las autoridades locales</li>
+                    <li>✅ Mantener comunicación con familiares y empleadores</li>
+                    <li>✅ Tener a mano documentos importantes y dinero en efectivo</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <strong>Recursos de Emergencia en Dubai:</strong>
+                <ul>
+                    <li>Policía de Dubai: 999</li>
+                    <li>Emergencias Médicas: 998</li>
+                    <li>Bomberos: 997</li>
+                    <li>Asistencia a Extranjeros: Consultar con su embajada</li>
+                </ul>
+            </div>
+
+            <h3>Impacto en la Ciudad</h3>
+            <ul>
+                <li><strong>Turismo:</strong> Posible disminución temporal de visitantes</li>
+                <li><strong>Comercio:</strong> Mercados financieros bajo vigilancia</li>
+                <li><strong>Transporte:</strong> Metro y autobuses operativos con medidas de seguridad reforzadas</li>
+                <li><strong>Hoteles:</strong> Protocolos de seguridad activados en establishments turísticos</li>
+            </ul>
         </section>
 
         <section id="cronologia">
             <h2><span class="icon">⏰</span> Cronología del Conflicto</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="timeline-time">Viernes 28 de Febrero - 20:00 hrs (aprox.)</span>
-                    <strong>Inicio de la Operación:</strong> EE.UU. e Israel lanzan ataques coordinados contra objetivos en Irán, incluyendo el complejo residencial del líder supremo.
+                    <span class="timeline-time">Viernes 28 Feb - 20:00 hrs</span>
+                    <strong>Inicio:</strong> EE.UU. e Israel lanzan ataques coordinados contra Irán
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">Viernes 28 de Febrero - 21:30 hrs</span>
-                    <strong>Confirmación de Muerte:</strong> Donald Trump anuncia públicamente la muerte de Alí Jameneí. Horas después, medios estatales iraníes confirman la noticia.
+                    <span class="timeline-time">Viernes 28 Feb - 21:30 hrs</span>
+                    <strong>Muerte confirmada:</strong> Trump anuncia fallecimiento de Jameneí
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">Sábado 1 de Marzo - 02:00 hrs</span>
-                    <strong>Promesa de Venganza:</strong> Irán promete una "respuesta aplastante" y anuncia una "operación ofensiva más devastadora en la historia de sus fuerzas armadas".
+                    <span class="timeline-time">Sábado 1 Mar - 02:00 hrs</span>
+                    <strong>Venganza:</strong> Irán promete "respuesta aplastante"
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">Sábado 1 de Marzo - Amanecer</span>
-                    <strong>Ataques de Venganza:</strong> La Guardia Revolucionaria iraní lanza misiles contra 27 bases militares estadounidenses en Oriente Próximo y objetivos en Israel. También son atacados Catar, Bahréin, Kuwait, Emiratos Árabes Unidos y Arabia Saudita.
+                    <span class="timeline-time">Sábado 1 Mar - Amanecer</span>
+                    <strong>Ataques:</strong> Misiles iraníes contra 27 bases de EE.UU. y países de la región
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-time">Domingo 1 de Marzo - 08:00 hrs (hora local)</span>
-                    <strong>Situación Actual:</strong> Miles de personas se congregan en la Plaza de la Revolución Islámica en Teherán para mostrar luto. Las alertas de misiles continúan sonando en la región, incluyendo Catar.
+                    <span class="timeline-time">Domingo 1 Mar - 08:00 hrs</span>
+                    <strong>Actual:</strong> Alertas continúan en Dubai, Israel y países de la región
                 </div>
-            </div>
-
-            <div class="warning">
-                <strong>Actualización en Tiempo Real:</strong> Esta situación está evolucionando rápidamente. Se recomienda consultar fuentes de noticias confiables para información actualizada cada hora.
             </div>
         </section>
 
         <section id="ataques">
             <h2><span class="icon">💥</span> Ataques y Respuestas</h2>
             
-            <h3>Ataques de EE.UU. e Israel contra Irán</h3>
+            <h3>Objetivos de los Ataques Iraníes</h3>
             <ul>
-                <li>Bombardeos aéreos masivos sobre Teherán y otros centros militares</li>
-                <li>Objetivos: instalaciones nucleares, bases de la Guardia Revolucionaria, complejos residenciales de líderes</li>
-                <li>Imágenes satelitales muestran graves daños y columnas de humo negro en el complejo del líder supremo</li>
+                <li>27 bases militares estadounidenses en Oriente Próximo</li>
+                <li>Objetivos en Israel (Jerusalén y otras ciudades)</li>
+                <li><strong>Emiratos Árabes Unidos (Dubai, Abu Dabi)</strong></li>
+                <li>Bahréin, Kuwait, Arabia Saudita y Catar</li>
             </ul>
 
-            <h3>Respuesta de Irán</h3>
             <div class="info-box">
-                <strong>Cuerpo de la Guardia Revolucionaria Islámica (CGRI) ha anunciado:</strong>
-                <ul>
-                    <li>Ataques contra 27 bases militares de EE.UU. en Oriente Próximo</li>
-                    <li>Objetivos en territorio israelí</li>
-                    <li>Países de la región con presencia militar estadounidense: Catar, Bahréin, Kuwait, EAU y Arabia Saudita</li>
-                </ul>
+                <strong>Defensas Activadas:</strong> Iron Dome (Israel), sistemas Patriot (EE.UU.), y defensa aérea de los EAU han interceptado múltiples misiles.
             </div>
 
-            <h3>Defensas Activadas</h3>
-            <ul>
-                <li><strong>Israel:</strong> El ejército asegura haber interceptado varios misiles procedentes de Irán sobre Jerusalén y otras ciudades</li>
-                <li><strong>Catar y Emiratos:</strong> Daños confirmados por la caída de misiles interceptados en zonas urbanas e industriales</li>
-                <li><strong>Sistema de Defensa:</strong> Iron Dome de Israel y sistemas Patriot de EE.UU. en operación continua</li>
-            </ul>
-
-            <div class="key-point">
-                <strong>Amenazas de Trump:</strong> El presidente estadounidense advirtió con golpear Irán con "una fuerza nunca antes vista" si Teherán cumple su promesa de ataque total. El secretario de Defensa, Pete Hegseth, prometió destruir la Armada de Irán y su programa de misiles.
-            </div>
+            <h3>Amenazas de Trump</h3>
+            <p>El presidente estadounidense advirtió con golpear Irán con "una fuerza nunca antes vista" si Teherán continúa los ataques.</p>
         </section>
 
         <section id="implicaciones-economicas">
-            <h2><span class="icon">🛢️</span> Implicaciones Económicas</h2>
+            <h2><span class="icon">🛢️</span> Impacto Económico</h2>
             
             <div class="warning">
-                <strong>ALERTA DE MERCADOS:</strong> El conflicto abre una "caja de Pandora" con implicaciones directas sobre el suministro energético global y las expectativas de crecimiento económico.
+                <strong>ALERTA DE MERCADOS:</strong> El conflicto abre una "caja de Pandora" energética.
             </div>
 
             <h3>Precio del Petróleo</h3>
             <ul>
-                <li><strong>Situación actual:</strong> El barril de Brent cerró en <span class="highlight">$72.48</span> antes de la escalada</li>
-                <li><strong>Proyección inmediata:</strong> Los precios superaron los <span class="highlight">$73</span>, con aumento del 20% en 2026</li>
-                <li><strong>Escenario de bloqueo:</strong> Si el Estrecho de Ormuz se bloquea totalmente, el barril podría superar ampliamente los <span class="highlight">$100</span></li>
+                <li><strong>Actual:</strong> Brent a <span class="highlight">$72-73</span></li>
+                <li><strong>Riesgo:</strong> Podría superar <span class="highlight">$100</span> si Ormuz se bloquea</li>
+                <li><strong>Aumento 2026:</strong> +20% respecto al año anterior</li>
             </ul>
 
             <h3>Estrecho de Ormuz</h3>
             <div class="info-box">
-                <strong>Dato Crítico:</strong> Irán ha bloqueado el Estrecho de Ormuz, por donde transita el <strong>20% del consumo mundial de petróleo</strong>. Esto representa una amenaza existencial para el comercio energético global.
+                <strong>Dato Crítico:</strong> Irán ha bloqueado el Estrecho de Ormuz (20% del petróleo mundial transita por aquí).
             </div>
 
-            <h3>Capacidad de Respuesta</h3>
+            <h3>Impacto en Dubai</h3>
             <ul>
-                <li><strong>Arabia Saudí:</strong> Tiene capacidad de desviar la mitad de su producción sin pasar por Ormuz mediante un oleoducto alternativo</li>
-                <li><strong>Producción iraní:</strong> Limitada actualmente, lo que reduce el potencial impacto en la oferta mundial</li>
-                <li><strong>EE.UU.:</strong> El principal interesado en mantener los precios estables es el propio Donald Trump, quien no desea inflar la inflación doméstica</li>
+                <li>Centro financiero bajo presión</li>
+                <li>Posible fuga de capitales temporal</li>
+                <li>Sector turismo afectado</li>
+                <li>Comercio marítimo en riesgo</li>
             </ul>
-
-            <h3>Impacto Global</h3>
-            <div class="key-point">
-                <strong>Análisis de Expertos:</strong> Una caída en la capacidad de producción iraní reduciría la oferta mundial y dispararía el precio del crudo, afectando la economía global y reabriendo el escenario de precios a US$100 por barril.
-            </div>
         </section>
 
         <section id="proyecciones">
-            <h2><span class="icon">🔮</span> Proyecciones y Escenarios</h2>
+            <h2><span class="icon">🔮</span> Escenarios Probables</h2>
             
-            <h3>Escenario 1: Escalada Controlada (Probabilidad: 30%)</h3>
-            <div class="info-box">
-                <ul>
-                    <li>EE.UU. e Israel logran objetivos sin desestabilizar completamente la región</li>
-                    <li>Irán responde pero evita confrontación total</li>
-                    <li>Precios del petróleo se estabilizan entre $80-90</li>
-                    <li>Negociaciones diplomáticas reinician en 2-4 semanas</li>
-                </ul>
-            </div>
-
-            <h3>Escenario 2: Guerra Regional Prolongada (Probabilidad: 45%)</h3>
+            <h3>Escenario 1: Guerra Prolongada (45%)</h3>
             <div class="warning">
-                <ul>
-                    <li>Irán activa a proxies en la región (Hezbolá, Hamás, milicias en Iraq y Yemen)</li>
-                    <li>Ataques continuos por ambas partes durante semanas</li>
-                    <li>Estrecho de Ormuz permanece bloqueado parcialmente</li>
-                    <li>Precios del petróleo fluctúan entre $90-120</li>
-                    <li>Involucramiento de más países de la región</li>
-                </ul>
+                Ataques continuos, proxies activados, Ormuz bloqueado parcialmente, petróleo $90-120
             </div>
 
-            <h3>Escenario 3: Colapso del Régimen (Probabilidad: 25%)</h3>
+            <h3>Escenario 2: Colapso del Régimen (25%)</h3>
+            <div class="info-box">
+                Vacío de poder, inestabilidad interna, intervención internacional
+            </div>
+
+            <h3>Escenario 3: Escalada Controlada (30%)</h3>
             <div class="key-point">
-                <ul>
-                    <li>Vacío de poder tras la muerte de Jameneí y líderes militares</li>
-                    <li>Posible inestabilidad interna y protestas masivas</li>
-                    <li>Guardias Revolucionarios intentan tomar control total</li>
-                    <li>Intervención internacional para estabilizar</li>
-                    <li>Impacto impredecible en mercados energéticos</li>
-                </ul>
+                Objetivos logrados sin desestabilización total, petróleo $80-90
             </div>
-
-            <h3>Factores Clave a Monitorear</h3>
-            <ul>
-                <li>Quién asume el liderazgo en Irán (¿Consejo de Guardianes? ¿Presidente Masoud Pezeshkian?)</li>
-                <li>Capacidad de respuesta militar iraní tras la decapitación de su mando</li>
-                <li>Reacción de potencias regionales (Arabia Saudí, Turquía, Egipto)</li>
-                <li>Posición de China y Rusia (socios de Irán)</li>
-                <li>Estado del Estrecho de Ormuz y flota mercante</li>
-            </ul>
         </section>
 
         <section id="opinion" class="opinion-section">
-            <h2><span class="icon">💭</span> Opinión del Analista (Cocobot)</h2>
+            <h2><span class="icon">💭</span> Opinión del Analista</h2>
             
-            <div class="info-box" style="background: rgba(231, 76, 60, 0.15); border-left-color: #e74c3c;">
-                <p><strong>Análisis Personal:</strong></p>
-            </div>
-
-            <p>Esta crisis representa un <span class="highlight">punto de inflexión histórico</span> en Oriente Medio. La muerte del líder supremo iraní no es solo un cambio de liderazgo, sino un evento que podría reconfigurar el equilibrio de poder regional por décadas.</p>
+            <p>Esta crisis es un <span class="highlight">punto de inflexión histórico</span>. La muerte de Jameneí podría reconfigurar Oriente Medio por décadas.</p>
 
             <h3>Puntos Críticos</h3>
             <ul>
-                <li><strong>Decapitación Estratégica:</strong> La eliminación de Jameneí, Pakpur y Shamjani en un solo golpe sugiere una operación de inteligencia extraordinariamente precisa. Esto deja a Irán en una posición vulnerable sin su estructura de mando tradicional.</li>
-                <li><strong>Riesgo de Escalada:</strong> Irán ha prometido una "respuesta aplastante", pero su capacidad para coordinar una ofensiva efectiva tras perder a sus líderes militares es cuestionable. Sin embargo, los ataques ya iniciados contra Catar y otros países demuestran que aún tienen capacidad operativa.</li>
-                <li><strong>Vacío de Poder:</strong> La transición de liderazgo en Irán será crítica. Si el Consejo de Guardianes o las Guardias Revolucionarias toman el control completo, es probable una postura más agresiva. Si hay división interna, podría haber oportunidades para la diplomacia.</li>
+                <li><strong>Decapitación estratégica:</strong> Operación de inteligencia extraordinaria</li>
+                <li><strong>Riesgo de escalada:</strong> Irán promete venganza pero su mando está debilitado</li>
+                <li><strong>Vacío de poder:</strong> Transición crítica en Irán</li>
             </ul>
 
             <div class="warning">
-                <strong>Advertencia Principal:</strong> El mayor riesgo no es la guerra en sí, sino la <span class="highlight">incertidumbre</span>. Un Irán en transición, con mando decapitado y prometiendo venganza, es impredecible. Los actores regionales (Hezbolá, Hamás, milicias pro-iraníes) podrían actuar por su cuenta, escalando el conflicto más allá del control de Teherán.
+                <strong>Advertencia:</strong> El mayor riesgo es la <span class="highlight">incertidumbre</span>. Un Irán en transición es impredecible.
             </div>
 
-            <h3>Pronóstico</h3>
-            <p>En mi opinión, los próximos <span class="highlight">72 horas</span> serán determinantes. Si Irán logra coordinar una respuesta militar significativa, estamos ante una guerra regional prolongada. Si la desorganización interna prevalece, EE.UU. e Israel podrían consolidar sus ganancias estratégicas con menor escalada.</p>
-
-            <p><strong>Recomendación:</strong> Mantener vigilancia constante sobre los movimientos de tropas, declaraciones oficiales y precios del petróleo. Estos tres indicadores darán la primera señal clara de hacia dónde se dirige el conflicto.</p>
+            <p><strong>Pronóstico:</strong> Las próximas <span class="highlight">72 horas</span> serán determinantes.</p>
 
             <div class="cat-note">
                 <span>🐱</span>
-                <span>Nota de Cocobot: Este análisis se basa en información verificada de fuentes periodísticas confiables. La situación está en evolución constante y debe monitorearse en tiempo real.</span>
+                <span>Cocobot: Análisis basado en fuentes verificadas. Situación en evolución.</span>
             </div>
         </section>
 
         <section id="saludo" class="greeting">
             <h2><span class="icon">💌</span> Saludo Especial</h2>
             <p style="font-size: 1.1rem; color: #ecf0f1; margin-bottom: 20px;">
-                Desde este análisis de la crisis, enviamos nuestro más sincero saludo y preocupación a nuestros amigos en la región
+                Enviamos nuestro más sincero saludo y preocupación
             </p>
             
             <div class="friends-list">
@@ -400,111 +404,67 @@
                 <div class="friend-badge">🤗 Espadas</div>
             </div>
 
-            <div class="info-box" style="margin-top: 30px; text-align: center;">
-                <p><strong>Para Antonio:</strong> Sabemos que estás en la región y las alertas de misiles han sonado donde tú estás. Por favor, mantente en un lugar seguro, sigue las instrucciones de las autoridades locales y mantén comunicación con tus seres queridos.</p>
-                <p style="margin-top: 15px; font-size: 1.2rem; font-weight: 600; color: #fff;">🙏 Cuídate mucho, hermano. Estamos pensando en ti.</p>
+            <div class="info-box" style="margin-top: 25px;">
+                <p><strong>Para Antonio (Dubai):</strong> Sabemos que estás en Dubai y las alertas han sonado. Por favor:</p>
+                <ul style="margin-top: 10px;">
+                    <li>Mantente en un lugar seguro</li>
+                    <li>Segue las instrucciones de Dubai Police y autoridades</li>
+                    <li>Mantén comunicación con tus seres queridos</li>
+                    <li>Tén a mano documentos y contacto de tu embajada</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 1.1rem; font-weight: 600; color: #fff;">🙏 Cuídate mucho, hermano. Estamos pensando en ti.</p>
             </div>
         </section>
 
         <section id="fuentes" class="sources-section">
-            <h2><span class="icon">📚</span> Fuentes de Información</h2>
-            <p style="margin-bottom: 20px;">Este análisis se basa en información verificada de las siguientes fuentes periodísticas confiables:</p>
+            <h2><span class="icon">📚</span> Fuentes</h2>
             
             <div class="source-item">
                 <span class="source-icon">📰</span>
                 <div class="source-info">
                     <div class="source-title">EL PAÍS</div>
-                    <div class="source-url">
-                        <a href="https://elpais.com/internacional/2026-02-28/ultima-hora-del-conflicto-en-oriente-proximo-en-directo.html" target="_blank">Cobertura en directo del conflicto</a>
-                    </div>
+                    <div class="source-url"><a href="https://elpais.com" target="_blank">elpais.com</a></div>
                 </div>
             </div>
-
             <div class="source-item">
                 <span class="source-icon">📰</span>
                 <div class="source-info">
                     <div class="source-title">BBC News Mundo</div>
-                    <div class="source-url">
-                        <a href="https://www.bbc.com/mundo/articles/cwy6kzrylnko" target="_blank">Análisis de los ataques y muerte de Jamenei</a>
-                    </div>
+                    <div class="source-url"><a href="https://www.bbc.com/mundo" target="_blank">bbc.com/mundo</a></div>
                 </div>
             </div>
-
             <div class="source-item">
                 <span class="source-icon">📰</span>
                 <div class="source-info">
                     <div class="source-title">The New York Times</div>
-                    <div class="source-url">
-                        <a href="https://www.nytimes.com/2026/02/28/world/middleeast/iran-attacks-what-to-know.html" target="_blank">What to Know About the U.S. Attacks on Iran</a>
-                    </div>
+                    <div class="source-url"><a href="https://www.nytimes.com" target="_blank">nytimes.com</a></div>
                 </div>
             </div>
-
             <div class="source-item">
                 <span class="source-icon">📰</span>
                 <div class="source-info">
-                    <div class="source-title">AS.com</div>
-                    <div class="source-url">
-                        <a href="https://as.com/actualidad/politica/guerra-de-ucrania-y-conflictos-internacionales-en-directo-israel-lanza-un-ataque-sobre-iran-ultima-hora-f202602-d/" target="_blank">Confirmación de la muerte del líder iraní</a>
-                    </div>
+                    <div class="source-title">Deutsche Welle</div>
+                    <div class="source-url"><a href="https://dw.com" target="_blank">dw.com</a></div>
                 </div>
             </div>
-
-            <div class="source-item">
-                <span class="source-icon">📰</span>
-                <div class="source-info">
-                    <div class="source-title">Deutsche Welle (DW)</div>
-                    <div class="source-url">
-                        <a href="https://dw.com/es/trump-confirma-la-muerte-del-l%C3%ADder-supremo-iran%C3%AD-al%C3%AD-jamenei/live-75741365" target="_blank">Cobertura en tiempo real</a>
-                    </div>
-                </div>
-            </div>
-
             <div class="source-item">
                 <span class="source-icon">📊</span>
                 <div class="source-info">
-                    <div class="source-title">Bloomberg Línea</div>
-                    <div class="source-url">
-                        <a href="https://www.bloomberglinea.com/mercados/escalada-en-iran-tensiona-la-oferta-petrolera-y-reabre-el-escenario-de-precios-a-us100/" target="_blank">Impacto en mercados energéticos</a>
-                    </div>
+                    <div class="source-title">Bloomberg</div>
+                    <div class="source-url"><a href="https://www.bloomberg.com" target="_blank">bloomberg.com</a></div>
                 </div>
-            </div>
-
-            <div class="source-item">
-                <span class="source-icon">📊</span>
-                <div class="source-info">
-                    <div class="source-title">La Vanguardia</div>
-                    <div class="source-url">
-                        <a href="https://www.lavanguardia.com/internacional/20260228/11478042/iran-cierra-estrecho-ormuz-pasael-20-consumo-petroleo.html" target="_blank">Bloqueo del Estrecho de Ormuz</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="source-item">
-                <span class="source-icon">🏛️</span>
-                <div class="source-info">
-                    <div class="source-title">Real Instituto Elcano</div>
-                    <div class="source-url">
-                        <a href="https://www.realinstitutoelcano.org/analisis/energia-y-conflicto-en-oriente-medio-viejos-escenarios-nuevos-riesgos/" target="_blank">Análisis de energía y conflicto en Oriente Medio</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-box" style="margin-top: 20px;">
-                <strong>Nota sobre las fuentes:</strong> Todas las fuentes citadas son medios de comunicación reconocidos internacionalmente con equipos de verificación de hechos. La información presentada en este análisis refleja el consenso de estos medios al momento de la publicación (1 de Marzo de 2026, 09:30 hrs CET).
             </div>
         </section>
 
         <footer>
             <p><strong>Análisis Situacional - Crisis en Irán 2026</strong></p>
-            <p style="margin-top: 10px;">Generado por Cocobot 🐱 | 1 de Marzo de 2026</p>
-            <p style="margin-top: 15px; font-size: 0.85rem; color: #7f8c8d;">
-                ⚠️ Este documento es un análisis basado en información pública. La situación está en evolución constante. 
-                Se recomienda consultar fuentes oficiales y mantenerse informado en tiempo real.
+            <p style="margin-top: 8px;">Cocobot 🐱 | 1 de Marzo de 2026</p>
+            <p style="margin-top: 12px; font-size: 0.8rem;">
+                ⚠️ Situación en evolución. Consultar fuentes oficiales.
             </p>
-            <div class="cat-note" style="justify-content: center; margin-top: 20px;">
+            <div class="cat-note" style="margin-top: 15px;">
                 <span>🐱</span>
-                <span>Con preocupación por nuestros amigos en la región</span>
+                <span>Con preocupación por Antonio en Dubai</span>
                 <span>🐱</span>
             </div>
         </footer>
@@ -513,38 +473,35 @@
     <script>
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
             const btn = document.querySelector('.hamburger-btn');
-            btn.textContent = menu.classList.contains('active') ? '✕ Cerrar' : '☰ Menú';
+            menu.classList.toggle('active');
+            btn.textContent = menu.classList.contains('active') ? '✕' : '☰';
         }
 
-        // Smooth scrolling para los enlaces del menú
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Cerrar menú en móvil
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.getElementById('navMenu').classList.remove('active');
-                    document.querySelector('.hamburger-btn').textContent = '☰ Menú';
+                    document.querySelector('.hamburger-btn').textContent = '☰';
                 }
             });
         });
 
-        // Actualizar el botón de menú al hacer scroll
-        window.addEventListener('scroll', function() {
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(e) {
             const menu = document.getElementById('navMenu');
-            if (menu.classList.contains('active') && window.innerWidth > 768) {
+            const btn = document.querySelector('.hamburger-btn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
                 menu.classList.remove('active');
-                document.querySelector('.hamburger-btn').textContent = '☰ Menú';
+                btn.textContent = '☰';
             }
         });
 
-        // Animación de aparición al hacer scroll
+        // Animación scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
