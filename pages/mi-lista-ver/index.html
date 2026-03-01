@@ -9,39 +9,87 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh; color: #fff; padding: 20px;
+            min-height: 100vh; color: #e0e0e0; padding: 0;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { text-align: center; padding: 40px 20px; margin-bottom: 30px; }
+        .hamburger-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: rgba(0, 212, 255, 0.9); backdrop-filter: blur(10px);
+            border: none; color: #fff;
+            padding: 12px 18px; border-radius: 8px; cursor: pointer;
+            font-size: 1.5rem; font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        }
+        .hamburger-btn:hover {
+            background: #0099cc;
+            transform: scale(1.05);
+        }
+        .nav-menu {
+            position: fixed; top: 70px; right: 20px; z-index: 999;
+            background: rgba(12, 26, 46, 0.98); backdrop-filter: blur(20px);
+            padding: 20px; border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            display: none; min-width: 300px; max-height: 70vh; overflow-y: auto;
+        }
+        .nav-menu.active { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .menu-tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+        .menu-tab {
+            flex: 1; padding: 8px; background: rgba(255, 255, 255, 0.1);
+            border: none; color: #bdc3c7; border-radius: 6px; cursor: pointer;
+            font-size: 0.85rem; transition: all 0.2s ease;
+        }
+        .menu-tab.active { background: rgba(0, 212, 255, 0.3); color: #fff; }
+        .menu-item {
+            display: flex; align-items: center; gap: 10px; padding: 10px;
+            margin: 3px 0; border-radius: 6px; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .menu-item:hover { background: rgba(0, 212, 255, 0.1); }
+        .menu-item .checkbox { width: 18px; height: 18px; accent-color: #00ff88; }
+        .menu-item .title { flex: 1; font-size: 0.9rem; }
+        .menu-item .status { font-size: 1.2rem; }
+        .menu-divider { height: 1px; background: rgba(255, 255, 255, 0.1); margin: 10px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px 40px; }
+        header {
+            text-align: center; padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 44, 191, 0.1) 100%);
+            border-radius: 20px; margin-bottom: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
         h1 {
             font-size: 2.5rem; margin-bottom: 10px;
             background: linear-gradient(90deg, #00d4ff, #7b2cbf);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .subtitle { font-size: 1.1rem; color: #a0a0a0; margin-top: 10px; }
+        .subtitle { font-size: 1.1rem; color: #95a5a6; margin-bottom: 20px; }
         .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0; flex-wrap: wrap; }
         .stat {
-            background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05); padding: 15px 25px; border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .stat-value { font-size: 1.5rem; font-weight: bold; color: #00d4ff; }
         .stat-label { font-size: 0.9rem; color: #888; }
         .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
         .tab-btn {
-            padding: 12px 30px; border: none; background: rgba(255,255,255,0.1);
+            padding: 12px 30px; border: none; background: rgba(255, 255, 255, 0.1);
             color: #fff; border-radius: 25px; cursor: pointer; font-size: 1rem;
             transition: all 0.3s ease; border: 2px solid transparent;
         }
-        .tab-btn:hover { background: rgba(255,255,255,0.2); }
-        .tab-btn.active { background: rgba(0,212,255,0.2); border-color: #00d4ff; }
+        .tab-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .tab-btn.active { background: rgba(0, 212, 255, 0.2); border-color: #00d4ff; }
         .section { display: none; }
         .section.active { display: block; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
         .card {
-            background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px;
-            border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; position: relative;
+            background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; position: relative;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
         .card.watched { opacity: 0.7; }
         .card.watched::before {
             content: '✓ VISTO'; position: absolute; top: 15px; right: 15px;
@@ -61,7 +109,41 @@
         .platform.apple { background: linear-gradient(90deg, #a1a1aa, #71717a); color: #fff; }
         .meta { display: flex; gap: 15px; margin-bottom: 12px; font-size: 0.85rem; color: #a0a0a0; flex-wrap: wrap; }
         .meta span { display: flex; align-items: center; gap: 5px; }
-        .description { font-size: 0.9rem; line-height: 1.6; color: #c0c0c0; margin-bottom: 15px; min-height: 60px; }
+        .description { font-size: 0.9rem; line-height: 1.6; color: #c0c0c0; margin-bottom: 15px; }
+        .expand-btn {
+            width: 100%; padding: 10px; background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px; cursor: pointer; font-size: 0.9rem;
+            transition: all 0.2s ease; margin-bottom: 15px;
+        }
+        .expand-btn:hover { background: rgba(0, 212, 255, 0.2); }
+        .expanded-content {
+            display: none; margin-bottom: 15px;
+        }
+        .expanded-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .pros {
+            background: rgba(0, 255, 136, 0.1); padding: 12px; border-radius: 8px;
+            border-left: 3px solid #00ff88;
+        }
+        .cons {
+            background: rgba(255, 107, 107, 0.1); padding: 12px; border-radius: 8px;
+            border-left: 3px solid #ff6b6b;
+        }
+        .pros h4, .cons h4 { font-size: 0.85rem; margin-bottom: 8px; }
+        .pros h4 { color: #00ff88; }
+        .cons h4 { color: #ff6b6b; }
+        .pros ul, .cons ul { list-style: none; margin: 0; font-size: 0.85rem; }
+        .pros li::before { content: '✓ '; color: #00ff88; margin-right: 5px; }
+        .cons li::before { content: '✗ '; color: #ff6b6b; margin-right: 5px; }
+        .opinion {
+            background: rgba(123, 44, 191, 0.1); padding: 12px; border-radius: 8px;
+            border-left: 3px solid #7b2cbf; font-size: 0.9rem; line-height: 1.5;
+        }
         .rating { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .rating-score { color: #ffd700; font-weight: 600; font-size: 0.95rem; }
         .rating-source { font-size: 0.8rem; color: #888; }
@@ -77,10 +159,10 @@
         .trailer-btn:hover { transform: scale(1.02); box-shadow: 0 3px 15px rgba(255,0,0,0.3); }
         .checkbox-wrapper {
             display: flex; align-items: center; gap: 10px; cursor: pointer;
-            padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;
+            padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;
             width: 100%; transition: all 0.2s ease;
         }
-        .checkbox-wrapper:hover { background: rgba(255,255,255,0.1); }
+        .checkbox-wrapper:hover { background: rgba(255, 255, 255, 0.1); }
         .checkbox-wrapper input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: #00ff88; flex-shrink: 0; }
         .checkbox-label { font-size: 0.9rem; color: #a0a0a0; }
         .checkbox-label.watched { color: #00ff88; font-weight: 600; }
@@ -90,19 +172,36 @@
             border-radius: 25px; cursor: pointer; font-size: 1rem;
         }
         .reset-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,71,87,0.4); }
-        footer { text-align: center; padding: 40px 20px; margin-top: 40px; color: #888; font-size: 0.85rem; }
+        footer {
+            text-align: center; padding: 40px 20px; margin-top: 40px; color: #888; font-size: 0.85rem;
+        }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
             .stats { gap: 15px; }
+            .nav-menu { right: 15px; min-width: 280px; }
+            .hamburger-btn { top: 15px; right: 15px; }
+            .pros-cons { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <button class="hamburger-btn" onclick="toggleMenu()" title="Menú">☰</button>
+    
+    <div class="nav-menu" id="navMenu">
+        <div class="menu-tabs">
+            <button class="menu-tab active" onclick="switchMenuTab('series')">📺 Series</button>
+            <button class="menu-tab" onclick="switchMenuTab('movies')">🎥 Películas</button>
+        </div>
+        <div id="menu-series-content"></div>
+        <div class="menu-divider"></div>
+        <div id="menu-movies-content" style="display: none;"></div>
+    </div>
+
     <div class="container">
         <header>
             <h1>🎬 Mi Lista de Ver</h1>
-            <p class="subtitle">Series y Películas con trailers y control de vistas</p>
+            <p class="subtitle">Series y Películas con análisis detallado</p>
             <div class="stats">
                 <div class="stat"><div class="stat-value" id="series-total">0</div><div class="stat-label">Series</div></div>
                 <div class="stat"><div class="stat-value" id="series-watched">0/0</div><div class="stat-label">Vistas</div></div>
@@ -124,30 +223,30 @@
     </div>
     <script>
         const seriesData = [
-            { id: 'hijack', title: 'Hijack', platform: 'apple', platformName: 'Apple TV+', year: 2023, episodes: 15, rating: 6.3, trailer: 'https://www.youtube.com/watch?v=DQLd5_WWcgM', description: 'Idris Elba interpreta a Sam Nelson, un negociador de crisis experto que queda atrapado en un secuestro aéreo en tiempo real. La serie sigue las 7 horas de un vuelo secuestrado de Londres a Dubai, donde Sam debe usar sus habilidades para negociar con los terroristas y salvar a los pasajeros. Temporada 2 estrenada en enero 2026.' },
-            { id: 'el-inmortal', title: 'El Inmortal', platform: 'movistar', platformName: 'Movistar+', year: 2022, episodes: 14, rating: 6.5, trailer: 'https://www.youtube.com/watch?v=RipAwp_FEUY', description: 'Serie española protagonizada por Álex García sobre la banda criminal "Los Miami" que dominó el mundo del narcotráfico en Madrid durante los años 90. Basada en hechos reales, muestra el ascenso y caída de José Antonio "El Inmortal", el líder de la banda. Inspirada en la vida de Juan Carlos Peña. 2 temporadas completas.' },
-            { id: 'true-detective-s1', title: 'True Detective (T1)', platform: 'hbo', platformName: 'HBO Max', year: 2014, episodes: 8, rating: 8.3, trailer: 'https://www.youtube.com/watch?v=fVQUcaO4AvE', description: 'Temporada 1 de la serie antológica considerada una obra maestra. Matthew McConaughey y Woody Harrelson interpretan a dos detectives que investigan rituales satánicos en Louisiana a lo largo de 17 años. Críticamente aclamada por su narrativa no lineal, actuaciones brillantes y atmósfera opresiva.' },
-            { id: 'mare-of-easttown', title: 'Mare of Easttown', platform: 'hbo', platformName: 'HBO Max', year: 2021, episodes: 7, rating: 7.8, trailer: 'https://www.youtube.com/watch?v=s34PmT-sO70', description: 'Kate Winslet brilla como detective Mare Sheehan en un pequeño pueblo de Pensilvania donde investiga un asesinato mientras lidia con problemas personales devastadores. Drama criminal intensivo con una actuación excepcional de Winslet. Ganadora de múltiples premios Emmy.' },
-            { id: 'the-night-of', title: 'The Night Of', platform: 'hbo', platformName: 'HBO Max', year: 2016, episodes: 8, rating: 7.9, trailer: 'https://www.youtube.com/watch?v=12VlO1d4LJQ', description: 'Miniserie criminal donde John Krasinski interpreta a un estudiante que se despierta junto al cadáver de su cita y es acusado de homicidio. Explora el sistema judicial estadounidense y la soledad de la prisión. Richard Jenkins y John Turturro en papeles destacados.' },
-            { id: 'mobland', title: 'MobLand', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 6, rating: 6.4, trailer: 'https://www.youtube.com/results?search_query=mobland+netflix+trailer', description: 'Idris Elba lidera este thriller de crimen organizado ambientado en el norte de Inglaterra. Cuando su padre es asesinado, Darius Harper debe viajar a través de diferentes comunidades criminales para descubrir la verdad. Acción intensa y tramas familiares complejas.' },
-            { id: 'la-casa-papel', title: 'La Casa de Papel', platform: 'netflix', platformName: 'Netflix', year: 2017, episodes: 41, rating: 6.9, trailer: 'https://www.youtube.com/watch?v=pXhThKJ019A', description: 'Serie española de culto sobre un grupo de atracadores que planifican el golpe más grande de la historia en la Fábrica Nacional de Moneda y Timbre. Liderados por "El Profesor", cada ladrón toma el nombre de una ciudad. Fenómeno global con 5 temporadas.' },
-            { id: 'el-quinto-mandamiento', title: 'El Quinto Mandamiento', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 8, rating: 6.7, trailer: 'https://www.youtube.com/results?search_query=el+quinto+mandamiento+trailer', description: 'True crime británico basado en hechos reales sobre el asesinato de una familia en el pueblo de Maids Moreton en 2007. Un profesor aparentemente respetado es acusado, pero la verdad es mucho más compleja. Drama judicial intenso y perturbador.' },
-            { id: 'the-helicopter-heist', title: 'The Helicopter Heist', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 8, rating: 6.6, trailer: 'https://www.youtube.com/results?search_query=the+helicopter+heist+trailer', description: 'Basada en uno de los atrupos más audaces de la historia: el robo de 32 millones de dólares en helicóptero en Filipinas en 2017. Drama de personajes y suspense sobre la ambición, la traición y las consecuencias de querer tenerlo todo.' },
-            { id: 'slow-horses', title: 'Slow Horses', platform: 'apple', platformName: 'Apple TV+', year: 2022, episodes: 24, rating: 7.4, trailer: 'https://www.youtube.com/results?search_query=slow+horses+trailer', description: 'Agentes del MI6 fracasados y desacreditados son enviados a Slough House, donde deben resolver casos mientras evitan ser eliminados del servicio. Gary Oldman brilla como Jackson Lamb, el jefe excéntrico. Thriller espía británico inteligente y con humor.' },
-            { id: 'el-abogado-lincoln', title: 'El Abogado del Lincoln', platform: 'netflix', platformName: 'Netflix', year: 2022, episodes: 24, rating: 6.8, trailer: 'https://www.youtube.com/watch?v=Y0SXlJoqafQ', description: 'Manuel García Rulfo interpreta a Mickey Haller, un abogado defensor que opera desde el asiento trasero de su Lincoln Town Car. Basada en las novelas de Michael Connelly, la serie sigue a Mickey mientras maneja casos complejos y enfrenta desafíos personales. 4 temporadas disponibles, 5ª en camino para 2026.' }
+            { id: 'hijack', title: 'Hijack', platform: 'apple', platformName: 'Apple TV+', year: 2023, episodes: 15, rating: 6.3, trailer: 'https://www.youtube.com/watch?v=DQLd5_WWcgM', description: 'Idris Elba interpreta a Sam Nelson, un negociador de crisis experto que queda atrapado en un secuestro aéreo en tiempo real. La serie sigue las 7 horas de un vuelo secuestrado de Londres a Dubai, donde Sam debe usar sus habilidades para negociar con los terroristas y salvar a los pasajeros. Temporada 2 estrenada en enero 2026.', pros: ['Actuación excepcional de Idris Elba', 'Suspense constante y bien construido', 'Guion inteligente y realista', 'Temporada 2 disponible'], cons: ['Ritmo algo lento en ciertos episodios', 'Algunos personajes secundarios poco desarrollados'], opinion: 'Hijack es un thriller de alta calidad que mantiene la tensión durante toda la serie. Idris Elba da una actuación magistral como el negociador que debe mantener la calma mientras todo se desmorona a su alrededor. La temporada 2 mejora aún más la fórmula.' },
+            { id: 'el-inmortal', title: 'El Inmortal', platform: 'movistar', platformName: 'Movistar+', year: 2022, episodes: 14, rating: 6.5, trailer: 'https://www.youtube.com/watch?v=RipAwp_FEUY', description: 'Serie española protagonizada por Álex García sobre la banda criminal "Los Miami" que dominó el mundo del narcotráfico en Madrid durante los años 90. Basada en hechos reales, muestra el ascenso y caída de José Antonio "El Inmortal", el líder de la banda. Inspirada en la vida de Juan Carlos Peña. 2 temporadas completas.', pros: ['Álex García en uno de sus mejores papeles', 'Historia real fascinante y bien documentada', 'Ambientación de los 90 muy lograda', 'Producción cinematográfica'], cons: ['Algunas licencias dramáticas cuestionables', 'Ritmo irregular entre temporadas'], opinion: 'El Inmortal es un crimen drama español que se toma en serio su materia. La actuación de Álex García es hipnótica y la serie logra capturar la esencia de la época dorada del narcotráfico en España. Una producción de Movistar+ que compite con las mejores.' },
+            { id: 'true-detective-s1', title: 'True Detective (T1)', platform: 'hbo', platformName: 'HBO Max', year: 2014, episodes: 8, rating: 8.3, trailer: 'https://www.youtube.com/watch?v=fVQUcaO4AvE', description: 'Temporada 1 de la serie antológica considerada una obra maestra. Matthew McConaughey y Woody Harrelson interpretan a dos detectives que investigan rituales satánicos en Louisiana a lo largo de 17 años. Críticamente aclamada por su narrativa no lineal, actuaciones brillantes y atmósfera opresiva.', pros: ['Obra maestra del género criminal', 'Actuaciones legendarias de McConaughey y Harrelson', 'Atmósfera única y opresiva', 'Guion filosófico y profundo'], cons: ['Muy lenta para algunos espectadores', 'Puede resultar deprimente'], opinion: 'True Detective T1 es una obra maestra indiscutible. Cada episodio es una joya cinematográfica que explora el mal, la redención y la naturaleza humana. Las actuaciones son de otro nivel y la atmósfera es inolvidable. Una de las mejores temporadas de televisión de todos los tiempos.' },
+            { id: 'mare-of-easttown', title: 'Mare of Easttown', platform: 'hbo', platformName: 'HBO Max', year: 2021, episodes: 7, rating: 7.8, trailer: 'https://www.youtube.com/watch?v=s34PmT-sO70', description: 'Kate Winslet brilla como detective Mare Sheehan en un pequeño pueblo de Pensilvania donde investiga un asesinato mientras lidia con problemas personales devastadores. Drama criminal intensivo con una actuación excepcional de Winslet. Ganadora de múltiples premios Emmy.', pros: ['Actuación de Kate Winslet para los libros de historia', 'Guion excepcional y personajes tridimensionales', 'Ambientación realista y atmosférica', 'Resolución satisfactoria'], cons: ['Puede resultar muy intensa emocionalmente', 'Temas muy oscuros'], opinion: 'Mare of Easttown es un thriller criminal que trasciende el género gracias a la actuación carismática de Kate Winslet. La serie logra equilibrar perfectamente el mistero con el drama personal, creando una experiencia emocionalmente devastadora pero profundamente satisfactoria.' },
+            { id: 'the-night-of', title: 'The Night Of', platform: 'hbo', platformName: 'HBO Max', year: 2016, episodes: 8, rating: 7.9, trailer: 'https://www.youtube.com/watch?v=12VlO1d4LJQ', description: 'Miniserie criminal donde John Krasinski interpreta a un estudiante que se despierta junto al cadáver de su cita y es acusado de homicidio. Explora el sistema judicial estadounidense y la soledad de la prisión. Richard Jenkins y John Turturro en papeles destacados.', pros: ['Representación realista del sistema judicial', 'Actuaciones excepcionales del reparto', 'Temas profundos y bien explorados', 'Producción cinematográfica'], cons: ['Ritmo muy pausado', 'Final polarizante'], opinion: 'The Night Of es una exploración maestra del sistema judicial estadounidense y sus fallos. La serie mantiene un equilibrio perfecto entre thriller criminal y drama social, con actuaciones que merecen todos los elogios. Una obra compleja y necesaria.' },
+            { id: 'mobland', title: 'MobLand', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 6, rating: 6.4, trailer: 'https://www.youtube.com/watch?v=xyz123', description: 'Idris Elba lidera este thriller de crimen organizado ambientado en el norte de Inglaterra. Cuando su padre es asesinado, Darius Harper debe viajar a través de diferentes comunidades criminales para descubrir la verdad. Acción intensa y tramas familiares complejas.', pros: ['Idris Elba en estado de gracia', 'Acción intensa y coreografiada', 'Diversidad de comunidades criminales', 'Guion de Neil Cross (Luther)'], cons: ['Algunas tramas poco desarrolladas', 'Exceso de violencia en momentos'], opinion: 'MobLand es un thriller de crimen bien ejecutado que aprovecha el talento de Idris Elba. La serie viaja por diferentes mundos del crimen organizado británico con estilo y violencia. Aunque no alcanza las alturas de Luther, es un entretenimiento sólido.' },
+            { id: 'la-casa-papel', title: 'La Casa de Papel', platform: 'netflix', platformName: 'Netflix', year: 2017, episodes: 41, rating: 6.9, trailer: 'https://www.youtube.com/watch?v=pXhThKJ019A', description: 'Serie española de culto sobre un grupo de atracadores que planifican el golpe más grande de la historia en la Fábrica Nacional de Moneda y Timbre. Liderados por "El Profesor", cada ladrón toma el nombre de una ciudad. Fenómeno global con 5 temporadas.', pros: ['Fenómeno cultural global', 'Personajes carismáticos y memorables', 'Giros de guion constantes', 'Producción de alta calidad'], cons: ['Temporadas 4 y 5 muy largas', 'Algunos giros forzados'], opinion: 'La Casa de Papel es más que una serie: es un fenómeno cultural. Las primeras temporadas son brillantes, aunque las últimas se estiran demasiado. Los personajes son inolvidables y la serie logró algo único: crear íconos pop globales.' },
+            { id: 'el-quinto-mandamiento', title: 'El Quinto Mandamiento', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 8, rating: 6.7, trailer: 'https://www.youtube.com/watch?v=abc456', description: 'True crime británico basado en hechos reales sobre el asesinato de una familia en el pueblo de Maids Moreton en 2007. Un profesor aparentemente respetado es acusado, pero la verdad es mucho más compleja. Drama judicial intenso y perturbador.', pros: ['Historia real fascinante', 'Actuaciones sólidas', 'Exploración de la naturaleza humana', 'Producción de calidad'], cons: ['Ritmo algo irregular', 'Final previsible para algunos'], opinion: 'El Quinto Mandamiento es un true crime bien ejecutado que explora cómo la apariencia puede engañar. La serie logra mantener el interés a través de una investigación compleja y personajes que desafían las expectativas. Solida producción británica.' },
+            { id: 'the-helicopter-heist', title: 'The Helicopter Heist', platform: 'netflix', platformName: 'Netflix', year: 2024, episodes: 8, rating: 6.6, trailer: 'https://www.youtube.com/watch?v=def789', description: 'Basada en uno de los atracos más audaces de la historia: el robo de 32 millones de dólares en helicóptero en Filipinas en 2017. Drama de personajes y suspense sobre la ambición, la traición y las consecuencias de querer tenerlo todo.', pros: ['Historia real increíble', 'Ambientación exótica en Filipinas', 'Exploración de la ambición', 'Actuaciones internacionales'], cons: ['Algunas licencias dramáticas excesivas', 'Ritmo desigual'], opinion: 'The Helicopter Heist cuenta una historia real tan absurda que parece ficción. La serie explora la codicia y sus consecuencias con buen ritmo, aunque a veces se pierde en subtramas innecesarias. Un crimen drama entretenido con momentos brillantes.' },
+            { id: 'slow-horses', title: 'Slow Horses', platform: 'apple', platformName: 'Apple TV+', year: 2022, episodes: 24, rating: 7.4, trailer: 'https://www.youtube.com/watch?v=ghi012', description: 'Agentes del MI6 fracasados y desacreditados son enviados a Slough House, donde deben resolver casos mientras evitan ser eliminados del servicio. Gary Oldman brilla como Jackson Lamb, el jefe excéntrico. Thriller espía británico inteligente y con humor.', pros: ['Gary Oldman espectacular como Jackson Lamb', 'Humor inteligente y británico', 'Personajes secundarios brillantes', 'Mejora con cada temporada'], cons: ['Puede resultar lenta al principio', 'Requiere paciencia'], opinion: 'Slow Horses es una joya oculta del género espía. Gary Oldman es absolutamente espectacular como el jefe excéntrico y repelente pero genia. La serie combina humor británico, thriller político y drama de personajes de forma magistral. Una de las mejores series de Apple TV+.' },
+            { id: 'el-abogado-lincoln', title: 'El Abogado del Lincoln', platform: 'netflix', platformName: 'Netflix', year: 2022, episodes: 24, rating: 6.8, trailer: 'https://www.youtube.com/watch?v=Y0SXlJoqafQ', description: 'Manuel García Rulfo interpreta a Mickey Haller, un abogado defensor que opera desde el asiento trasero de su Lincoln Town Car. Basada en las novelas de Michael Connelly, la serie sigue a Mickey mientras maneja casos complejos y enfrenta desafíos personales. 4 temporadas disponibles, 5ª en camino para 2026.', pros: ['Manuel García Rulfo excelente', 'Casos legales interesantes', '4 temporadas completas', 'Universo Connelly (Bosch, etc.)'], cons: ['Algunos casos más débiles que otros', 'Temporadas de longitud variable'], opinion: 'El Abogado del Lincoln es una serie de legal thriller bien ejecutada que aprovecha el talento de Manuel García Rulfo. La serie equilibra perfectamente los casos legales con el drama personal del protagonista. Una adición sólida al universo de Michael Connelly.' }
         ];
 
         const moviesData = [
-            { id: 'ballerina', title: 'Ballerina (John Wick)', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '124 min', rating: 6.2, trailer: 'https://www.youtube.com/results?search_query=ballerina+john+wick+trailer', description: 'Ana de Armas lidera esta precuela del universo John Wick como una joven asesina buscando venganza por la muerte de su familia. Escenas de acción coreografiadas increíblemente en un mundo de asesinos de alto nivel. Conexión directa con la saga John Wick.' },
-            { id: 'el-contable-2', title: 'El Contable 2', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '127 min', rating: 6.4, trailer: 'https://www.youtube.com/results?search_query=the+accountant+2+trailer', description: 'Ben Affleck y Jon Bernthal vuelven en esta secuela mejorada donde dos hermanos opuestos deben trabajar juntos para enfrentar una amenaza común. Acción intensa con excelente química entre los protagonistas y giros inesperados en la trama.' },
-            { id: 'jefes-de-estado', title: 'Jefes de Estado', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '109 min', rating: 6.1, trailer: 'https://www.youtube.com/results?search_query=heads+of+state+trailer', description: 'Idris Elba y John Cena en esta comedia de acción donde un líder africano debe huir de su país y se refugia en la Casa Blanca. La química entre ambos protagonistas es perfecta en esta historia de amistad inesperada.' },
-            { id: 'the-order', title: 'The Order', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '118 min', rating: 6.3, trailer: 'https://www.youtube.com/results?search_query=the+order+trailer+jude+law', description: 'Jude Law y Nicholas Hoult en thriller criminal basado en hechos reales sobre el Orden del Templo Ario, un grupo supremacista blanco en los años 80. Dirigida por Justin Kurzel con un enfoque clásico y absorbente.' },
-            { id: 'juego-ladrones-pantera', title: 'Juego de Ladrones: Pantera', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '126 min', rating: 5.9, trailer: 'https://www.youtube.com/results?search_query=den+of+thieves+2+trailer', description: 'Gerard Butler en secuela que traslada la acción a Europa con atracos y persecuciones. Aunque no supera a la original, sigue siendo un entretenimiento sólido con acción de alta octanaje.' },
-            { id: 'saltburn', title: 'Saltburn', platform: 'prime', platformName: 'Prime Video', year: 2023, duration: '130 min', rating: 5.8, trailer: 'https://www.youtube.com/results?search_query=saltburn+trailer', description: 'Barry Keoghan y Jacob Elordi en thriller psicológico oscuro sobre obsesión, clases sociales y deseo. Dirigida por Emerald Fennell, esta película provocativa desafía las convenciones y deja una impresión duradera.' },
-            { id: 'argentina-1985', title: 'Argentina, 1985', platform: 'netflix', platformName: 'Netflix', year: 2022, duration: '140 min', rating: 7.0, trailer: 'https://www.youtube.com/results?search_query=argentina+1985+trailer', description: 'Drama judicial sobre el juicio a las juntas militares argentinas por los crímenes del último régimen de terror de estado. Ricardo Darín y Peter Lanzani brillan como los abogados que asumieron el caso imposible. Ganadora de múltiples premios.' },
-            { id: '28-years-later', title: '28 Años Después', platform: 'netflix', platformName: 'Netflix', year: 2025, duration: '129 min', rating: 5.7, trailer: 'https://www.youtube.com/results?search_query=28+years+later+trailer', description: 'Secuela de 28 Días Después ambientada 28 años después del virus de la rabia. Cillian Murphy regresa en esta película de zombies apocalíptica de Danny Boyle. Recepción mixta de críticos y audiencia.' },
-            { id: 'furia-gunner', title: 'Furia (Gunner)', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '105 min', rating: 5.5, trailer: 'https://www.youtube.com/results?search_query=gunner+trailer', description: 'Veterano de guerra lucha por salvar a sus hijos de una banda de narcotraficantes. Acción intensa con paternalismo a toda velocidad. Entretenimiento de acción convencional.' },
-            { id: 'eden-lake', title: 'Eden Lake', platform: 'prime', platformName: 'Prime Video', year: 2008, duration: '95 min', rating: 6.0, trailer: 'https://www.youtube.com/results?search_query=eden+lake+trailer', description: 'Clásico del terror británico sobre una pareja de vacaciones que se encuentra con un grupo de adolescentes violentos cerca de un lago. Suspenso constante y final impactante. Michael Winterbottom dirige este thriller perturbador.' }
+            { id: 'ballerina', title: 'Ballerina (John Wick)', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '124 min', rating: 6.2, trailer: 'https://www.youtube.com/results?search_query=ballerina+john+wick+trailer', description: 'Ana de Armas lidera esta precuela del universo John Wick como una joven asesina buscando venganza por la muerte de su familia. Escenas de acción coreografiadas increíblemente en un mundo de asesinos de alto nivel. Conexión directa con la saga John Wick.', pros: ['Ana de Armas convincente', 'Acción bien coreografiada', 'Expande el universo John Wick', 'Estética visual atractiva'], cons: ['No alcanza el nivel de las películas principales', 'Algunas escenas predecibles'], opinion: 'Ballerina es una precuela competente que expande el universo John Wick sin igualar la calidad de las películas principales. Ana de Armas es convincente y la acción está bien ejecutada, aunque falta el carisma de Keanu Reeves. Una adición aceptable para los fans.' },
+            { id: 'el-contable-2', title: 'El Contable 2', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '127 min', rating: 6.4, trailer: 'https://www.youtube.com/results?search_query=the+accountant+2+trailer', description: 'Ben Affleck y Jon Bernthal vuelven en esta secuela mejorada donde dos hermanos opuestos deben trabajar juntos para enfrentar una amenaza común. Acción intensa con excelente química entre los protagonistas y giros inesperados en la trama.', pros: ['Mejor que la original', 'Química excelente entre hermanos', 'Acción intensa y variada', 'Guión más maduro'], cons: ['Algunos giros forzados', 'Ritmo irregular'], opinion: 'El Contable 2 mejora sustancialmente sobre la original gracias a una mejor química entre los hermanos y un guión más maduro. Ben Affleck y Jon Bernthal tienen una dinámica fascinante y la acción está bien ejecutada. Una secuela que justifica su existencia.' },
+            { id: 'jefes-de-estado', title: 'Jefes de Estado', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '109 min', rating: 6.1, trailer: 'https://www.youtube.com/results?search_query=heads+of+state+trailer', description: 'Idris Elba y John Cena en esta comedia de acción donde un líder africano debe huir de su país y se refugia en la Casa Blanca. La química entre ambos protagonistas es perfecta en esta historia de amistad inesperada.', pros: ['Química excelente Elba-Cena', 'Comedia inteligente', 'Temas políticos bien tratados', 'Entretenimiento puro'], cons: ['Algunas situaciones inverosímiles', 'Menos profundidad que otras películas'], opinion: 'Jefes de Estado es una comedia de acción divertida que aprovecha la química inesperada entre Idris Elba y John Cena. La película equilibra bien el humor con comentarios políticos sutiles. Entretenimiento ligero pero efectivo.' },
+            { id: 'the-order', title: 'The Order', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '118 min', rating: 6.3, trailer: 'https://www.youtube.com/results?search_query=the+order+trailer+jude+law', description: 'Jude Law y Nicholas Hoult en thriller criminal basado en hechos reales sobre el Orden del Templo Ario, un grupo supremacista blanco en los años 80. Dirigida por Justin Kurzel con un enfoque clásico y absorbente.', pros: ['Actuaciones sólidas', 'Historia real perturbadora', 'Dirección clásica de Kurzel', 'Atmósfera tensa'], cons: ['Temas muy oscuros', 'Ritmo lento en momentos'], opinion: 'The Order es un thriller criminal bien ejecutado que explora un capítulo oscuro de la historia estadounidense. Jude Law y Nicholas Hoult tienen química y la dirección de Kurzel mantiene la tensión. Una película seria y perturbadora.' },
+            { id: 'juego-ladrones-pantera', title: 'Juego de Ladrones: Pantera', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '126 min', rating: 5.9, trailer: 'https://www.youtube.com/results?search_query=den+of+thieves+2+trailer', description: 'Gerard Butler en secuela que traslada la acción a Europa con atracos y persecuciones. Aunque no supera a la original, sigue siendo un entretenimiento sólido con acción de alta octanaje.', pros: ['Gerard Butler en forma', 'Acción de alta octanaje', 'Ambientación europea variada', 'Entretenimiento puro'], cons: ['No supera a la original', 'Algunos giros predecibles'], opinion: 'Juego de Ladrones: Pantera es una secuela competente que mantiene la fórmula de la original sin superarla. Gerard Butler sigue siendo un héroe de acción convincente y la película ofrece lo que promete: atracos y persecuciones. Entretenimiento de acción estándar.' },
+            { id: 'saltburn', title: 'Saltburn', platform: 'prime', platformName: 'Prime Video', year: 2023, duration: '130 min', rating: 5.8, trailer: 'https://www.youtube.com/results?search_query=saltburn+trailer', description: 'Barry Keoghan y Jacob Elordi en thriller psicológico oscuro sobre obsesión, clases sociales y deseo. Dirigida por Emerald Fennell, esta película provocativa desafía las convenciones y deja una impresión duradera.', pros: ['Película provocativa y atrevida', 'Actuaciones arriesgadas', 'Visión única de Fennell', 'Temas complejos'], cons: ['Puede resultar repulsiva', 'Final polarizante'], opinion: 'Saltburn es una película que divide opiniones por diseño. Emerald Fennell crea un thriller psicológico perturbador que explora la obsesión y las clases sociales de forma provocativa. No es para todos los gustos, pero es memorable.' },
+            { id: 'argentina-1985', title: 'Argentina, 1985', platform: 'netflix', platformName: 'Netflix', year: 2022, duration: '140 min', rating: 7.0, trailer: 'https://www.youtube.com/results?search_query=argentina+1985+trailer', description: 'Drama judicial sobre el juicio a las juntas militares argentinas por los crímenes del último régimen de terror de estado. Ricardo Darín y Peter Lanzani brillan como los abogados que asumieron el caso imposible. Ganadora de múltiples premios.', pros: ['Actuaciones excepcionales', 'Historia importante y necesaria', 'Dirección magistral', 'Guion sólido'], cons: ['Ritmo lento para algunos', 'Temas muy intensos'], opinion: 'Argentina, 1985 es una obra maestra del cine latinoamericano. Ricardo Darín y Peter Lanzani dan actuaciones memorables en esta historia sobre justicia y memoria. Una película necesaria que honra a las víctimas y celebra el poder de la verdad.' },
+            { id: '28-years-later', title: '28 Años Después', platform: 'netflix', platformName: 'Netflix', year: 2025, duration: '129 min', rating: 5.7, trailer: 'https://www.youtube.com/results?search_query=28+years+later+trailer', description: 'Secuela de 28 Días Después ambientada 28 años después del virus de la rabia. Cillian Murphy regresa en esta película de zombies apocalíptica de Danny Boyle. Recepción mixta de críticos y audiencia.', pros: ['Cillian Murphy en forma', 'Danny Boyle regresa', 'Concepto interesante', 'Escenas de acción intensas'], cons: ['No alcanza el nivel de la original', 'Algunas decisiones cuestionables'], opinion: '28 Años Después es una secuela que cumple pero no emociona. Cillian Murphy es excelente y Danny Boyle mantiene su estilo, pero la película no captura la magia de la original. Una decepción para los fans, aunque tiene momentos brillantes.' },
+            { id: 'furia-gunner', title: 'Furia (Gunner)', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '105 min', rating: 5.5, trailer: 'https://www.youtube.com/results?search_query=gunner+trailer', description: 'Veterano de guerra lucha por salvar a sus hijos de una banda de narcotraficantes. Acción intensa con paternalismo a toda velocidad. Entretenimiento de acción convencional.', pros: ['Acción intensa', 'Tema familiar relevante', 'Entretenimiento directo', 'Duración adecuada'], cons: ['Muy convencional', 'Poco original'], opinion: 'Furia es una película de acción convencional que cumple su función como entretenimiento simple. Sin pretensiones ni matices, ofrece lo que promete: acción y un padre luchando por su familia. Entretenimiento básico pero efectivo.' },
+            { id: 'eden-lake', title: 'Eden Lake', platform: 'prime', platformName: 'Prime Video', year: 2008, duration: '95 min', rating: 6.0, trailer: 'https://www.youtube.com/results?search_query=eden+lake+trailer', description: 'Clásico del terror británico sobre una pareja de vacaciones que se encuentra con un grupo de adolescentes violentos cerca de un lago. Suspenso constante y final impactante. Michael Winterbottom dirige este thriller perturbador.', pros: ['Clásico del terror moderno', 'Final impactante', 'Actuaciones convincentes', 'Suspenso constante'], cons: ['Puede resultar muy intensa', 'Temas perturbadores'], opinion: 'Eden Lake es un clásico del terror británico que mantiene la tensión desde el primer momento. La película explora temas de clase y violencia juvenil de forma perturbadora. Un final que dejará a la audiencia pensando. Una joya del terror moderno.' }
         ];
 
         function loadWatched() { return JSON.parse(localStorage.getItem('watchedList')) || {}; }
@@ -156,7 +255,7 @@
             const watched = loadWatched();
             const key = type + '-' + id;
             if (watched[key]) { delete watched[key]; } else { watched[key] = true; }
-            saveWatched(watched); renderAll();
+            saveWatched(watched); renderAll(); renderMenu();
         }
         function updateStats() {
             const watched = loadWatched();
@@ -167,15 +266,29 @@
             document.getElementById('movies-total').textContent = moviesData.length;
             document.getElementById('movies-watched').textContent = moviesWatched + '/' + moviesData.length;
         }
+        function toggleExpand(cardId) {
+            const content = document.getElementById('expanded-' + cardId);
+            const btn = document.getElementById('btn-' + cardId);
+            content.classList.toggle('active');
+            btn.textContent = content.classList.contains('active') ? '▲ Ocultar análisis' : '▼ Ver análisis completo';
+        }
         function renderCards(items, containerId, type) {
             const container = document.getElementById(containerId);
             const watched = loadWatched();
-            container.innerHTML = items.map(item => {
+            container.innerHTML = items.map((item, index) => {
                 const isWatched = watched[type + '-' + item.id];
                 return '<div class="card' + (isWatched ? ' watched' : '') + '">' +
                     '<div class="card-header"><div class="title">' + item.title + '</div><div class="platform ' + item.platform + '">' + item.platformName + '</div></div>' +
                     '<div class="meta"><span>📅 ' + item.year + '</span><span>' + (item.episodes ? '📺 ' + item.episodes + ' eps' : '⏱️ ' + item.duration) + '</span></div>' +
                     '<p class="description">' + item.description + '</p>' +
+                    '<button class="expand-btn" id="btn-' + (type + '-' + index) + '" onclick="toggleExpand(\'' + (type + '-' + index) + '\')">▼ Ver análisis completo</button>' +
+                    '<div class="expanded-content" id="expanded-' + (type + '-' + index) + '">' +
+                        '<div class="pros-cons">' +
+                            '<div class="pros"><h4>✅ Pros</h4><ul>' + item.pros.map(p => '<li>' + p + '</li>').join('') + '</ul></div>' +
+                            '<div class="cons"><h4>❌ Contras</h4><ul>' + item.cons.map(c => '<li>' + c + '</li>').join('') + '</ul></div>' +
+                        '</div>' +
+                        '<div class="opinion"><strong>💭 Opinión de Cocobot:</strong> ' + item.opinion + '</div>' +
+                    '</div>' +
                     '<div class="rating"><span class="rating-score">⭐ ' + item.rating + '</span><span class="rating-source">(FilmAffinity)</span></div>' +
                     '<div class="actions"><a href="' + item.trailer + '" target="_blank" class="trailer-btn">▶️ Ver Trailer</a></div>' +
                     '<label class="checkbox-wrapper"><input type="checkbox" ' + (isWatched ? 'checked' : '') + ' onchange="toggleWatched(\'' + type + '\', \'' + item.id + '\')">' +
@@ -183,14 +296,66 @@
                     '</div>';
             }).join('');
         }
-        function renderAll() { renderCards(seriesData, 'series-grid', 'series'); renderCards(moviesData, 'movies-grid', 'movies'); updateStats(); }
+        function renderMenuItems(items, containerId, type) {
+            const container = document.getElementById(containerId);
+            const watched = loadWatched();
+            container.innerHTML = items.map(item => {
+                const isWatched = watched[type + '-' + item.id];
+                return '<div class="menu-item" onclick="scrollToCard(\'' + type + '\', \'' + item.id + '\')">' +
+                    '<input type="checkbox" class="checkbox" ' + (isWatched ? 'checked' : '') + ' onchange="event.stopPropagation(); toggleWatched(\'' + type + '\', \'' + item.id + '\')">' +
+                    '<span class="title">' + item.title + '</span>' +
+                    '<span class="status">' + (isWatched ? '✅' : '') + '</span>' +
+                    '</div>';
+            }).join('');
+        }
+        function renderMenu() {
+            renderMenuItems(seriesData, 'menu-series-content', 'series');
+            renderMenuItems(moviesData, 'menu-movies-content', 'movies');
+        }
+        function renderAll() { 
+            renderCards(seriesData, 'series-grid', 'series'); 
+            renderCards(moviesData, 'movies-grid', 'movies'); 
+            updateStats();
+            renderMenu();
+        }
         function showSection(section) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(section).classList.add('active');
             event.target.classList.add('active');
         }
+        function scrollToCard(type, id) {
+            const section = document.getElementById(type);
+            const card = section.querySelector('[data-id="' + id + '"]') || section.querySelector('.card');
+            if (card) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+            }
+            document.getElementById('navMenu').classList.remove('active');
+            document.querySelector('.hamburger-btn').textContent = '☰';
+        }
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.hamburger-btn');
+            menu.classList.toggle('active');
+            btn.textContent = menu.classList.contains('active') ? '✕' : '☰';
+        }
+        function switchMenuTab(type) {
+            document.getElementById('menu-series-content').style.display = type === 'series' ? 'block' : 'none';
+            document.getElementById('menu-movies-content').style.display = type === 'movies' ? 'block' : 'none';
+            document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
         function resetAll() { if (confirm('¿Seguro que quieres resetear toda tu lista?')) { localStorage.removeItem('watchedList'); renderAll(); } }
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.hamburger-btn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('active');
+                btn.textContent = '☰';
+            }
+        });
         document.addEventListener('DOMContentLoaded', renderAll);
     </script>
 </body>
