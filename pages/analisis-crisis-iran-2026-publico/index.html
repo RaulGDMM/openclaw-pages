@@ -134,6 +134,34 @@
         .timeline-item.urgent::before {
             background: #8e44ad;
         }
+        .opinion-section {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.1) 100%);
+            border: 2px solid rgba(231, 76, 60, 0.4);
+        }
+        .greeting {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(41, 128, 185, 0.05) 100%);
+            border: 2px solid rgba(52, 152, 219, 0.4);
+            text-align: center; padding: 35px;
+        }
+        .greeting h2 { justify-content: center; }
+        .friends-list {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .friend-badge {
+            background: rgba(52, 152, 219, 0.2); padding: 10px 20px;
+            border-radius: 25px; color: #fff; font-weight: 600;
+            border: 1px solid rgba(52, 152, 219, 0.4);
+        }
+        .friend-badge.warning {
+            background: rgba(231, 122, 33, 0.3);
+            border-color: rgba(231, 122, 33, 0.5);
+        }
+        .friend-badge.critical {
+            background: rgba(142, 68, 173, 0.4);
+            border-color: rgba(142, 68, 173, 0.6);
+            animation: pulse 2s infinite;
+        }
         .regional-alert {
             background: linear-gradient(135deg, rgba(231, 122, 33, 0.15) 0%, rgba(211, 84, 0, 0.1) 100%);
             border: 2px solid rgba(231, 122, 33, 0.4);
@@ -192,6 +220,7 @@
         <a href="#ataques">💥 Ataques</a>
         <a href="#implicaciones-economicas">🛢️ Impacto Económico</a>
         <a href="#proyecciones">🔮 Escenarios</a>
+        <a href="#opinion">💭 Opinión</a>
         <a href="#fuentes">📚 Fuentes</a>
     </div>
 
@@ -199,7 +228,7 @@
         <header>
             <h1>🌍 Crisis en Irán 2026</h1>
             <p class="subtitle">Análisis situacional público - Oriente Medio</p>
-            <span class="date-badge">📅 1 de Marzo de 2026 - ACTUALIZADO 18:00 HRS</span>
+            <span class="date-badge">📅 01 de March de 2026 - ACTUALIZADO 20:24 HRS</span>
         </header>
 
         <div class="alert-banner urgent">
@@ -213,7 +242,7 @@
             </div>
             
             <div class="casualty-box">
-                📊 <strong>BAJAS CONFIRMADAS (Actualizado 18:00):</strong><br>
+                📊 <strong>BAJAS CONFIRMADAS (Actualizado 20:24):</strong><br>
                 • Irán: 200+ muertos (ataques EE.UU./Israel)<br>
                 • EAU: 3 muertos, 58 heridos (misiles iraníes)<br>
                 • Israel: 8 muertos en Beit Shemesh
@@ -243,16 +272,16 @@
 
             <h3>🔴 Países Afectados (Actualizado)</h3>
             <ul>
-                <li><strong>🇦🇪 Emiratos Árabes Unidos (DUBÁI, Abu Dabi):</strong> <span style="color:#e74c3c; font-weight:700;">3 MUERTOS, 58 HERIDOS</span>. Puerto de Jebel Ali con incendio (escombros de misil interceptado). DP World suspendió operaciones. Aeropuerto de Dubái y Burj Al Arab dañados.</li>
+                <li><strong>🇦🇪 Emiratos Árabes Unidos (DUBÁI, Abu Dabi):</strong> <span style="color:#e74c3c; font-weight:700;">3 MUERTOS, 58 HERIDOS</span>. Incendio en muelle. DP World suspendió operaciones (36% del PIB de Dubái). Aeropuerto Internacional: Dañado. Burj Al Arab: Dañado.</li>
                 <li><strong>🇮🇱 Israel:</strong> Múltiples ciudades bajo alerta. <span style="color:#e74c3c; font-weight:700;">8 MUERTOS en Beit Shemesh</span>. Iron Dome en operación continua.</li>
                 <li><strong>🇶🇦 Catar:</strong> Alertas activas, instalaciones energéticas protegidas</li>
                 <li><strong>🇧🇭 Bahréin, 🇰🇼 Kuwait, 🇸🇦 Arabia Saudita:</strong> Protocolos de seguridad máximos</li>
             </ul>
 
             <div class="casualty-box" style="background: rgba(142, 68, 173, 0.2); border-left-color: #8e44ad;">
-                🚨 <strong>DUBAÍ - DAÑOS CONFIRMADOS (18:00):</strong><br>
-                • Puerto de Jebel Ali: Incendio en muelle por escombros<br>
-                • DP World: Operaciones suspendidas (36% del PIB de Dubái)<br>
+                🚨 <strong>DUBAÍ - DAÑOS CONFIRMADOS (20:24):</strong><br>
+                • Puerto de Jebel Ali: Incendio en muelle<br>
+                • DP World: DP World suspendió operaciones (36% del PIB de Dubái)<br>
                 • Aeropuerto Internacional: Dañado<br>
                 • Burj Al Arab: Dañado<br>
                 • Barrios residenciales: Alertas de defensa aérea
@@ -304,8 +333,8 @@
                     <strong>Alertas:</strong> Continúan en Israel, EAU y países de la región
                 </div>
                 <div class="timeline-item urgent">
-                    <span class="timeline-time">Domingo 1 Mar - 18:00 hrs (ACTUAL)</span>
-                    <strong>BAJAS CONFIRMADAS:</strong> 3 muertos, 58 heridos en EAU. Dubái dañado (Jebel Ali, aeropuerto, Burj Al Arab). 8 muertos en Israel (Beit Shemesh). Irán declara 40 días de luto.
+                    <span class="timeline-time">Domingo 1 Mar - 20:24 hrs (ACTUAL)</span>
+                    <strong>BAJAS CONFIRMADAS:</strong> 3 muertos, 58 heridos en EAU. Dubái dañado. 8 muertos en Israel. Irán declara 40 días de luto.
                 </div>
             </div>
         </section>
@@ -339,7 +368,7 @@
             <h3>Precio del Petróleo</h3>
             <ul>
                 <li><strong>Actual:</strong> Brent a <span class="highlight">$72-73</span></li>
-                <li><strong>Riesgo:</strong> Podría superar <span class="highlight">$100</span> si Ormuz se bloquea</li>
+                <li><strong>Riesgo:</strong> Podría superar <span class="highlight">$100+</span> si Ormuz se bloquea</li>
                 <li><strong>Aumento 2026:</strong> +20% respecto al año anterior</li>
             </ul>
 
@@ -374,6 +403,31 @@
             <h3>Escenario 3: Escalada Controlada (20%)</h3>
             <div class="key-point">
                 Objetivos logrados sin desestabilización total, petróleo $80-90
+            </div>
+        </section>
+
+        <section id="opinion" class="opinion-section">
+            <h2><span class="icon">💭</span> Opinión del Analista</h2>
+            
+            <p>Esta crisis es un <span class="highlight">punto de inflexión histórico</span>. La muerte de Jameneí podría reconfigurar Oriente Medio por décadas.</p>
+
+            <h3>Puntos Críticos</h3>
+            <ul>
+                <li><strong>Decapitación estratégica:</strong> Operación de inteligencia extraordinaria</li>
+                <li><strong>Riesgo de escalada:</strong> Irán promete venganza pero su mando está debilitado</li>
+                <li><strong>Vacío de poder:</strong> Transición crítica en Irán</li>
+                <li><strong>Bajas en aliados:</strong> EAU e Israel confirmando muertos</li>
+            </ul>
+
+            <div class="warning">
+                <strong>Advertencia:</strong> El mayor riesgo es la <span class="highlight">incertidumbre</span>. Un Irán en transición es impredecible.
+            </div>
+
+            <p><strong>Pronóstico:</strong> Las próximas <span class="highlight">24-48 horas</span> serán determinantes.</p>
+
+            <div class="cat-note">
+                <span>🐱</span>
+                <span>Cocobot: Análisis basado en fuentes verificadas. Situación en evolución. Actualizado 20:24.</span>
             </div>
         </section>
 
@@ -426,7 +480,7 @@
 
         <footer>
             <p><strong>Análisis Situacional Público - Crisis en Irán 2026</strong></p>
-            <p style="margin-top: 8px;">Cocobot 🐱 | 1 de Marzo de 2026 - <span style="color:#e74c3c; font-weight:700;">ACTUALIZADO 18:00 HRS</span></p>
+            <p style="margin-top: 8px;">Cocobot 🐱 | 01 de March de 2026 - <span style="color:#e74c3c; font-weight:700;">ACTUALIZADO 20:24 HRS</span></p>
             <p style="margin-top: 12px; font-size: 0.8rem;">
                 ⚠️ Situación en evolución. Consultar fuentes oficiales.
             </p>
@@ -446,7 +500,6 @@
             btn.textContent = menu.classList.contains('active') ? '✕' : '☰';
         }
 
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -459,7 +512,6 @@
             });
         });
 
-        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', function(e) {
             const menu = document.getElementById('navMenu');
             const btn = document.querySelector('.hamburger-btn');
@@ -469,7 +521,6 @@
             }
         });
 
-        // Animación scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -486,5 +537,6 @@
             observer.observe(section);
         });
     </script>
+
 </body>
 </html>
