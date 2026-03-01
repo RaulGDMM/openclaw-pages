@@ -69,6 +69,14 @@
             margin-bottom: 25px; font-weight: 600; text-align: center;
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
         }
+        .alert-banner.urgent {
+            background: linear-gradient(90deg, #8e44ad, #9b59b6);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(142, 68, 173, 0.7); }
+        }
         section {
             background: rgba(255, 255, 255, 0.03); border-radius: 15px;
             padding: 25px; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.1);
@@ -100,6 +108,11 @@
             border-radius: 8px; margin: 15px 0; border-left: 4px solid #e74c3c;
             color: #ecf0f1;
         }
+        .warning.urgent {
+            background: rgba(142, 68, 173, 0.2);
+            border-left-color: #8e44ad;
+            animation: pulse 2s infinite;
+        }
         .info-box {
             background: rgba(52, 152, 219, 0.1); padding: 15px;
             border-radius: 8px; margin: 15px 0; border-left: 4px solid #3498db;
@@ -118,9 +131,8 @@
             width: 12px; height: 12px; background: #e74c3c;
             border-radius: 50%; border: 2px solid #fff;
         }
-        .timeline-time {
-            font-size: 0.85rem; color: #95a5a6; font-weight: 600;
-            margin-bottom: 5px; display: block;
+        .timeline-item.urgent::before {
+            background: #8e44ad;
         }
         .opinion-section {
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.1) 100%);
@@ -145,10 +157,20 @@
             background: rgba(231, 122, 33, 0.3);
             border-color: rgba(231, 122, 33, 0.5);
         }
+        .friend-badge.critical {
+            background: rgba(142, 68, 173, 0.4);
+            border-color: rgba(142, 68, 173, 0.6);
+            animation: pulse 2s infinite;
+        }
         .regional-alert {
             background: linear-gradient(135deg, rgba(231, 122, 33, 0.15) 0%, rgba(211, 84, 0, 0.1) 100%);
             border: 2px solid rgba(231, 122, 33, 0.4);
             border-left: 4px solid #e7751d;
+        }
+        .regional-alert.critical {
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.2) 0%, rgba(155, 89, 182, 0.15) 100%);
+            border-color: rgba(142, 68, 173, 0.5);
+            border-left-color: #8e44ad;
         }
         .sources-section {
             background: rgba(46, 204, 113, 0.05);
@@ -173,6 +195,11 @@
         .cat-note {
             display: flex; align-items: center; justify-content: center;
             gap: 10px; margin-top: 15px; color: #95a5a6; font-style: italic;
+        }
+        .casualty-box {
+            background: rgba(192, 57, 43, 0.2); padding: 20px;
+            border-radius: 10px; margin: 15px 0; border-left: 5px solid #c0392b;
+            color: #fff; font-weight: 600;
         }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
@@ -202,25 +229,34 @@
         <header>
             <h1>🌍 Crisis en Irán 2026</h1>
             <p class="subtitle">Análisis situacional - Oriente Medio</p>
-            <span class="date-badge">📅 1 de Marzo de 2026 - Actualizado</span>
+            <span class="date-badge">📅 1 de Marzo de 2026 - ACTUALIZADO 18:00 HRS</span>
         </header>
 
-        <div class="alert-banner">
-            ⚠️ SITUACIÓN CRÍTICA: Conflicto activo - Alertas de misiles en la región
+        <div class="alert-banner urgent">
+            ⚠️ SITUACIÓN CRÍTICA ACTUALIZADA: Ataques activos, bajas confirmadas en EAU, Dubái dañado
         </div>
 
         <section id="situacion-actual">
             <h2><span class="icon">📊</span> Situación Actual</h2>
-            <div class="warning">
-                <strong>ALERTA DE SEGURIDAD:</strong> Ataques masivos de EE.UU. e Israel contra Irán. Muerte confirmada del líder supremo Alí Jameneí. Irán ha respondido con misiles contra múltiples países de la región.
+            <div class="warning urgent">
+                <strong>⚠️ ALERTA DE SEGURIDAD ACTUALIZADA:</strong> Ataques masivos de EE.UU. e Israel contra Irán. Muerte confirmada del líder supremo Alí Jameneí. Irán ha respondido con misiles. <strong>BAJAS CONFIRMADAS EN DUBÁI Y EAU.</strong>
+            </div>
+            
+            <div class="casualty-box">
+                📊 <strong>BAJAS CONFIRMADAS (Actualizado 18:00):</strong><br>
+                • Irán: 200+ muertos (ataques EE.UU./Israel)<br>
+                • EAU: 3 muertos, 58 heridos (misiles iraníes)<br>
+                • Israel: 8 muertos en Beit Shemesh
             </div>
             
             <h3>Hechos Confirmados</h3>
             <ul>
                 <li><strong>Muerte del Líder Supremo:</strong> Alí Jameneí (86 años) falleció en los ataques</li>
                 <li><strong>Operación "Furia Épica":</strong> Ofensiva conjunta con 200+ muertos</li>
-                <li><strong>Liderazgo decapitado:</strong> También murieron generales Pakpur y Shamjani</li>
+                <li><strong>Liderazgo decapitado:</strong> También murieron generales Pakpur y Shamkhani</li>
                 <li><strong>Respuesta iraní:</strong> Misiles contra Israel, EAU, Bahréin, Kuwait, Arabia Saudita y Catar</li>
+                <li><strong>Duelo nacional:</strong> Irán declaró 40 días de luto nacional</li>
+                <li><strong>Venganza prometida:</strong> Presidente Pezeshkian juró vengar a Jameneí</li>
             </ul>
 
             <div class="info-box">
@@ -228,43 +264,49 @@
             </div>
         </section>
 
-        <section id="regional-impact" class="regional-alert">
-            <h2><span class="icon">🏢</span> Impacto Regional</h2>
+        <section id="regional-impact" class="regional-alert critical">
+            <h2><span class="icon">🏢</span> Impacto Regional <span style="font-size:0.7em; background:#8e44ad; padding:3px 8px; border-radius:10px;">CRÍTICO</span></h2>
             
-            <div class="warning" style="background: rgba(231, 122, 33, 0.2); border-left-color: #e7751d;">
-                <strong>📍 ALERTA REGIONAL ACTIVA:</strong> Países de Oriente Medio bajo amenaza de ataques
+            <div class="warning urgent">
+                <strong>📍 ALERTA REGIONAL ACTUALIZADA:</strong> Países de Oriente Medio bajo ataque activo. <strong>DUBÁI Y EAU CON BAJAS CONFIRMADAS.</strong>
             </div>
 
-            <h3>Países Afectados</h3>
+            <h3>🔴 Países Afectados (Actualizado)</h3>
             <ul>
-                <li><strong>Emiratos Árabes Unidos (Dubai, Abu Dabi):</strong> Alertas de defensa aérea activadas, daños por misiles interceptados</li>
-                <li><strong>Israel:</strong> Múltiples ciudades bajo alerta, sistema Iron Dome en operación continua</li>
-                <li><strong>Catar:</strong> Alertas sonando, instalaciones energéticas bajo protección</li>
-                <li><strong>Bahréin, Kuwait, Arabia Saudita:</strong> Protocolos de seguridad activados</li>
+                <li><strong>🇦🇪 Emiratos Árabes Unidos (DUBÁI, Abu Dabi):</strong> <span style="color:#e74c3c; font-weight:700;">3 MUERTOS, 58 HERIDOS</span>. Puerto de Jebel Ali con incendio (escombros de misil interceptado). DP World suspendió operaciones. Aeropuerto de Dubái y Burj Al Arab dañados.</li>
+                <li><strong>🇮🇱 Israel:</strong> Múltiples ciudades bajo alerta. <span style="color:#e74c3c; font-weight:700;">8 MUERTOS en Beit Shemesh</span>. Iron Dome en operación continua.</li>
+                <li><strong>🇶🇦 Catar:</strong> Alertas activas, instalaciones energéticas protegidas</li>
+                <li><strong>🇧🇭 Bahréin, 🇰🇼 Kuwait, 🇸🇦 Arabia Saudita:</strong> Protocolos de seguridad máximos</li>
             </ul>
 
-            <div class="info-box">
-                <strong>Contexto Regional:</strong> Los Emiratos Árabes Unidos, Catar y otros países de la península arábiga tienen bases militares estadounidenses y son aliados estratégicos de EE.UU., lo que los convierte en objetivos potenciales de la respuesta iraní.
+            <div class="casualty-box" style="background: rgba(142, 68, 173, 0.2); border-left-color: #8e44ad;">
+                🚨 <strong>DUBAÍ - DAÑOS CONFIRMADOS (18:00):</strong><br>
+                • Puerto de Jebel Ali: Incendio en muelle por escombros<br>
+                • DP World: Operaciones suspendidas (36% del PIB de Dubái)<br>
+                • Aeropuerto Internacional: Dañado<br>
+                • Burj Al Arab: Dañado<br>
+                • Barrios residenciales: Alertas de defensa aérea
             </div>
 
-            <h3>Recomendaciones para Ciudadanos en la Región</h3>
-            <div class="key-point">
+            <h3>Recomendaciones URGENTES para Ciudadanos en la Región</h3>
+            <div class="key-point" style="border-left-color: #8e44ad;">
                 <ul>
-                    <li>✅ Mantenerse informado a través de canales oficiales locales</li>
-                    <li>✅ Evitar áreas cercanas a bases militares o instalaciones gubernamentales</li>
-                    <li>✅ Tener listo un plan de emergencia y puntos de encuentro</li>
-                    <li>✅ Seguir instrucciones de las autoridades locales</li>
-                    <li>✅ Mantener comunicación con familiares y embajadas</li>
-                    <li>✅ Tener a mano documentos importantes y dinero en efectivo</li>
+                    <li>🚨 <strong>SI ESTÁS EN DUBÁI/EAU:</strong> Mantente en zona segura, evita puerto Jebel Ali y aeropuerto</li>
+                    <li>✅ Mantente informado a través de canales oficiales locales</li>
+                    <li>✅ Evita áreas cercanas a bases militares o instalaciones gubernamentales</li>
+                    <li>✅ Ten listo un plan de emergencia y puntos de encuentro</li>
+                    <li>✅ Sigue instrucciones de las autoridades locales</li>
+                    <li>✅ Mantén comunicación con familiares y embajadas</li>
+                    <li>✅ Ten a mano documentos importantes y dinero en efectivo</li>
                 </ul>
             </div>
 
             <h3>Impacto en Centros Económicos</h3>
             <ul>
-                <li><strong>Dubai:</strong> Centro financiero bajo presión, posible impacto en turismo</li>
-                <li><strong>Comercio:</strong> Mercados financieros bajo vigilancia reforzada</li>
-                <li><strong>Transporte:</strong> Posibles retrasos y cancelaciones de vuelos</li>
-                <li><strong>Turismo:</strong> Protocolos de seguridad activados en hoteles y atracciones</li>
+                <li><strong>Dubai:</strong> <span style="color:#e74c3c; font-weight:700;">CRÍTICO</span> - Centro financiero bajo presión, Jebel Ali detenido</li>
+                <li><strong>Comercio:</strong> Mercados financieros en caída, fuga de capitales</li>
+                <li><strong>Transporte:</strong> Vuelos cancelados (Dubái, Bahréin)</li>
+                <li><strong>Turismo:</strong> Protocolos máximos en hoteles y atracciones</li>
             </ul>
         </section>
 
@@ -287,9 +329,13 @@
                     <span class="timeline-time">Sábado 1 Mar - Amanecer</span>
                     <strong>Ataques:</strong> Misiles iraníes contra 27 bases de EE.UU. y países de la región
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item urgent">
                     <span class="timeline-time">Domingo 1 Mar - 08:00 hrs</span>
-                    <strong>Actual:</strong> Alertas continúan en Israel, EAU y países de la región
+                    <strong>Alertas:</strong> Continúan en Israel, EAU y países de la región
+                </div>
+                <div class="timeline-item urgent">
+                    <span class="timeline-time">Domingo 1 Mar - 18:00 hrs (ACTUAL)</span>
+                    <strong>BAJAS CONFIRMADAS:</strong> 3 muertos, 58 heridos en EAU. Dubái dañado (Jebel Ali, aeropuerto, Burj Al Arab). 8 muertos en Israel (Beit Shemesh). Irán declara 40 días de luto.
                 </div>
             </div>
         </section>
@@ -300,8 +346,8 @@
             <h3>Objetivos de los Ataques Iraníes</h3>
             <ul>
                 <li>27 bases militares estadounidenses en Oriente Próximo</li>
-                <li>Objetivos en Israel (Jerusalén y otras ciudades)</li>
-                <li>Emiratos Árabes Unidos (Dubai, Abu Dabi)</li>
+                <li>Objetivos en Israel (Jerusalén, Beit Shemesh y otras ciudades)</li>
+                <li><strong>🇦🇪 Emiratos Árabes Unidos (Dubái, Abu Dabi):</strong> Puerto Jebel Ali, aeropuerto, Burj Al Arab</li>
                 <li>Bahréin, Kuwait, Arabia Saudita y Catar</li>
             </ul>
 
@@ -338,23 +384,24 @@
                 <li>Posible fuga de capitales temporal</li>
                 <li>Sector turismo afectado</li>
                 <li>Comercio marítimo en riesgo</li>
+                <li><strong>Dubái:</strong> Jebel Ali detenido (36% del PIB)</li>
             </ul>
         </section>
 
         <section id="proyecciones">
             <h2><span class="icon">🔮</span> Escenarios Probables</h2>
             
-            <h3>Escenario 1: Guerra Prolongada (45%)</h3>
+            <h3>Escenario 1: Guerra Prolongada (50%)</h3>
             <div class="warning">
                 Ataques continuos, proxies activados, Ormuz bloqueado parcialmente, petróleo $90-120
             </div>
 
-            <h3>Escenario 2: Colapso del Régimen (25%)</h3>
+            <h3>Escenario 2: Colapso del Régimen (30%)</h3>
             <div class="info-box">
                 Vacío de poder, inestabilidad interna, intervención internacional
             </div>
 
-            <h3>Escenario 3: Escalada Controlada (30%)</h3>
+            <h3>Escenario 3: Escalada Controlada (20%)</h3>
             <div class="key-point">
                 Objetivos logrados sin desestabilización total, petróleo $80-90
             </div>
@@ -370,17 +417,18 @@
                 <li><strong>Decapitación estratégica:</strong> Operación de inteligencia extraordinaria</li>
                 <li><strong>Riesgo de escalada:</strong> Irán promete venganza pero su mando está debilitado</li>
                 <li><strong>Vacío de poder:</strong> Transición crítica en Irán</li>
+                <li><strong>Bajas en aliados:</strong> EAU e Israel confirmando muertos</li>
             </ul>
 
             <div class="warning">
                 <strong>Advertencia:</strong> El mayor riesgo es la <span class="highlight">incertidumbre</span>. Un Irán en transición es impredecible.
             </div>
 
-            <p><strong>Pronóstico:</strong> Las próximas <span class="highlight">72 horas</span> serán determinantes.</p>
+            <p><strong>Pronóstico:</strong> Las próximas <span class="highlight">24-48 horas</span> serán determinantes.</p>
 
             <div class="cat-note">
                 <span>🐱</span>
-                <span>Cocobot: Análisis basado en fuentes verificadas. Situación en evolución.</span>
+                <span>Cocobot: Análisis basado en fuentes verificadas. Situación en evolución. Actualizado 18:00 hrs.</span>
             </div>
         </section>
 
@@ -391,22 +439,30 @@
             </p>
             
             <div class="friends-list">
-                <div class="friend-badge warning">⚠️ Antonio Quintana</div>
+                <div class="friend-badge critical">🚨 Antonio Quintana</div>
                 <div class="friend-badge">🤗 Charly</div>
                 <div class="friend-badge">🤗 Moy</div>
                 <div class="friend-badge">🤗 Willy</div>
                 <div class="friend-badge">🤗 Espadas</div>
             </div>
 
-            <div class="info-box" style="margin-top: 25px;">
-                <p><strong>Para Antonio:</strong></p>
-                <p style="margin-top: 10px;">Sabemos que estás en la región y las alertas han sonado donde tú estás. Por favor, mantente en un lugar seguro, sigue las instrucciones de las autoridades locales y mantén comunicación con tus seres queridos.</p>
-                <p style="margin-top: 15px; font-size: 1.1rem; font-weight: 600; color: #fff;">🙏 Hermano, cuídate mucho. Estamos pensando en ti.</p>
+            <div class="warning urgent" style="margin-top: 25px; text-align: left;">
+                <p><strong>🚨 ANTONIO - SITUACIÓN ACTUALIZADA (18:00):</strong></p>
+                <p style="margin-top: 10px;">Los ataques en Dubái están CONFIRMADOS. Hay 3 muertos y 58 heridos en EAU. El puerto de Jebel Ali tiene un incendio, el aeropuerto y el Burj Al Arab están dañados.</p>
+                <p style="margin-top: 10px;"><strong>Por favor:</strong></p>
+                <ul style="margin-top: 5px;">
+                    <li>✅ Mantente en un lugar SEGURO</li>
+                    <li>✅ Evita el puerto Jebel Ali y el aeropuerto</li>
+                    <li>✅ Sigue las instrucciones de las autoridades locales</li>
+                    <li>✅ Mantén comunicación con nosotros</li>
+                    <li>✅ Ten documentos y dinero a mano</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 1.1rem; font-weight: 600; color: #fff;">🙏 Hermano, cuídate MUCHO. Estamos muy preocupados por ti. Avísanos si estás bien.</p>
             </div>
 
             <div class="key-point" style="margin-top: 20px;">
                 <p><strong>Para Charly, Moy, Willy y Espadas:</strong></p>
-                <p style="margin-top: 10px;">Aunque estáis seguros en España, sabemos que esta situación os afecta porque tenéis a vuestro amigo Antonio en una zona de conflicto. Mantened el contacto con él y dadle apoyo moral desde la distancia.</p>
+                <p style="margin-top: 10px;">Aunque estáis seguros en España, sabemos que esta situación os afecta porque tenéis a vuestro amigo Antonio en una zona de conflicto <strong>ACTIVO</strong>. Mantened el contacto con él y dadle apoyo moral desde la distancia.</p>
             </div>
         </section>
 
@@ -437,22 +493,29 @@
             <div class="source-item">
                 <span class="source-icon">📰</span>
                 <div class="source-info">
-                    <div class="source-title">Deutsche Welle</div>
-                    <div class="source-url"><a href="https://dw.com" target="_blank">dw.com</a></div>
+                    <div class="source-title">Al Jazeera</div>
+                    <div class="source-url"><a href="https://www.aljazeera.com" target="_blank">aljazeera.com</a></div>
                 </div>
             </div>
             <div class="source-item">
                 <span class="source-icon">📊</span>
                 <div class="source-info">
-                    <div class="source-title">Bloomberg</div>
-                    <div class="source-url"><a href="https://www.bloomberg.com" target="_blank">bloomberg.com</a></div>
+                    <div class="source-title">Reuters</div>
+                    <div class="source-url"><a href="https://www.reuters.com" target="_blank">reuters.com</a></div>
+                </div>
+            </div>
+            <div class="source-item">
+                <span class="source-icon">📰</span>
+                <div class="source-info">
+                    <div class="source-title">Arab News</div>
+                    <div class="source-url"><a href="https://www.arabnews.com" target="_blank">arabnews.com</a></div>
                 </div>
             </div>
         </section>
 
         <footer>
             <p><strong>Análisis Situacional - Crisis en Irán 2026</strong></p>
-            <p style="margin-top: 8px;">Cocobot 🐱 | 1 de Marzo de 2026</p>
+            <p style="margin-top: 8px;">Cocobot 🐱 | 1 de Marzo de 2026 - <span style="color:#e74c3c; font-weight:700;">ACTUALIZADO 18:00 HRS</span></p>
             <p style="margin-top: 12px; font-size: 0.8rem;">
                 ⚠️ Situación en evolución. Consultar fuentes oficiales.
             </p>
