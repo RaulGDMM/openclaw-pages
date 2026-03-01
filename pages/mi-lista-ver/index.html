@@ -90,25 +90,33 @@
         .card {
             background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; position: relative;
+            overflow: hidden;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
         .card.watched { opacity: 0.7; }
         .card.watched::before {
             content: '✓ VISTO'; position: absolute; top: 15px; right: 15px;
             background: #00ff88; color: #000; padding: 5px 12px; border-radius: 15px;
-            font-size: 0.75rem; font-weight: bold;
+            font-size: 0.75rem; font-weight: bold; z-index: 10;
         }
         .card.upcoming-card {
             border: 2px solid rgba(231, 76, 60, 0.4);
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(192, 57, 43, 0.05) 100%);
         }
-        .card.upcoming-card::before {
-            content: '🔜 PRÓXIMO ESTRENO'; position: absolute; top: 15px; right: 15px;
-            background: #e74c3c; color: #fff; padding: 5px 12px; border-radius: 15px;
-            font-size: 0.75rem; font-weight: bold;
+        .card.upcoming-card .upcoming-badge {
+            display: block; text-align: center;
+            background: #e74c3c; color: #fff; padding: 6px 12px;
+            border-radius: 8px; font-size: 0.75rem; font-weight: bold;
+            margin-bottom: 15px;
         }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; gap: 10px; }
-        .title { font-size: 1.2rem; font-weight: 600; color: #fff; flex: 1; line-height: 1.3; }
+        .release-date {
+            background: rgba(231, 76, 60, 0.2); padding: 8px 12px;
+            border-radius: 8px; font-size: 0.85rem; color: #e74c3c;
+            font-weight: 600; margin-bottom: 12px; text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 10px; flex-wrap: wrap; }
+        .title { font-size: 1.2rem; font-weight: 600; color: #fff; flex: 1; line-height: 1.3; min-width: 200px; }
         .platform {
             font-size: 0.75rem; padding: 4px 10px; border-radius: 10px;
             font-weight: 600; text-transform: uppercase; min-width: 80px; text-align: center; flex-shrink: 0;
@@ -119,6 +127,7 @@
         .platform.movistar { background: linear-gradient(90deg, #00a4e4, #0088cc); color: #fff; }
         .platform.apple { background: linear-gradient(90deg, #a1a1aa, #71717a); color: #fff; }
         .platform.disney { background: linear-gradient(90deg, #113ccf, #0099ff); color: #fff; }
+        .platform.amazon { background: linear-gradient(90deg, #00a8e1, #0088cc); color: #fff; }
         .meta { display: flex; gap: 15px; margin-bottom: 12px; font-size: 0.85rem; color: #a0a0a0; flex-wrap: wrap; }
         .meta span { display: flex; align-items: center; gap: 5px; }
         .description { font-size: 0.9rem; line-height: 1.6; color: #c0c0c0; margin-bottom: 15px; }
@@ -155,11 +164,6 @@
             text-decoration: none; transition: all 0.2s ease;
         }
         .trailer-btn:hover { transform: scale(1.02); box-shadow: 0 3px 15px rgba(255,0,0,0.3); }
-        .release-date {
-            background: rgba(231, 76, 60, 0.2); padding: 8px 12px;
-            border-radius: 8px; font-size: 0.9rem; color: #e74c3c;
-            font-weight: 600; margin-bottom: 10px; text-align: center;
-        }
         .checkbox-wrapper {
             display: flex; align-items: center; gap: 10px; cursor: pointer;
             padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;
@@ -183,6 +187,11 @@
             .nav-menu { right: 15px; min-width: 280px; }
             .hamburger-btn { top: 15px; right: 15px; }
             .pros-cons { grid-template-columns: 1fr; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .title { font-size: 1.1rem; min-width: auto; width: 100%; margin-bottom: 8px; }
+            .platform { min-width: auto; padding: 3px 8px; font-size: 0.7rem; }
+            .release-date { font-size: 0.8rem; padding: 6px 10px; }
+            .upcoming-badge { font-size: 0.7rem; padding: 5px 10px; margin-bottom: 12px; }
         }
     </style>
 </head>
@@ -269,7 +278,7 @@
             { id: '28-years-later', title: '28 Años Después', platform: 'netflix', platformName: 'Netflix', year: 2025, duration: '129 min', rating: 5.7, trailer: 'https://www.youtube.com/results?search_query=28+years+later+trailer', description: 'Secuela de 28 Días Después. Cillian Murphy regresa en película zombies de Danny Boyle. Recepción mixta.', pros: ['Cillian Murphy en forma', 'Danny Boyle', 'Concepto interesante', 'Acción intensa'], cons: ['No alcanza original', 'Decisiones cuestionables'], opinion: '28 Años Después es secuela que cumple pero no emociona. Cillian Murphy es excelente y Boyle mantiene estilo, pero no captura magia original.' },
             { id: 'furia-gunner', title: 'Furia (Gunner)', platform: 'prime', platformName: 'Prime Video', year: 2025, duration: '105 min', rating: 5.5, trailer: 'https://www.youtube.com/results?search_query=gunner+trailer', description: 'Veterano salva hijos de narcotraficantes. Acción intensa con paternalismo. Entretenimiento convencional.', pros: ['Acción intensa', 'Tema familiar', 'Entretenimiento directo', 'Duración adecuada'], cons: ['Muy convencional', 'Poco original'], opinion: 'Furia es película acción convencional que cumple como entretenimiento simple. Sin pretensiones, ofrece lo que promete.' },
             { id: 'eden-lake', title: 'Eden Lake', platform: 'prime', platformName: 'Prime Video', year: 2008, duration: '95 min', rating: 6.0, trailer: 'https://www.youtube.com/results?search_query=eden+lake+trailer', description: 'Clásico terror británico sobre pareja vs adolescentes violentos. Suspenso constante. Michael Winterbottom.', pros: ['Clásico terror moderno', 'Final impactante', 'Actuaciones convincentes', 'Suspenso constante'], cons: ['Muy intensa', 'Temas perturbadores'], opinion: 'Eden Lake es clásico terror británico que mantiene tensión. Explora temas clase y violencia juvenil de forma perturbadora.' },
-            { id: 'dune-part-2', title: 'Dune: Parte 2', platform: 'hbo', platformName: 'HBO Max', year: 2024, duration: '166 min', rating: 7.6, trailer: 'https://www.youtube.com/watch?v=Way9Dexny3w', description: 'Denis Villeneuve continua épica sci-fi. Timothée Chalamet y Zendaya. Espectacular visualmente.', pros: ['Producción impecable', 'Actuaciones sólidas', 'Escala épica', 'Guion inteligente'], cons: ['Muy larga', 'Ritmo pausado'], opinion: 'Dune: Parte 2 es obra maestra del cine sci-fi. Villeneuve logra equilibrio perfecto entre espectáculo y narrativa.' },
+            { id: 'dune-part-2', title: 'Dune: Parte 2', platform: 'hbo', platformName: 'HBO Max', year: 2024, duration: '166 min', rating: 7.6, trailer: 'https://www.youtube.com/watch?v=Way9Dexny3w', description: 'Denis Villeneuve continúa épica sci-fi. Timothée Chalamet y Zendaya. Espectacular visualmente.', pros: ['Producción impecable', 'Actuaciones sólidas', 'Escala épica', 'Guion inteligente'], cons: ['Muy larga', 'Ritmo pausado'], opinion: 'Dune: Parte 2 es obra maestra del cine sci-fi. Villeneuve logra equilibrio perfecto entre espectáculo y narrativa.' },
             { id: 'pooh-blood-honey', title: 'Paddington en Perú', platform: 'prime', platformName: 'Prime Video', year: 2024, duration: '105 min', rating: 7.1, trailer: 'https://www.youtube.com/watch?v=xyz789', description: 'Aventura familiar con Paddington en Perú. Ben Swimm como Paddington. Diversión para toda la familia.', pros: ['Divertida', 'Mensaje positivo', 'Producción colorida', 'Familia'], cons: ['Poco original', 'Para niños'], opinion: 'Paddington en Perú es aventura familiar encantadora. Ben Swimm es perfecto como Paddington. Diversión garantizada.' },
             { id: 'wicked', title: 'Wicked', platform: 'disney', platformName: 'Disney+', year: 2024, duration: '160 min', rating: 7.3, trailer: 'https://www.youtube.com/watch?v=6COmYeLsz4c', description: 'Cynthia Erivo y Ariana Grande como Brumas de Oz. Musical espectacular basado en Broadway.', pros: ['Actuaciones musicales', 'Producción espectacular', 'Historia fascinante', 'Coreografía'], cons: ['Muy larga', 'Solo Parte 1'], opinion: 'Wicked es musical espectacular que honra el original de Broadway. Cynthia Erivo y Ariana Grande son perfectas.' },
             { id: 'joker-folie-a-deux', title: 'Joker: Folie à Deux', platform: 'hbo', platformName: 'HBO Max', year: 2024, duration: '138 min', rating: 6.0, trailer: 'https://www.youtube.com/watch?v=t5fxG371r2I', description: 'Joaquin Phoenix regresa como Joker. Lady Gaga como Harley Quinn. Musical psicológico.', pros: ['Joaquin Phoenix', 'Lady Gaga', 'Concepto único', 'Visión artística'], cons: ['Polarizante', 'No para todos'], opinion: 'Joker: Folie à Deux es audaz pero polarizante. Phoenix y Gaga tienen química interesante, pero no alcanza la original.' },
@@ -326,9 +335,11 @@
             container.innerHTML = items.map((item, index) => {
                 const isWatched = watched[type + '-' + item.id];
                 const cardClass = isUpcoming ? 'card upcoming-card' : 'card' + (isWatched ? ' watched' : '');
+                const upcomingBadge = isUpcoming ? '<div class="upcoming-badge">🔜 PRÓXIMO ESTRENO</div>' : '';
                 const releaseDate = isUpcoming ? '<div class="release-date">📅 Estreno: ' + item.releaseDate + '</div>' : '';
                 const checkbox = !isUpcoming ? '<label class="checkbox-wrapper"><input type="checkbox" ' + (isWatched ? 'checked' : '') + ' onchange="toggleWatched(\'' + type + '\', \'' + item.id + '\')"><span class="checkbox-label' + (isWatched ? ' watched' : '') + '">' + (isWatched ? '✓ Vista' : '✗ Ver') + '</span></label>' : '';
                 return '<div class="' + cardClass + '">' +
+                    upcomingBadge +
                     releaseDate +
                     '<div class="card-header"><div class="title">' + item.title + '</div><div class="platform ' + item.platform + '">' + item.platformName + '</div></div>' +
                     '<div class="meta"><span>📅 ' + item.year + '</span><span>' + (item.episodes ? '📺 ' + item.episodes + ' eps' : '⏱️ ' + item.duration) + '</span></div>' +
