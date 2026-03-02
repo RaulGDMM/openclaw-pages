@@ -44,7 +44,7 @@
             align-items: center;
             width: 100%;
             flex: 1;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .header {
@@ -246,7 +246,7 @@
             }
         }
 
-        /* Landscape mode */
+        /* Landscape mode - CONTROLES A LA IZQUIERDA */
         @media (orientation: landscape) {
             .game-wrapper {
                 flex-direction: row;
@@ -288,6 +288,7 @@
                 gap: 5px;
                 padding: 8px;
                 max-width: 220px;
+                order: -1; /* Controles primero (izquierda) */
             }
 
             .control-btn {
@@ -336,9 +337,25 @@
         }
 
         /* Landscape fullscreen */
-        body:fullscreen:has(.game-wrapper[style*="flex-direction: row"]) #gameCanvas {
-            width: 280px;
-            height: 560px;
+        @media (orientation: landscape) {
+            body:fullscreen .game-wrapper {
+                padding: 0 10px;
+            }
+
+            body:fullscreen .game-container {
+                padding: 10px 15px;
+            }
+
+            body:fullscreen #gameCanvas {
+                width: 280px;
+                height: 560px;
+            }
+
+            body:fullscreen .control-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
         }
 
         /* Small screens */
@@ -703,8 +720,8 @@
             fullscreenBtn.textContent = document.fullscreenElement ? '✕' : '⛶';
         });
 
-        // Controles táctiles
-        function setupTouchButton(id, action) {
+        // Controles táctiles con mantener pulsado
+        function setupTouchButton(id, action, repeat = true) {
             const btn = document.getElementById(id);
             let interval;
             
@@ -712,63 +729,111 @@
                 e.preventDefault();
                 if (!isGameOver) {
                     action();
-                    if (id === 'downBtn') {
-                        interval = setInterval(action, 50);
+                    if (repeat) {
+                        interval = setInterval(action, 80); // 80ms para movimiento continuo
                     }
                 }
             }, { passive: false });
 
             btn.addEventListener('touchend', (e) => {
                 e.preventDefault();
-                clearInterval(interval);
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
+            });
+
+            btn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
             });
 
             btn.addEventListener('mousedown', (e) => {
                 if (!isGameOver) {
                     action();
-                    if (id === 'downBtn') {
-                        interval = setInterval(action, 50);
+                    if (repeat) {
+                        interval = setInterval(action, 80);
                     }
                 }
             });
 
             btn.addEventListener('mouseup', () => {
-                clearInterval(interval);
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
             });
 
             btn.addEventListener('mouseleave', () => {
-                clearInterval(interval);
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
+            });
+
+            btn.addEventListener('mouseout', () => {
+                if (interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
             });
         }
 
-        setupTouchButton('leftBtn', () => { movePiece(-1, 0); draw(); });
-        setupTouchButton('rightBtn', () => { movePiece(1, 0); draw(); });
-        setupTouchButton('rotateBtn', () => { rotatePiece(); draw(); });
-        setupTouchButton('downBtn', drop);
+        // Configurar todos los botones con mantener pulsado
+        setupTouchButton('leftBtn', () => { 
+            if (movePiece(-1, 0)) draw(); 
+        }, true);
+        
+        setupTouchButton('rightBtn', () => { 
+            if (movePiece(1, 0)) draw(); 
+        }, true);
+        
+        setupTouchButton('rotateBtn', () => { 
+            rotatePiece(); 
+            draw(); 
+        }, false); // Rotar no se repite
+        
+        setupTouchButton('downBtn', drop, true);
 
         // Controles de teclado (para PC)
+        let keyInterval;
         document.addEventListener('keydown', (e) => {
             if (isGameOver) return;
             
-            switch(e.key) {
-                case 'ArrowLeft':
-                    movePiece(-1, 0);
-                    break;
-                case 'ArrowRight':
-                    movePiece(1, 0);
-                    break;
-                case 'ArrowUp':
-                    rotatePiece();
-                    break;
-                case 'ArrowDown':
-                    drop();
-                    return;
-                case 'F11':
-                    e.preventDefault();
-                    fullscreenBtn.click();
-                    return;
+            function handleKey() {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        movePiece(-1, 0);
+                        break;
+                    case 'ArrowRight':
+                        movePiece(1, 0);
+                        break;
+                    case 'ArrowUp':
+                        rotatePiece();
+                        break;
+                    case 'ArrowDown':
+                        drop();
+                        return;
+                }
+                draw();
             }
-            draw();
+
+            handleKey();
+            
+            // Repetir para flechas izquierda/derecha
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                keyInterval = setInterval(handleKey, 80);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (keyInterval) {
+                clearInterval(keyInterval);
+                keyInterval = null;
+            }
         });
 
         // Ajustar tamaño al resize
