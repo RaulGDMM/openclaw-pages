@@ -34,13 +34,13 @@
             height: 100vh;
             max-height: 100vh;
             padding: 8px;
-            gap: 8px;
+            gap: 6px;
         }
 
         .game-container {
             background: rgba(0, 0, 0, 0.85);
             border-radius: 12px;
-            padding: 10px;
+            padding: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
@@ -48,7 +48,7 @@
             width: 100%;
             flex: 1;
             max-width: 420px;
-            gap: 8px;
+            gap: 6px;
         }
 
         .header {
@@ -57,8 +57,8 @@
             align-items: center;
             width: 100%;
             color: white;
-            padding: 5px 8px;
-            gap: 5px;
+            padding: 4px 6px;
+            gap: 4px;
         }
 
         .score-box {
@@ -67,46 +67,51 @@
         }
 
         .score-label {
-            font-size: 9px;
+            font-size: 8px;
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .score-value {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #ffd700;
         }
 
         .high-score {
-            font-size: 11px;
+            font-size: 10px;
             color: #00ff00;
         }
 
         .level-indicator {
             color: #00ffff;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .next-piece-container {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            padding: 8px;
+            padding: 6px;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 70px;
+            min-height: 55px;
+        }
+
+        .next-piece-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .next-piece-label {
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 5px;
-            text-align: center;
+            white-space: nowrap;
         }
 
         #nextCanvas {
@@ -136,17 +141,18 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            padding: 10px 8px;
+            gap: 10px;
+            padding: 10px 8px 8px 8px;
             width: 100%;
+            flex-shrink: 0;
         }
 
         .control-btn {
-            width: 62px;
-            height: 62px;
+            width: 58px;
+            height: 58px;
             border: none;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -156,6 +162,7 @@
             justify-content: center;
             user-select: none;
             -webkit-user-select: none;
+            flex-shrink: 0;
         }
 
         .control-btn:active {
@@ -180,11 +187,11 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             border: none;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.3);
             color: white;
@@ -252,14 +259,14 @@
             }
 
             .controls {
-                gap: 10px;
+                gap: 8px;
                 padding: 8px;
             }
 
             .control-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 22px;
+                width: 56px;
+                height: 56px;
+                font-size: 21px;
             }
         }
 
@@ -292,17 +299,22 @@
             }
 
             .control-btn {
-                width: 55px;
-                height: 55px;
-                font-size: 20px;
+                width: 52px;
+                height: 52px;
+                font-size: 19px;
             }
 
             .controls {
-                gap: 8px;
+                gap: 6px;
             }
 
             .next-piece-container {
-                min-height: 60px;
+                min-height: 50px;
+            }
+
+            #nextCanvas {
+                width: 80px;
+                height: 80px;
             }
         }
 
@@ -314,9 +326,9 @@
             }
 
             .control-btn {
-                width: 58px;
-                height: 58px;
-                font-size: 21px;
+                width: 54px;
+                height: 54px;
+                font-size: 20px;
             }
         }
 
@@ -341,9 +353,9 @@
         }
 
         body:fullscreen .control-btn {
-            width: 65px;
-            height: 65px;
-            font-size: 24px;
+            width: 62px;
+            height: 62px;
+            font-size: 23px;
         }
     </style>
 </head>
@@ -368,9 +380,9 @@
             </div>
 
             <div class="next-piece-container">
-                <div style="width: 100%; text-align: center;">
-                    <div class="next-piece-label">Siguiente</div>
-                    <canvas id="nextCanvas" width="120" height="120"></canvas>
+                <div class="next-piece-content">
+                    <span class="next-piece-label">Siguiente</span>
+                    <canvas id="nextCanvas" width="100" height="100"></canvas>
                 </div>
             </div>
 
@@ -403,7 +415,7 @@
         const COLS = 10;
         const ROWS = 20;
         let BLOCK_SIZE = 30;
-        const NEXT_BLOCK_SIZE = 25;
+        const NEXT_BLOCK_SIZE = 20;
         const COLORS = [
             null,
             '#00f5ff', // I - Cyan
@@ -487,8 +499,13 @@
         }
 
         // Dibujar pieza en canvas
-        function drawPiece(ctx, piece, blockSize, offsetX = 0, offsetY = 0) {
-            if (!piece) return;
+        function drawPiece(ctx, piece, blockSize) {
+            if (!piece) {
+                console.log('⚠️ drawPiece: piece es null');
+                return;
+            }
+            
+            console.log('📍 Dibujando pieza:', piece);
             
             for (let row = 0; row < piece.shape.length; row++) {
                 for (let col = 0; col < piece.shape[row].length; col++) {
@@ -501,7 +518,10 @@
 
         // Dibujar preview de siguiente pieza
         function drawNextPiece() {
-            if (!nextPiece) return;
+            if (!nextPiece) {
+                console.log('⚠️ drawNextPiece: nextPiece es null');
+                return;
+            }
             
             // Limpiar canvas
             nextCtx.fillStyle = '#000';
@@ -526,6 +546,9 @@
 
         // Dibujar juego
         function draw() {
+            console.log('🎨 draw() llamado');
+            console.log('  currentPiece:', currentPiece);
+            
             // Limpiar canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -541,7 +564,10 @@
 
             // Dibujar pieza actual
             if (currentPiece) {
+                console.log('  Dibujando pieza actual en', currentPiece.x, currentPiece.y);
                 drawPiece(ctx, currentPiece, BLOCK_SIZE);
+            } else {
+                console.log('❌ PIEZA ACTUAL ES NULL!');
             }
         }
 
@@ -605,19 +631,23 @@
                 // Si no funciona, revertir rotación
                 currentPiece.shape = originalShape;
             }
+            draw();
         }
 
         // Bajar pieza
         function drop() {
             if (!movePiece(0, 1)) {
-                // Fijar pieza
-                for (let row = 0; row < currentPiece.shape.length; row++) {
-                    for (let col = 0; col < currentPiece.shape[row].length; col++) {
-                        if (currentPiece.shape[row][col]) {
-                            const boardY = currentPiece.y + row;
-                            const boardX = currentPiece.x + col;
-                            if (boardY >= 0) {
-                                board[boardY][boardX] = currentPiece.type;
+                // Fijar pieza en el tablero
+                if (currentPiece) {
+                    console.log('🔒 Fijando pieza en el tablero');
+                    for (let row = 0; row < currentPiece.shape.length; row++) {
+                        for (let col = 0; col < currentPiece.shape[row].length; col++) {
+                            if (currentPiece.shape[row][col]) {
+                                const boardY = currentPiece.y + row;
+                                const boardX = currentPiece.x + col;
+                                if (boardY >= 0 && boardY < ROWS && boardX >= 0 && boardX < COLS) {
+                                    board[boardY][boardX] = currentPiece.type;
+                                }
                             }
                         }
                     }
@@ -626,16 +656,24 @@
                 // Verificar líneas completas
                 clearLines();
                 
-                // Nueva pieza
+                // Nueva pieza: tomar la siguiente y generar una nueva
                 currentPiece = nextPiece;
                 nextPiece = createPiece();
+                
+                console.log('🆕 Nueva pieza:', currentPiece);
+                console.log('📋 Siguiente pieza:', nextPiece);
+                
+                // Dibujar preview de la nueva siguiente
                 drawNextPiece();
                 
                 if (collide(currentPiece)) {
                     gameOver();
+                } else {
+                    draw();
                 }
+            } else {
+                draw();
             }
-            draw();
         }
 
         // Limpiar líneas completas
@@ -793,7 +831,6 @@
         
         setupTouchButton('rotateBtn', () => { 
             rotatePiece(); 
-            draw(); 
         }, false);
         
         setupTouchButton('downBtn', drop, true, 50);
@@ -845,10 +882,13 @@
         });
 
         // Iniciar juego
+        console.log('🎮 Iniciando Tetris...');
         adjustBlockSize();
         initBoard();
         currentPiece = createPiece();
         nextPiece = createPiece();
+        console.log('📦 Pieza inicial:', currentPiece);
+        console.log('📋 Siguiente:', nextPiece);
         draw();
         drawNextPiece();
         gameInterval = setInterval(drop, dropInterval);
