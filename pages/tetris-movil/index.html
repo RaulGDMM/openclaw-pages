@@ -54,11 +54,17 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
             color: white;
             padding: 4px 6px;
             gap: 4px;
+        }
+
+        .score-section {
+            display: flex;
+            gap: 8px;
+            flex: 1;
         }
 
         .score-box {
@@ -89,29 +95,22 @@
             font-size: 12px;
         }
 
-        .next-piece-container {
+        .next-piece-box {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 6px;
-            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 55px;
-        }
-
-        .next-piece-content {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            min-width: 65px;
         }
 
         .next-piece-label {
             color: white;
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            white-space: nowrap;
+            margin-bottom: 4px;
         }
 
         #nextCanvas {
@@ -308,13 +307,9 @@
                 gap: 6px;
             }
 
-            .next-piece-container {
-                min-height: 50px;
-            }
-
             #nextCanvas {
-                width: 80px;
-                height: 80px;
+                width: 50px;
+                height: 50px;
             }
         }
 
@@ -365,24 +360,24 @@
     <div class="game-wrapper">
         <div class="game-container">
             <div class="header">
-                <div class="score-box">
-                    <div class="score-label">Puntuación</div>
-                    <div class="score-value" id="score">0</div>
+                <div class="score-section">
+                    <div class="score-box">
+                        <div class="score-label">Puntuación</div>
+                        <div class="score-value" id="score">0</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-label">Récord</div>
+                        <div class="high-score" id="highScore">0</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-label">Nivel</div>
+                        <div class="level-indicator" id="level">1</div>
+                    </div>
                 </div>
-                <div class="score-box">
-                    <div class="score-label">Récord</div>
-                    <div class="high-score" id="highScore">0</div>
-                </div>
-                <div class="score-box">
-                    <div class="score-label">Nivel</div>
-                    <div class="level-indicator" id="level">1</div>
-                </div>
-            </div>
-
-            <div class="next-piece-container">
-                <div class="next-piece-content">
+                
+                <div class="next-piece-box">
                     <span class="next-piece-label">Siguiente</span>
-                    <canvas id="nextCanvas" width="100" height="100"></canvas>
+                    <canvas id="nextCanvas" width="60" height="60"></canvas>
                 </div>
             </div>
 
@@ -415,7 +410,7 @@
         const COLS = 10;
         const ROWS = 20;
         let BLOCK_SIZE = 30;
-        const NEXT_BLOCK_SIZE = 20;
+        const NEXT_BLOCK_SIZE = 12;
         const COLORS = [
             null,
             '#00f5ff', // I - Cyan
@@ -505,8 +500,6 @@
                 return;
             }
             
-            console.log('📍 Dibujando pieza:', piece);
-            
             for (let row = 0; row < piece.shape.length; row++) {
                 for (let col = 0; col < piece.shape[row].length; col++) {
                     if (piece.shape[row][col]) {
@@ -546,9 +539,6 @@
 
         // Dibujar juego
         function draw() {
-            console.log('🎨 draw() llamado');
-            console.log('  currentPiece:', currentPiece);
-            
             // Limpiar canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -564,10 +554,7 @@
 
             // Dibujar pieza actual
             if (currentPiece) {
-                console.log('  Dibujando pieza actual en', currentPiece.x, currentPiece.y);
                 drawPiece(ctx, currentPiece, BLOCK_SIZE);
-            } else {
-                console.log('❌ PIEZA ACTUAL ES NULL!');
             }
         }
 
@@ -639,7 +626,6 @@
             if (!movePiece(0, 1)) {
                 // Fijar pieza en el tablero
                 if (currentPiece) {
-                    console.log('🔒 Fijando pieza en el tablero');
                     for (let row = 0; row < currentPiece.shape.length; row++) {
                         for (let col = 0; col < currentPiece.shape[row].length; col++) {
                             if (currentPiece.shape[row][col]) {
@@ -660,15 +646,14 @@
                 currentPiece = nextPiece;
                 nextPiece = createPiece();
                 
-                console.log('🆕 Nueva pieza:', currentPiece);
-                console.log('📋 Siguiente pieza:', nextPiece);
-                
-                // Dibujar preview de la nueva siguiente
+                // DIBUJAR preview de la nueva siguiente
                 drawNextPiece();
                 
+                // VERIFICAR COLISIÓN INMEDIATA
                 if (collide(currentPiece)) {
                     gameOver();
                 } else {
+                    // DIBUJAR inmediatamente la nueva pieza
                     draw();
                 }
             } else {
@@ -882,13 +867,10 @@
         });
 
         // Iniciar juego
-        console.log('🎮 Iniciando Tetris...');
         adjustBlockSize();
         initBoard();
         currentPiece = createPiece();
         nextPiece = createPiece();
-        console.log('📦 Pieza inicial:', currentPiece);
-        console.log('📋 Siguiente:', nextPiece);
         draw();
         drawNextPiece();
         gameInterval = setInterval(drop, dropInterval);
