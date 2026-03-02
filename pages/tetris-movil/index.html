@@ -495,7 +495,12 @@
 
         // Dibujar pieza en canvas
         function drawPiece(ctx, piece, blockSize) {
-            if (!piece) return;
+            if (!piece) {
+                console.error('❌ drawPiece: piece es NULL!');
+                return;
+            }
+            
+            console.log('🎨 Dibujando pieza:', piece.type, 'en', piece.x, piece.y);
             
             for (let row = 0; row < piece.shape.length; row++) {
                 for (let col = 0; col < piece.shape[row].length; col++) {
@@ -508,7 +513,12 @@
 
         // Dibujar preview de siguiente pieza
         function drawNextPiece() {
-            if (!nextPiece) return;
+            if (!nextPiece) {
+                console.error('❌ drawNextPiece: nextPiece es NULL!');
+                return;
+            }
+            
+            console.log('📋 Dibujando preview:', nextPiece.type);
             
             // Limpiar canvas
             nextCtx.fillStyle = '#000';
@@ -533,6 +543,8 @@
 
         // Dibujar juego
         function draw() {
+            console.log('🖼️ draw() llamado - currentPiece:', currentPiece ? currentPiece.type : 'NULL');
+            
             // Limpiar canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -549,6 +561,8 @@
             // Dibujar pieza actual
             if (currentPiece) {
                 drawPiece(ctx, currentPiece, BLOCK_SIZE);
+            } else {
+                console.error('❌ currentPiece es NULL en draw()!');
             }
         }
 
@@ -617,7 +631,12 @@
 
         // Fijar pieza en el tablero
         function lockPiece() {
-            if (!currentPiece) return;
+            console.log('🔒 lockPiece() - Fijando pieza', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
+            
+            if (!currentPiece) {
+                console.error('❌ lockPiece: currentPiece es NULL!');
+                return;
+            }
             
             for (let row = 0; row < currentPiece.shape.length; row++) {
                 for (let col = 0; col < currentPiece.shape[row].length; col++) {
@@ -646,6 +665,8 @@
             }
             
             if (linesCleared > 0) {
+                console.log('📊 Líneas limpiadas:', linesCleared);
+                
                 // Puntuación: 100, 300, 500, 800 por 1, 2, 3, 4 líneas
                 const points = [0, 100, 300, 500, 800];
                 score += points[linesCleared] * level;
@@ -664,18 +685,35 @@
 
         // Generar nueva pieza
         function spawnNewPiece() {
+            console.log('🆕 spawnNewPiece() - Cambiando de pieza');
+            
             currentPiece = nextPiece;
             nextPiece = createPiece();
+            
+            console.log('  Nueva currentPiece:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
+            console.log('  Nueva nextPiece:', nextPiece.type);
+            
             drawNextPiece();
         }
 
         // Bajar pieza (llamado por el intervalo)
         function drop() {
-            if (!currentPiece) return;
+            console.log('⬇️ drop() llamado');
+            
+            if (!currentPiece) {
+                console.error('❌ drop(): currentPiece es NULL!');
+                return;
+            }
+            
+            console.log('  Pieza actual:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
             
             // Intentar bajar
-            if (!movePiece(0, 1)) {
+            const canMove = movePiece(0, 1);
+            console.log('  ¿Pudo bajar?', canMove);
+            
+            if (!canMove) {
                 // No puede bajar más, fijar pieza
+                console.log('  ❌ No puede bajar más → Fijando pieza');
                 lockPiece();
                 
                 // Limpiar líneas
@@ -685,13 +723,15 @@
                 spawnNewPiece();
                 
                 // Verificar colisión inmediata (game over)
-                if (collide(currentPiece)) {
+                if (currentPiece && collide(currentPiece)) {
+                    console.log('  💥 Colisión inmediata → GAME OVER');
                     gameOver();
                     return;
                 }
             }
             
             // DIBUJAR SIEMPRE al final de drop()
+            console.log('  🎨 Dibujando...');
             draw();
         }
 
@@ -707,6 +747,7 @@
 
         // Game over
         function gameOver() {
+            console.log('💥 GAME OVER');
             isGameOver = true;
             clearInterval(gameInterval);
             document.getElementById('finalScore').textContent = score;
@@ -715,6 +756,7 @@
 
         // Reiniciar juego
         function restartGame() {
+            console.log('🔄 restartGame()');
             initBoard();
             score = 0;
             level = 1;
@@ -725,6 +767,8 @@
             document.getElementById('gameOver').style.display = 'none';
             currentPiece = createPiece();
             nextPiece = createPiece();
+            console.log('  Pieza inicial:', currentPiece.type);
+            console.log('  Siguiente:', nextPiece.type);
             draw();
             drawNextPiece();
             gameInterval = setInterval(drop, dropInterval);
@@ -871,13 +915,18 @@
         });
 
         // Iniciar juego
+        console.log('🎮 Iniciando Tetris...');
         adjustBlockSize();
         initBoard();
         currentPiece = createPiece();
         nextPiece = createPiece();
+        console.log('✅ Juego iniciado');
+        console.log('  Pieza inicial:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
+        console.log('  Siguiente:', nextPiece.type);
         draw();
         drawNextPiece();
         gameInterval = setInterval(drop, dropInterval);
+        console.log('⏱️ Intervalo configurado:', dropInterval, 'ms');
     </script>
 </body>
 </html>
