@@ -721,7 +721,8 @@
         });
 
         // Controles táctiles con mantener pulsado
-        function setupTouchButton(id, action, repeat = true) {
+        // Velocidades: Izquierda/Derecha = 150ms (lento para precisión), Abajo = 50ms (rápido para acelerar)
+        function setupTouchButton(id, action, repeat = true, intervalMs = 150) {
             const btn = document.getElementById(id);
             let interval;
             
@@ -730,7 +731,7 @@
                 if (!isGameOver) {
                     action();
                     if (repeat) {
-                        interval = setInterval(action, 80); // 80ms para movimiento continuo
+                        interval = setInterval(action, intervalMs);
                     }
                 }
             }, { passive: false });
@@ -755,7 +756,7 @@
                 if (!isGameOver) {
                     action();
                     if (repeat) {
-                        interval = setInterval(action, 80);
+                        interval = setInterval(action, intervalMs);
                     }
                 }
             });
@@ -782,21 +783,21 @@
             });
         }
 
-        // Configurar todos los botones con mantener pulsado
+        // Configurar todos los botones con velocidades diferentes
         setupTouchButton('leftBtn', () => { 
             if (movePiece(-1, 0)) draw(); 
-        }, true);
+        }, true, 150); // 150ms para izquierda (lento, preciso)
         
         setupTouchButton('rightBtn', () => { 
             if (movePiece(1, 0)) draw(); 
-        }, true);
+        }, true, 150); // 150ms para derecha (lento, preciso)
         
         setupTouchButton('rotateBtn', () => { 
             rotatePiece(); 
             draw(); 
         }, false); // Rotar no se repite
         
-        setupTouchButton('downBtn', drop, true);
+        setupTouchButton('downBtn', drop, true, 50); // 50ms para abajo (rápido, acelerar)
 
         // Controles de teclado (para PC)
         let keyInterval;
@@ -823,9 +824,13 @@
 
             handleKey();
             
-            // Repetir para flechas izquierda/derecha
+            // Repetir para flechas izquierda/derecha con 150ms
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                keyInterval = setInterval(handleKey, 80);
+                keyInterval = setInterval(handleKey, 150);
+            }
+            // Repetir para abajo con 50ms
+            else if (e.key === 'ArrowDown') {
+                keyInterval = setInterval(drop, 50);
             }
         });
 
