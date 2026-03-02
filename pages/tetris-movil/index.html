@@ -495,10 +495,7 @@
 
         // Dibujar pieza en canvas
         function drawPiece(ctx, piece, blockSize) {
-            if (!piece) {
-                console.log('⚠️ drawPiece: piece es null');
-                return;
-            }
+            if (!piece) return;
             
             for (let row = 0; row < piece.shape.length; row++) {
                 for (let col = 0; col < piece.shape[row].length; col++) {
@@ -511,10 +508,7 @@
 
         // Dibujar preview de siguiente pieza
         function drawNextPiece() {
-            if (!nextPiece) {
-                console.log('⚠️ drawNextPiece: nextPiece es null');
-                return;
-            }
+            if (!nextPiece) return;
             
             // Limpiar canvas
             nextCtx.fillStyle = '#000';
@@ -621,43 +615,20 @@
             draw();
         }
 
-        // Bajar pieza
-        function drop() {
-            if (!movePiece(0, 1)) {
-                // Fijar pieza en el tablero
-                if (currentPiece) {
-                    for (let row = 0; row < currentPiece.shape.length; row++) {
-                        for (let col = 0; col < currentPiece.shape[row].length; col++) {
-                            if (currentPiece.shape[row][col]) {
-                                const boardY = currentPiece.y + row;
-                                const boardX = currentPiece.x + col;
-                                if (boardY >= 0 && boardY < ROWS && boardX >= 0 && boardX < COLS) {
-                                    board[boardY][boardX] = currentPiece.type;
-                                }
-                            }
+        // Fijar pieza en el tablero
+        function lockPiece() {
+            if (!currentPiece) return;
+            
+            for (let row = 0; row < currentPiece.shape.length; row++) {
+                for (let col = 0; col < currentPiece.shape[row].length; col++) {
+                    if (currentPiece.shape[row][col]) {
+                        const boardY = currentPiece.y + row;
+                        const boardX = currentPiece.x + col;
+                        if (boardY >= 0 && boardY < ROWS && boardX >= 0 && boardX < COLS) {
+                            board[boardY][boardX] = currentPiece.type;
                         }
                     }
                 }
-                
-                // Verificar líneas completas
-                clearLines();
-                
-                // Nueva pieza: tomar la siguiente y generar una nueva
-                currentPiece = nextPiece;
-                nextPiece = createPiece();
-                
-                // DIBUJAR preview de la nueva siguiente
-                drawNextPiece();
-                
-                // VERIFICAR COLISIÓN INMEDIATA
-                if (collide(currentPiece)) {
-                    gameOver();
-                } else {
-                    // DIBUJAR inmediatamente la nueva pieza
-                    draw();
-                }
-            } else {
-                draw();
             }
         }
 
@@ -689,6 +660,39 @@
                 clearInterval(gameInterval);
                 gameInterval = setInterval(drop, dropInterval);
             }
+        }
+
+        // Generar nueva pieza
+        function spawnNewPiece() {
+            currentPiece = nextPiece;
+            nextPiece = createPiece();
+            drawNextPiece();
+        }
+
+        // Bajar pieza (llamado por el intervalo)
+        function drop() {
+            if (!currentPiece) return;
+            
+            // Intentar bajar
+            if (!movePiece(0, 1)) {
+                // No puede bajar más, fijar pieza
+                lockPiece();
+                
+                // Limpiar líneas
+                clearLines();
+                
+                // Nueva pieza
+                spawnNewPiece();
+                
+                // Verificar colisión inmediata (game over)
+                if (collide(currentPiece)) {
+                    gameOver();
+                    return;
+                }
+            }
+            
+            // DIBUJAR SIEMPRE al final de drop()
+            draw();
         }
 
         // Actualizar puntuación
