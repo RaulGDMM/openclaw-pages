@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <meta name="screen-orientation" content="portrait">
     <title>Tetris Móvil - Clásico</title>
     <style>
         * {
@@ -242,7 +241,21 @@
             font-weight: bold;
         }
 
-        /* Portrait only */
+        .desktop-hint {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: none;
+            z-index: 900;
+        }
+
+        /* Portrait mode */
         @media (orientation: portrait) {
             .game-wrapper {
                 padding: 5px 8px;
@@ -267,31 +280,80 @@
                 height: 56px;
                 font-size: 21px;
             }
+
+            .desktop-hint {
+                display: none;
+            }
         }
 
-        /* Forzar portrait */
+        /* Landscape mode - OPTIMIZADO PARA ESCRITORIO */
         @media (orientation: landscape) {
-            body::after {
-                content: "📱 Gira tu móvil a vertical para jugar";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                color: white;
-                display: flex;
+            .game-wrapper {
+                flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                font-size: 20px;
-                z-index: 9999;
-                text-align: center;
-                padding: 20px;
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .game-container {
+                flex-direction: row;
+                padding: 10px 15px;
+                max-width: none;
+                gap: 15px;
+                flex: none;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 0;
+                min-width: 90px;
+            }
+
+            .score-section {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .score-box {
+                margin-bottom: 5px;
+            }
+
+            .next-piece-box {
+                min-width: 60px;
+            }
+
+            .canvas-container {
+                flex: none;
+            }
+
+            #gameCanvas {
+                width: 240px;
+                height: 480px;
+            }
+
+            .controls {
+                gap: 8px;
+                padding: 8px;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            .desktop-hint {
+                display: block;
             }
         }
 
         /* Small screens */
-        @media (max-height: 750px) {
+        @media (max-height: 750px) and (orientation: portrait) {
             #gameCanvas {
                 width: 260px;
                 height: 520px;
@@ -314,7 +376,7 @@
         }
 
         /* Very small screens */
-        @media (max-width: 360px) {
+        @media (max-width: 360px) and (orientation: portrait) {
             #gameCanvas {
                 width: 270px;
                 height: 540px;
@@ -352,10 +414,38 @@
             height: 62px;
             font-size: 23px;
         }
+
+        body:fullscreen .desktop-hint {
+            display: none;
+        }
+
+        /* Landscape fullscreen */
+        @media (orientation: landscape) {
+            body:fullscreen .game-wrapper {
+                padding: 0 10px;
+            }
+
+            body:fullscreen .game-container {
+                padding: 10px 15px;
+            }
+
+            body:fullscreen #gameCanvas {
+                width: 280px;
+                height: 560px;
+            }
+
+            body:fullscreen .control-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <button class="fullscreen-btn" id="fullscreenBtn" title="Pantalla completa">⛶</button>
+    
+    <div class="desktop-hint">💻 Escritorio: Flechas ←↑→↓ + ESPACIO para girar</div>
 
     <div class="game-wrapper">
         <div class="game-container">
@@ -495,12 +585,7 @@
 
         // Dibujar pieza en canvas
         function drawPiece(ctx, piece, blockSize) {
-            if (!piece) {
-                console.error('❌ drawPiece: piece es NULL!');
-                return;
-            }
-            
-            console.log('🎨 Dibujando pieza:', piece.type, 'en', piece.x, piece.y);
+            if (!piece) return;
             
             for (let row = 0; row < piece.shape.length; row++) {
                 for (let col = 0; col < piece.shape[row].length; col++) {
@@ -513,12 +598,7 @@
 
         // Dibujar preview de siguiente pieza
         function drawNextPiece() {
-            if (!nextPiece) {
-                console.error('❌ drawNextPiece: nextPiece es NULL!');
-                return;
-            }
-            
-            console.log('📋 Dibujando preview:', nextPiece.type);
+            if (!nextPiece) return;
             
             // Limpiar canvas
             nextCtx.fillStyle = '#000';
@@ -543,8 +623,6 @@
 
         // Dibujar juego
         function draw() {
-            console.log('🖼️ draw() llamado - currentPiece:', currentPiece ? currentPiece.type : 'NULL');
-            
             // Limpiar canvas
             ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -561,8 +639,6 @@
             // Dibujar pieza actual
             if (currentPiece) {
                 drawPiece(ctx, currentPiece, BLOCK_SIZE);
-            } else {
-                console.error('❌ currentPiece es NULL en draw()!');
             }
         }
 
@@ -631,12 +707,7 @@
 
         // Fijar pieza en el tablero
         function lockPiece() {
-            console.log('🔒 lockPiece() - Fijando pieza', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
-            
-            if (!currentPiece) {
-                console.error('❌ lockPiece: currentPiece es NULL!');
-                return;
-            }
+            if (!currentPiece) return;
             
             for (let row = 0; row < currentPiece.shape.length; row++) {
                 for (let col = 0; col < currentPiece.shape[row].length; col++) {
@@ -665,8 +736,6 @@
             }
             
             if (linesCleared > 0) {
-                console.log('📊 Líneas limpiadas:', linesCleared);
-                
                 // Puntuación: 100, 300, 500, 800 por 1, 2, 3, 4 líneas
                 const points = [0, 100, 300, 500, 800];
                 score += points[linesCleared] * level;
@@ -685,35 +754,18 @@
 
         // Generar nueva pieza
         function spawnNewPiece() {
-            console.log('🆕 spawnNewPiece() - Cambiando de pieza');
-            
             currentPiece = nextPiece;
             nextPiece = createPiece();
-            
-            console.log('  Nueva currentPiece:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
-            console.log('  Nueva nextPiece:', nextPiece.type);
-            
             drawNextPiece();
         }
 
         // Bajar pieza (llamado por el intervalo)
         function drop() {
-            console.log('⬇️ drop() llamado');
-            
-            if (!currentPiece) {
-                console.error('❌ drop(): currentPiece es NULL!');
-                return;
-            }
-            
-            console.log('  Pieza actual:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
+            if (!currentPiece) return;
             
             // Intentar bajar
-            const canMove = movePiece(0, 1);
-            console.log('  ¿Pudo bajar?', canMove);
-            
-            if (!canMove) {
+            if (!movePiece(0, 1)) {
                 // No puede bajar más, fijar pieza
-                console.log('  ❌ No puede bajar más → Fijando pieza');
                 lockPiece();
                 
                 // Limpiar líneas
@@ -723,15 +775,13 @@
                 spawnNewPiece();
                 
                 // Verificar colisión inmediata (game over)
-                if (currentPiece && collide(currentPiece)) {
-                    console.log('  💥 Colisión inmediata → GAME OVER');
+                if (collide(currentPiece)) {
                     gameOver();
                     return;
                 }
             }
             
             // DIBUJAR SIEMPRE al final de drop()
-            console.log('  🎨 Dibujando...');
             draw();
         }
 
@@ -747,7 +797,6 @@
 
         // Game over
         function gameOver() {
-            console.log('💥 GAME OVER');
             isGameOver = true;
             clearInterval(gameInterval);
             document.getElementById('finalScore').textContent = score;
@@ -756,7 +805,6 @@
 
         // Reiniciar juego
         function restartGame() {
-            console.log('🔄 restartGame()');
             initBoard();
             score = 0;
             level = 1;
@@ -767,8 +815,6 @@
             document.getElementById('gameOver').style.display = 'none';
             currentPiece = createPiece();
             nextPiece = createPiece();
-            console.log('  Pieza inicial:', currentPiece.type);
-            console.log('  Siguiente:', nextPiece.type);
             draw();
             drawNextPiece();
             gameInterval = setInterval(drop, dropInterval);
@@ -868,7 +914,7 @@
         
         setupTouchButton('downBtn', drop, true, 50);
 
-        // Controles de teclado (para PC)
+        // Controles de teclado (para PC) - FLECHAS + ESPACIO
         let keyInterval;
         document.addEventListener('keydown', (e) => {
             if (isGameOver) return;
@@ -882,6 +928,7 @@
                         movePiece(1, 0);
                         break;
                     case 'ArrowUp':
+                    case ' ': // ESPACIO para rotar
                         rotatePiece();
                         break;
                     case 'ArrowDown':
@@ -893,12 +940,15 @@
 
             handleKey();
             
+            // Repetir para flechas izquierda/derecha con 150ms
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                 keyInterval = setInterval(handleKey, 150);
             }
+            // Repetir para abajo con 50ms
             else if (e.key === 'ArrowDown') {
                 keyInterval = setInterval(drop, 50);
             }
+            // Espacio NO se repite (solo 1 rotación por press)
         });
 
         document.addEventListener('keyup', (e) => {
@@ -915,18 +965,13 @@
         });
 
         // Iniciar juego
-        console.log('🎮 Iniciando Tetris...');
         adjustBlockSize();
         initBoard();
         currentPiece = createPiece();
         nextPiece = createPiece();
-        console.log('✅ Juego iniciado');
-        console.log('  Pieza inicial:', currentPiece.type, 'en', currentPiece.x, currentPiece.y);
-        console.log('  Siguiente:', nextPiece.type);
         draw();
         drawNextPiece();
         gameInterval = setInterval(drop, dropInterval);
-        console.log('⏱️ Intervalo configurado:', dropInterval, 'ms');
     </script>
 </body>
 </html>
