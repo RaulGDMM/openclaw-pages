@@ -555,7 +555,34 @@
             min-width: 600px;
             margin: 0;
         }
-        </style>
+        
+        
+        /* TODOS los enlaces en blanco/gris claro */
+        a {
+            color: #e0e6ed !important;
+            text-decoration: underline !important;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: #dc2626 !important;
+        }
+        
+        /* Enlaces en secciones con fondo oscuro (info-box, key-point, warning) */
+        .key-point a,
+        .info-box a,
+        .warning a {
+            color: #f1f5f9 !important;
+            font-weight: 500 !important;
+        }
+        
+        .key-point a:hover,
+        .info-box a:hover,
+        .warning a:hover {
+            color: #dc2626 !important;
+        }
+    </style>
 </head>
 <body>
     <button class="hamburger-btn" onclick="toggleMenu()" title="Menú" aria-label="Abrir menú">☰</button>
