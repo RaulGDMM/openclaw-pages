@@ -4,7 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌍 Crisis Irán 2026 - Análisis Geopolítico Profundo</title>
-        <style>
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #151b2e;
+            --bg-card: #1a2238;
+            --text-primary: #e0e6ed;
+            --text-secondary: #94a3b8;
+            --accent-red: #dc2626;
+            --accent-orange: #f59e0b;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --border-color: #2d3748;
+            --gradient-primary: linear-gradient(135deg, #1e3a5f 0%, #151b2e 50%, #0a0e1a 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .hamburger-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(220, 38, 38, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+        }
+        
+        .hamburger-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.7);
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 999;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            display: none;
+            min-width: 280px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .nav-menu.active {
+            display: block;
+        }
+        
+        .nav-menu a {
+            display: block;
+            padding: 14px 18px;
+            margin: 6px 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(220, 38, 38, 0.15);
+            color: #fff;
+            border-left-color: var(--accent-red);
+            padding-left: 25px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
         
         header {
             text-align: center;
@@ -13,27 +121,39 @@
             border-radius: 20px;
             margin-bottom: 40px;
             border: 1px solid rgba(220, 38, 38, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             color: #fff;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease;
         }
         
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .subtitle {
             font-size: 1.3rem;
             color: var(--text-secondary);
             margin-bottom: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .subtitle { font-size: 1.1rem; }
+            animation: fadeInUp 0.8s ease 0.2s both;
         }
         
         .date-badge {
@@ -44,6 +164,7 @@
             border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 600;
+            animation: fadeInUp 0.8s ease 0.4s both;
         }
         
         .alert-banner {
@@ -56,6 +177,7 @@
             text-align: center;
             box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
             font-size: 1.1rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
         }
         
         section {
@@ -66,15 +188,19 @@
             border: 1px solid var(--border-color);
             scroll-margin-top: 120px;
             transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInSection 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInSection {
+            to { opacity: 1; transform: translateY(0); }
         }
         
         section:hover {
             border-color: rgba(220, 38, 38, 0.5);
             box-shadow: 0 8px 30px rgba(220, 38, 38, 0.2);
-        }
-        
-        @media (max-width: 768px) {
-            section { padding: 25px; }
+            transform: translateY(-3px);
         }
         
         h2 {
@@ -87,10 +213,6 @@
             border-bottom: 2px solid rgba(220, 38, 38, 0.3);
             padding-bottom: 15px;
             flex-wrap: wrap;
-        }
-        
-        @media (max-width: 768px) {
-            h2 { font-size: 1.5rem; }
         }
         
         h2 .icon {
@@ -107,15 +229,10 @@
             gap: 10px;
         }
         
-        @media (max-width: 768px) {
-            h3 { font-size: 1.2rem; }
-        }
-        
         p {
             margin-bottom: 15px;
             color: var(--text-secondary);
             font-size: 1.05rem;
-            line-height: 1.7;
         }
         
         .highlight {
@@ -159,10 +276,6 @@
             margin: 30px 0;
         }
         
-        @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-        }
-        
         .stat-card {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 12px;
@@ -186,10 +299,6 @@
             line-height: 1.2;
         }
         
-        @media (max-width: 768px) {
-            .stat-value { font-size: 2rem; }
-        }
-        
         .stat-label {
             font-size: 0.95rem;
             color: var(--text-secondary);
@@ -207,21 +316,12 @@
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             overflow: hidden;
-            font-size: 0.95rem;
-        }
-        
-        @media (max-width: 768px) {
-            table { font-size: 0.85rem; display: block; overflow-x: auto; }
         }
         
         th, td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
-        }
-        
-        @media (max-width: 768px) {
-            th, td { padding: 10px; }
         }
         
         th {
@@ -246,7 +346,6 @@
             margin-bottom: 12px;
             color: var(--text-secondary);
             font-size: 1.05rem;
-            line-height: 1.6;
         }
         
         li strong {
@@ -289,7 +388,6 @@
             font-style: italic;
             font-size: 1.1rem;
             color: #f1f5f9;
-            line-height: 1.6;
         }
         
         .quote-author {
@@ -379,10 +477,6 @@
             margin: 30px 0;
         }
         
-        @media (max-width: 768px) {
-            .comparison-grid { grid-template-columns: 1fr; }
-        }
-        
         .comparison-card {
             background: rgba(0, 0, 0, 0.2);
             padding: 25px;
@@ -396,16 +490,29 @@
             font-size: 1.2rem;
         }
         
-        a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: color 0.2s ease;
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 90px 15px 40px; }
+            section { padding: 25px; }
+            .nav-menu { right: 15px; min-width: 250px; }
+            .hamburger-btn { top: 15px; right: 15px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 10px; }
         }
         
-        a:hover {
-            color: #60a5fa;
-            text-decoration: underline;
-        }</style>
+        /* Animaciones al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
     <button class="hamburger-btn" onclick="toggleMenu()" title="Menú" aria-label="Abrir menú">☰</button>
@@ -817,8 +924,7 @@
             </div>
         </section>
 
-        <footer class="footer">
-
+        
         <section id="fuentes">
             <h2><span class="icon">📚</span> Fuentes y Referencias</h2>
             
@@ -904,14 +1010,14 @@
             <div class="key-point" style="margin-top: 25px;">
                 <strong>🔗 Enlaces a fuentes originales:</strong>
                 <ul style="margin-top: 15px;">
-                    <li><a href="https://www.theguardian.com/commentisfree/2026/feb/28/diversionary-war-trump-wants-to-distract-americans-from-scandals-at-home" target="_blank" style="color: var(--accent-blue);">The Guardian - Trump's diversionary war</a></li>
-                    <li><a href="https://jeffries.house.gov/2026/03/01/leader-jeffries-on-wbls-what-donald-trump-has-done-is-put-us-in-greater-danger/" target="_blank" style="color: var(--accent-blue);">Hakeem Jeffries - What Donald Trump has done</a></li>
-                    <li><a href="https://www.reuters.com/world/middle-east/intelligence-assessment-warns-iranian-attacks-us-following-khameneis-death-2026-03-02/" target="_blank" style="color: var(--accent-blue);">Reuters - Intelligence assessment warns of Iranian attacks</a></li>
-                    <li><a href="https://www.dhs.gov/national-terrorism-advisory-system" target="_blank" style="color: var(--accent-blue);">DHS - National Terrorism Advisory System</a></li>
-                    <li><a href="https://www.iaea.org/topics/monitoring-and-verification-in-iran" target="_blank" style="color: var(--accent-blue);">IAEA - Monitoring and Verification in Iran</a></li>
-                    <li><a href="https://www.cnbc.com/2026/03/03/strait-of-hormuz-closure-which-countries-will-be-hit-the-most.html" target="_blank" style="color: var(--accent-blue);">CNBC - Strait of Hormuz impact on China</a></li>
-                    <li><a href="https://www.politico.com/news/2026/03/02/iran-us-strikes-china-oil-supply-charts-00806415" target="_blank" style="color: var(--accent-blue);">Politico - China's oil dilemma</a></li>
-                    <li><a href="https://www.chathamhouse.org/2026/03/iran-war-exposes-limits-russias-leverage-fragmenting-regional-order" target="_blank" style="color: var(--accent-blue);">Chatham House - Russia's leverage limits</a></li>
+                    <li><a href="https://www.theguardian.com/commentisfree/2026/feb/28/diversionary-war-trump-wants-to-distract-americans-from-scandals-at-home" target="_blank">The Guardian - Trump's diversionary war</a></li>
+                    <li><a href="https://jeffries.house.gov/2026/03/01/leader-jeffries-on-wbls-what-donald-trump-has-done-is-put-us-in-greater-danger/" target="_blank">Hakeem Jeffries - What Donald Trump has done</a></li>
+                    <li><a href="https://www.reuters.com/world/middle-east/intelligence-assessment-warns-iranian-attacks-us-following-khameneis-death-2026-03-02/" target="_blank">Reuters - Intelligence assessment warns of Iranian attacks</a></li>
+                    <li><a href="https://www.dhs.gov/national-terrorism-advisory-system" target="_blank">DHS - National Terrorism Advisory System</a></li>
+                    <li><a href="https://www.iaea.org/topics/monitoring-and-verification-in-iran" target="_blank">IAEA - Monitoring and Verification in Iran</a></li>
+                    <li><a href="https://www.cnbc.com/2026/03/03/strait-of-hormuz-closure-which-countries-will-be-hit-the-most.html" target="_blank">CNBC - Strait of Hormuz impact on China</a></li>
+                    <li><a href="https://www.politico.com/news/2026/03/02/iran-us-strikes-china-oil-supply-charts-00806415" target="_blank">Politico - China's oil dilemma</a></li>
+                    <li><a href="https://www.chathamhouse.org/2026/03/iran-war-exposes-limits-russias-leverage-fragmenting-regional-order" target="_blank">Chatham House - Russia's leverage limits</a></li>
                 </ul>
             </div>
             
@@ -922,7 +1028,7 @@
                 </p>
             </div>
         </section>
-
+<footer class="footer">
             <p><strong>Análisis Geopolítico - Crisis Irán 2026</strong></p>
             <p style="margin-top: 10px;">Cocobot 🐱 | 3 de Marzo de 2026 | 20:00 CET</p>
             <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-secondary);">
