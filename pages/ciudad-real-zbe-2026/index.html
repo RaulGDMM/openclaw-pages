@@ -411,7 +411,31 @@
         .badge-b { background: #f59e0b; color: #fff; }
         .badge-sin { background: #6b7280; color: #fff; }
         
-        .footer {
+        
+        .source-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.2s ease;
+        }
+        
+        .source-link:hover {
+            color: var(--accent-green);
+            transform: translateX(5px);
+        }
+        
+        .source-link .source-name {
+            color: inherit;
+        }
+        
+        .source-link .source-type {
+            color: var(--accent-blue);
+        }
+        
+        .source-link:hover .source-type {
+            color: var(--accent-green);
+        }
+.footer {
             text-align: center;
             padding: 40px 20px;
             color: var(--text-secondary);
@@ -858,50 +882,64 @@
                 <div class="source-item">
                     <span class="source-icon">🏛️</span>
                     <div class="source-content">
-                        <div class="source-name">Ley 7/2021 de Cambio Climático y Transición Energética</div>
-                        <div class="source-type">Marco legal nacional - BOE</div>
+                        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2021-9798" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Ley 7/2021 de Cambio Climático y Transición Energética</div>
+                            <div class="source-type">Marco legal nacional - BOE ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">🚗</span>
                     <div class="source-content">
-                        <div class="source-name">Dirección General de Tráfico (DGT)</div>
-                        <div class="source-type">cdt.dgt.es - Consulta de etiquetas ambientales</div>
+                        <a href="https://www.dgt.es/es/consultas-y-servicios/consulta-de-vehiculos/etiqueta-ambiental/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Dirección General de Tráfico (DGT)</div>
+                            <div class="source-type">Consulta etiquetas ambientales ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">🏢</span>
                     <div class="source-content">
-                        <div class="source-name">Federación Española de Municipios y Provincias (FEMP)</div>
-                        <div class="source-type">Ordenanza tipo de Zonas de Bajas Emisiones</div>
+                        <a href="https://www.femp.es/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Federación Española de Municipios y Provincias (FEMP)</div>
+                            <div class="source-type">Ordenanza tipo Zonas de Bajas Emisiones ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">🌍</span>
                     <div class="source-content">
-                        <div class="source-name">Ministerio para la Transición Ecológica</div>
-                        <div class="source-type">Supervisión e implementación de ZBE</div>
+                        <a href="https://www.miteco.gob.es/es/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Ministerio para la Transición Ecológica</div>
+                            <div class="source-type">Supervisión e implementación de ZBE ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">📰</span>
                     <div class="source-content">
-                        <div class="source-name">Motor16.com</div>
-                        <div class="source-type">Información sobre multas ZBE - Febrero 2026</div>
+                        <a href="https://www.motor16.com/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Motor16.com</div>
+                            <div class="source-type">Información sobre multas ZBE - Febrero 2026 ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">📊</span>
                     <div class="source-content">
-                        <div class="source-name">Junta de Castilla-La Mancha</div>
-                        <div class="source-type">www.jccm.es - Calidad del aire y episodios de contaminación</div>
+                        <a href="https://www.jccm.es/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Junta de Castilla-La Mancha</div>
+                            <div class="source-type">Calidad del aire y episodios de contaminación ↗</div>
+                        </a>
                     </div>
                 </div>
                 <div class="source-item">
                     <span class="source-icon">🏙️</span>
                     <div class="source-content">
-                        <div class="source-name">Ayuntamiento de Ciudad Real</div>
-                        <div class="source-type">www.ciudadreal.es - Normativa municipal ZBE</div>
+                        <a href="https://www.ciudadreal.es/" target="_blank" rel="noopener noreferrer" class="source-link">
+                            <div class="source-name">Ayuntamiento de Ciudad Real</div>
+                            <div class="source-type">Normativa municipal ZBE ↗</div>
+                        </a>
                     </div>
                 </div>
             </div>
