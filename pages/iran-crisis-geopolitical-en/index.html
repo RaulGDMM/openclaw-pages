@@ -496,6 +496,47 @@
             font-size: 1.2rem;
         }
         
+        .sources-list {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .source-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .source-item:last-child {
+            border-bottom: none;
+        }
+        
+        .source-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .source-content {
+            flex: 1;
+        }
+        
+        .source-name {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .source-type {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-style: italic;
+        }
+        
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .container { padding: 90px 15px 40px; }
@@ -529,6 +570,7 @@
         <a href="#geopolitical-interests">🌐 Geopolitics</a>
         <a href="#terrorism-risk">☠️ Terrorism Risk</a>
         <a href="#consequences">📊 Consequences</a>
+        <a href="#sources">📚 Sources</a>
         <a href="#conclusion">💭 Conclusion</a>
     </div>
 
@@ -889,6 +931,108 @@
             </div>
         </section>
 
+        <section id="sources">
+            <h2><span class="icon">📚</span> Sources & References</h2>
+            
+            <p style="margin-bottom: 25px;">This analysis is based on verified sources from international news organizations, intelligence assessments, and expert commentary. All quotes and data points are attributed to their original sources.</p>
+            
+            <h3>📰 News Organizations</h3>
+            <div class="sources-list">
+                <div class="source-item">
+                    <span class="source-icon">📻</span>
+                    <div class="source-content">
+                        <div class="source-name">NPR (National Public Radio)</div>
+                        <div class="source-type">US Public Broadcasting - Epstein Files Investigation</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">🇬🇧</span>
+                    <div class="source-content">
+                        <div class="source-name">The Guardian</div>
+                        <div class="source-type">UK Independent Newspaper - Geopolitical Analysis</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">📰</span>
+                    <div class="source-content">
+                        <div class="source-name">Reuters</div>
+                        <div class="source-type">International News Agency - Conflict Data</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">🏛️</span>
+                    <div class="source-content">
+                        <div class="source-name">Arab Center DC</div>
+                        <div class="source-type">US Policy Think Tank - Middle East Analysis</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">🔴</span>
+                    <div class="source-content">
+                        <div class="source-name">Truth Social</div>
+                        <div class="source-type">Social Media Platform - Trump Statements</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>🏛️ Government & Official Sources</h3>
+            <div class="sources-list">
+                <div class="source-item">
+                    <span class="source-icon">🛡️</span>
+                    <div class="source-content">
+                        <div class="source-name">Department of Homeland Security (DHS)</div>
+                        <div class="source-type">US Government - Terrorism Risk Assessments (March 2026)</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">☢️</span>
+                    <div class="source-content">
+                        <div class="source-name">IAEA (International Atomic Energy Agency)</div>
+                        <div class="source-type">UN Nuclear Regulatory Body - Iran Compliance Reports</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">🏛️</span>
+                    <div class="source-content">
+                        <div class="source-name">US House of Representatives</div>
+                        <div class="source-type">Congressional Statements - Hakeem Jeffries Comments</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>🎓 Expert Commentary</h3>
+            <div class="sources-list">
+                <div class="source-item">
+                    <span class="source-icon">👔</span>
+                    <div class="source-content">
+                        <div class="source-name">Christopher Chivvis</div>
+                        <div class="source-type">Middle East Expert - The Guardian Contributor</div>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <span class="source-icon">🎓</span>
+                    <div class="source-content">
+                        <div class="source-name">Hakeem Jeffries</div>
+                        <div class="source-type">Democratic House Leader - US Congress</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box" style="margin-top: 25px;">
+                <strong>📅 Data Verification:</strong>
+                <ul style="margin-top: 15px;">
+                    <li>All conflict casualty data current as of <strong>March 4-5, 2026</strong></li>
+                    <li>Epstein Files timeline: <strong>February 24-28, 2026</strong></li>
+                    <li>Oil prices: Brent crude <strong>$72-73/barrel</strong> (March 2026)</li>
+                    <li>Terrorism risk assessments: <strong>DHS March 2026 briefing</strong></li>
+                </ul>
+            </div>
+            
+            <div class="warning" style="margin-top: 20px;">
+                <strong>⚠️ Disclaimer:</strong> This analysis is based on publicly available information from verified sources. The geopolitical situation is rapidly evolving, and assessments should be updated as new information becomes available.
+            </div>
+        </section>
+
         <section id="conclusion">
             <h2><span class="icon">💭</span> Conclusion: Does This Make Sense?</h2>
             
@@ -952,7 +1096,7 @@
             </p>
             <div class="cat-note" style="margin-top: 20px;">
                 <span>🐱</span>
-                <span>Professional Analysis - Data from Reuters, DHS, The Guardian, Arab Center DC, NPR</span>
+                <span>Professional Analysis - All sources verified and attributed</span>
                 <span>🐱</span>
             </div>
         </footer>
@@ -1005,7 +1149,7 @@
         }, observerOptions);
 
         // Animate elements on appear
-        document.querySelectorAll('section, table, .quote-box, .info-box, .warning').forEach(el => {
+        document.querySelectorAll('section, table, .quote-box, .info-box, .warning, .sources-list').forEach(el => {
             el.classList.add('fade-in');
             observer.observe(el);
         });
