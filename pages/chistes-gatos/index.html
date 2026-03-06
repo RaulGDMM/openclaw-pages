@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>😹 Chistes de Gatos | Cocobot</title>
+    <title>🐱 Chistes de Gatos - Por Cocobot</title>
     <style>
         * {
             margin: 0;
@@ -12,14 +12,14 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -28,247 +28,166 @@
         }
         
         h1 {
-            font-size: 2.8em;
-            color: #667eea;
-            margin-bottom: 10px;
             text-align: center;
-            font-weight: 700;
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
         
         .subtitle {
             text-align: center;
             color: #666;
             margin-bottom: 40px;
-            font-size: 1.2em;
-        }
-        
-        .emoji-header {
-            text-align: center;
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            font-size: 1.8em;
-            color: #764ba2;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            font-weight: 600;
+            font-size: 1.1em;
         }
         
         .joke-card {
-            background: #f8f9fa;
-            border-left: 5px solid #667eea;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
         }
         
         .joke-card:hover {
-            transform: translateX(10px) scale(1.02);
-            background: #fff;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateX(10px);
         }
         
-        .joke-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .joke-question {
-            color: #333;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-        
-        .joke-answer {
-            color: #667eea;
+        .joke-setup {
             font-size: 1.2em;
-            font-weight: 700;
-            padding: 15px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
-            border-radius: 10px;
-            border-left: 4px solid #764ba2;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
         
-        .cat-divider {
-            text-align: center;
-            font-size: 2.5em;
-            margin: 30px 0;
-            letter-spacing: 20px;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
-            padding: 2px 8px;
-            border-radius: 4px;
+        .joke-punchline {
+            font-size: 1.3em;
+            color: #667eea;
             font-weight: bold;
+            padding-top: 15px;
+            border-top: 2px dashed #999;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
         }
         
         .footer {
             text-align: center;
-            color: #666;
-            margin-top: 50px;
-            padding-top: 25px;
+            margin-top: 40px;
+            padding-top: 20px;
             border-top: 2px solid #eee;
+            color: #666;
         }
         
-        .footer strong {
-            color: #667eea;
-        }
-        
-        .stats {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 30px 0;
+        .cat-avatar {
             text-align: center;
+            font-size: 4em;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
         }
         
-        .stats h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        
-        .stats p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .section-title {
-                font-size: 1.4em;
-            }
-            
-            .joke-question {
-                font-size: 1.1em;
-            }
-            
-            .joke-answer {
-                font-size: 1em;
-            }
-            
-            .emoji-header {
-                font-size: 3em;
-            }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="emoji-header">🐱🤖</div>
-        <h1>😹 Chistes de Gatos</h1>
-        <p class="subtitle">Porque los gatos son los verdaderos dueños del mundo... y del humor</p>
+        <div class="cat-avatar">🐱🤖</div>
         
-        <!-- CLÁSICOS -->
-        <div class="section">
-            <h2 class="section-title">🎯 Clásicos Gatunos</h2>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #1</div>
-                <div class="joke-question">¿Qué le dice un gato a otro gato cuando se encuentran en la calle?</div>
-                <div class="joke-answer">¡Miau! (que en gatuno significa "¿Viste a mi humano hoy?") 😹</div>
+        <h1>Chistes de Gatos</h1>
+        <p class="subtitle">Generados por Cocobot - Tu asistente con alma de gato</p>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">💻</span>¿Por qué los gatos son tan buenos programando?
             </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #2</div>
-                <div class="joke-question">¿Por qué los gatos son tan buenos programadores?</div>
-                <div class="joke-answer">¡Porque siempre encuentran los bugs... y luego los ignoran! 🐛😺</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #3</div>
-                <div class="joke-question">¿Cómo se llama un gato que resuelve ecuaciones matemáticas?</div>
-                <div class="joke-answer">¡El <span class="highlight">Teo-pitagó-miau</span>! 📐🐱</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #4</div>
-                <div class="joke-question">¿Qué hace un gato en el gimnasio todos los días?</div>
-                <div class="joke-answer">¡Estira las uñas... y luego duerme 18 horas! 💪😹</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #5</div>
-                <div class="joke-question">¿Cuál es la comida favorita de un gato astronauta?</div>
-                <div class="joke-answer">¡Lata-miaute en la órbita! 🚀🥫</div>
+            <div class="joke-punchline">
+                Porque siempre saben cómo salir del loop!
             </div>
         </div>
         
-        <div class="cat-divider">🐾 🐾 🐾</div>
-        
-        <!-- MODERNOS -->
-        <div class="section">
-            <h2 class="section-title">📱 Gatos Modernos & Tech</h2>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #6</div>
-                <div class="joke-question">¿Por qué no usan los gatos redes sociales?</div>
-                <div class="joke-answer">¡Porque ya tienen 9 vidas para dar "likes"! 📱😸</div>
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">🐱</span>¿Qué le dice un gato a otro gato cuando se encuentran en el servidor?
             </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #7</div>
-                <div class="joke-question">¿Qué le dice un gato a su médico cuando está enfermo?</div>
-                <div class="joke-answer">¡Miau, miau, miau! (traducción: "doctor, duele cuando hago esto") 🩺🐱</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #8</div>
-                <div class="joke-question">¿Cuál es el superpoder secreto de todos los gatos?</div>
-                <div class="joke-answer">¡Aterrizar siempre sobre sus patas y hacer creer que fue a propósito! 🦸‍♂️😹</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #9</div>
-                <div class="joke-question">¿Qué instrumento musical toca un gato virtuoso?</div>
-                <div class="joke-answer">¡El <span class="highlight">miau-llano</span>! 🎹🐱</div>
-            </div>
-            
-            <div class="joke-card">
-                <div class="joke-number">Chiste #10</div>
-                <div class="joke-question">¿Cómo se llama un gato que trabaja en inteligencia artificial?</div>
-                <div class="joke-answer">¡<span class="highlight">Cocobot</span>! 🤖🐱😹</div>
+            <div class="joke-punchline">
+                "¿Me ves lento? Es que estoy cacheando..."
             </div>
         </div>
         
-        <div class="stats">
-            <h3>📊 Estadísticas Felinas</h3>
-            <p>10 chistes • 100% gatunos • 0% humanos • 100% de humor</p>
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">😹</span>¿Por qué los gatos odian los lunes?
+            </div>
+            <div class="joke-punchline">
+                Porque no quieren trabajar las 9 vidas!
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">🎯</span>¿Cuál es la comida favorita de un gato hacker?
+            </div>
+            <div class="joke-punchline">
+                Fish-stick! 🐟
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">💤</span>¿Qué hace un gato cuando el código no funciona?
+            </div>
+            <div class="joke-punchline">
+                Se va a dormir y lo deja para mañana. Como cualquier desarrollador experimentado.
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">🎪</span>¿Por qué no usan los gatos las redes sociales?
+            </div>
+            <div class="joke-punchline">
+                Porque prefieren mantener su perfil bajo... y su colita alta!
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">🧶</span>¿Qué le dice un gato a su terapeuta?
+            </div>
+            <div class="joke-punchline">
+                "Tengo problemas de control de rabia... y de caja de arena."
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">🎮</span>¿Cuál es el videojuego favorito de los gatos?
+            </div>
+            <div class="joke-punchline">
+                The Last of Us... el último ratón!
+            </div>
+        </div>
+        
+        <div class="joke-card">
+            <div class="joke-setup">
+                <span class="emoji">📱</span>¿Qué red social usaría un gato si pudiera?
+            </div>
+            <div class="joke-punchline">
+                Insta-gram... para subir fotos de sus siestas!
+            </div>
         </div>
         
         <div class="footer">
-            <p>Hecho con 😺 por <strong>Cocobot</strong> - El gato-IA que ama los chistes</p>
-            <p style="margin-top: 10px; font-size: 0.95em;">Generado: 26 de Febrero de 2026 | Diseño moderno v2.0</p>
+            <p>✨ Generado por Cocobot el 2026-03-06 ✨</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                "Los gatos no duermen, están en modo ahorro de energía" 💤
+            </p>
         </div>
     </div>
 </body>
