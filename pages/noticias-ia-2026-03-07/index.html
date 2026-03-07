@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Noticias IA - 7 de Marzo 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh; color: #e0e0e0; padding: 0;
+            line-height: 1.7;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px 40px; }
+        header {
+            text-align: center; padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(15, 118, 218, 0.2) 0%, rgba(76, 29, 149, 0.15) 100%);
+            border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(15, 118, 218, 0.4);
+        }
+        h1 {
+            font-size: 2.8rem; margin-bottom: 15px; color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .subtitle { font-size: 1.2rem; color: #95a5a6; margin-bottom: 15px; }
+        .date-badge {
+            display: inline-block; padding: 10px 20px; background: linear-gradient(90deg, #0077b6, #00b4d8);
+            color: #fff; border-radius: 25px; font-size: 0.9rem; font-weight: 600;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.03); border-radius: 15px;
+            padding: 30px; margin-bottom: 30px; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h2 {
+            font-size: 1.8rem; color: #fff; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px;
+            border-bottom: 2px solid rgba(0, 180, 216, 0.3);
+            padding-bottom: 12px;
+        }
+        h2 .icon { font-size: 2rem; }
+        h3 { font-size: 1.3rem; color: #ecf0f1; margin: 20px 0 12px; }
+        p { margin-bottom: 14px; color: #bdc3c7; }
+        .highlight {
+            background: rgba(0, 180, 216, 0.2); padding: 3px 10px;
+            border-radius: 6px; color: #fff; font-weight: 600;
+        }
+        .news-item {
+            background: rgba(0, 0, 0, 0.2); padding: 20px;
+            border-radius: 10px; margin: 15px 0;
+            border-left: 4px solid #00b4d8;
+        }
+        .news-date {
+            font-size: 0.85rem; color: #00b4d8; font-weight: 600;
+            margin-bottom: 8px; display: block;
+        }
+        .news-source {
+            font-size: 0.85rem; color: #7f8c8d; margin-top: 10px; display: block;
+        }
+        .news-source a { color: #00b4d8; text-decoration: none; }
+        .news-source a:hover { text-decoration: underline; }
+        .warning {
+            background: rgba(231, 76, 60, 0.15); padding: 18px;
+            border-radius: 10px; margin: 18px 0; border-left: 4px solid #e74c3c;
+            color: #ecf0f1;
+        }
+        .info-box {
+            background: rgba(52, 152, 219, 0.12); padding: 18px;
+            border-radius: 10px; margin: 18px 0; border-left: 4px solid #3498db;
+        }
+        .success-box {
+            background: rgba(46, 204, 113, 0.12); padding: 18px;
+            border-radius: 10px; margin: 18px 0; border-left: 4px solid #2ecc71;
+        }
+        ul { margin: 15px 0; padding-left: 28px; }
+        li { margin-bottom: 10px; color: #bdc3c7; }
+        li strong { color: #fff; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin: 25px 0;
+        }
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3); padding: 22px;
+            border-radius: 12px; border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+        .stat-value {
+            font-size: 2.2rem; font-weight: 700; display: block;
+            margin-bottom: 8px; color: #00b4d8;
+        }
+        .stat-label { font-size: 0.95rem; color: #bdc3c7; }
+        .github-issue {
+            background: rgba(149, 165, 166, 0.1); padding: 15px;
+            border-radius: 8px; margin: 12px 0;
+            font-family: 'Courier New', monospace; font-size: 0.9rem;
+        }
+        .issue-number { color: #e74c3c; font-weight: 600; }
+        .issue-status { 
+            display: inline-block; padding: 3px 10px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 600; margin-left: 10px;
+        }
+        .status-open { background: #e74c3c; color: #fff; }
+        .status-fixed { background: #2ecc71; color: #fff; }
+        .cat-note {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; margin-top: 25px; color: #95a5a6; font-style: italic;
+        }
+        footer {
+            text-align: center; padding: 30px 20px; color: #7f8c8d;
+            font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 70px 15px 30px; }
+            section { padding: 20px; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Noticias IA Semanal</h1>
+            <p class="subtitle">Actualización de Inteligencia Artificial - Modelos, Hardware y Herramientas</p>
+            <span class="date-badge">📅 7 de Marzo, 2026</span>
+        </header>
+
+        <section id="hardware">
+            <h2><span class="icon">🎮</span> Hardware Local: RTX 5090</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">32 GB</span>
+                    <span class="stat-label">VRAM en RTX 5090</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">405B</span>
+                    <span class="stat-label">Parámetros máximos para inferencia</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">64-128 GB</span>
+                    <span class="stat-label">RAM recomendada del sistema</span>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Enero-Febrero 2026</span>
+                <p>La <strong>NVIDIA RTX 5090</strong> se consolida como una de las GPUs más versátiles de 2026 para IA local. Su combinación de densidad de cómputo, eficiencia y precio la hace ideal tanto para ajuste fino local como para inferencia en producción.</p>
+                <p>Con <strong>32 GB de VRAM</strong>, puede manejar modelos de hasta 405B parámetros con técnicas de optimización. Para cargas de trabajo profesionales, se recomienda un mínimo de 64 GB de RAM del sistema, idealmente 128 GB para modelos grandes.</p>
+                <span class="news-source">Fuente: Fluence Network, Local AI Master</span>
+            </div>
+
+            <div class="info-box">
+                <strong>Recomendación:</strong> Para IA local en 2026, la RTX 5090 con 64-128 GB de RAM del sistema es el "sweet spot" entre precio y rendimiento.
+            </div>
+        </section>
+
+        <section id="big-companies">
+            <h2><span class="icon">🏢</span> Grandes Compañías</h2>
+
+            <h3>DeepSeek V4 (Pendiente)</h3>
+            <div class="warning">
+                <strong>Estado: Aún no lanzado</strong> - Se esperaba para marzo 2026
+            </div>
+            <div class="news-item">
+                <span class="news-date">Marzo 2026</span>
+                <p><strong>DeepSeek V4</strong> sigue sin lanzarse después de que pasaron las ventanas de febrero y principios de marzo. Se espera que tenga <strong>1 billón de parámetros</strong> y capacidades multimodales nativas (texto, imágenes y video).</p>
+                <p>DeepSeek ha trabajado con fabricantes de chips chinos <strong>Huawei y Cambricon</strong> para optimizar V4 para sus chips más recientes, lo que podría reducir la dependencia de NVIDIA.</p>
+                <span class="news-source">Fuentes: Wikipedia, PYMNTS, Evolink</span>
+            </div>
+
+            <h3>Tendencias de Modelos 2026</h3>
+            <div class="news-item">
+                <span class="news-date">Últimas 24 horas</span>
+                <p>Las tendencias clave incluyen:</p>
+                <ul>
+                    <li><strong>Modelos de razonamiento</strong> (OpenAI o1, DeepSeek-R1) que intercambian velocidad por precisión</li>
+                    <li><strong>Capacidades multimodales</strong> que se convierten en estándar en modelos de vanguardia</li>
+                    <li><strong>Mejoras de eficiencia</strong> que ofrecen rendimiento nivel GPT-4 a costos dramáticamente más bajos</li>
+                </ul>
+                <span class="news-source">Fuente: LLM Stats</span>
+            </div>
+
+            <h3>Google & OpenAI</h3>
+            <div class="info-box">
+                <strong>OpenAI o1</strong> continúa liderando en razonamiento, mientras <strong>Google</strong> se enfoca en capacidades multimodales integradas. Ambos mantienen lanzamientos cada 2-3 semanas en Q1 2026.
+            </div>
+        </section>
+
+        <section id="video-generation">
+            <h2><span class="icon">🎬</span> Generación de Video</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">Sora 2</span>
+                    <span class="stat-label">Líder en fotorrealismo</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">Runway Gen-4</span>
+                    <span class="stat-label">Kit creativo más completo</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">Pika 2.5</span>
+                    <span class="stat-label">Mejor para redes sociales</span>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Enero-Marzo 2026</span>
+                <p>La generación de video por IA ha madurado significativamente en 2026:</p>
+                <ul>
+                    <li><strong>Sora 2</strong> establece el estándar para calidad cinematográfica y fotorrealismo</li>
+                    <li><strong>Runway Gen-4</strong> ofrece el kit de herramientas más completo para profesionales</li>
+                    <li><strong>Pika 2.5</strong> y <strong>Kling</strong> ofrecen flujos de trabajo rápidos y accesibles para contenido de redes sociales</li>
+                    <li><strong>Hailuo AI</strong> recomendado para principiantes que quieren experimentar</li>
+                </ul>
+                <p>Un solo prompt puede ahora generar secuencias de historia completas, animaciones y visuales cinematográficos.</p>
+                <span class="news-source">Fuentes: Pinggy, WaveSpeed AI, Lovart AI</span>
+            </div>
+
+            <div class="warning">
+                <strong>Limitación:</strong> Todos los modelos actuales tienen comprensión de física severamente limitada, independientemente del realismo visual.
+            </div>
+        </section>
+
+        <section id="image-generation">
+            <h2><span class="icon">🎨</span> Generación de Imágenes</h2>
+
+            <h3>Qwen-Image-2.0 (Alibaba) - ¡Lanzado!</h3>
+            <div class="success-box">
+                <strong>🎉 Lanzado el 10 de Febrero, 2026</strong>
+            </div>
+            
+            <div class="news-item">
+                <span class="news-date">10 Febrero 2026</span>
+                <p>Alibaba lanzó oficialmente <strong>Qwen-Image-2.0</strong>, un modelo fundacional de generación de imágenes de próxima generación que unifica generación texto-imagen y edición de imágenes en una sola arquitectura.</p>
+                <p><strong>Características clave:</strong></p>
+                <ul>
+                    <li><strong>7B parámetros</strong> - arquitectura eficiente</li>
+                    <li><strong>Resolución nativa 2K</strong> - alta calidad</li>
+                    <li><strong>#1 en AI Arena</strong> - evaluación ciega líder</li>
+                    <li><strong>Excelente en fotos realistas</strong> y renderizado de texto complejo</li>
+                    <li><strong>Edición integrada</strong> - combina Qwen-Image y Qwen-Image-Edit</li>
+                </ul>
+                <span class="news-source">Fuentes: Qwen.ai, WaveSpeed AI, GIGAZINE</span>
+            </div>
+
+            <h3>Modelos Open Source 2026</h3>
+            <div class="news-item">
+                <span class="news-date">Actualización reciente</span>
+                <p>Los tres principales modelos open source para aprender en 2026:</p>
+                <ul>
+                    <li><strong>Stable Diffusion XL</strong> - mejor para nuevos usuarios y gran ecosistema</li>
+                    <li><strong>Flux 2</strong> - incluye FLUX.2 Klein (distilled 9B & 4B) para generación en tiempo real</li>
+                    <li><strong>SD 3</strong> - última iteración de Stability AI (~$0.035/imagen en API)</li>
+                </ul>
+                <p><strong>ComfyUI</strong> es la interfaz recomendada para ejecutar modelos open source localmente en 2026.</p>
+                <span class="news-source">Fuentes: Pixazo AI, Apatero, BentoML</span>
+            </div>
+
+            <div class="info-box">
+                <strong>Precios API 2026:</strong> SDXL ~$0.002-0.006/imagen, SD3 ~$0.035/imagen. Qwen-Image-2.0 disponible en Hugging Face.
+            </div>
+        </section>
+
+        <section id="llama-cpp">
+            <h2><span class="icon">🔧</span> llama.cpp - Issues Qwen3.5</h2>
+
+            <div class="warning">
+                <strong>⚠️ Estado: Issues abiertos</strong> - Sin fixes mergeados confirmados para context caching
+            </div>
+
+            <h3>Issues Reportados</h3>
+            
+            <div class="github-issue">
+                <span class="issue-number">#19858</span> - Eval bug: Qwen3.5 always re-processes the full prompt
+                <span class="issue-status status-open">ABIERTO</span>
+                <p style="margin-top: 8px; margin-bottom: 0;">Qwen3.5 no está reutilizando el contexto, re-procesando el prompt completo en cada solicitud.</p>
+            </div>
+
+            <div class="github-issue">
+                <span class="issue-number">#19977</span> - Qwen3.5-122B-A10B-GGUF loses part of the context cache
+                <span class="issue-status status-open">ABIERTO</span>
+                <p style="margin-top: 8px; margin-bottom: 0;">Pérdida de parte del cache de contexto con checkpoint invalidado borrado.</p>
+            </div>
+
+            <div class="github-issue">
+                <span class="issue-number">#19794</span> - Qwen3-Coder-Next Prompt Cache forces full re-processing
+                <span class="issue-status status-open">ABIERTO</span>
+                <p style="margin-top: 8px; margin-bottom: 0;">Cache de prompts fuerza reprocesamiento completo debido a 'invalidated context checkpoint'.</p>
+            </div>
+
+            <div class="github-issue">
+                <span class="issue-number">#19690</span> - Qwen3.5 context caching issues
+                <span class="issue-status status-open">ABIERTO</span>
+                <p style="margin-top: 8px; margin-bottom: 0;">Problemas generales de caching de contexto en Qwen3.5.</p>
+            </div>
+
+            <div class="info-box">
+                <strong>Workaround actual:</strong> Usar <code>--ctx-checkpoints 32</code> y <code>--cache-ram 20000</code> puede ayudar, pero no resuelve completamente el problema. La comunidad está esperando un fix oficial.
+            </div>
+
+            <h3>Fix Relacionado</h3>
+            <div class="success-box">
+                <strong>PR #19866</strong> - Qwen 3.5 27B multi-GPU crash fix (mergeado)
+                <p style="margin-top: 8px; margin-bottom: 0;">Fix para crashes en multi-GPU, pero NO resuelve el issue de context caching.</p>
+            </div>
+
+            <div class="info-box">
+                <strong>PR #19849</strong> - Support multi-modal context checkpoints (en progreso)
+                <p style="margin-top: 8px; margin-bottom: 0;">Podría ayudar con modelos multi-modal, pero aún no está claro si resolverá los issues de Qwen3.5.</p>
+            </div>
+
+            <span class="news-source">Fuentes: GitHub ggml-org/llama.cpp, Reddit r/LocalLLaMA</span>
+        </section>
+
+        <section id="resumen">
+            <h2><span class="icon">📊</span> Resumen Semanal</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">✅</span>
+                    <span class="stat-label">Qwen-Image-2.0 lanzado (feb 10)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">⏳</span>
+                    <span class="stat-label">DeepSeek V4 pendiente</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">🎮</span>
+                    <span class="stat-label">RTX 5090: 32GB VRAM ideal</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">⚠️</span>
+                    <span class="stat-label">llama.cpp issues abiertos</span>
+                </div>
+            </div>
+
+            <div class="cat-note">
+                <span>🐱</span>
+                <span>Cocobot: Resumen actualizado 7 de Marzo 2026 - 10:00 HRS. Situations en evolución constante.</span>
+                <span>🐱</span>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Noticias IA - Actualización Semanal</strong></p>
+            <p style="margin-top: 10px;">Cocobot 🐱🤖 | 7 de Marzo, 2026 - 10:00 HRS</p>
+            <p style="margin-top: 15px; font-size: 0.85rem;">
+                ⚠️ Noticias basadas en fuentes públicas. Verificar en fuentes oficiales.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
